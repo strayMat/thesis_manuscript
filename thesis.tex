@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 
 
 \usepackage{arxiv}
@@ -40,7 +40,9 @@
 \bibliography{references} 
 
 
-\title{What practical choices impact counterfactual predictions from EHR data ?}
+\title{
+  Representations and inference from time-varying routine care data 
+}
 
 \author{
   Matthieu Doutreligne \\
@@ -60,34 +62,57 @@
 
 \begin{document}
 \maketitle
+
+
 \begin{abstract}
 
+  Real World Databases (RWD) are increasingly numerous, exhaustive and with fine
+  temporal details. Unlike traditional data used in clinical research, they
+  describe the routine organization of care. These records of patients
+  day-to-day care enable new research questions, notably concerning the
+  efficiency of interventions after market access, their effect heterogeneity in
+  under-served populations or the development of personalized medicine thanks to
+  recent advances in machine learning. On the other hand, the complexity and
+  large-scale nature of these databases pose a number of challenges for
+  effectively answering these questions. To remedy this, econometricians and
+  epidemiologists have recently proposed the use of flexible models bridging
+  causal inference with high-dimensional machine learning.
 
-  Recent advances in machine learning are bringing the promise of predictive
-  medicine closer to reality. Machines read medical images faster and more
-  efficiently than most practitioners \citep{zhou2021review}. Structured data from Electronic Health
-  Records \citep{rajkomar2018scalable} or administrative databases
-  \citep{beaulieu2021machine} outperform rule-based clinical scores in
-  predicting patient's readmission, in-hospital mortality or future
-  comorbidities \citep{li2020behrt}. Recently, large language models leveraged
-  clinical notes from several hospitals for length of stay prediction
-  \citep{jiang2023health}. Hope is high that LLMs models will soon be able to
-  help practitioners during consultation \citep{lee2023benefits}.
+  Chapter 1 draws upon the national case study of the 32 French regional and
+  university hospitals to highlight key aspects of modern Clinical Data
+  Warehouses (CDWs), the cornerstone infrastructure of precision medicine. From
+  semi-structured interviews and an analysis of declared observational studies
+  on CDWs in France, I highlight both the potential and future challenges of
+  leveraging these routinely collected data for research purposes.
 
-  Randomized Control Trials (RCT) have
-  long been the gold standard to measure whether the benefits of an intervention
-  outweigh its harms \citep{brook1986method}. However, routinely collected data
-  such as Electronic Health Records (EHR) or insurance claims
-  \citep{wang2023early} can also be leveraged to estimate treatment effects via
-  counterfactual prediction analyses \citep{hernan2019second}.  They are
-  particularly useful to study comparative effectiveness of treatments,
-  generalize RCT findings to broader populations, to explore treatment
-  heterogeneity on subgroups \citep{mant1999can,desai2021broadening}, and to
-  gain first insights at smaller costs than RCTs
-  \citep{black1996we,bosdriesz2020evidence}. However, the lack of controlled
-  interventions and the time-varying nature of such data open many threats to
-  the validity of causal inference \citep{bouvier2023should}.
+  Acknowledging the difficulty to access large sample sizes and large
+  computational power to develop powerful and generalizable predictive models,
+  Chapter 2 leverages distributional representations of medical concepts for
+  clinical tasks. I show that these sharable representations improve the
+  predictive power and reduce transfer biases in small samples databases.
 
+  Despite a current focus on artificial intelligence, healthcare does not seek
+  purely predictive models, but appropriate intervention that will benefit
+  specific patients. This is a decision making problem highly amenable to
+  counterfactual prediction rather than traditional statistical learning.
+  Chapter 3 draws on the emulation of a clinical trial in the intensive care
+  unit to highlight the importance of the different practical choices when
+  developing counterfactual prediction algorithms on time-varying data collected
+  in routine care.
+
+  In high-dimensional settings such as time-varying data and heterogeneity of
+  interventions on subgroups, the selection of a causal model hyper-parameters
+  is crucial to avoid under- or over-learning of necessary flexible models.
+  Chapter 4 demonstrates the peril of relying on traditional evaluation metrics
+  (Mean Squared Error) for counterfactual predictions. In simulation and three
+  semi-simulated datasets, I highlight the performance of the doubly robust
+  R-risk over other existing risks and discuss their effectiveness regimes.
+
+  In conclusion, Chapter 5 underpins the opportunities of emerging machine
+  learning and natural language processing methods to shed light on current
+  public health issues thanks to routine care data. I discuss how these methods
+  can accelerate the development and evaluation of new tailored interventions,
+  public health policies or quality of care indicators.
 
 \end{abstract}
 
@@ -96,12 +121,11 @@
 %\keywords{First keyword \and Second keyword \and More}
 
 
+\chapter{Introduction}
 
-\section{Introduction}
+\section{Context}
 
-\subsection{Context}
-
-
+% RCT and Real world data
 \paragraph{Recent surge in the collection of healtchare data, are drawing
   increasing attention to observational studies based on nonrandomized data
   sources for estimating causal effects.} Often referred as Real World Data
@@ -118,10 +142,37 @@ as the \textit{Food and Drug Administration}
 \citep{desai2021broadening,fda_real-world_2021}, the \textit{European
   Medicines Agency} \citep{flynn_marketing_2022}, the French \textit{Haute
   Autorité de Santé} \citep{vanier2023rapid} and the British \textit{National
-Institute for
+  Institute for
   Health and Care Excellence} \citep{kent_nice_2022}.
 
-\subsection{Motivation}
+
+Randomized Control Trials (RCT) have
+long been the gold standard to measure whether the benefits of an intervention
+outweigh its harms \citep{brook1986method}. However, routinely collected data
+such as Electronic Health Records (EHR) or insurance claims
+\citep{wang2023early} can also be leveraged to estimate treatment effects via
+counterfactual prediction analyses \citep{hernan2019second}.  They are
+particularly useful to study comparative effectiveness of treatments,
+generalize RCT findings to broader populations, to explore treatment
+heterogeneity on subgroups \citep{mant1999can,desai2021broadening}, and to
+gain first insights at smaller costs than RCTs
+\citep{black1996we,bosdriesz2020evidence}. However, the lack of controlled
+interventions and the time-varying nature of such data open many threats to
+the validity of causal inference \citep{bouvier2023should}.
+
+
+% ML in healthcare 
+Machines read medical images faster
+and more efficiently than most practitioners \citep{zhou2021review}.
+Structured data from Electronic Health Records \citep{rajkomar2018scalable} or
+administrative databases \citep{beaulieu2021machine} outperform rule-based
+clinical scores in predicting patient's readmission, in-hospital mortality or
+future comorbidities \citep{li2020behrt}. Recently, large language models
+leveraged clinical notes from several hospitals for length of stay prediction
+\citep{jiang2023health}. Hope is high that LLMs models will soon be able to
+help practitioners during consultation \citep{lee2023benefits}.
+
+\section{Motivation}
 
 Despite the interest in RWD for observational studies, a clear analysis
 framework is required to avoid the inherent pitfalls of such studies, limit the
@@ -138,6 +189,11 @@ with dabigatran compared with warfarin, \cite{wang2022understanding} found that
 following the RCTs protocol, real-world evidence studies has been shown to be
 highly consistent with RCTs \citep{wang2023emulation}.
 \clearpage
+
+\chapter{Conclusion}
+
+Je suis persuadé que les seconds permettent d'accélerer considérablement la mise
+en place des études, et que certains travaux récents .
 
 \printbibliography
 
