@@ -1,0 +1,150 @@
+\documentclass{article}
+
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{makecell}
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2]{biblatex}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{pifont}
+\usepackage{csvsimple}
+
+\usepackage{todonotes}
+\newcommand{\md}[1]{\todo[color=blue!40,inline]{Matt: #1}}
+\newcommand{\ts}[1]{\todo[color=orange!40,inline]{Tristan: #1}}
+
+
+% color commands
+\colorlet{P}{ForestGreen}
+\colorlet{I}{MidnightBlue}
+\colorlet{C}{YellowOrange}
+\colorlet{O}{DarkOrchid}
+
+% equations commands
+\newcommand{\indep}{\perp \!\!\! \perp}
+\newtheorem{assumption}{Assumption}
+
+
+\bibliography{references} 
+
+
+\title{What practical choices impact counterfactual predictions from EHR data ?}
+
+\author{
+  Matthieu Doutreligne \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+  %% \And
+  %% Coauthor \\
+  %% Affiliation \\
+  %% Address \\
+  %% \texttt{email} \\
+}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+
+  Recent advances in machine learning are bringing the promise of predictive
+  medicine closer to reality. Machines read medical images faster and more
+  efficiently than most practitioners \citep{zhou2021review}. Structured data from Electronic Health
+  Records \citep{rajkomar2018scalable} or administrative databases
+  \citep{beaulieu2021machine} outperform rule-based clinical scores in
+  predicting patient's readmission, in-hospital mortality or future
+  comorbidities \citep{li2020behrt}. Recently, large language models leveraged
+  clinical notes from several hospitals for length of stay prediction
+  \citep{jiang2023health}. Hope is high that LLMs models will soon be able to
+  help practitioners during consultation \citep{lee2023benefits}.
+
+  Randomized Control Trials (RCT) have
+  long been the gold standard to measure whether the benefits of an intervention
+  outweigh its harms \citep{brook1986method}. However, routinely collected data
+  such as Electronic Health Records (EHR) or insurance claims
+  \citep{wang2023early} can also be leveraged to estimate treatment effects via
+  counterfactual prediction analyses \citep{hernan2019second}.  They are
+  particularly useful to study comparative effectiveness of treatments,
+  generalize RCT findings to broader populations, to explore treatment
+  heterogeneity on subgroups \citep{mant1999can,desai2021broadening}, and to
+  gain first insights at smaller costs than RCTs
+  \citep{black1996we,bosdriesz2020evidence}. However, the lack of controlled
+  interventions and the time-varying nature of such data open many threats to
+  the validity of causal inference \citep{bouvier2023should}.
+
+
+\end{abstract}
+
+
+% keywords can be removed
+%\keywords{First keyword \and Second keyword \and More}
+
+
+
+\section{Introduction}
+
+\subsection{Context}
+
+
+\paragraph{Recent surge in the collection of healtchare data, are drawing
+  increasing attention to observational studies based on nonrandomized data
+  sources for estimating causal effects.} Often referred as Real World Data
+(RWD), they come from routine care Information System routine such as
+Electronic Health Records (EHR) or insurance claims \citep{wang2023emulation}.
+RWD are interesting opportunities to research effectiveness of treatments in
+routine care data, generalize RCT findings to a broader population, to explore
+treatment heterogeneity on subgroups \citep{mant1999can, desai2021broadening},
+and to gain first insights at smaller costs than RCTs
+\citep{black1996we,bosdriesz2020evidence}. Moreover, this data is well suited
+to measure the impact of health policies or changes in professional
+guidelines. These opportunities have been well identified by HTA agencies such
+as the \textit{Food and Drug Administration}
+\citep{desai2021broadening,fda_real-world_2021}, the \textit{European
+  Medicines Agency} \citep{flynn_marketing_2022}, the French \textit{Haute
+  Autorité de Santé} \citep{vanier2023rapid} and the British \textit{National
+Institute for
+  Health and Care Excellence} \citep{kent_nice_2022}.
+
+\subsection{Motivation}
+
+Despite the interest in RWD for observational studies, a clear analysis
+framework is required to avoid the inherent pitfalls of such studies, limit the
+introduction of biases and derive insightful evidences \citep{hernan2019second,
+  wang2023emulation}. It has been shown that failure to follow closely a ground
+truth emulated trial,
+yields substantially different results in observational studies: eg. for
+cardiovascualar outcomes of antidiabetic or antiplatelet medications based on
+insurance claims data \citep{schneeweiss2021conducting}. Comparing and
+replicating real-world evidence studies for focused on the risk of major
+bleeding
+with dabigatran compared with warfarin, \cite{wang2022understanding} found that
+60 to 88\% of variation remained unexplained. On the contrary, when closely
+following the RCTs protocol, real-world evidence studies has been shown to be
+highly consistent with RCTs \citep{wang2023emulation}.
+\clearpage
+
+\printbibliography
+
+\appendix
+
+\clearpage
+
+\section{Causal Diagrams}
+
+\end{document}
