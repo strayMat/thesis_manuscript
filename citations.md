@@ -1,0 +1,2 @@
+- "Every time I fire a linguist, the performance of the speech recognizer goes up", Frederik Jelinek
+- Analogisme: EN thérapeutique, c'est la théorie des signatures, Les mots et les choses (Foucault) ou par Delà la Nature (Descola)
