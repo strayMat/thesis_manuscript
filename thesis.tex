@@ -21,11 +21,22 @@
 \usepackage{pifont}
 \usepackage{csvsimple}
 
+% notes in the margin
 \usepackage{todonotes}
-\newcommand{\md}[1]{\todo[color=blue!40,inline]{Matt: #1}}
-\newcommand{\ts}[1]{\todo[color=orange!40,inline]{Tristan: #1}}
+\usepackage{snaptodo}
 
+\setlength{\marginparwidth}{1.4cm}
+\setlength{\marginparsep}{-.01cm}
+%\setlength\textwidth{177.8mm}
 
+\snaptodoset{block rise=1em}
+\snaptodoset{margin block/.style={font=\tiny}} \newcommand{\gv}[1]{%
+    \snaptodo[margin block/.append style=green!50!black]{%
+	\sloppy\textbf{Gael}: #1}}
+\snaptodoset{margin block/.style={font=\tiny}} \newcommand{\md}[1]{%
+    \snaptodo[margin block/.append style=blue]{%
+	\sloppy\textbf{Matthieu}: #1}}
+  
 % color commands
 \colorlet{P}{ForestGreen}
 \colorlet{I}{MidnightBlue}
@@ -181,7 +192,8 @@ specialized registry and cohorts
 routine data collection
 
 
-\subsection{Interventional data vs observational data}\label{subsec:intro:interventional_vs_observational}
+\subsection{Interventional data vs observational
+  data}\label{subsec:intro:interventional_vs_observational}
 
 
 \textit{In an experiment, the reason for the exposure assignment is solely to
@@ -234,20 +246,6 @@ Definition of EHR: Health data warehouses (HDWs) refer to the pooling of data fr
 The 4 phases of data flow from the various sources that make up the HIS (figure)
 Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
 
-\section{Various data usages: Primary Use and Secondary use}\label{sec:intro:data_usages}
-
-\subsection{Primary usages}\label{subsec:intro:primary_usages}
-
-Primary usages directly serve one patient care.
-Secondary usages do not concern directly the care and support of one patient: research, quality or management indicators, billings.
-Mixt usages such as learning algorithms
-
-
-\subsection{Secondary usages}\label{subsec:intro:secondary_usages}
-
-My work lies mainly in the secondary use, but I hope to highlight interesting future directions for primary usages.
-
-
 \section{Two cultures of statistics for health}\label{sec:two_cultures}
 
 Statistical Learning Framework
@@ -281,17 +279,37 @@ help practitioners during consultation \citep{lee2023benefits}.
 \section{Abstract}\label{sec:cdw:abstract}
 \section{Motivation and background: a changing world}\label{sec:cdw:motivation}
 
-Routine data collection are drawing increasing interest
+
+\subsection{Routine data collection are drawing increasing interest}\label{chapter:cdw:routine_data_collection}
+
+\subsection{Different kind of healthcare data usages}\label{subsec:cdw:data_usages}
+
+\paragraph{Primary data usages}
+Primary usages directly serve one patient care.
+
+\paragraph{Secondary data usages}
+Secondary usages do not concern directly the care and support of one patient: research, quality or management indicators, billings.
+
+\paragraph{Mix usages}
+
+Mix usages such as learning algorithms
+
 Health Technology A agencies interest: organizational impact of health products, potential for real world efficiency (entire life cycle of the product), quality, security, pertinence and security of care, health monitoring, health management.
 
 Precision medicine
 
 Fundamental research : biomarkers, observational epidemiology
-Healthcare data collection is heavily influenced from the local healthcare organization
-Centralized data collections: ex. Israël, HIRA,
 
-More heterogeneous data collections structuring themselves into network: ex. from US, Korea, Germany,
-The case of France
+\subsection{Healthcare data collection is heavily influenced from the local healthcare organization}
+
+\paragraph{Centralized data collections: ex. Israël, HIRA}
+
+\paragraph{More heterogeneous data collections structured into networks} ex. from
+
+US, Korea, Germany,
+
+\paragraph{The case of France}
+
 centralized national insurer but scattered hospital ehrs. Projects in other areas: eg. cancer (unicancer), gp (cnge project, darmoni). National initiative to develop and structure hospital cdws.
 
 
@@ -325,7 +343,8 @@ Contrast with classical epidemiology study types and the notion of experiment \c
 \paragraph{Medical informatics}
 
 
-\section{Results: Complex and hetero}\label{sec:cdw:results}
+\section{Results: A rapidly evolving landscape with a variety of
+  situations}\label{sec:cdw:results}
 
 \subsection{Governance}\label{subsec:cdw:results:governance}
 \paragraph{Initiation and actors}
@@ -384,7 +403,6 @@ also highlighted. Concrete examples are the automatic sorting of hospital
 prescriptions by order of complexity or the setting up of specialized channels
 for primary or secondary prevention.
 
-
 \subsection{Technical architecture}\label{subsec:cdw:results:architecture}
 Three layer : Data preprocessing (acquisition and normalization), storage, exposure
 Datalab: a crucial technological brick
@@ -401,9 +419,9 @@ eHop
 Half of the CDWs have put in place documentation accessible within the organization
 No documentation is public
 
-\section{Recommandations}
+\section{Recommendations: What is needed to consolidate EHRs and their usages}\label{sec:cdw:recommendations}
 
-\subsection{Governance}
+\subsection{Governance}\label{subsec:cdw:recommendations:governance}
 CDW becomes an essential component of data management in the hospital
 Resources specific to the warehouse are rare and only project-based. Should promote long-middle term teams (eg. inria ?)
 Multi-layered governance
@@ -435,6 +453,8 @@ The question of expanding the scope of the data beyond the purely hospital domai
 
 
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
+\section{Abstract}\label{sec:predictive_models:abstract}
+
 \section{Motivation}\label{sec:predictive_models:motivation}
 
 \subsection{Importance of predictive tasks from EHRs}\label{subsec:predictive_models:importance}
@@ -533,6 +553,8 @@ Varying inclusion criteria: illustration of immortal time bias
 \subsection{Discussion}\label{subsec:causal_tuto:discussion}
 
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
+\section{Abstract}\label{sec:causal_model_selection:abstract}
+
 \section{Motivation}\label{sec:causal_model_selection:motivation}
 
 Extending prediction to prescription requires causal model selection
@@ -541,37 +563,53 @@ Prior work: model selection for outcome modeling (g-computation)
 \section{Methods}\label{sec:causal_model_selection:methods}
 
 
-Notations
-Model-selection risks, oracle and feasible
-Causal model selection
+\subsection{Notations}\label{subsec:causal_model_selection:notations}
+
+\subsection{Model-selection risks, oracle and feasible}\label{subsec:causal_model_selection:risks}
+\subsection{Causal model selection}\label{subsec:causal_model_selection:causal_model_selection}
+
 The $\tau\mathrm{-risk}$ : an oracle error risk
 Feasible error risks
 Estimation and model selection procedure
-Theory: Links between feasible and oracle risks
-Upper bound of $\tau\mathrm{-risk}$ with $\mu\mathrm{-risk}_{IPW}$
-Reformulation of the R-risk as reweighted $\tau\mathrm{-risk}$
-Interesting special cases
+\section{Theory: Links between feasible and oracle risks}\label{sec:causal_model_selection:theory}
+
+\subsection{Upper bound of $\tau\mathrm{-risk}$ with
+  $\mu\mathrm{-risk}_{IPW}$}\label{subsec:causal_model_selection:upper_bound}
+
+\subsection{Reformulation of the R-risk as reweighted
+  $\tau\mathrm{-risk}$}\label{subsec:causal_model_selection:r_risk_reformulation}
+
+\subsection{Interesting special
+  cases}\label{subsec:causal_model_selection:special_cases}
+
 \section{Empirical Study}\label{sec:causal_model_selection:empirical_study}
 
 \subsection{Caussim: Extensive simulation settings}\label{subsec:causal_model_selection:caussim}
 \paragraph{Data Generation Process}
 
 Family of candidate estimators
-\subsection{Semi-simulated datasets}
-Datasets
-Family of candidate estimators
-Nuisance estimators
-\subsection{Measuring overlap between treated and non treated}
-\subsection{Empirical results: factors driving good model selection across datasets}
+
+\subsection{Semi-simulated datasets}\label{subsec:causal_model_selection:semi_simulated}
+\paragraph{Datasets}
+\paragraph{Family of candidate estimators}
+\paragraph{Nuisance estimators}
+
+\subsection{Measuring overlap between treated and non treated}\label{subsec:causal_model_selection:overlap}
+
+\subsection{Empirical results: factors driving good model selection across
+  datasets}\label{subsec:causal_model_selection:empirical_results}
+
+
 The $R\mathrm{-risk}$ is the best metric
+
 Model selection is harder in settings of low population overlap
-Nuisances can be estimated on the same data as outcome models
-Use 90\% of the data to estimate outcome models, 10% to select them
 
+Nuisances can be estimated on the same data as outcome
+models
 
-\subsection{Discussion and conclusion}
+Use 90\% of the data to estimate outcome models, 10\% to select them
 
-
+\section{Discussion and conclusion}\label{sec:causal_model_selection:discussion}
 
 
 \chapter{Conclusion}\label{chapter:conclusion}

@@ -7,3 +7,7 @@
 # Done, not included
 
 - Work with Alex on calibration
+
+# Others
+
+Plan in google docs : https://docs.google.com/document/d/1atZsMtf_jtPkQGlDTawVaevOiA3U0bTWocy8yjETU-g/edit
