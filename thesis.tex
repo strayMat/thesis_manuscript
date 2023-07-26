@@ -44,25 +44,11 @@
   Representations and inference from time-varying routine care data 
 }
 
-\author{
-  Matthieu Doutreligne \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
-}
+\author{Matthieu Doutreligne}
+\date{}
 
 \begin{document}
 \maketitle
-
 
 \begin{abstract}
 
@@ -114,10 +100,10 @@
   tailored interventions, public health policies or quality-of-care indicators.
 
 \end{abstract}
-
-
 % keywords can be removed
 %\keywords{First keyword \and Second keyword \and More}
+
+\tableofcontents
 
 
 
@@ -165,6 +151,20 @@ gain first insights at smaller costs than RCTs
 \citep{black1996we,bosdriesz2020evidence}. However, the lack of controlled
 interventions and the time-varying nature of such data open many threats to
 the validity of causal inference \citep{bouvier2023should}.
+Despite the interest in RWD for observational studies, a clear analysis
+framework is required to avoid the inherent pitfalls of such studies, limit the
+introduction of biases and derive insightful evidences \citep{hernan2019second,
+  wang2023emulation}. It has been shown that failure to follow closely a ground
+truth emulated trial,
+yields substantially different results in observational studies: eg. for
+cardiovascualar outcomes of antidiabetic or antiplatelet medications based on
+insurance claims data \citep{schneeweiss2021conducting}. Comparing and
+replicating real-world evidence studies for focused on the risk of major
+bleeding
+with dabigatran compared with warfarin, \cite{wang2022understanding} found that
+60 to 88\% of variation remained unexplained. On the contrary, when closely
+following the RCTs protocol, real-world evidence studies has been shown to be
+highly consistent with RCTs \citep{wang2023emulation}.
 
 
 
@@ -182,6 +182,17 @@ routine data collection
 
 
 \subsection{Interventional data vs observational data}\label{subsec:intro:interventional_vs_observational}
+
+
+\textit{In an experiment, the reason for the exposure assignment is solely to
+  suit the objectives of the study; if people receive their exposure assignment
+  based on considerations other than the study protocol, it is not a true
+  experiment} \citep{rothman2012epidemiology}
+
+Reinforcement learning can be seen as a form if
+interventional data collection where intervention probabilities are known
+\cite{bareinboim2015bandits}
+
 
 Interventional data contains interaction with the patients / environment where the intervention probabilities are known.
 Eg. RCT : fixed probability for any patient (statistical unit): first RCT, RCTs as the basis of Evidence Based Medicine in the late 80s.
@@ -284,7 +295,7 @@ The case of France
 centralized national insurer but scattered hospital ehrs. Projects in other areas: eg. cancer (unicancer), gp (cnge project, darmoni). National initiative to develop and structure hospital cdws.
 
 
-\section{Methods: Which data usage in French University Hospitals}\label{sec:cdw:motivation}
+\section{Methods: Which data usage in French University Hospitals}\label{sec:cdw:methods}
 
 \subsection{Interviews and study coverage}\label{subsec:cdw:interviews}
 
@@ -304,7 +315,8 @@ The denominator for the quantitative results is the 18 CDWs in production
 
 \subsection{A classification of observational studies}\label{subsec:cdw:classification}
 
-Contrast with classical epidemiology study types and the notion of experiment: Rothman.
+Contrast with classical epidemiology study types and the notion of experiment \citep{rothman2012epidemiology}.
+
 \paragraph{Outcome frequency}
 \paragraph{Population characterization}
 \paragraph{Risk factors}
@@ -313,9 +325,9 @@ Contrast with classical epidemiology study types and the notion of experiment: R
 \paragraph{Medical informatics}
 
 
-\section{Results: Complex and hetero}
+\section{Results: Complex and hetero}\label{sec:cdw:results}
 
-\subsection{Governance}
+\subsection{Governance}\label{subsec:cdw:results:governance}
 \paragraph{Initiation and actors}
 Figure temporality of CDW
 Federating potential
@@ -327,10 +339,10 @@ In-house solution development vs industrialization
 
 Scientific committee and project follow-up platform
 
-\subsection{Transparency}
+\subsection{Transparency}\label{subsec:cdw:results:transparency}
 Uneven public reference on hospital websites of ongoing studies.
 
-\subsection{Data}
+\subsection{Data}\label{subsec:cdw:results:data}
 
 \paragraph{Strong dependance to the HIS}
 
@@ -338,34 +350,54 @@ Data collected reflect data collection
 Exemples, AP-HP, HCLs
 
 \paragraph{Categories of Data}
-Main functionalities of HIS are the same.
-Common base
-Details: Table
-Takeaway: most of the current accessible data are billing, administrative and text, importantly, low access to temporality.
-Data reuse: research
+
+Main functionalities of HIS are the same. Common base Details: Table Takeaway:
+most of the current accessible data are billing, administrative and text,
+importantly, low access to temporality.
+
+\paragraph{Data reuse: research}
 Details of current study types.
 Details of specialty of the principal investigator
 Interest for research data network but lack of resources
-Data reuse: CDW are used for monitoring and management
+
+\paragraph{Data reuse: CDW are used for monitoring and management}
 Initialization for billing
 Potential for professional feedbacks
 Pharmacovigilance
+
 \paragraph{Data reuse: Strong interest for CDW in the context of care}
-Search engines for phenotyping
-Growing interest in computational phenotyping
-Other uses exemples
-\subsection{Technical architecture}
+
+Some CDWs develop specific applications that provide new functionalities
+compared to care software. Search engines can be used to query all the
+hospital's data gathered in the CDW, without data compartmentalization between
+different softwares. Dedicated interfaces can then offer a unified view of the
+history of a patient's data, with inter-specialty transversality, which is
+particularly valuable in internal medicine. These cross-disciplinary search
+tools also enable healthcare professionals to conduct rapid searches in all the
+texts, for example, to find similar patients \citep{garcelon2017finding}.
+%
+There is a growing interest in such computational phenotyping tools to support
+the development of digital health solutions \citep{wen2023impact}.
+%
+Uses for prevention, automation of repetitive tasks, and care coordination are
+also highlighted. Concrete examples are the automatic sorting of hospital
+prescriptions by order of complexity or the setting up of specialized channels
+for primary or secondary prevention.
+
+
+\subsection{Technical architecture}\label{subsec:cdw:results:architecture}
 Three layer : Data preprocessing (acquisition and normalization), storage, exposure
 Datalab: a crucial technological brick
-\subsection{Data quality, standard formats}
-Quality tools
+
+\subsection{Data quality, standard formats}\label{subsec:cdw:results:data_quality}
+\paragraph{Quality tools}
 Automatic tooling for acquisition
 First development for automatic data checks
-Standard format
+\paragraph{Standard format}
 No single standard data model,
 Omop
 eHop
-Documentation
+\paragraph{Documentation}
 Half of the CDWs have put in place documentation accessible within the organization
 No documentation is public
 
@@ -405,13 +437,13 @@ The question of expanding the scope of the data beyond the purely hospital domai
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 \section{Motivation}\label{sec:predictive_models:motivation}
 
-\subsection{Importance of predictive tasks from EHRs}
+\subsection{Importance of predictive tasks from EHRs}\label{subsec:predictive_models:importance}
 Prevention
 Piloting
 In the literature
 Within french CDW (23 \% of studies, just after population definitions)
 
-\subsection{EHRs data is complex}
+\subsection{EHRs data is complex}\label{subsec:predictive_models:complex_data}
 How ? time, high cardinality, multi-modality
 In the literature
 Within french CDW(link with previous chapter)
@@ -428,7 +460,7 @@ Performances
 Insertion in the care workflow
 
 
-\section{Predictive pipelines}
+\section{Predictive pipelines}\label{sec:predictive_models:pipelines}
 
 Demographic features
 Count encoding with event features
@@ -462,46 +494,53 @@ The relevant concepts for causal inference are scattered in different literature
 
 \section{Step-by-step framework for robust decision making from EHR data}\label{sec:causal_tuto:framework}
 
-Robust study design to avoid biases: Framing the question
+\subsection{Robust study design to avoid biases: Framing the question}
 PICOT
 Selection Bias
 Immortal time bias
-Is the dataset sufficient to inform on the intervention: identification
-Causal graph
-Computing the causal effect of interest: Estimation
-Confounders extractions
-Confounders aggregation
-Causal estimators
-Nuisance estimators
-Assessing the robustness of the hypothesis: Vibration or sensitivity analysis
+
+\subsection{Is the dataset sufficient to inform on the intervention: identification}
+Causal graph Computing the causal effect of interest: Estimation Confounders
+extractions Confounders aggregation Causal estimators Nuisance estimators
+\subsection{Assessing the robustness of the hypothesis: Vibration or sensitivity
+  analysis}\label{subsec:causal_tuto:vibration_analysis}
 
 Sensitivity vs robustness
-Heterogeneity of treatment
+
+\subsection{Heterogeneity of treatment}
 Interest of HTE
 How to do HTE ? Final regression analysis.
-Application on MIMIC-IV
+
+\section{Application on MIMIC-IV}\label{sec:causal_tuto:application}
+
 Emulated trial: Effect of albumin in combination with crystalloids compared to crystalloids alone on 28-day mortality in sepsis patients
 Choice of the trial
 Known effects
-Framing the question
-Identification
+
+\subsection{Framing the question}\label{subsec:causal_tuto:framing_mimic}
+\subsection{Identification}
 Covariates and dag
-Estimation
+\subsection{Estimation}
 Confounders extractions
 Confounders aggregation
 Causal estimators
 Nuisance estimators
-Vibration analysis
+\subsection{Vibration analysis}
 Varying estimation choices:
 Varying inclusion criteria: illustration of immortal time bias
-Heterogeneity of treatment
-Discussion
-How to select predictive models for causal inference ?
-Motivation
+\subsection{Heterogeneity of treatment}
+
+\subsection{Discussion}\label{subsec:causal_tuto:discussion}
+
+\chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
+\section{Motivation}\label{sec:causal_model_selection:motivation}
+
 Extending prediction to prescription requires causal model selection
 Illustration: the best predictor may not estimate best causal effects
 Prior work: model selection for outcome modeling (g-computation)
-Methods
+\section{Methods}\label{sec:causal_model_selection:methods}
+
+
 Notations
 Model-selection risks, oracle and feasible
 Causal model selection
@@ -512,96 +551,30 @@ Theory: Links between feasible and oracle risks
 Upper bound of $\tau\mathrm{-risk}$ with $\mu\mathrm{-risk}_{IPW}$
 Reformulation of the R-risk as reweighted $\tau\mathrm{-risk}$
 Interesting special cases
-Empirical Study
-Caussim: Extensive simulation settings
-Data Generation Process
+\section{Empirical Study}\label{sec:causal_model_selection:empirical_study}
+
+\subsection{Caussim: Extensive simulation settings}\label{subsec:causal_model_selection:caussim}
+\paragraph{Data Generation Process}
+
 Family of candidate estimators
-Semi-simulated datasets
+\subsection{Semi-simulated datasets}
 Datasets
 Family of candidate estimators
 Nuisance estimators
-Measuring overlap between treated and non treated
-Empirical results: factors driving good model selection across datasets
+\subsection{Measuring overlap between treated and non treated}
+\subsection{Empirical results: factors driving good model selection across datasets}
 The $R\mathrm{-risk}$ is the best metric
 Model selection is harder in settings of low population overlap
 Nuisances can be estimated on the same data as outcome models
 Use 90\% of the data to estimate outcome models, 10% to select them
 
 
-Discussion and conclusion
+\subsection{Discussion and conclusion}
 
 
 
 
-
-
-\section{Context}
-
-
-
-\section{Motivation}
-
-Despite the interest in RWD for observational studies, a clear analysis
-framework is required to avoid the inherent pitfalls of such studies, limit the
-introduction of biases and derive insightful evidences \citep{hernan2019second,
-  wang2023emulation}. It has been shown that failure to follow closely a ground
-truth emulated trial,
-yields substantially different results in observational studies: eg. for
-cardiovascualar outcomes of antidiabetic or antiplatelet medications based on
-insurance claims data \citep{schneeweiss2021conducting}. Comparing and
-replicating real-world evidence studies for focused on the risk of major
-bleeding
-with dabigatran compared with warfarin, \cite{wang2022understanding} found that
-60 to 88\% of variation remained unexplained. On the contrary, when closely
-following the RCTs protocol, real-world evidence studies has been shown to be
-highly consistent with RCTs \citep{wang2023emulation}.
-\clearpage
-
-\section{Definitions}
-
-\subsection{Interventional vs Observational}
-
-\paragraph{Interventional data}
-
-\textit{In an experiment, the reason for the exposure assignment is solely to
-  suit the objectives of the study; if people receive their exposure assignment
-  based on considerations other than the study protocol, it is not a true
-  experiment} \citep{rothman2012epidemiology}
-
-Reinforcement learning can be seen as a form if
-interventional data collection where intervention probabilities are known
-\cite{bareinboim2015bandits}
-
-
-\chapter{Good practices for clinical data warehouse implementation: A case study
-  in France}\label{chap:good_practices}
-
-
-\section{Results}\label{sec:good_practices:results}
-\subsection{Data}\label{subsec:good_practices:results:data}
-
-\paragraph{Strong interest for CDW in the context of care}
-
-Some CDWs develop specific applications that provide new functionalities
-compared to care software. Search engines can be used to query all the
-hospital's data gathered in the CDW, without data compartmentalization between
-different softwares. Dedicated interfaces can then offer a unified view of the
-history of a patient's data, with inter-specialty transversality, which is
-particularly valuable in internal medicine. These cross-disciplinary search
-tools also enable healthcare professionals to conduct rapid searches in all the
-texts, for example, to find similar patients \citep{garcelon2017finding}.
-%
-There is a growing interest in such computational phenotyping tools to support
-the development of digital health solutions \citep{wen2023impact}.
-%
-Uses for prevention, automation of repetitive tasks, and care coordination are
-also highlighted. Concrete examples are the automatic sorting of hospital
-prescriptions by order of complexity or the setting up of specialized channels
-for primary or secondary prevention.
-
-
-\chapter{Conclusion}
-
+\chapter{Conclusion}\label{chapter:conclusion}
 
 Predictive medecine is hard
 
@@ -615,6 +588,7 @@ can repeat more experiments (limit: signals could be highly delayed).
 Text is pervasive, we are using it to communicate and to log most of our
 information. We should leverage it more in the context of care (limit:
 temporality is hard to capture but is a key aspect of causal inference).
+
 
 \printbibliography
 
