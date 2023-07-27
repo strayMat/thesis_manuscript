@@ -122,62 +122,55 @@
 \chapter{Introduction: amazing opportunities of health data?}\label{chap:intro}
 \section{How I came into this landscape}\label{sec:intro:landscape}
 
-
 I will present my progression among these opportunities.
 
-\subsection{Increasing collection of data}
+\subsection{Context: From a modern statistical formation to the first contact with epidemiology}\label{subsec:intro:context}
 
+\paragraph{Learning statistics during the Natural Language Processing revolution}
 
-% RCT and Real world data
-\paragraph{Recent surge in the collection of healtchare data, are drawing
-  increasing attention to observational studies based on nonrandomized data
-  sources for estimating causal effects.} Often referred as Real World Data
-(RWD), they come from routine care Information System routine such as
-Electronic Health Records (EHR) or insurance claims \citep{wang2023emulation}.
-RWD are interesting opportunities to research effectiveness of treatments in
-routine care data, generalize RCT findings to a broader population, to explore
-treatment heterogeneity on subgroups \citep{mant1999can, desai2021broadening},
-and to gain first insights at smaller costs than RCTs
-\citep{black1996we,bosdriesz2020evidence}. Moreover, this data is well suited
-to measure the impact of health policies or changes in professional
-guidelines. These opportunities have been well identified by HTA agencies such
-as the \textit{Food and Drug Administration}
-\citep{desai2021broadening,fda_real-world_2021}, the \textit{European
-  Medicines Agency} \citep{flynn_marketing_2022}, the French \textit{Haute
-  Autorité de Santé} \citep{vanier2023rapid} and the British \textit{National
-  Institute for
-  Health and Care Excellence} \citep{kent_nice_2022}.
-
+Machine learning techniques, a subfield of artificial intelligence, became
+increasingly good as solving complex tasks where previous pattern recognition
+techniques were struggling. First, categorized into supervised and unsupervised
+approaches, the pre-training paradigm became increasingly popular in the 2010's:
+\cite{halevy2009unreasonable} proposed to take advantages of regularities
+present in large piles of data to design automatically interesting features for
+large application domains. The practical successes came in image processing
+\citep{}, then Natural Language Processing \citep{} and structural biology.
 %
-Randomized Control Trials (RCT) have
-long been the gold standard to measure whether the benefits of an intervention
-outweigh its harms \citep{brook1986method}. However, routinely collected data
-such as Electronic Health Records (EHR) or insurance claims
-\citep{wang2023early} can also be leveraged to estimate treatment effects via
-counterfactual prediction analyses \citep{hernan2019second}.  They are
-particularly useful to study comparative effectiveness of treatments,
-generalize RCT findings to broader populations, to explore treatment
-heterogeneity on subgroups \citep{mant1999can,desai2021broadening}, and to
-gain first insights at smaller costs than RCTs
-\citep{black1996we,bosdriesz2020evidence}. However, the lack of controlled
-interventions and the time-varying nature of such data open many threats to
-the validity of causal inference \citep{bouvier2023should}.
-Despite the interest in RWD for observational studies, a clear analysis
-framework is required to avoid the inherent pitfalls of such studies, limit the
-introduction of biases and derive insightful evidences \citep{hernan2019second,
-  wang2023emulation}. It has been shown that failure to follow closely a ground
-truth emulated trial,
-yields substantially different results in observational studies: eg. for
-cardiovascualar outcomes of antidiabetic or antiplatelet medications based on
-insurance claims data \citep{schneeweiss2021conducting}. Comparing and
-replicating real-world evidence studies for focused on the risk of major
-bleeding
-with dabigatran compared with warfarin, \cite{wang2022understanding} found that
-60 to 88\% of variation remained unexplained. On the contrary, when closely
-following the RCTs protocol, real-world evidence studies has been shown to be
-highly consistent with RCTs \citep{wang2023emulation}.
 
+\paragraph{APHP: Removing identification elements from clinical notes}
 
+At the end of the master, continuous improvements in ? until Bert paper.
+
+\paragraph{Billing claims: an underused huge pile of data}
+
+First questions: how useful are such wealth of data ? How to use it ?
+
+Covid-19: National healthcare monitoring during the epidemics. Integrated data
+pipeline are very useful during crisis for monitoring
+
+\subsection{Increasing collection of data and computing power}
+
+A whole generation of quantitative researchers has been trained with flexible
+data-hungry models.
+
+The unreasonable effectiveness of data \citep{halevy2009unreasonable}.
+
+\subsection{A pressing need for using the collected data}
+
+Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
+rule-based artificial intelligence expert systems judges \textit{medical
+  practice, and biomedical research, are inherently information-management tasks}
+\citep{patel2009coming}.
+
+However, the incentives to collect and analyze data are not aligned between
+healthcare actors.
+
+\paragraph{Industry for research and marketing}
+
+\paragraph{Public policies}
+
+\paragraph{Healthcare}
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
@@ -191,10 +184,8 @@ hand made data collection for one research question with a specific protocol,
 specialized registry and cohorts
 routine data collection
 
-
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
-
 
 \textit{In an experiment, the reason for the exposure assignment is solely to
   suit the objectives of the study; if people receive their exposure assignment
@@ -218,10 +209,18 @@ Distinction between association and causation (ladder of causation): first insig
 
 \subsection{Focus of this thesis: real world data, observational}\label{subsec:intro:focus_data}
 
-Rationnal:
 Inconvenient of interventional data : Increasing costs of RCTs,
-New challenges in public health: resource constraint, chronic disease,
-Rise of digitalization and computing power allowing new research methods
+
+Today's public health issues are closely linked to routine care, not ideal care:
+resource constraint, chronic disease. Not so new as it was already major issues
+mentioned in the late 60s \cite{rutstein1967coming}: \textit{1) modern
+  medicine's skyrocketing costs; 2) the chaos of an information explosion
+  involving both paperwork pro- liferation and large amounts of new knowledge that
+  no single physician could hope to digest; 3) a geographic maldistribution of
+  MD's; 4) increasing demands on the physician's time as increasing numbers of
+  individuals began to demand quality medical care.}
+
+Rise of digitalization and computing power suggesting new research methods
 
 
 \section{Various sources of data}\label{sec:intro:sources}
@@ -238,9 +237,11 @@ Increasing informatization
 EHR at the center
 Other applications part of HIS: give examples.
 
-\subsection{Clinical Data Warehouse}\label{subsec:intro:cdw}
-An infrastructure is needed to pool data from one or more medical information systems.
-Definition of EHR: Health data warehouses (HDWs) refer to the pooling of data from one or more medical information systems, in a homogeneous format for reuse in management, research or care.
+\subsection{Clinical Data Warehouse}\label{subsec:intro:cdw} An infrastructure
+is needed to pool data from one or more medical information systems. Definition
+of Clinical Data Warehouse: Health data warehouses (HDWs) refer to the pooling of
+data from one or more medical information systems, in a homogeneous format for
+reuse in management, research or care.
 
 
 The 4 phases of data flow from the various sources that make up the HIS (figure)
@@ -248,10 +249,24 @@ Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work sh
 
 \section{Two cultures of statistics for health}\label{sec:two_cultures}
 
-Statistical Learning Framework
-General framework
-Model selection
-\subsection{One choice of perspective: Recent statistical learning}\label{subsec:intro:recent_statistical_learning}
+
+\subsection{Statistical Learning Framework}
+
+Embraced by artificial intelligence in medicine community. How useful is a model
+?
+
+
+
+\subsection{Epidemiological Framework}
+
+\subsection{One choice of perspective: Recent statistical
+  learning}\label{subsec:intro:recent_statistical_learning}
+% 
+Learning statistics in the age of deep learning push towards adopting a view on
+  statistics on considering than mechanisms are in general unknown ant that
+  predictive accuracy is the one and only mean to evaluate how a model fit to
+  data \citep{breiman2001statistical}.
+% 
 % ML in healthcare 
 Machines read medical images faster
 and more efficiently than most practitioners \citep{zhou2021review}.
@@ -264,9 +279,7 @@ leveraged clinical notes from several hospitals for length of stay prediction
 help practitioners during consultation \citep{lee2023benefits}.
 
 
-
 \section{Notions of causality}\label{sec:intro:causality}
-
 
 
 
@@ -282,7 +295,7 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 \subsection{Routine data collection are drawing increasing interest}\label{chapter:cdw:routine_data_collection}
 
-\subsection{Different kind of healthcare data usages}\label{subsec:cdw:data_usages}
+\subsection{Different types of healthcare data usages}\label{subsec:cdw:data_usages}
 
 \paragraph{Primary data usages}
 Primary usages directly serve one patient care.
@@ -313,7 +326,7 @@ US, Korea, Germany,
 centralized national insurer but scattered hospital ehrs. Projects in other areas: eg. cancer (unicancer), gp (cnge project, darmoni). National initiative to develop and structure hospital cdws.
 
 
-\section{Methods: Which data usage in French University Hospitals}\label{sec:cdw:methods}
+\section{Methods: interviews of French University Hospitals}\label{sec:cdw:methods}
 
 \subsection{Interviews and study coverage}\label{subsec:cdw:interviews}
 
@@ -331,7 +344,8 @@ core mission. Date of interview
 
 The denominator for the quantitative results is the 18 CDWs in production
 
-\subsection{A classification of observational studies}\label{subsec:cdw:classification}
+\subsection{A classification of observational
+  studies}\label{subsec:cdw:classification}
 
 Contrast with classical epidemiology study types and the notion of experiment \citep{rothman2012epidemiology}.
 
@@ -346,7 +360,8 @@ Contrast with classical epidemiology study types and the notion of experiment \c
 \section{Results: A rapidly evolving landscape with a variety of
   situations}\label{sec:cdw:results}
 
-\subsection{Governance}\label{subsec:cdw:results:governance}
+\subsection{Governance: CDW are federating multiple teams in the
+  hospital}\label{subsec:cdw:results:governance}
 \paragraph{Initiation and actors}
 Figure temporality of CDW
 Federating potential
@@ -358,10 +373,12 @@ In-house solution development vs industrialization
 
 Scientific committee and project follow-up platform
 
-\subsection{Transparency}\label{subsec:cdw:results:transparency}
-Uneven public reference on hospital websites of ongoing studies.
+\subsection{Uneven transparency of ongoing
+  studies}\label{subsec:cdw:results:transparency} Uneven public reference on
+hospital websites of ongoing studies.
 
-\subsection{Data}\label{subsec:cdw:results:data}
+\subsection{Triple usage of data: research, management,
+  clinic}\label{subsec:cdw:results:data}
 
 \paragraph{Strong dependance to the HIS}
 
@@ -403,11 +420,13 @@ also highlighted. Concrete examples are the automatic sorting of hospital
 prescriptions by order of complexity or the setting up of specialized channels
 for primary or secondary prevention.
 
-\subsection{Technical architecture}\label{subsec:cdw:results:architecture}
-Three layer : Data preprocessing (acquisition and normalization), storage, exposure
-Datalab: a crucial technological brick
+\subsection{A multi-layered technical
+  architecture}\label{subsec:cdw:results:architecture} Three layer : Data
+preprocessing (acquisition and normalization), storage, exposure Datalab: a
+crucial technological brick
 
-\subsection{Data quality, standard formats}\label{subsec:cdw:results:data_quality}
+\subsection{Too little data quality and too many data
+  formats}\label{subsec:cdw:results:data_quality}
 \paragraph{Quality tools}
 Automatic tooling for acquisition
 First development for automatic data checks
@@ -419,32 +438,41 @@ eHop
 Half of the CDWs have put in place documentation accessible within the organization
 No documentation is public
 
-\section{Recommendations: What is needed to consolidate EHRs and their usages}\label{sec:cdw:recommendations}
+\section{Recommendations: How to consolidate EHRs and expand
+  usages}\label{sec:cdw:recommendations}
 
-\subsection{Governance}\label{subsec:cdw:recommendations:governance}
-CDW becomes an essential component of data management in the hospital
-Resources specific to the warehouse are rare and only project-based. Should promote long-middle term teams (eg. inria ?)
-Multi-layered governance
-\subsection{Transparency}
-Public registration of comparative observational study protocols for research
-Patient information stays limited
-\subsection{Data}
-study design : change of focus from data collection to data preprocessing -> other complementary skills needed
-Link with the HIS, lack of standard at the HIS level, lack of sharing of data schema
-Data reuse oriented towards primary care is still rare and rarely supported by appropriate funding.
+\subsection{Governance: CDWs are
+  infrastructures}\label{subsec:cdw:recommendations:governance}
+
+CDW becomes an essential component of data management in the hospital Resources
+specific to the warehouse are rare and only project-based. Should promote
+long-middle term teams (eg. inria ?) Multi-layered governance
+
+\subsection{Transparency: Keep the bar
+  high}\label{subsec:cdw:recommendations:transparency} Public registration of
+comparative observational study protocols for research Patient information stays
+limited
+
+\subsection{Data: complex data collection requires a variety of
+  expertise}\label{subsec:cdw:recommendations:data} study design : change of
+focus from data collection to data preprocessing -> other complementary skills
+needed Link with the HIS, lack of standard at the HIS level, lack of sharing of
+data schema Data reuse oriented towards primary care is still rare and rarely
+supported by appropriate funding.
 
 
-\subsection{Technical architecture}
-Lack of harmonization: focus on fewer solutions
-Commercial solutions emerging
-Case for open source: transparency, less technological lock-in, mutualization, favor modularity, help build consensus
-Opportunity for open source solutions
-Data quality, standard formats
-Quality is not sufficiently considered as a relevant scientific topic itself.
-Tooling: Link with devops/ automated CI in industrial data science
-there is a need for open-source publication of research code to ensure quality retrospective research
+\subsection{Technical architecture: towards more harmonization and open source ?
+}\label{subsec:cdw:recommendations:architecture} Lack of harmonization: focus on
+fewer solutions Commercial solutions emerging Case for open source:
+transparency, less technological lock-in, mutualization, favor modularity, help
+build consensus Opportunity for open source solutions Data quality, standard
+formats Quality is not sufficiently considered as a relevant scientific topic
+itself. Tooling: Link with devops/ automated CI in industrial data science there
+is a need for open-source publication of research code to ensure quality
+retrospective research
 
-\section{Conclusion}
+\section{Conclusion}\label{sec:cdw:conclusion}
+
 The French CDW ecosystem is beginning to take shape
 The priority is the creation and perpetuation of multidisciplinary warehouse teams
 Constitution of a multilevel collaboration network is another priority.
@@ -457,7 +485,15 @@ The question of expanding the scope of the data beyond the purely hospital domai
 
 \section{Motivation}\label{sec:predictive_models:motivation}
 
-\subsection{Importance of predictive tasks from EHRs}\label{subsec:predictive_models:importance}
+\subsection{Why such interest in predictive models from EHRs}\label{subsec:predictive_models:importance}
+
+\paragraph{Interest in the clinic}
+
+One of the earliest risk score was designed to predict Coronary heart disease
+risk by fitting a cox model using seven features: age, cholesterol, systolic
+blood pressure, hematocrit, ECG status, smoking at intake, and relative body
+weight \citep{brand1976multivariate}.
+
 Prevention
 Piloting
 In the literature
