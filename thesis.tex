@@ -143,7 +143,7 @@ Continuous improvements in natural language processing led to the intuition that
 soon the information contained in clinical texts could be mined by appropriate
 to serve clinical research.
 
-However, privacy concern
+However, privacy concern:
 
 Need for pseudonymization : use newly to reach State of the Art pseudonymization
 \citep{dernoncourt2017identification, paris2019desidentification}.
@@ -172,7 +172,7 @@ pipeline are very useful during crisis for monitoring: If you do not see all the
 data creating process, standard pipelines, standard tests and documentation : it
 is inherently a group effort.
 
-\subsection{Wrap-up : Increasing collection of data and available computing power}
+\subsection{Wrap-up: Increasing data collection and computing power}
 
 \paragraph{Data is collected at massive scale in healthcare} centralized
 into dedicated databases for analysis: eg. APHP clinical notes, French.
@@ -191,24 +191,58 @@ rule-based artificial intelligence expert systems judges \textit{medical
 However, the incentives to collect and analyze data are not aligned between
 healthcare actors.
 
-\paragraph{Industry for research and marketing}
+\paragraph{Healthcare practice}
+
+Automation of tedious tasks,
+
+\paragraph{Research}
+
+Biomarkers, drug development,
 
 \paragraph{Public policies: monitoring and evaluation}
 
-\paragraph{Healthcare practice}
+
+\paragraph{Marketing}
+Tailored recommendations, market access
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
-\subsection{Various types of data: Real World Data, observational data}\label{subsec:intro:real_world_data}
+\subsection{Various types of data: Real World Data}\label{subsec:intro:real_world_data}
 
 Real world data refer to routinely collected data
 
-Gradient and distinction between research data and opportunistic data collection.
+Gradient and distinction between research data and opportunistic data
+collection.
 
-Exemples:
-hand made data collection for one research question with a specific protocol,
-specialized registry and cohorts
-routine data collection
+\paragraph{Traditional research data collections}
+
+Hand made data collection for one research question with a specific protocol,
+Specialized registry and cohorts
+
+
+\paragraph{Claims}
+
+Billing system, eg. PMSI.
+
+Advantages (space and time coverage, scale, structure), disadvantages (not clinic, no exam results, few measures, heterogeneity of collection)
+
+\paragraph{EHRs and Hospital Information System}
+
+Increasing informatization
+EHR at the center
+Other applications part of HIS: give examples.
+
+\paragraph{Clinical Data Warehouse} An infrastructure
+is needed to pool data from one or more medical information systems. Definition
+of Clinical Data Warehouse: Health data warehouses (HDWs) refer to the pooling of
+data from one or more medical information systems, in a homogeneous format for
+reuse in management, research or care.
+
+
+The 4 phases of data flow from the various sources that make up the HIS (figure)
+Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
+
+
 
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
@@ -259,31 +293,6 @@ mentioned in the late 60s \cite{rutstein1967coming}: \textit{1) modern
   individuals began to demand quality medical care.}
 
 Rise of digitalization and computing power suggesting new research methods
-
-
-\section{Various sources of data}\label{sec:intro:sources}
-
-\subsection{Claims}\label{subsec:intro:claims}
-
-Billing system, eg. PMSI.
-
-Advantages (space and time coverage, scale, structure), disadvantages (not clinic, no exam results, few measures, heterogeneity of collection)
-
-\subsection{EHRs and Hospital Information System}\label{subsec:intro:EHRs}
-
-Increasing informatization
-EHR at the center
-Other applications part of HIS: give examples.
-
-\subsection{Clinical Data Warehouse}\label{subsec:intro:cdw} An infrastructure
-is needed to pool data from one or more medical information systems. Definition
-of Clinical Data Warehouse: Health data warehouses (HDWs) refer to the pooling of
-data from one or more medical information systems, in a homogeneous format for
-reuse in management, research or care.
-
-
-The 4 phases of data flow from the various sources that make up the HIS (figure)
-Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
 
 \section{Two cultures of statistics for health}\label{sec:intro:two_cultures}
 
