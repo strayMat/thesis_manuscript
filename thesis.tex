@@ -14,7 +14,6 @@
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}
 \usepackage{graphicx}
-\usepackage[dvipsnames]{xcolor}
 \usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2]{biblatex}
 \usepackage{tabularx}
 \usepackage{multirow}
@@ -140,23 +139,49 @@ large application domains. The practical successes came in image processing
 
 \paragraph{APHP: Removing identification elements from clinical notes}
 
-At the end of the master, continuous improvements in ? until Bert paper.
+Continuous improvements in natural language processing led to the intuition that
+soon the information contained in clinical texts could be mined by appropriate
+to serve clinical research.
+
+However, privacy concern
+
+Need for pseudonymization : use newly to reach State of the Art pseudonymization
+\citep{dernoncourt2017identification, paris2019desidentification}.
 
 \paragraph{Billing claims: an underused huge pile of data}
 
-First questions: how useful are such wealth of data ? How to use it ?
+French ministry department of statistics had billions of claims extracted in a
+dedicated server. But the amount of data made the job impossible.
 
+I learned that distributed computing (aka appropriate tools), summary statistics
+and good documentation.
+
+I began to wonder what were the appropriate methodological tools to extract
+relevant information from this data. Hammer that sees a nail : Can I use language
+modeling techniques to mine this data ?
+
+First questions: how useful are such wealth of data ? Is unsupervised learning
+useful ? Is prediction a useful goal ? Ironically, at the end of the day, I
+replicated unsupervised learning results from \citep{beam2019clinical} but would
+not know how to use it. I moved towards more interpretable dictionary learning
+with control groups analyses to study polymedication.
+
+% Not sure it is useful
 Covid-19: National healthcare monitoring during the epidemics. Integrated data
-pipeline are very useful during crisis for monitoring
+pipeline are very useful during crisis for monitoring: If you do not see all the
+data creating process, standard pipelines, standard tests and documentation : it
+is inherently a group effort.
 
-\subsection{Increasing collection of data and computing power}
+\subsection{Wrap-up : Increasing collection of data and available computing power}
 
 A whole generation of quantitative researchers has been trained with flexible
-data-hungry models.
+data-hungry models. The unreasonable effectiveness of data \citep{halevy2009unreasonable}.
 
-The unreasonable effectiveness of data \citep{halevy2009unreasonable}.
+Data is collected at massive scale in healthcare and centralized into dedicated databases for analysis: eg. APHP clinical notes, French.
 
-\subsection{A pressing need for using the collected data}
+More general citation than own experience
+
+\subsection{Pressing needs for using the collected data ?}
 
 Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
 rule-based artificial intelligence expert systems judges \textit{medical
@@ -168,9 +193,9 @@ healthcare actors.
 
 \paragraph{Industry for research and marketing}
 
-\paragraph{Public policies}
+\paragraph{Public policies: monitoring and evaluation}
 
-\paragraph{Healthcare}
+\paragraph{Healthcare practice}
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
@@ -249,23 +274,25 @@ Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work sh
 
 \section{Two cultures of statistics for health}\label{sec:two_cultures}
 
+In 2001, \cite{breiman2001statistical} clearly separates two statistical
+cultures: a predominant community focused on models, and another relying on
+gaining in popul
 
-\subsection{Statistical Learning Framework}
+\begin{myleftlinebox}
+  \subsection{Statistical Learning Framework}
 
-Embraced by artificial intelligence in medicine community. How useful is a model
-?
-
-
+  Embraced by artificial intelligence in medicine community. How useful is a model
+  ?
+\end{myleftlinebox}
 
 \subsection{Epidemiological Framework}
 
 \subsection{One choice of perspective: Recent statistical
   learning}\label{subsec:intro:recent_statistical_learning}
 % 
-Learning statistics in the age of deep learning push towards adopting a view on
-  statistics on considering than mechanisms are in general unknown ant that
-  predictive accuracy is the one and only mean to evaluate how a model fit to
-  data \citep{breiman2001statistical}.
+Learning statistics in the age of deep learning pushes towards adopting a view
+on statistics that consider mechanisms as generally unknown, and predictive
+accuracy as the hallmark of validity \citep{breiman2001statistical}.
 % 
 % ML in healthcare 
 Machines read medical images faster
