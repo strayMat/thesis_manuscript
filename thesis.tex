@@ -174,14 +174,14 @@ is inherently a group effort.
 
 \subsection{Wrap-up : Increasing collection of data and available computing power}
 
+\paragraph{Data is collected at massive scale in healthcare} centralized
+into dedicated databases for analysis: eg. APHP clinical notes, French.
+
+\paragraph{Models are scaling up}
 A whole generation of quantitative researchers has been trained with flexible
 data-hungry models. The unreasonable effectiveness of data \citep{halevy2009unreasonable}.
 
-Data is collected at massive scale in healthcare and centralized into dedicated databases for analysis: eg. APHP clinical notes, French.
-
-More general citation than own experience
-
-\subsection{Pressing needs for using the collected data ?}
+\subsection{What pressing needs to use health data}
 
 Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
 rule-based artificial intelligence expert systems judges \textit{medical
@@ -202,6 +202,7 @@ healthcare actors.
 \subsection{Various types of data: Real World Data, observational data}\label{subsec:intro:real_world_data}
 
 Real world data refer to routinely collected data
+
 Gradient and distinction between research data and opportunistic data collection.
 
 Exemples:
@@ -212,25 +213,37 @@ routine data collection
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
 
+
+Interventional data contains interaction with the patients / environment where
+the intervention probabilities are known. Eg. RCT : fixed probability for any
+patient (statistical unit): first RCT, RCTs as the basis of Evidence Based
+Medicine in the late 80s.
+
 \textit{In an experiment, the reason for the exposure assignment is solely to
   suit the objectives of the study; if people receive their exposure assignment
   based on considerations other than the study protocol, it is not a true
   experiment} \citep{rothman2012epidemiology}
 
-Reinforcement learning can be seen as a form if
-interventional data collection where intervention probabilities are known
-\cite{bareinboim2015bandits}
+Pbs of external validity raised in economics (Deaton,
+cf intro de la revue de Bénédicte). Focus is such problems is probably greater
+in economics because situations are not well controlled at all: very far from
+labs settings. Clinical situation is closer to lab (clinical epidemiology !=
+social epidemiology) What about medico-economics. I do not address this question
+in the present thesis, but it is a clear motivation
 
+%
+Observational data cannot intervene in any way with the patients. It should rely
+on observation alone to estimate intervention probability.
 
-Interventional data contains interaction with the patients / environment where the intervention probabilities are known.
-Eg. RCT : fixed probability for any patient (statistical unit): first RCT, RCTs as the basis of Evidence Based Medicine in the late 80s.
-Pbs of external validity raised in economics (Deaton, cf intro de la revue de Bénédicte). Focus is such problems is probably greater in economics because situations are not well controlled at all: very far from labs settings. Clinical situation is closer to lab (clinical epidemiology != social epidemiology)
-What about medico-economics. I do not address this question in the present thesis, but it is a clear motivation
-Eg. Conditional probability are interventional as well: conditionally randomized experiments in epidemiology (hernan), reinforcement learning in ML community (bareinboim2015bandits).
+% Interventional vs Observational: A gradient as well 
+Conditional probabilities are interventional as well: conditionally randomized
+experiments in epidemiology \citep{hernan2020causal}. This concept is known as
+reinforcement learning in the Machine Learning community (bareinboim2015bandits)
+where intervention probabilities are known
+\cite{bareinboim2015bandits}.
 
-Observational data cannot intervene in any way with the patients. It should rely on observation alone to estimate intervention probability.
-
-Distinction between association and causation (ladder of causation): first insight that different tools than statistics are needed.
+Distinction between association and causation (ladder of causation): first
+insight that different tools than statistics are needed.
 
 \subsection{Focus of this thesis: real world data, observational}\label{subsec:intro:focus_data}
 
@@ -272,20 +285,33 @@ reuse in management, research or care.
 The 4 phases of data flow from the various sources that make up the HIS (figure)
 Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
 
-\section{Two cultures of statistics for health}\label{sec:two_cultures}
+\section{Two cultures of statistics for health}\label{sec:intro:two_cultures}
 
 In 2001, \cite{breiman2001statistical} clearly separates two statistical
-cultures: a predominant community focused on models, and another relying on
-gaining in popul
+cultures: a predominant community at the time focused on models, another one
+relying on predictive accuracy.
 
-\begin{myleftlinebox}
-  \subsection{Statistical Learning Framework}
+Epidemiological statistics tends to be closer to the first model-based culture
+whereas artificial intelligence in medicine embraced the second one.
 
-  Embraced by artificial intelligence in medicine community. How useful is a model
-  ?
-\end{myleftlinebox}
+\begin{baground_box_left}
+  \subsection{Machine Learning Framework}\label{subsec:intro:machine_learning}
 
-\subsection{Epidemiological Framework}
+  Departing from  carefully designing functional forms for statistical models, the
+  \paragraph{Rashomon effect: multiple models can equally well model a given dataset}
+  % ref to appendix to describe ML algortihm: at least ridge, random forest, boosting.
+  \paragraph{Model selection}
+  Hyper-parameters selection, cross-validation (stone, 1974) and Textbook figure
+
+  \subsection{Biostatistics Framework}\label{subsec:intro:biostatistics_framework}
+
+  In medical journals, cox model for survival data and logistic regression for
+  binary outcomes have been the standard for publication.
+
+  Focus on variable selection: root in hand collected variables in carefully designed subpopulation ?
+
+
+\end{baground_box_left}
 
 \subsection{One choice of perspective: Recent statistical
   learning}\label{subsec:intro:recent_statistical_learning}
