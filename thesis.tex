@@ -143,7 +143,8 @@ Continuous improvements in natural language processing led to the intuition that
 soon the information contained in clinical texts could be mined by appropriate
 to serve clinical research.
 
-However, privacy concern:
+However, privacy concern: the access to very detailed elements of patient cares
+is no more restricted to the medical staff.
 
 Need for pseudonymization : use newly to reach State of the Art pseudonymization
 \citep{dernoncourt2017identification, paris2019desidentification}.
@@ -181,6 +182,11 @@ into dedicated databases for analysis: eg. APHP clinical notes, French.
 A whole generation of quantitative researchers has been trained with flexible
 data-hungry models. The unreasonable effectiveness of data \citep{halevy2009unreasonable}.
 
+A recent work on the classification of data and models (AI) in clinical medicine
+suggests three main usages: AI in clinical practice, clinical research on AI/ML
+device and applications and AI/ML used to conduct clinical research
+\citep{haug2023artificial}.
+
 \subsection{What pressing needs to use health data}
 
 Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
@@ -193,16 +199,24 @@ healthcare actors.
 
 \paragraph{Healthcare practice}
 
-Automation of tedious tasks,
+Automation of tedious tasks, decision support systems
 
 \paragraph{Research}
 
-Biomarkers, drug development,
+Drug development, evidence based medicine, biomarkers, epidemiology ie.
+understanding of the mechanisms of disease \textit{the study of the distribution
+  and determinants of disease frequency} \citep{macmahon1970epidemiology}
 
 \paragraph{Public policies: monitoring and evaluation}
 
+Guidelines, quality of care, public health
+Health Technology Agencies interest: organizational impact of health products,
+potential for real world efficiency (entire life cycle of the product), quality,
+security, pertinence and security of care, health monitoring, health management.
 
+% I am not totally naive
 \paragraph{Marketing}
+
 Tailored recommendations, market access
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
@@ -276,9 +290,6 @@ reinforcement learning in the Machine Learning community (bareinboim2015bandits)
 where intervention probabilities are known
 \cite{bareinboim2015bandits}.
 
-Distinction between association and causation (ladder of causation): first
-insight that different tools than statistics are needed.
-
 \subsection{Focus of this thesis: real world data, observational}\label{subsec:intro:focus_data}
 
 Inconvenient of interventional data : Increasing costs of RCTs,
@@ -306,36 +317,42 @@ whereas artificial intelligence in medicine embraced the second one.
 \begin{baground_box_left}
   \subsection{Machine Learning Framework}\label{subsec:intro:machine_learning}
 
-  Departing from  carefully designing functional forms for statistical models, the
+  Departing from carefully designing functional forms for statistical models,
+  seeking algorithm efficiency and out-of sample predictive accuracy.
+
   \paragraph{Rashomon effect: multiple models can equally well model a given dataset}
-  % ref to appendix to describe ML algortihm: at least ridge, random forest, boosting.
+  % ref to appendix to describe ML algorithms: at least ridge, random forest, boosting.
+
   \paragraph{Model selection}
   Hyper-parameters selection, cross-validation (stone, 1974) and Textbook figure
 
   \subsection{Biostatistics Framework}\label{subsec:intro:biostatistics_framework}
 
-  In medical journals, cox model for survival data and logistic regression for
+  In medical journals, Cox model for survival data and logistic regression for
   binary outcomes have been the standard for publication.
 
-  Focus on variable selection: root in hand collected variables in carefully designed subpopulation ?
+  Focus on variable selection: root in hand collected variables in carefully
+  designed subpopulation ?
 
 
 \end{baground_box_left}
 
-\subsection{One choice of perspective: Recent statistical
+\subsection{One choice of perspective: recent statistical
   learning}\label{subsec:intro:recent_statistical_learning}
 % 
-Learning statistics in the age of deep learning pushes towards adopting a view
-on statistics that consider mechanisms as generally unknown, and predictive
+\paragraph{This perspective reflects more naturally my progression:} Learning
+statistics in the age of deep learning pushes towards adopting a view on
+statistics that consider mechanisms as generally unknown, and predictive
 accuracy as the hallmark of validity \citep{breiman2001statistical}.
 % 
 % ML in healthcare 
-Machines read medical images faster
-and more efficiently than most practitioners \citep{zhou2021review}.
-Structured data from Electronic Health Records \citep{rajkomar2018scalable} or
-administrative databases \citep{beaulieu2021machine} outperform rule-based
-clinical scores in predicting patient's readmission, in-hospital mortality or
-future comorbidities \citep{li2020behrt}. Recently, large language models
+\paragraph{Recent discourse and successes are heavily influenced by this line of
+  though:} Machines read medical images faster and more efficiently than most
+practitioners \citep{zhou2021review}. Structured data from Electronic Health
+Records \citep{rajkomar2018scalable} or administrative databases
+\citep{beaulieu2021machine} outperform rule-based clinical scores in
+predicting patient's readmission, in-hospital mortality or future
+comorbidities \citep{li2020behrt}. Recently, large language models (LLMs)
 leveraged clinical notes from several hospitals for length of stay prediction
 \citep{jiang2023health}. Hope is high that LLMs models will soon be able to
 help practitioners during consultation \citep{lee2023benefits}.
@@ -343,7 +360,52 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 \section{Notions of causality}\label{sec:intro:causality}
 
+\begin{baground_box_left}
 
+  \subsection{Association is not causation}\label{subsec:intro:causation}
+
+  \paragraph{Observational data can have different causal interpretations}
+
+  One statistical model yields multiple causal models, only one of which
+  correctly reflects the reality : find a good medical example (otherwise look
+  into Peter jonas's book or \cite[chapter~36]{murphy2022probabilistic}).
+
+  \paragraph{Ladder of causality}
+
+  Distinction between association and causation (ladder of causation): first
+  insight that different tools than statistics are needed.
+
+  \paragraph{Causality in epidemiology}
+
+  Opening an epidemiological book, confounding is the very first explained concept
+  \citep{rothman2012epidemiology}.
+
+  Causes are mainly presented as binary variables absent or present in \citep{}.
+  Their strengh is only defined at a population level, making them relative to a
+  given population \citep[chapter~3]{rothman2012epidemiology}. This point of
+  view is rather aligned with statistical modeling related to variable
+  significance, not with model performances.
+
+  Interesting concept of promoter --the last component cause-- that
+
+  Importance of validity by generalization of theory rather than statistical
+  generalization: established epidemiological knowledge should \textit{tell us
+    what to expect in people or settings that were not studied.} Statistical
+  generalization is considered by \cite{rothman2012epidemiology} as applied
+  epidemiology, focused on specific cases and not as the core of epidemiological
+  science.
+
+  \paragraph{Causality in Machine Learning}
+
+  Relation to dataset shift \citep{subbaswamy2020development}
+
+  \subsection{Neyman-rubin causal framework}\label{subsec:intro:causal_framework}
+
+  - PO notations
+  - The rest will be presented in chapter 4 and 5.
+  - Send back to appendix the DM (in randomized experiments)
+
+\end{baground_box_left}
 
 \section{Overview and contributions}\label{sec:intro:contributions}
 
@@ -354,10 +416,7 @@ help practitioners during consultation \citep{lee2023benefits}.
 \section{Abstract}\label{sec:cdw:abstract}
 \section{Motivation and background: a changing world}\label{sec:cdw:motivation}
 
-
-\subsection{Routine data collection are drawing increasing interest}\label{chapter:cdw:routine_data_collection}
-
-\subsection{Different types of healthcare data usages}\label{subsec:cdw:data_usages}
+\subsection{From primary to secondary data usages}\label{subsec:cdw:data_usages}
 
 \paragraph{Primary data usages}
 Primary usages directly serve one patient care.
@@ -365,15 +424,11 @@ Primary usages directly serve one patient care.
 \paragraph{Secondary data usages}
 Secondary usages do not concern directly the care and support of one patient: research, quality or management indicators, billings.
 
-\paragraph{Mix usages}
+\paragraph{Towards mix usages: the learning health system paradigm}
+
+The notion of learning health system \citep{mcginnis2013best}.
 
 Mix usages such as learning algorithms
-
-Health Technology A agencies interest: organizational impact of health products, potential for real world efficiency (entire life cycle of the product), quality, security, pertinence and security of care, health monitoring, health management.
-
-Precision medicine
-
-Fundamental research : biomarkers, observational epidemiology
 
 \subsection{Healthcare data collection is heavily influenced from the local healthcare organization}
 
@@ -387,8 +442,8 @@ US, Korea, Germany,
 
 centralized national insurer but scattered hospital ehrs. Projects in other areas: eg. cancer (unicancer), gp (cnge project, darmoni). National initiative to develop and structure hospital cdws.
 
-
-\section{Methods: interviews of French University Hospitals}\label{sec:cdw:methods}
+\section{Speaking to the data collectors: interviews of French
+  University Hospitals}\label{sec:cdw:methods}
 
 \subsection{Interviews and study coverage}\label{subsec:cdw:interviews}
 
@@ -419,8 +474,8 @@ Contrast with classical epidemiology study types and the notion of experiment \c
 \paragraph{Medical informatics}
 
 
-\section{Results: A rapidly evolving landscape with a variety of
-  situations}\label{sec:cdw:results}
+\section{Observations from a rapidly evolving and heterogeneous
+  ecosystem}\label{sec:cdw:results}
 
 \subsection{Governance: CDW are federating multiple teams in the
   hospital}\label{subsec:cdw:results:governance}
@@ -533,6 +588,22 @@ itself. Tooling: Link with devops/ automated CI in industrial data science there
 is a need for open-source publication of research code to ensure quality
 retrospective research
 
+\subsection{Data quality an document: more incentives needed}\label{subsec:cdw:recommendations:quality}
+
+Quality is not sufficiently considered as a relevant scientific topic itself.
+However, it is the backbone of all research done within a CDW. In order to
+improve the quality of the data with respect to research uses, it is necessary
+to conduct continuous studies dedicated to this topic [52,54–56]. These studies
+should contribute to a reflection on methodologies and standard tools for data
+quality, such as those developed by the OHDSI research network [41].
+
+Finally, there is a need for open-source publication of research code to ensure
+quality retrospective research [55,57]. Recent research in data analysis has
+shown that innumerable biases can lurk in training data sets [58,59]. Open
+publication of data schemas is considered an indispensable prerequisite for all
+data science and artificial intelligence uses [58]. Inspired by data set cards
+  [58] and data set publication guides, it would be interesting to define a
+standard CDW card documenting the main data flows.
 \section{Conclusion}\label{sec:cdw:conclusion}
 
 The French CDW ecosystem is beginning to take shape
@@ -552,14 +623,24 @@ The question of expanding the scope of the data beyond the purely hospital domai
 \paragraph{Interest in the clinic}
 
 One of the earliest risk score was designed to predict Coronary heart disease
-risk by fitting a cox model using seven features: age, cholesterol, systolic
+risk by fitting a cox model using seven features on 5300 patients: age, cholesterol, systolic
 blood pressure, hematocrit, ECG status, smoking at intake, and relative body
 weight \citep{brand1976multivariate}.
 
-Prevention
-Piloting
-In the literature
-Within french CDW (23 \% of studies, just after population definitions)
+\textit{Being able to predict key outcomes could, theoretically, make the use of
+  hospital palliative care resources more efficient and precise} \citep{topol2019high}
+
+Prevention : \textit{Early detection and appropriate treatment of sepsis have
+  been associated with a significant mortality benefit in hospitalized patients}
+\citep{wong2021external}
+
+Alert systems \citep{yu2018artificial}.
+
+\paragraph{Long term prevention}
+
+\paragraph{Piloting}
+
+\paragraph{Exploring french CDWs:} 23 \% of studies, just after population definitions).
 
 \subsection{EHRs data is complex}\label{subsec:predictive_models:complex_data}
 How ? time, high cardinality, multi-modality
@@ -712,18 +793,25 @@ Use 90\% of the data to estimate outcome models, 10\% to select them
 
 \chapter{Conclusion}\label{chapter:conclusion}
 
-Predictive medecine is hard
+%Predictive medecine is hard
 
 Modern healthcare burdens and costs are driven by chronic diseases where death
-is not the only outcome of interest.
-
-Focus on smaller rewards, on which experiments are easier to conduct and where
-error is possible: it would allow better learning for decision making since we
-can repeat more experiments (limit: signals could be highly delayed).
+is not the only outcome of interest. Focus on smaller rewards, on which
+experiments are easier to conduct and where error is possible: it would allow
+better learning for decision making since we can repeat more experiments (limit:
+signals could be highly delayed).
 
 Text is pervasive, we are using it to communicate and to log most of our
-information. We should leverage it more in the context of care (limit:
-temporality is hard to capture but is a key aspect of causal inference).
+information. We can rely pretraining models outside the healthcare domain. We
+should leverage it more in the context of care (limit: temporality is hard to
+capture but is a key aspect of causal inference).
+
+The unreasonable effectiveness of healthcare data is yet out of reach due to
+hugely difficult transfer of models or administrative barriers to access data
+(due to multiplicity of the involved actors). This forces us to rely on
+efficient techniques that make the best of medium-sized data or rely on sharable
+sources of knowledge (aggregated statistics, federated learning approaches,
+ontologies, ...).
 
 
 \printbibliography
