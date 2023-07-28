@@ -162,7 +162,12 @@ relevant information from this data. Hammer that sees a nail : Can I use languag
 modeling techniques to mine this data ?
 
 First questions: how useful are such wealth of data ? Is unsupervised learning
-useful ? Is prediction a useful goal ? Ironically, at the end of the day, I
+useful ? Is prediction a useful goal ? I was exactly in the atypical situation
+mentioned by Cox in his answer to Breiman's foundational paper on Machine
+Learning \citep{breiman2001statistical} : \textit{Data looking for a question are
+  not unknown and raise puzzles but are, I believe, atypical in most contexts.}
+
+Ironically, at the end of the day, I
 replicated unsupervised learning results from \citep{beam2019clinical} but would
 not know how to use it. I moved towards more interpretable dictionary learning
 with control groups analyses to study polymedication.
@@ -173,10 +178,18 @@ pipeline are very useful during crisis for monitoring: If you do not see all the
 data creating process, standard pipelines, standard tests and documentation : it
 is inherently a group effort.
 
-\subsection{Wrap-up: Increasing data collection and computing power}
+\subsection{Wrap-up: Increasing data collection and computing power}\label{subsec:intro:wrapup}
 
 \paragraph{Data is collected at massive scale in healthcare} centralized
 into dedicated databases for analysis: eg. APHP clinical notes, French.
+
+It is acknowledged that we entered since at least 2022 years in an era where we
+frenetically store data without having a dedicated question in mind. The vague
+concept of big data describes this new attitude towards data collection. I would
+propose another view on the current situation: data collected in huge quantity
+is part of the reality, but it does not preclude to assemble data suited for an
+appropriate question. In medical informatics, this is called computational
+phenotyping.
 
 \paragraph{Models are scaling up}
 A whole generation of quantitative researchers has been trained with flexible
@@ -256,8 +269,6 @@ reuse in management, research or care.
 The 4 phases of data flow from the various sources that make up the HIS (figure)
 Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
 
-
-
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
 
@@ -272,12 +283,12 @@ Medicine in the late 80s.
   based on considerations other than the study protocol, it is not a true
   experiment} \citep{rothman2012epidemiology}
 
-Pbs of external validity raised in economics (Deaton,
-cf intro de la revue de Bénédicte). Focus is such problems is probably greater
-in economics because situations are not well controlled at all: very far from
-labs settings. Clinical situation is closer to lab (clinical epidemiology !=
-social epidemiology) What about medico-economics. I do not address this question
-in the present thesis, but it is a clear motivation
+Pbs of external validity raised in economics (Deaton, cf intro de la revue de
+Bénédicte). Focus is such problems is probably greater in economics because
+situations are not well controlled at all: very far from labs settings. Clinical
+situation is closer to lab (clinical epidemiology != social epidemiology). What
+about medico-economics ? I do not address this question in the present thesis,
+but it is a clear motivation.
 
 %
 Observational data cannot intervene in any way with the patients. It should rely
@@ -287,8 +298,9 @@ on observation alone to estimate intervention probability.
 Conditional probabilities are interventional as well: conditionally randomized
 experiments in epidemiology \citep{hernan2020causal}. This concept is known as
 reinforcement learning in the Machine Learning community (bareinboim2015bandits)
-where intervention probabilities are known
-\cite{bareinboim2015bandits}.
+where intervention probabilities are known \cite{bareinboim2015bandits}.
+Decision making processes rely to the correct estimations of these
+conditional probabilities, hence the link between this work and precision medicine.
 
 \subsection{Focus of this thesis: real world data, observational}\label{subsec:intro:focus_data}
 
@@ -298,7 +310,7 @@ Today's public health issues are closely linked to routine care, not ideal care:
 resource constraint, chronic disease. Not so new as it was already major issues
 mentioned in the late 60s \cite{rutstein1967coming}: \textit{1) modern
   medicine's skyrocketing costs; 2) the chaos of an information explosion
-  involving both paperwork pro- liferation and large amounts of new knowledge that
+  involving both paperwork proliferation and large amounts of new knowledge that
   no single physician could hope to digest; 3) a geographic maldistribution of
   MD's; 4) increasing demands on the physician's time as increasing numbers of
   individuals began to demand quality medical care.}
@@ -334,6 +346,17 @@ whereas artificial intelligence in medicine embraced the second one.
   Focus on variable selection: root in hand collected variables in carefully
   designed subpopulation ?
 
+  Focus on simple models for juridical and credibility reasons but also for
+  practical reasons: the input data should be readily available to question one
+  model individual prediction \citep{wyatt1995commentary}.
+
+  The divide between modeling and empirical algorithmic approaches is best
+  illustrated in the commentary to Breimann by David Cox or Bad Efron in  \cite{}:
+
+  \textit{Often the prediction is under quite different conditions from the
+  data; [...] what would be the effect on annual incidence of cancer in the
+  United States of reducing by 10\% the medical use of X-rays}. This example is
+  a pure causal inference question.
 
 \end{baground_box_left}
 
@@ -604,14 +627,20 @@ publication of data schemas is considered an indispensable prerequisite for all
 data science and artificial intelligence uses [58]. Inspired by data set cards
   [58] and data set publication guides, it would be interesting to define a
 standard CDW card documenting the main data flows.
+
 \section{Conclusion}\label{sec:cdw:conclusion}
 
 The French CDW ecosystem is beginning to take shape
+
 The priority is the creation and perpetuation of multidisciplinary warehouse teams
+
 Constitution of a multilevel collaboration network is another priority.
+
 Common data model should be encouraged
+
 The question of expanding the scope of the data beyond the purely hospital domain must be asked.
 
+Heterogeneity of data collection calls for distributed information sharing models.
 
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 \section{Abstract}\label{sec:predictive_models:abstract}
@@ -622,13 +651,21 @@ The question of expanding the scope of the data beyond the purely hospital domai
 
 \paragraph{Interest in the clinic}
 
-One of the earliest risk score was designed to predict Coronary heart disease
-risk by fitting a cox model using seven features on 5300 patients: age, cholesterol, systolic
-blood pressure, hematocrit, ECG status, smoking at intake, and relative body
-weight \citep{brand1976multivariate}.
-
+% better use of constrained medical resources
 \textit{Being able to predict key outcomes could, theoretically, make the use of
   hospital palliative care resources more efficient and precise} \citep{topol2019high}
+
+The Framingham risk score, one of the earliest predictive model in medicine was
+designed to predict Coronary heart disease risk by fitting a cox model using
+seven features on 5300 patients: age, cholesterol, systolic blood pressure,
+hematocrit, ECG status, smoking at intake, and relative body weight
+\citep{brand1976multivariate}.
+
+Some are used in clinical practice every day : the Glasgow coma scale
+\citep{teasdale1974assessment}, the APACHE III score \citep{knaus1991apache}.
+But a very small part of the published models are used in practice
+\citep{wyatt1995commentary}. Reasons for this poor adoption are lack of
+evidences for credibility, generalizability or clinical effectiveness.
 
 Prevention : \textit{Early detection and appropriate treatment of sepsis have
   been associated with a significant mortality benefit in hospitalized patients}
@@ -636,9 +673,23 @@ Prevention : \textit{Early detection and appropriate treatment of sepsis have
 
 Alert systems \citep{yu2018artificial}.
 
+Patient deterioration detection \citep{rothman2013development}: \textit{Rather than attempting to forecast a particular
+  adverse event, we argue that intervention during early deterioration can help prevent such an adverse event from
+  occurring}
+
+\paragraph{Risk stratification}
+
+risk stratify \citep{tang2007global}
+
 \paragraph{Long term prevention}
 
-\paragraph{Piloting}
+
+\paragraph{Planning and piloting}
+
+Rejoin the logistic and administrative help from \cite{topol2019high}.
+
+The LOS task: planning the number of beds and members of staff required,
+identifying individual outliers and case mix correction for benchmarking \citep{verburg2017models}
 
 \paragraph{Exploring french CDWs:} 23 \% of studies, just after population definitions).
 
@@ -652,26 +703,45 @@ Within french CDW(link with previous chapter)
 What are the most impactful algorithms for predictive tasks from structured EHR ?
 A wealth of methods, but a lack of insights on the advantages and inconvenience for specific problems and resources.
 
+For logistic models, a requirement is that the test set should have at least 10
+cases per feature with a positive event (eg. mortality)
+\citep{harrell1985regression,wyatt1995commentary}.
+
 \subsection{What makes a healthcare predictive model useful?}\label{subsec:predictive_models:useful}
 
-We can share it
-Performances
-Insertion in the care workflow
+We build upon the criteria for adoption from \cite{wyatt1995commentary}. Need
+also more modern sources eg. \cite{subbaswamy2020development}.
+
+\paragraph{We can share it easily: } Hence, people can use it AND contribute to
+external validity and continuous improvements.
+
+\paragraph{Performances}
+
+\paragraph{Insertion in the care workflow}
 
 
 \section{Predictive pipelines}\label{sec:predictive_models:pipelines}
 
-Demographic features
-Count encoding with event features
-Static Embeddings of event features
-Transformer based
+\subsection{Demographic features}\label{subsec:predictive_models:demographic}
+
+\subsection{Count encoding with event features}\label{subsec:predictive_models:count_encoding}
+
+\subsection{Static Embeddings of event features}
+
+\subsection{Transformer based}\label{subsec:predictive_models:transformer}
+
 \section{Empirical Study}\label{sec:predictive_models:empirical_study}
+
 \subsection{Evaluation pipeline}\label{subsec:predictive_models:evaluation_pipeline}
+
 \subsection{Task definitions}\label{subsec:predictive_models:task_definitions}
 
 \paragraph{Length Of Stay}
+
 \paragraph{Diagnosis Prediction}
+
 \paragraph{Major Adverse Cardiovascular Events}
+
 \subsection{Results: performance-sample trade-offs}
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
@@ -679,10 +749,22 @@ Transformer based
 \chapter{Prediction is not all we need: Causal analysis of EHRs to ground decision making}\label{chapter:causal_tuto}
 \section{Abstract}\label{sec:causal_tuto:abstract}
 
-\section{Motivation : Healthcare is concerned with decision making, not mere prediction}\label{sec:causal_tuto:motivation}
+\section{Motivation : Healthcare is concerned with decision making, not mere
+  prediction}\label{sec:causal_tuto:motivation}
 
-\subsection{Predictive medicine currently suffers from biases}\label{subsec:causal_tuto:predictive_medicine_biases}
-(shortcuts, population shifts). Racial, gender and under-served population biases raise concern on fairness.
+
+Even the early Framingham study concludes that risk reduction is more important
+than identifying the strength of specific risk factors since this quantity is
+subject to slight changes in the risk model \citep{brand1976multivariate}:
+\textit{It further suggests that the strength of a particular risk factor may
+  not be as important from the point of view of intervention as the ability to
+  safely and conveniently achieve even a moderate risk reduction in a large number
+  of persons.}
+
+\subsection{Predictive medicine currently suffers from
+  biases}\label{subsec:causal_tuto:predictive_medicine_biases} (shortcuts,
+population shifts). Racial, gender and under-served population biases raise
+concern on fairness.
 \subsection{A key ingredient to ground data-driven decision making is causal thinking}
 
 \subsection{The need for synthetic materials for practitioners}\label{subsec:causal_tuto:synthetic_materials}
@@ -707,6 +789,7 @@ extractions Confounders aggregation Causal estimators Nuisance estimators
 Sensitivity vs robustness
 
 \subsection{Heterogeneity of treatment}
+
 Interest of HTE
 How to do HTE ? Final regression analysis.
 
@@ -717,19 +800,23 @@ Choice of the trial
 Known effects
 
 \subsection{Framing the question}\label{subsec:causal_tuto:framing_mimic}
+
 \subsection{Identification}
 Covariates and dag
+
 \subsection{Estimation}
 Confounders extractions
 Confounders aggregation
 Causal estimators
 Nuisance estimators
+
 \subsection{Vibration analysis}
 Varying estimation choices:
 Varying inclusion criteria: illustration of immortal time bias
+
 \subsection{Heterogeneity of treatment}
 
-\subsection{Discussion}\label{subsec:causal_tuto:discussion}
+\section{Discussion}\label{subsec:causal_tuto:discussion}
 
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
 \section{Abstract}\label{sec:causal_model_selection:abstract}
@@ -793,19 +880,26 @@ Use 90\% of the data to estimate outcome models, 10\% to select them
 
 \chapter{Conclusion}\label{chapter:conclusion}
 
-%Predictive medecine is hard
-
+%Healthcare burden in modern world is access to healthcare, and chronic disease
+%ie. resource issues more than better products, our methodological toolbox to
+%distinguish between good and bad management is not adapted to the task since it
+%involved complicated process specific to each situation. Some can be borrowed
+%from economics, but specificities of healthcare should be mixed in. 
 Modern healthcare burdens and costs are driven by chronic diseases where death
 is not the only outcome of interest. Focus on smaller rewards, on which
 experiments are easier to conduct and where error is possible: it would allow
 better learning for decision making since we can repeat more experiments (limit:
 signals could be highly delayed).
 
+% Pattern exists in the massive data collected: we need to extract them
+% automatically and articulate these with scientific questions guided by
+% knowledge domain.
 Text is pervasive, we are using it to communicate and to log most of our
 information. We can rely pretraining models outside the healthcare domain. We
 should leverage it more in the context of care (limit: temporality is hard to
 capture but is a key aspect of causal inference).
 
+% Those problem are more pragmatic than theoretical. Thus, data and conclusions need to circulate. 
 The unreasonable effectiveness of healthcare data is yet out of reach due to
 hugely difficult transfer of models or administrative barriers to access data
 (due to multiplicity of the involved actors). This forces us to rely on
