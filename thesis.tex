@@ -19,6 +19,7 @@
 \usepackage{multirow}
 \usepackage{pifont}
 \usepackage{csvsimple}
+\usepackage[title,toc,titletoc,page]{appendix}
 
 % notes in the margin
 \usepackage{todonotes}
@@ -324,7 +325,12 @@ cultures: a predominant community at the time focused on models, another one
 relying on predictive accuracy.
 
 Epidemiological statistics tends to be closer to the first model-based culture
-whereas artificial intelligence in medicine embraced the second one.
+whereas artificial intelligence in medicine embraced the second one. This
+cultural differences might be explained by different objectives. Clinical
+Epidemiology seeks to uncover nature mechanisms from data, to understand how
+nature works. AIM adopts a more pragmatic approach, trying to understand what
+deployed healthcare system is improving outcomes or not, without trying to
+uncover the full causal mechanism leading to observed results.
 
 \begin{baground_box_left}
   \subsection{Machine Learning Framework}\label{subsec:intro:machine_learning}
@@ -647,7 +653,7 @@ Heterogeneity of data collection calls for distributed information sharing model
 
 \section{Motivation}\label{sec:predictive_models:motivation}
 
-\subsection{Why such interest in predictive models from EHRs}\label{subsec:predictive_models:importance}
+\subsection{Why such interest in predictive models in healthcare}\label{subsec:predictive_models:importance}
 
 \paragraph{Interest in the clinic}
 
@@ -660,6 +666,12 @@ designed to predict Coronary heart disease risk by fitting a cox model using
 seven features on 5300 patients: age, cholesterol, systolic blood pressure,
 hematocrit, ECG status, smoking at intake, and relative body weight
 \citep{brand1976multivariate}.
+
+\cite{harrell2001regression} mention diagnosis, prognosis, confounder adjustment
+and heterogeneous treatment effects (mainly for cost-effectiveness analyses) as
+the main uses of predictive models in healthcare. Ten years later,
+\cite{steyerberg2009applications} also mentions diagnosis, prognosis and therapy
+(He has a great figure from pubmed). I should do the same for 2023.
 
 Some are used in clinical practice every day : the Glasgow coma scale
 \citep{teasdale1974assessment}, the APACHE III score \citep{knaus1991apache}.
@@ -693,9 +705,14 @@ identifying individual outliers and case mix correction for benchmarking \citep{
 
 \paragraph{Exploring french CDWs:} 23 \% of studies, just after population definitions).
 
-\subsection{EHRs data is complex}\label{subsec:predictive_models:complex_data}
-How ? time, high cardinality, multi-modality
-In the literature
+\subsection{Prediction models are built on increasingly complex data sources}\label{subsec:predictive_models:complex_data}
+
+Why is EHR so complex ? How ? time, high cardinality, multi-modality
+
+\paragraph{In the literature}: early article in \cite{wu2010prediction},
+literature review from 2017 \citep{goldstein2017opportunities}, literature
+review more focused on models and task from soda prez.
+
 Within french CDW(link with previous chapter)
 
 \subsection{Low prevalence and local practice}\label{subsec:predictive_models:low_prevalence}
@@ -709,16 +726,18 @@ cases per feature with a positive event (eg. mortality)
 
 \subsection{What makes a healthcare predictive model useful?}\label{subsec:predictive_models:useful}
 
-We build upon the criteria for adoption from \cite{wyatt1995commentary}. Need
-also more modern sources eg. \cite{subbaswamy2020development}.
+We build upon the criteria for adoption from \cite{wyatt1995commentary}.
+
+More modern sources eg. \cite{subbaswamy2020development}.
 
 \paragraph{We can share it easily: } Hence, people can use it AND contribute to
 external validity and continuous improvements.
 
-\paragraph{Performances}
+\paragraph{Performances} linked to accuracy, but questions on how to measure it.
 
 \paragraph{Insertion in the care workflow}
 
+Arguments for ease of deployment.
 
 \section{Predictive pipelines}\label{sec:predictive_models:pipelines}
 
@@ -760,6 +779,16 @@ subject to slight changes in the risk model \citep{brand1976multivariate}:
   not be as important from the point of view of intervention as the ability to
   safely and conveniently achieve even a moderate risk reduction in a large number
   of persons.}
+In a foundational article on EHR, the use-case of heart failure prediction is
+motivated by agressive interventions \citep{wu2010prediction}: \textit{heart
+  failure could potentially lead to improved outcomes through aggressive
+  intervention, such as treatment with angiotensin converting enzyme
+  (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs).}. It is almost
+always the case that prognosis models are motivated by decision making
+processes. It is clearly described by \cite{steyerberg2009applications} for
+diagnosis: \textit{If we do a diagnostic test, we may detect an underlying
+  disease. But some diseases are not treatable, or the natural course might be
+  very similar to what is achieved with treatment.}
 
 \subsection{Predictive medicine currently suffers from
   biases}\label{subsec:causal_tuto:predictive_medicine_biases} (shortcuts,
@@ -884,7 +913,7 @@ Use 90\% of the data to estimate outcome models, 10\% to select them
 %ie. resource issues more than better products, our methodological toolbox to
 %distinguish between good and bad management is not adapted to the task since it
 %involved complicated process specific to each situation. Some can be borrowed
-%from economics, but specificities of healthcare should be mixed in. 
+%from economics, but specificities from epidemiology should be mixed in. 
 Modern healthcare burdens and costs are driven by chronic diseases where death
 is not the only outcome of interest. Focus on smaller rewards, on which
 experiments are easier to conduct and where error is possible: it would allow
@@ -910,10 +939,11 @@ ontologies, ...).
 
 \printbibliography
 
-\appendix
-
 \clearpage
+\begin{appendices}
+  \section{Statistical models}\label{apd:statistical_models}
 
-\section{Causal Diagrams}
+  \section{Causal Diagrams}\label{apd:causal_diagrams}
 
+\end{appendices}
 \end{document}
