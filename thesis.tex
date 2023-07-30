@@ -204,8 +204,8 @@ device and applications and AI/ML used to conduct clinical research
 \subsection{What pressing needs to use health data}
 
 Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
-rule-based artificial intelligence expert systems judges \textit{medical
-  practice, and biomedical research, are inherently information-management tasks}
+rule-based artificial intelligence expert systems described \textit{medical
+  practice, and biomedical research, [as] inherently information-management tasks}
 \citep{patel2009coming}.
 
 However, the incentives to collect and analyze data are not aligned between
@@ -213,7 +213,7 @@ healthcare actors.
 
 \paragraph{Healthcare practice}
 
-Automation of tedious tasks, decision support systems
+Automation of tedious tasks, decision support system
 
 \paragraph{Research}
 
@@ -224,14 +224,17 @@ understanding of the mechanisms of disease \textit{the study of the distribution
 \paragraph{Public policies: monitoring and evaluation}
 
 Guidelines, quality of care, public health
+
 Health Technology Agencies interest: organizational impact of health products,
 potential for real world efficiency (entire life cycle of the product), quality,
-security, pertinence and security of care, health monitoring, health management.
+security, pertinence and security of care,
+
+Government bodies: health monitoring, health management, contextualization.
 
 % I am not totally naive
 \paragraph{Marketing}
 
-Tailored recommendations, market access
+Market access, tailored recommendations.
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
@@ -259,16 +262,6 @@ Advantages (space and time coverage, scale, structure), disadvantages (not clini
 Increasing informatization
 EHR at the center
 Other applications part of HIS: give examples.
-
-\paragraph{Clinical Data Warehouse} An infrastructure
-is needed to pool data from one or more medical information systems. Definition
-of Clinical Data Warehouse: Health data warehouses (HDWs) refer to the pooling of
-data from one or more medical information systems, in a homogeneous format for
-reuse in management, research or care.
-
-
-The 4 phases of data flow from the various sources that make up the HIS (figure)
-Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
 
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
@@ -366,7 +359,7 @@ uncover the full causal mechanism leading to observed results.
 
 \end{baground_box_left}
 
-\subsection{One choice of perspective: recent statistical
+\subsection{One choice of perspective: Recent statistical
   learning}\label{subsec:intro:recent_statistical_learning}
 % 
 \paragraph{This perspective reflects more naturally my progression:} Learning
@@ -399,11 +392,6 @@ help practitioners during consultation \citep{lee2023benefits}.
   correctly reflects the reality : find a good medical example (otherwise look
   into Peter jonas's book or \cite[chapter~36]{murphy2022probabilistic}).
 
-  \paragraph{Ladder of causality}
-
-  Distinction between association and causation (ladder of causation): first
-  insight that different tools than statistics are needed.
-
   \paragraph{Causality in epidemiology}
 
   Opening an epidemiological book, confounding is the very first explained concept
@@ -428,11 +416,16 @@ help practitioners during consultation \citep{lee2023benefits}.
 
   Relation to dataset shift \citep{subbaswamy2020development}
 
+  Distinction between association and causation (ladder of causation): first
+  insight that different tools than statistics are needed.
+
+
   \subsection{Neyman-rubin causal framework}\label{subsec:intro:causal_framework}
 
   - PO notations
+  - Explain what is a rct, its origin and the difference with an observational study
+  - Send back to appendix the Difference in Means  (in randomized experiments)
   - The rest will be presented in chapter 4 and 5.
-  - Send back to appendix the DM (in randomized experiments)
 
 \end{baground_box_left}
 
@@ -443,15 +436,17 @@ help practitioners during consultation \citep{lee2023benefits}.
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}\label{chapter:cdw}
 
 \section{Abstract}\label{sec:cdw:abstract}
-\section{Motivation and background: a changing world}\label{sec:cdw:motivation}
+\section{Motivation and background: A changing world}\label{sec:cdw:motivation}
 
-\subsection{From primary to secondary data usages}\label{subsec:cdw:data_usages}
+\subsection{Data for primary or secondary
+  usages?}\label{subsec:cdw:data_usages}
 
 \paragraph{Primary data usages}
 Primary usages directly serve one patient care.
 
 \paragraph{Secondary data usages}
-Secondary usages do not concern directly the care and support of one patient: research, quality or management indicators, billings.
+Secondary usages do not concern directly the care and support of one patient:
+research, quality or management indicators, billings.
 
 \paragraph{Towards mix usages: the learning health system paradigm}
 
@@ -471,7 +466,19 @@ US, Korea, Germany,
 
 centralized national insurer but scattered hospital ehrs. Projects in other areas: eg. cancer (unicancer), gp (cnge project, darmoni). National initiative to develop and structure hospital cdws.
 
-\section{Speaking to the data collectors: interviews of French
+\subsection{The multiplication of Clinical Data Warehouses}\label{subsec:cdw:cdw_definition}
+
+An infrastructure is needed to pool data from one or more medical information
+systems. Definition of Clinical Data Warehouse: Health data warehouses (HDWs)
+refer to the pooling of data from one or more medical information systems, in a
+homogeneous format for reuse in management, research or care.
+
+
+The 4 phases of data flow from the various sources that make up the HIS (figure)
+Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
+
+
+\section{Speaking to the data collectors: Interviews of French
   University Hospitals}\label{sec:cdw:methods}
 
 \subsection{Interviews and study coverage}\label{subsec:cdw:interviews}
@@ -523,7 +530,7 @@ Scientific committee and project follow-up platform
   studies}\label{subsec:cdw:results:transparency} Uneven public reference on
 hospital websites of ongoing studies.
 
-\subsection{Triple usage of data: research, management,
+\subsection{Triple usage of data: Research, management,
   clinic}\label{subsec:cdw:results:data}
 
 \paragraph{Strong dependance to the HIS}
@@ -537,7 +544,7 @@ Main functionalities of HIS are the same. Common base Details: Table Takeaway:
 most of the current accessible data are billing, administrative and text,
 importantly, low access to temporality.
 
-\paragraph{Data reuse: research}
+\paragraph{Data reuse: Research}
 Details of current study types.
 Details of specialty of the principal investigator
 Interest for research data network but lack of resources
@@ -599,7 +606,7 @@ long-middle term teams (eg. inria ?) Multi-layered governance
 comparative observational study protocols for research Patient information stays
 limited
 
-\subsection{Data: complex data collection requires a variety of
+\subsection{Data: Complex data collection requires a variety of
   expertise}\label{subsec:cdw:recommendations:data} study design : change of
 focus from data collection to data preprocessing -> other complementary skills
 needed Link with the HIS, lack of standard at the HIS level, lack of sharing of
@@ -607,7 +614,7 @@ data schema Data reuse oriented towards primary care is still rare and rarely
 supported by appropriate funding.
 
 
-\subsection{Technical architecture: towards more harmonization and open source ?
+\subsection{Technical architecture: Towards more harmonization and open source ?
 }\label{subsec:cdw:recommendations:architecture} Lack of harmonization: focus on
 fewer solutions Commercial solutions emerging Case for open source:
 transparency, less technological lock-in, mutualization, favor modularity, help
@@ -651,7 +658,7 @@ Heterogeneity of data collection calls for distributed information sharing model
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 \section{Abstract}\label{sec:predictive_models:abstract}
 
-\section{Motivation}\label{sec:predictive_models:motivation}
+\section{Predictive models in healthcare: Less fascination, more practical utility}\label{sec:predictive_models:motivation}
 
 \subsection{Why such interest in predictive models in healthcare}\label{subsec:predictive_models:importance}
 
@@ -705,7 +712,7 @@ identifying individual outliers and case mix correction for benchmarking \citep{
 
 \paragraph{Exploring french CDWs:} 23 \% of studies, just after population definitions).
 
-\subsection{Prediction models are built on increasingly complex data sources}\label{subsec:predictive_models:complex_data}
+\subsection{Data sources fueling predictive models are increasingly complex}\label{subsec:predictive_models:complex_data}
 
 Why is EHR so complex ? How ? time, high cardinality, multi-modality
 
@@ -715,16 +722,17 @@ review more focused on models and task from soda prez.
 
 Within french CDW(link with previous chapter)
 
-\subsection{Low prevalence and local practice}\label{subsec:predictive_models:low_prevalence}
-
-What are the most impactful algorithms for predictive tasks from structured EHR ?
-A wealth of methods, but a lack of insights on the advantages and inconvenience for specific problems and resources.
+\subsection{Low prevalence and local practice: Headaches for machine learning}\label{subsec:predictive_models:low_prevalence}
 
 For logistic models, a requirement is that the test set should have at least 10
 cases per feature with a positive event (eg. mortality)
 \citep{harrell1985regression,wyatt1995commentary}.
 
 \subsection{What makes a healthcare predictive model useful?}\label{subsec:predictive_models:useful}
+
+What are the most impactful algorithms for predictive tasks from structured EHR
+? A wealth of methods, but a lack of insights on the advantages and
+inconvenience for specific problems and resources.
 
 We build upon the criteria for adoption from \cite{wyatt1995commentary}.
 
@@ -739,7 +747,7 @@ external validity and continuous improvements.
 
 Arguments for ease of deployment.
 
-\section{Predictive pipelines}\label{sec:predictive_models:pipelines}
+\section{From basic to complex: four increasingly sophisticated predictive pipelines}\label{sec:predictive_models:pipelines}
 
 \subsection{Demographic features}\label{subsec:predictive_models:demographic}
 
@@ -753,15 +761,15 @@ Arguments for ease of deployment.
 
 \subsection{Evaluation pipeline}\label{subsec:predictive_models:evaluation_pipeline}
 
-\subsection{Task definitions}\label{subsec:predictive_models:task_definitions}
+\subsection{Three clinical and operational tasks}\label{subsec:predictive_models:task_definitions}
 
-\paragraph{Length Of Stay}
+\paragraph{Length Of Stay: Plan}
 
-\paragraph{Diagnosis Prediction}
+\paragraph{Diagnosis Prediction: Benchmark}
 
-\paragraph{Major Adverse Cardiovascular Events}
+\paragraph{Major Adverse Cardiovascular Events: Prevent}
 
-\subsection{Results: performance-sample trade-offs}
+\subsection{Results: Performance-sample trade-offs}
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
 
@@ -852,7 +860,167 @@ Varying inclusion criteria: illustration of immortal time bias
 
 \section{Motivation}\label{sec:causal_model_selection:motivation}
 
-Extending prediction to prescription requires causal model selection
+\subsection{Extending prediction to prescription needs causality}
+
+Progress in machine learning brings predictive models to new health
+data \citep{beam2018big,rajkomar2019machine}, with the promise of
+precision medicine.
+Automated analysis of
+medical images is increasingly accurate, \emph{eg} for brain images,
+\citep{khojaste2022deep,zhang2019radiological} or mammography
+\citep{yala2019deep,shen2019deep,nassif2022breast}.
+New prognostic models leverage routinely-collected
+patient records
+\citep{mooney2018bigdata}: predicting heart
+failure from claims \citep{desai2020comparison}, suicide attempts
+from questionnaires \citep{simon2018predicting}...
+Clinical notes contain much prognostic information
+but require text modeling  \citep{horng2017creating,wang2020prediction,spasic2020clinical}.
+Data may be difficult to
+control and model, but the accuracy of the prediction can be verified
+on left-out data
+\citep{altman2009prognosis,poldrack2020establishment,varoquaux2022evaluating}.
+Given a model predicting a health outcome, precision medicine
+would like it to guide decisions: will an individual benefit from an
+intervention such as surgery \citep{fontana2019can}?
+Contrasting predictions with and without the treatment gives an answer,
+but statistical validity requires causal inference
+\citep{snowden_implementation_2011,blakely2020reflection}.
+
+% - Causal inference is difficult
+% - Beyond the dream of assessing effectiveness and safety in real-word
+%   practice \citep{black1996we} include off-label drug usage 
+%   \citep{radley2006off} (which may lead to drug repurposing)
+% - Plug in that outcome modeling is complementary to RCTs: observational
+%   data gives weaker evidence than trials, but on both data outcome
+%   modeling opens the door to individual.
+% - Epidemiology has focused on propensity-score methods
+% - Principle causal inference with outcome models is possible
+% - It brings the promises of \emph{individualized treatment effects} --a
+%   goal related to capturing heterogeneity and thus CATE--
+% - It also performs well on causal-inference competition, although they
+%   focused on the ATE
+
+% The plethora of approaches approaches give different causal-inference
+% estimates => need for guideline on causal model selection.
+
+There is a rich causal-inference statistical literature, which bridges to
+predictive modeling via so-called \emph{outcome models}, or G-computation,
+G-formula \citep{robins_role_1986}, Q-model \citep{snowden_implementation_2011},
+conditional mean regression \citep{wendling_comparing_2018}. A central challenge
+of inference of treatment effects is that of confounding: spurious associations
+between treatment allocation and baseline health, \emph{eg} only prescribing a
+drug to mild cases \citep{hernan_causal_2020,vanderweele2019principles}.
+Controlled allocation of treatment, as in randomized controlled trials (RCTs),
+alleviate this concern. Yet most machine-learning models are trained on
+\emph{observational} data, close to real-word practice
+\citep{black1996we,hernan_methods_2021} but challenging for causal inference.
+Causal inference has been central to epidemiology, typically with methods that
+model treatment assignment \citep{austin_moving_2015,grose_use_2020}, based on
+propensity scores \citep{rosenbaum_central_1983}. Recent empirical results
+\citep{wendling_comparing_2018,dorie_automated_2019} show benefits of outcome
+modeling to estimate average treatment effects. Maybe a greater benefit is
+that these methods naturally go beyond average effects, estimating
+individualized or conditional average treatment effects (CATE), central to
+precision medicine.
+%
+For this purpose, such methods are also invaluable on randomized trials
+\citep{su2018random,lamont2018identification,hoogland2021tutorial}.
+
+%\idea{There is a variety of models for g-estimation}
+There is an explosion of outcome modeling or machine learning methods.
+For instance, many deep-learning methods have been developed for medical
+image analysis \citep{shen2017deep,monshi2020deep}.
+Even outcome-modeling methods specifically designed for causal
+inference are numerous: Bayesian Additive Regression Trees
+\citep{hill_bayesian_2011}, Targeted Maximum Likelihood Estimation
+\citep{laan_targeted_2011,schuler_targeted_2017}, causal boosting
+\citep{powers_methods_2018}, causal multivariate adaptive regression
+splines \citep{powers_methods_2018}, random forests
+\citep{wager_estimation_2018, athey_generalized_2019},
+Meta-learners \citep{kunzel_metalearners_2019}, R-learners
+\citep{nie_quasioracle_2017}, Doubly robust estimation
+\citep{chernozhukov_double_2018}...
+%\idea{The variety of estimators calls for model selection procedures}
+The wide variety of methods raises the problem
+of selecting between different estimators based on the data at hand.
+%
+Indeed, estimates of treatment effects can vary markedly across different
+predictive models. For instance, Figure shows
+large variations obtained across different outcome estimators on
+semi-synthetic datasets \citep{dorie_automated_2019}. Flexible models
+such as random forests are doing well in most settings except
+when treated and untreated populations differ noticeably, in
+which case a linear model (ridge) is to be preferred.
+However random forests with different hyper-parameters
+(max depth= 2) yield poor estimates.
+A simple rule of thumb such as preferring flexible models does not work in
+general; model selection is needed.
+
+%\idea{It is crucial to have tools for model selection.}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/chapter_5/_2023-03-08-11-10-28_acic_2016_ate_heterogeneity.parquet_abs_bias_ylog_scale=True.pdf}%
+  \caption{\textbf{Different outcome models lead to different
+      estimation errors on the Average Treatment Effects},
+    on 77 classic simulations with known true causal effect
+    \citep{dorie_automated_2019}. The different models are ridge regression
+    and random forests with different hyper-parameters
+    (details
+    \ref{apd:toy_example:acic_2016_ate_variability}). The different configurations are
+    plotted as a function of increasing difference between treated and
+    untreated population --see
+    \autoref{subsec:measuring_overlap}.
+    There is no systematic best performer; data-driven model
+    selection is important.
+    \label{fig:acic_2016_ate_heterogeneity}%
+  }
+\end{figure}
+
+Standard practices to select models in predictive settings rely on
+the error on the outcome
+\citep{poldrack2020establishment,varoquaux2022evaluating}. However, as we
+will see, these practices may not pick the best models
+for causal inference, as they can be misled by inhomogeneities due to
+treatment allocation.
+%
+Given complex, potentially noisy, data, which model is to be most trusted to
+yield valid causal estimates? As no single learner performs
+best on all data sets, there is a pressing need for clear guidelines to select
+outcome models for causal inference.
+
+\paragraph{Objectives and structure of the paper}
+
+In this paper, we study \textit{model selection procedures}
+in practical settings: \textit{finite samples} settings and without
+\textit{well-specification} assumption. Asymptotic causal-inference
+theory calls for complex risks, but a practical question is
+whether model-selection procedures, that rely on data split, can estimate
+these risks reliably enough. Indeed, they
+come with more quantities to estimate, which may
+bring additional variance, leading to worse model selection.
+
+We first illustrate the problem of causal model
+selection and briefly review prior art. Then, Section
+\ref{sec:framework} sets causal model selection in the
+\emph{potential outcome} framework and details the causal risks and
+model-selection procedure. Section \ref{sec:theory} gives theoretical
+results. Section \ref{sec:empirical_study} details a thorough empirical
+study, covering many different settings. Finally, Section \ref{sec:discussion}
+discusses the findings.
+%
+Results outline how to best select outcome models for causal
+inference with an adapted
+cross-validation to estimate the so-called $R\mathrm{-risk}$.
+This risk compensates for systematic
+differences between treated and non-treated individuals using
+two \emph{nuisance} models,
+themselves estimated from data and thus imperfect; yet these
+imperfections do not undermine the $R\mathrm{-risk}$.
+
+% XXX: merge the two paragraphs, above and below
+
 Illustration: the best predictor may not estimate best causal effects
 Prior work: model selection for outcome modeling (g-computation)
 \section{Methods}\label{sec:causal_model_selection:methods}
