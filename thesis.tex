@@ -877,7 +877,28 @@ Varying inclusion criteria: illustration of immortal time bias
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
 \section{Abstract}\label{sec:causal_model_selection:abstract}
 
-\section{Motivation}\label{sec:causal_model_selection:motivation}
+
+As predictive models --\emph{eg} from machine learning-- give likely outcomes,
+they may be used to support decision making, choosing whether to treat or not to
+treat. Such reasoning on the effect of an intervention is a causal-inference
+task. A plethora of predictive models are available for health data, from
+medical images to patient records. But, in a given situation, which of these
+models yield the most valid causal estimates? Here we highlight that classic
+machine-learning model selection does not select the best models for causal
+inference. Indeed, causal model selection should control both outcomes for each
+individual, treated or not treated, whereas only one outcome is observed.
+Theoretically, simple risks used in machine learning do not control causal
+effects when treated and non-treated population differ too much. More elaborate
+risks use ``nuisance'' re-weighting to approximate the causal error on the
+observed data. But does estimating these nuisance adds noise to model selection?
+Drawing from an extensive empirical study, we outline an efficient causal
+model-selection procedure. To select the best predictive model to guide
+decisions: use the so-called $R\text{-risk}$, use flexible estimators to compute
+the nuisance models on the train set, and split out 10\% of the data to compute
+risks.
+
+\section{Motivation: predictive models for causality cannot rely on the Machine Learning
+  toolbox}\label{sec:causal_model_selection:motivation}
 
 \subsection{Extending prediction to prescription needs causality}\label{subsec:causal_model_selection:extending_prediction}
 
@@ -1037,6 +1058,7 @@ imperfections do not undermine the $R\mathrm{-risk}$.
 
 \subsection{Illustration: the best predictor may not estimate best causal
   effects}%
+\label{subsec:causal_model_selection:illustration}%
 
 
 \begin{figure}[t!]
@@ -1122,7 +1144,6 @@ to bad causal estimates.
 This toy example illustrates that the classic minimum Mean Square Error
 criterion is not suited to choosing a model among candidate
 estimators for causal inference.
-
 
 \subsection{Prior work: model selection for outcome modeling (g-computation)}\label{subsec:causal_model_selection:prior_work}%
 
@@ -1759,22 +1780,26 @@ treated. We vary the separation between the two Gaussians to control the
 overlap between treated and non-treated populations, an important parameter
 for causal inference (related to $\eta$ in section
 \ref{theory:mu_risk_ipw_bound}). Finally, we generate observed outcomes
-adding Gaussian noise. We generate 1\,000 of such datasets, with
+adding Gaussian noise yielding a dataset as plotted in Figure \ref{fig:simulation_examples}. We generate 1\,000 of such datasets, with
 uniformly random overlap parameters. Details in
 \ref{apd:experiments:generation}.
 
 \captionsetup[sub]{font=large,labelfont={bf,sf}}%
 
-\begin{figure}[!t]
-  \centering
-  \includegraphics[width=0.75\linewidth]{img/chapter_5/caussim_example_rs_gaussian=8_rs_rotation=8_ntv=0.37_D=2_overlap=0.7_p_A=0.1.pdf}
-
-  \caption{Example of the simulation setup in the input space with two
-    knots --\emph{ie.}basis functions. The top panel
-    shows the observations in feature space, while the bottom panel displays the
-    two response surfaces on a 1D cut along the black lines drawn on
-    the top panel.}
-  \label{fig:simulation_examples}
+\begin{figure}[b!]
+  \begin{minipage}{0.3\textwidth}
+    \caption{Example of the simulation setup in the input space with two
+      knots --\emph{ie.}basis functions. The top panel
+      shows the observations in feature space, while the bottom panel displays the
+      two response surfaces on a 1D cut along the black lines drawn on
+      the top panel.}
+    \label{fig:simulation_examples}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.65\textwidth}
+    \centering
+    \includegraphics[width=0.6\linewidth]{img/chapter_5/caussim_example_rs_gaussian=8_rs_rotation=8_ntv=0.37_D=2_overlap=0.7_p_A=0.1.pdf}
+  \end{minipage}
 \end{figure}
 
 
