@@ -8,15 +8,25 @@
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
-\usepackage{makecell}
-\usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
-\usepackage{lipsum}
+% figures
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2]{biblatex}
+% tables
 \usepackage{tabularx}
+\usepackage{threeparttable}
 \usepackage{multirow}
+\usepackage{makecell}
+
+% maths
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}
+\usepackage{amssymb} %mathbb packages
+\usepackage{siunitx}
+\usepackage{algorithm, algorithmicx, algpseudocode}
+
 \usepackage{pifont}
 \usepackage{csvsimple}
 \usepackage[title,toc,titletoc,page]{appendix}
@@ -46,7 +56,9 @@
 % equations commands
 \newcommand{\indep}{\perp \!\!\! \perp}
 \newtheorem{assumption}{Assumption}
-
+\DeclareMathOperator*{\argmin}{argmin} \def\mycitecolor{green!50!black}
+\usepackage{mathtools}
+\newcommand\myeq{\stackrel{\mathclap{\text{def}}}{=}}
 
 \bibliography{references} 
 
@@ -862,6 +874,7 @@ Varying inclusion criteria: illustration of immortal time bias
 
 \subsection{Extending prediction to prescription needs causality}
 
+\md{watchout that I did not say the same thing as in chapter 4}
 Progress in machine learning brings predictive models to new health
 data \citep{beam2018big,rajkomar2019machine}, with the promise of
 precision medicine.
@@ -1023,7 +1036,258 @@ imperfections do not undermine the $R\mathrm{-risk}$.
 
 Illustration: the best predictor may not estimate best causal effects
 Prior work: model selection for outcome modeling (g-computation)
+
+
+\subsection{Prior work: model selection for outcome modeling (g-computation)}%
+
+
+A natural way to select a predictive model for causal inference would be
+an error measure between a causal quantity such as the CATE and models' estimate. But such error is
+not a ``feasible'' risk: it cannot be computed solely from observed data
+and requires oracle knowledge.
+
+% XXX: I think that I should make the following paragraph shorter
+
+\paragraph{Simulation studies of causal model selection}
+
+Using eight simulations setups from \cite{powers_methods_2018}, where
+the oracle CATE is known, \citet{schuler_comparison_2018} compare four
+causal risks, concluding that for CATE estimation the best
+model-selection risk is the so-called $R\text{-risk}$
+\cite{nie_quasioracle_2017} --def.\,\ref{def:r_risk}, below. Their
+empirical results are clear for randomized treatment allocation but less
+convincing for observational settings where both simple Mean Squared
+Error --MSE, $\mu\text{-risk}(f)$ def.\,\ref{def:mu_risk}-- and
+reweighted MSE --$\mu\text{-risk}_{IPW}$ def.\,\ref{def:mu_ipw_risk}--
+appear to perform better than $R\text{-risk}$ on half of the simulations.
+Another work \cite{alaa_validating_2019} studied empirically both MSE and
+reweighted MSE risks on the semi-synthetic ACIC 2016 datasets
+\cite{dorie_automated_2019}, but did not include the $R\text{-risk}$. We complete these
+prior empirical work by studying a wider variety of data generative
+processes and varying the influence of overlap, an important parameter of
+the data generation process which makes a given causal metric appropriate
+\cite{damour_overlap_2020}. We also study how to best adapt
+cross-validation procedures to causal metrics which themselves come with
+models to estimate.
+
+\paragraph{Theoretical studies of causal model selection}
+
+Several theoretical works have proposed causal model selection procedures
+that are \emph{consistent}: select the best model in a family given
+asymptotically large data. These work rely on introducing a
+CATE estimator in the testing procedure: matching
+\citep{rolling_model_2014}, an IPW estimate
+\citep{gutierrez_causal_2016}, a doubly robust estimator
+\citep{saito_counterfactual_2020}, or debiasing the error with influence
+functions \cite{alaa_validating_2019}. However, for theoretical
+guarantees to hold, the test-set correction needs to converge to the
+oracle: it needs to be flexible enough --well-posed-- and asymptotic
+data. From a practical perspective, meeting such requirements
+implies having a good CATE estimate, thus having solved
+the original problem of causal model selection.
+
+\paragraph{Statistical guarantees on causal estimation procedures}
+
+Much work in causal inference has focused on procedures that
+guarantee asymptotically consistent estimators, such as Targeted
+Machine Learning
+Estimation (TMLE) \cite{laan_targeted_2011,schuler_targeted_2017} or
+Double Machine Learning \cite{chernozhukov_double_2018}. Here also, theories require asymptotic regimes and
+models to be \textit{well-specified}.
+
+By contrast, \citet{johansson2022generalization} studies causal estimation
+without assuming that estimators are well specified. They derive an upper bound
+on the oracle error to the CATE ($\tau\text{-risk}$) that involves the error on
+the outcome and the similarity of the distributions of treated and control
+patients. However, they use this upper bound for model optimization,
+and do not give insights on model selection. In addition, for hyperparameter
+selection, they rely on a plugin estimate of the $\tau\text{-risk}$ built with
+counterfactual nearest neighbors, which has been shown ineffective
+\cite{schuler_comparison_2018}.
+
+\section{Formal setting: causal inference and model selection}\label{sec:framework}
+
+\subsection{The Neyman-Rubin Potential Outcomes framework}%
+\label{sec:neyman_rubin}%
+
+\paragraph{Settings}
+
+The Neyman-Rubin Potential Outcomes framework
+\cite{naimi2023defining,imbens_causal_2015} enables statistical reasoning on
+causal treatment effects: Given an outcome $Y \in \mathbb R$ (eg. mortality risk
+or hospitalization length), function of a binary treatment $A \in \mathcal{A} =
+  \{0, 1\}$ (eg.~a medical procedure, a drug administration), and baseline
+covariates $X \in \mathcal{X} \subset \mathbb{R}^d$, we observe the factual
+distribution, $O = (Y(A), X, A) \sim \mathcal D = \mathbb P(y, x, a)$. However,
+we want to model the existence of potential observations (unobserved ie.
+counterfactual) that correspond to a different treatment. Thus we want
+quantities on the counterfactual distribution $O^{*} = (Y(1), Y(0), X, A) \sim
+  \mathcal D^{*} = \mathbb P(y(1), y(0), x, a)$.
+
+Popular quantities of interest (estimands) are:
+at the population level, the
+Average Treatment Effect
+\begin{flalign*}
+  \text{ATE} &  &
+  \tau \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal D^*}[Y(1) - Y(0)];
+             &  &
+\end{flalign*}
+at the individual level, to model heterogeneity, the Conditional Average Treatment Effect
+\begin{flalign*}
+  \text{CATE} &  &
+  \tau (x) \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal{D}^\star}[Y(1) - Y(0) | X=x].
+              &  &
+\end{flalign*}
+
+\paragraph{Causal assumptions}
+
+Assumptions are necessary for causal estimands to be
+identifiability
+in observational settings \cite{rubin_causal_2005}. We assume the usual
+strong ignorability assumptions: \emph{1)}
+\emph{unconfoundedness} \mbox{$\{Y(0),
+    Y(1) \} \indep A | X$}, \emph{~2)} \emph{strong overlap} ie. every patient has a
+strictly positive probability to receive each treatment, \emph{3)}
+\emph{consistency}, and \emph{4)} \emph{generalization} (detailed in
+\ref{apd:causal_assumptions}).
+
+\paragraph{Estimating treatment effects with outcome models}\label{subsec:estimators}
+
+Should we know the two expected outcomes for a given $X$,
+we could compute the
+difference between them, which gives the causal effect of the treatment.
+%
+These two expected outcomes can be computed from the observed data:
+the consistency \ref{assumption:consistency} and unconfoundedness
+\ref{assumption:ignorability} assumptions imply the equality of two different
+expectations:
+\begin{equation}\label{eq:mu_identification}
+  \mathbb E_{Y(a) \sim \mathcal{D^{\star}}} [Y(a)|X=x] = \mathbb E_{Y \sim \mathcal{D}} [Y|X=x, A=a]
+\end{equation}
+On the left, the expectation is taken on the counterfactual unobserved
+distribution. On the right, the expectation is taken on the factual observed
+distribution conditionally on the treatment. This equality is referred as the
+g-formula identification \cite{robins_new_1986}. For the rest of the
+paper, the expectations will always be taken on the factual observed
+distribution $\mathcal{D}$. This identification leads to outcome based estimators (ie.
+g-computation estimators \cite{snowden_implementation_2011}), targeting the
+ATE $\tau$ with outcome modeling:
+\begin{eqnarray}
+  \tau =& \mathbb E_{Y \sim \mathcal{D^{\star}}}[Y(1) - Y(0)|X=x]
+  \notag
+  \\
+  = &\mathbb E_{Y \sim \mathcal{D}}[Y|A=1] - \mathbb E_{Y \sim \mathcal{D}}[Y| A=0]
+  \label{eq:tau_population}
+\end{eqnarray}
+This equation builds on two quantities: the conditional expectancy
+of the outcome given the covariates and either
+treatment or no no treatment, called \emph{response function}:
+\begin{flalign*}
+  \text{Response function}
+   &  &
+  \mu_{a}(x) \myeq \; \mathbb E_{Y \sim \mathcal{D}} [Y|X=x, A=a]
+   &  &
+\end{flalign*}
+
+Given a sample of data and the oracle response functions $\mu_0, \mu_1$, the
+finite sum version of \autoref{eq:tau_population} leads to an
+estimator of the ATE written:
+\begin{equation}
+  \hat \tau = \frac{1}{n} \biggl(\sum_{i=1}^n \mu_{1}(x_i) - \mu_{0}(x_i) \biggr)
+  \label{eq:ate_estimate}
+\end{equation}
+This estimator is an oracle \textbf{finite sum estimator} by opposition to the
+population expression of $\tau$, $\mathbb{E}[\mu_{1}(x_i) - \mu_{0}(x_i)]
+$,
+which involves an expectation taken on the full
+distribution $\mathcal D$, which is observable but requires infinite data. For
+each estimator $\ell$ taking an expectation over $\mathcal D$, we use the symbol
+$\hat \ell$ to note its finite sum version.
+
+Similarly to the ATE, at the individual level, the CATE:
+\begin{equation}
+  \tau(x) = \mu_{1}(x) - \mu_{0}(x)
+  \label{eq:cate_estimate}
+\end{equation}
+
+\paragraph{Robinson decomposition}
+The \emph{R-decomposition}
+of the outcome model plays an important role,
+\cite{robinson_rootnconsistent_1988}:
+introducing two quantities, the conditional mean outcome
+and the probability to be treated (known as propensity score \cite{rosenbaum_central_1983}):
+\begin{flalign}
+  \text{Conditional mean outcome} &                    & m(x) \myeq \; & \mathbb E_{Y \sim
+  \mathcal{D}} [Y|X=x]            &                    &
+  \label{def:m}
+  \\
+  \text{Propensity score}         &                    &
+  e(x) \myeq \;                   & \mathbb P[A=1|X=x]
+  \label{def:propensity_score}
+\end{flalign}
+the outcome can be written
+\begin{flalign}\label{eq:r_decomposition}
+  \text{R-decomposition}            &  & y(a) = m(x) + \big( a - e(x) \big)
+  \tau(x) + \varepsilon(x; a)\notag &  &
+  \\\ &&\text{with}\quad \mathbb E[\varepsilon(X; A)|X, A] = 0&&
+\end{flalign}
+$m$ and $e$ are often called
+\emph{nuisances} \cite{chernozhukov_double_2018}; they are unknown.
+
+%As noted by \cite{johansson2022generalization}, the machine learning
+%community often referred to the CATE by ITE, the Individual Treatment Effect.
+%From a purely causal point of view, the ITE is uniquely defined for each
+%individual and might not be accessible: $ITE(x_i) = Y_i(1) -  Y_i(0)$. On the
+%contrary, the CATE can always be derived by taking conditional expectancies. It
+%is the expected effect of the treatment in the region of the covariate space
+%around X. %Too cultivate
+
+\begin{table*}[!tb]
+  \makebox[\linewidth]{
+    \begin{threeparttable}[b]
+      \caption{Review of causal risks
+        ---
+        The $R\text{-risk}^*$ is called $\tau \text{-risk}_R$ in
+        \citet{schuler_comparison_2018}.
+        \label{tab:evaluation_metrics}}
+      \centering
+      \begin{tabular}{llr}
+        \toprule
+        Risk                                                                                           & Equation
+                                                                                                       & Reference                                                                                                                                           \\
+        \midrule
+        $mse(\tau(X), \tau_f(X))=\tau\text{-risk}$                                                     & $\mathbb E_{X\sim
+              p(X)}[(\tau(X) - \hat \tau_f(X))^2] $
+                                                                                                       & Eq. \ref{eq:tau_risk} \cite{hill_bayesian_2011}                                                                                                     \\
+        $mse(Y, f(X)) = \mu\text{-risk}$                                                               & $\mathbb{E}_{(Y, X, A)
+            \sim \mathcal D}\left[(Y-f(X ; A))^2 \right]$
+                                                                                                       & Def. \ref{def:mu_risk} \cite{schuler_comparison_2018}                                                                                               \\
+        $\mu\text{-risk}_{IPW}^*$                                                                      & $\mathbb{E}_{(Y, X, A)
+            \sim \mathcal D}\left[ \Big( \frac{A}{e(X)} + \frac{1-A}{1-e(X)} \Big)
+        (Y-f(X ; A))^2 \right]$                                                                        & Def.
+        \ref{def:mu_ipw_risk} \cite{vanderlaan_unified_2003}                                                                                                                                                                                                 \\
+        $\tau\text{-risk}^{\star}_{IPW}$                                                               & $\mathbb{E}_{(Y, X, A) \sim \mathcal D} \left[ \Big(Y \left( \frac{A}{e(X)} - \frac{1-A}{1-e(X)}\right)-\hat \tau_f\left(X\right)\Big)^2 \right]$ &
+        Def. \ref{def:tau_ipw_risk} \cite{wager_estimation_2018}
+        \\
+        $U\text{-risk}^*$                                                                              & $\mathbb{E}_{(Y, X, A) \sim \mathcal D}  \big[
+        \big( \frac{Y-m\left(X\right)}{A-e\left(X\right)} -  \hat \tau_f\left(X\right)\big)^{2} \big]$ &
+        Def. \ref{def:u_risk} \cite{nie_quasioracle_2017}
+        \\
+        $R\text{-risk}^*$                                                                              & $\mathbb{E}_{(Y, X, A)
+            \sim \mathcal D} \big[\big(\left(Y-m\left(X\right)\right)
+        -\left(A-e\left(X\right)\right) \hat \tau_f\left(X\right)\big)^{2} \big]$                      &
+        Def. \ref{def:r_risk} \cite{nie_quasioracle_2017}
+        \\
+        \bottomrule
+      \end{tabular}
+    \end{threeparttable}
+  }
+\end{table*}
+
+
 \section{Methods}\label{sec:causal_model_selection:methods}
+
+
 
 
 \subsection{Notations}\label{subsec:causal_model_selection:notations}
