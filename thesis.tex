@@ -882,8 +882,8 @@ Varying inclusion criteria: illustration of immortal time bias
 \subsection{Extending prediction to prescription needs causality}\label{subsec:causal_model_selection:extending_prediction}
 
 \md{watchout that I did not say the same thing as in chapter 4}
-Progress in machine learning brings predictive models to new health
-data \citep{beam2018big,rajkomar2019machine}, with the promise of
+\paragraph{Progress in machine learning brings predictive models to new health
+  data} \citep{beam2018big,rajkomar2019machine}, with the promise of
 precision medicine.
 Automated analysis of
 medical images is increasingly accurate, \emph{eg} for brain images,
@@ -924,32 +924,24 @@ but statistical validity requires causal inference
 % The plethora of approaches approaches give different causal-inference
 % estimates => need for guideline on causal model selection.
 
-There is a rich causal-inference statistical literature, which bridges to
-predictive modeling via so-called \emph{outcome models}, or G-computation,
-G-formula \citep{robins_role_1986}, Q-model \citep{snowden_implementation_2011},
-conditional mean regression \citep{wendling_comparing_2018}. A central challenge
-of inference of treatment effects is that of confounding: spurious associations
-between treatment allocation and baseline health, \emph{eg} only prescribing a
-drug to mild cases \citep{hernan_causal_2020,vanderweele2019principles}.
-Controlled allocation of treatment, as in randomized controlled trials (RCTs),
-alleviate this concern. Yet most machine-learning models are trained on
-\emph{observational} data, close to real-word practice
-\citep{black1996we,hernan_methods_2021} but challenging for causal inference.
-Causal inference has been central to epidemiology, typically with methods that
-model treatment assignment \citep{austin_moving_2015,grose_use_2020}, based on
-propensity scores \citep{rosenbaum_central_1983}. Recent empirical results
-\citep{wendling_comparing_2018,dorie_automated_2019} show benefits of outcome
-modeling to estimate average treatment effects. Maybe a greater benefit is
-that these methods naturally go beyond average effects, estimating
-individualized or conditional average treatment effects (CATE), central to
-precision medicine.
+\paragraph{Causal-inference bridges to predictive modeling via the rich statistical literature on \emph{outcome
+    models}}, or G-computation, G-formula \citep{robins_role_1986}, Q-model \citep{snowden_implementation_2011}, conditional
+mean regression \citep{wendling_comparing_2018}. A central challenge of inference of treatment effects is that of
+confounding: spurious associations between treatment allocation and baseline health, \emph{eg} only prescribing a drug
+to mild cases \citep{hernan_causal_2020,vanderweele2019principles}. Controlled allocation of treatment, as in randomized
+controlled trials (RCTs), alleviate this concern. Yet most machine-learning models are trained on \emph{observational}
+data, close to real-word practice \citep{black1996we,hernan_methods_2021} but challenging for causal inference. Causal
+inference has been central to epidemiology, typically with methods that model treatment assignment
+\citep{austin_moving_2015,grose_use_2020}, based on propensity scores \citep{rosenbaum_central_1983}. Recent empirical
+results \citep{wendling_comparing_2018,dorie_automated_2019} show benefits of outcome modeling to estimate average
+treatment effects. Maybe a greater benefit is that these methods naturally go beyond average effects, estimating
+individualized or conditional average treatment effects (CATE), central to precision medicine.
 %
 For this purpose, such methods are also invaluable on randomized trials
 \citep{su2018random,lamont2018identification,hoogland2021tutorial}.
 
-%\idea{There is a variety of models for g-estimation}
-There is an explosion of outcome modeling or machine learning methods.
-For instance, many deep-learning methods have been developed for medical
+\paragraph{Explosion of outcome modeling or machine learning methods.}
+Many deep-learning methods have been developed for medical
 image analysis \citep{shen2017deep,monshi2020deep}.
 Even outcome-modeling methods specifically designed for causal
 inference are numerous: Bayesian Additive Regression Trees
@@ -966,7 +958,7 @@ The wide variety of methods raises the problem
 of selecting between different estimators based on the data at hand.
 %
 Indeed, estimates of treatment effects can vary markedly across different
-predictive models. For instance, Figure shows
+predictive models. For instance, Figure \ref{fig:acic_2016_ate_heterogeneity} shows
 large variations obtained across different outcome estimators on
 semi-synthetic datasets \citep{dorie_automated_2019}. Flexible models
 such as random forests are doing well in most settings except
@@ -977,9 +969,7 @@ However random forests with different hyper-parameters
 A simple rule of thumb such as preferring flexible models does not work in
 general; model selection is needed.
 
-%\idea{It is crucial to have tools for model selection.}
-
-\begin{figure}[b!]
+\begin{figure}[h!]
   \begin{minipage}{.3\linewidth}
     \caption{\textbf{Different outcome models lead to different
         estimation errors on the Average Treatment Effects},
@@ -1050,9 +1040,9 @@ imperfections do not undermine the $R\mathrm{-risk}$.
 
 
 \begin{figure}[t!]
-  \begin{minipage}{0.3\textwidth}
+  \begin{minipage}{0.32\textwidth}
     \caption[The best predictor may not estimate best causal
-      effects]{\textbf{Illustration}: a) a random-forest estimator
+      effects]{\textbf{Illustration} \\a) a random-forest estimator
       with high performance for standard prediction (high $R^2$) but that
       yields poor causal estimates (large error between true effect $\tau$ and
       estimated $\hat{\tau}$), b) a linear estimator with smaller
@@ -1073,12 +1063,12 @@ imperfections do not undermine the $R\mathrm{-risk}$.
   \hfill
   \begin{minipage}{0.65\textwidth}
     %\centering
-    {\sffamily\footnotesize\scalebox{1.03}{a) Random forest, good average prediction but bad
+    {\sffamily\footnotesize\scalebox{0.9}{a) Random forest, good average prediction but bad
         causal inference}}
 
     \includegraphics[width=1\linewidth]{img/chapter_5/toy_random_forest_high_R2_high_tau_risk.pdf}%
 
-    {\sffamily\footnotesize\scalebox{1.03}{b) Linear model, worse average
+    {\sffamily\footnotesize\scalebox{0.9}{b) Linear model, worse average
         prediction but better causal inference}}
 
     \hfill%
@@ -1273,9 +1263,7 @@ g-computation estimators \citep{snowden_implementation_2011}), targeting the
 ATE $\tau$ with outcome modeling:
 \begin{eqnarray}
   \tau =& \mathbb E_{Y \sim \mathcal{D^{\star}}}[Y(1) - Y(0)|X=x]
-  \notag
-  \\
-  = &\mathbb E_{Y \sim \mathcal{D}}[Y|A=1] - \mathbb E_{Y \sim \mathcal{D}}[Y| A=0]
+  = \mathbb E_{Y \sim \mathcal{D}}[Y|A=1] - \mathbb E_{Y \sim \mathcal{D}}[Y| A=0]
   \label{eq:tau_population}
 \end{eqnarray}
 This equation builds on two quantities: the conditional expectancy
@@ -1326,9 +1314,8 @@ and the probability to be treated (known as propensity score \citep{rosenbaum_ce
 \end{flalign}
 the outcome can be written
 \begin{flalign}\label{eq:r_decomposition}
-  \text{R-decomposition}            &  & y(a) = m(x) + \big( a - e(x) \big)
-  \tau(x) + \varepsilon(x; a)\notag &  &
-  \\\ &&\text{with}\quad \mathbb E[\varepsilon(X; A)|X, A] = 0&&
+  \text{R-decomposition}                                                                   &  & y(a) = m(x) + \big( a - e(x) \big)
+  \tau(x) + \varepsilon(x; a) \quad \text{with}\quad \mathbb E[\varepsilon(X; A)|X, A] = 0 &  &
 \end{flalign}
 $m$ and $e$ are often called
 \emph{nuisances} \citep{chernozhukov_double_2018}; they are unknown.
@@ -1590,7 +1577,7 @@ covariates, the treatment, and the outcome, these residual terms are null.
 \begin{proposition}[Upper bound with $\mu \text{-risk}_{IPW}$
   ]\label{theory:prop:mu_risk_ipw_bound}
   \citep{johansson2022generalization} Given an outcome model $f$, let a
-  weighting function\\ $w(x; a) = \frac{a}{e(x)} + \frac{1-a}{1-e(x)}$ as the
+  weighting function $w(x; a) = \frac{a}{e(x)} + \frac{1-a}{1-e(x)}$ as the
   Inverse Propensity Weight. Then, under overlap (assumption
   \ref{assumption:overlap}), we have:
   \begin{equation*}
@@ -1642,8 +1629,7 @@ with the oracle $\tau \text{-risk}$.
   $f$, its $R\text{-risk}$ appears as weighted version of its $\tau\text{-risk}$
   (Proof in \ref{apd:proofs:r_risk_rewrite}):
   \begin{align}
-    R\text{-risk}^*(f) & = \int_{x} e(x)\big(1-e(x)\big)\big(\tau(x)-\tau_ {f}(x)\big)^{2} p(x) d x \nonumber \\
-                       & \quad\; + \tilde{\sigma}_B^2(1) + \tilde{\sigma}_B^{2}(0)
+    R\text{-risk}^*(f) & = \int_{x} e(x)\big(1-e(x)\big)\big(\tau(x)-\tau_ {f}(x)\big)^{2} p(x) d x  \quad\; + \tilde{\sigma}_B^2(1) + \tilde{\sigma}_B^{2}(0)
   \end{align}
 \end{proposition}
 
@@ -1702,18 +1688,17 @@ have access to the oracle Bayes predictor for the outcome ie.~$f(x,
   \tau\text{-risk}(\mu) = \mathbb E_{X\sim p(X)}[(\tau(X) - \tau_{\mu}(X))^2] = 0
 \end{equation}
 \begin{align}
-  \mu\text{-risk}(\mu) & = \mathbb E_{(Y, X, A) \sim p(Y;X;A)}[\big( Y - \mu_A(X)\big)^2] \\
-                       & = \int_{\mathcal X, \mathcal A}
-  \,\varepsilon(x,a)^2 p(a \mid x) \,p(x) \,dx\,da  \leq \sigma_B^{2}(0) + \sigma_B^{2}(1) \nonumber
+  \mu\text{-risk}(\mu) & = \mathbb E_{(Y, X, A) \sim p(Y;X;A)}[\big( Y - \mu_A(X)\big)^2]
+  = \int_{\mathcal X, \mathcal A}
+  \,\varepsilon(x,a)^2 p(a \mid x) \,p(x) \,dx\,da  \leq \sigma_B^{2}(0) + \sigma_B^{2}(1)
 \end{align}
 \begin{equation}
   \mu\text{-risk}_{IPW}(\mu) = \sigma_B^{2}(0) + \sigma_B^{2}(1)  \quad \text{from Lemma \ref{apd:proofs:mu_risk_ipw_link_mu}}
-  %\notag
 \end{equation}
-\begin{multline}
+\begin{equation}
   R\text{-risk}(\mu) = \tilde{\sigma}_B^{2}(0) + \tilde{\sigma}_B^{2}(1)
-  \leq \sigma_B^{2}(0) + \sigma_B^{2}(1)  \\  \text{from Proposition \ref{theory:prop:r_risk_rewrite}}%\notag
-\end{multline}
+  \leq \sigma_B^{2}(0) + \sigma_B^{2}(1)  \quad  \text{from Proposition \ref{theory:prop:r_risk_rewrite}}%\notag
+\end{equation}
 
 Thus, differences between causal risks only matter in finite sample regimes.
 Universally consistent learners converge to the Bayes risk in asymptotic
