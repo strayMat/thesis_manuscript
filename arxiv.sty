@@ -59,6 +59,7 @@
 }
 % lefthandside background box
 \usepackage[skins]{tcolorbox}
+\tcbuselibrary{breakable}
 \tcbset{%
   mytitle/.style={%
       enhanced,
@@ -67,9 +68,10 @@
         },
     },
   rightrule=0pt,
+  skin=enhanced,parbox=false,breakable
 }
 \colorlet{background_info_color}{green!10!orange}
-\newtcolorbox{baground_box_left}[1][]{
+\newtcolorbox{background_box_left}[1][]{
   mytitle=\textcolor{background_info_color}{Background},
   colframe=background_info_color, enhanced, colback=white, frame hidden, enlarge
   left by=-1cm,boxsep=0mm, left=1cm, borderline west =
@@ -91,7 +93,7 @@
       bottom=0pt, % Bottom margin (0pt means no extra margin on the bottom)
       rightupper=10mm, % Extra space on the right side for the citation
       rightlower=10mm, % Extra space on the right side for the citation
-      halign=flush right, % Text alignment within the box (right-aligned)
+      %halign=flush right, % Text alignment within the box (right-aligned)
       width=0.7\textwidth,
       flush right
     ]

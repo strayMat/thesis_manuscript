@@ -140,12 +140,12 @@
 
 
 
-\chapter{Introduction: amazing opportunities of health data?}\label{chap:intro}
+\chapter{Introduction: Amazing opportunities of health data?}\label{chap:intro}
 \section{How I came into this landscape}\label{sec:intro:landscape}
 
 I will present my progression among these opportunities.
 
-\subsection{Context: From a modern statistical formation to the first contact with epidemiology}\label{subsec:intro:context}
+\subsection{Context: From a modern statistical formation to epidemiology}\label{subsec:intro:context}
 
 \paragraph{Learning statistics during the Natural Language Processing revolution}
 
@@ -171,7 +171,7 @@ is no more restricted to the medical staff.
 Need for pseudonymization : use newly to reach State of the Art pseudonymization
 \citep{dernoncourt2017identification, paris2019desidentification}.
 
-\paragraph{Billing claims: an underused huge pile of data}
+\paragraph{Billing claims: An underused huge pile of data}
 
 French ministry department of statistics had billions of claims extracted in a
 dedicated server. But the amount of data made the job impossible.
@@ -346,7 +346,8 @@ nature works. AIM adopts a more pragmatic approach, trying to understand what
 deployed healthcare system is improving outcomes or not, without trying to
 uncover the full causal mechanism leading to observed results.
 
-\begin{baground_box_left}
+\begin{background_box_left}
+
   \subsection{Machine Learning Framework}\label{subsec:intro:machine_learning}
 
   Departing from carefully designing functional forms for statistical models,
@@ -378,7 +379,7 @@ uncover the full causal mechanism leading to observed results.
   United States of reducing by 10\% the medical use of X-rays}. This example is
   a pure causal inference question.
 
-\end{baground_box_left}
+\end{background_box_left}
 
 \subsection{One choice of perspective: Recent statistical
   learning}\label{subsec:intro:recent_statistical_learning}
@@ -403,7 +404,7 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 \section{Notions of causality}\label{sec:intro:causality}
 
-\begin{baground_box_left}
+\begin{background_box_left}
 
   \subsection{Association is not causation}\label{subsec:intro:causation}
 
@@ -443,12 +444,43 @@ help practitioners during consultation \citep{lee2023benefits}.
 
   \subsection{Neyman-rubin causal framework}\label{subsec:intro:causal_framework}
 
-  - PO notations
-  - Explain what is a rct, its origin and the difference with an observational study
-  - Send back to appendix the Difference in Means  (in randomized experiments)
-  - The rest will be presented in chapter 4 and 5.
+  I quickly introduce the statistical framework for causality, and will
+  progressively introduce supplementary concepts as needed in
+  Chapters \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
 
-\end{baground_box_left}
+  \paragraph{The Neyman-Rubin Potential Outcomes framework}\label{par:intro:causal_framework:neyman_rubin}
+  \citep{naimi2023defining,imbens_causal_2015} enables statistical reasoning on
+  causal treatment effects: Given an outcome $Y \in \mathbb R$ (eg. mortality risk
+  or hospitalization length), function of a binary treatment $A \in \mathcal{A} =
+    \{0, 1\}$ (eg.~a medical procedure, a drug administration), and baseline
+  covariates $X \in \mathcal{X} \subset \mathbb{R}^d$, we observe the factual
+  distribution, $O = (Y(A), X, A) \sim \mathcal D = \mathbb P(y, x, a)$. However,
+  we want to model the existence of potential observations (unobserved ie.
+  counterfactual) that correspond to a different treatment. Thus we want
+  quantities on the counterfactual distribution $O^{*} = (Y(1), Y(0), X, A) \sim
+    \mathcal D^{*} = \mathbb P(y(1), y(0), x, a)$.
+
+  Popular quantities of interest (estimands) are:
+  at the population level, the
+  Average Treatment Effect
+  \begin{flalign*}
+    \text{ATE} &  &
+    \tau \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal D^*}[Y(1) - Y(0)];
+               &  &
+  \end{flalign*}
+  at the individual level, to model heterogeneity, the Conditional Average Treatment Effect
+  \begin{flalign*}
+    \text{CATE} &  &
+    \tau (x) \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal{D}^\star}[Y(1) - Y(0) | X=x].
+                &  &
+  \end{flalign*}
+
+  \paragraph{Randomized Control Trials, the gold standard for evidence based medicine}
+
+  - Send back to appendix the Difference in Means  (in randomized experiments)
+
+
+\end{background_box_left}
 
 \section{Overview and contributions}\label{sec:intro:contributions}
 
@@ -817,7 +849,8 @@ Arguments for ease of deployment.
 \section{Abstract}\label{sec:causal_tuto:abstract}
 
 \begin{citationbox}
-  Nature marks each growth ... according to its curative benefit.\par\hfill -- Paracelsus
+  Nature marks each growth ... according to its curative benefit.
+  \par\hfill -- Paracelsus
 \end{citationbox}
 
 \vfill
@@ -906,22 +939,38 @@ Varying inclusion criteria: illustration of immortal time bias
 \section{Discussion}\label{subsec:causal_tuto:discussion}
 
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
+
+\begin{citationbox}
+  Nature marks each growth ... according to its curative benefit.
+  \par\hfill -- Paracelsus
+\end{citationbox}
+
+
 \section{Abstract}\label{sec:causal_model_selection:abstract}
 
-As predictive models --\emph{eg} from machine learning-- give likely outcomes,
-they may be used to support decision making, choosing whether to treat or not to
-treat. Such reasoning on the effect of an intervention is a causal-inference
-task. A plethora of predictive models are available for health data, from
-medical images to patient records. But, in a given situation, which of these
-models yield the most valid causal estimates? Here we highlight that classic
-machine-learning model selection does not select the best models for causal
-inference. Indeed, causal model selection should control both outcomes for each
-individual, treated or not treated, whereas only one outcome is observed.
+% Predictive models are not sufficient for decision making: I showed it in
+% chapter 4
+Predictive models --\emph{eg} from machine learning-- give likely outcomes, but
+they do not apply bluntly to decision making, choosing whether to treat
+or not to treat. Such reasoning on the effect of an intervention is a
+causal-inference task. I demonstrated that causal thinking was necessary to
+avoid introducing biases in the study design or during confounders selection.
+
+% Even with causal framework, there are too many models to choose from
+Even with a robust causal framework, choosing among the plethora of predictive
+models available for health data is not trivial. In a given situation, which
+of these models yield the most valid causal estimates?
+% scope of the paper 
+Here, I highlight that classic machine-learning model selection does not pick
+the best models for causal inference. Indeed, causal model selection should
+control both outcomes for each individual, treated or not treated, whereas only
+one outcome is observed.
 Theoretically, simple risks used in machine learning do not control causal
 effects when treated and non-treated population differ too much. More elaborate
-risks use ``nuisance'' re-weighting to approximate the causal error on the
-observed data. But does estimating these nuisance adds noise to model selection?
-Drawing from an extensive empirical study, we outline an efficient causal
+risks use ``nuisances'' re-weighting to approximate the causal error on the
+observed data. But does estimating these nuisances adds noise to model selection?
+% Contributions
+Drawing from an extensive empirical study, I outline an efficient causal
 model-selection procedure. To select the best predictive model to guide
 decisions: use the so-called $R\text{-risk}$, use flexible estimators to compute
 the nuisance models on the train set, and split out 10\% of the data to compute
@@ -935,7 +984,7 @@ risks.
   of the theoretical part, performed the experiments and wrote the manuscript.}
 
 \clearpage
-\section{Motivation: predictive models for causality cannot rely on the Machine Learning
+\section{Motivation: causal predictive models cannot rely on the Machine Learning
   toolbox}\label{sec:causal_model_selection:motivation}
 
 \subsection{Extending prediction to prescription needs causality}\label{subsec:causal_model_selection:extending_prediction}
@@ -984,7 +1033,7 @@ but statistical validity requires causal inference
 % estimates => need for guideline on causal model selection.
 
 \paragraph{Causal-inference bridges to predictive modeling via the rich statistical literature on \emph{outcome
-    models}}, or G-computation, G-formula \citep{robins_role_1986}, Q-model \citep{snowden_implementation_2011}, conditional
+    models},} or G-computation, G-formula \citep{robins_role_1986}, Q-model \citep{snowden_implementation_2011}, conditional
 mean regression \citep{wendling_comparing_2018}. A central challenge of inference of treatment effects is that of
 confounding: spurious associations between treatment allocation and baseline health, \emph{eg} only prescribing a drug
 to mild cases \citep{hernan_causal_2020,vanderweele2019principles}. Controlled allocation of treatment, as in randomized
@@ -1250,134 +1299,112 @@ selection, they rely on a plugin estimate of the $\tau\text{-risk}$ built with
 counterfactual nearest neighbors, which has been shown ineffective
 \citep{schuler_comparison_2018}.
 
-\section{Formal setting: causal inference and model selection}%
-\label{sec:causal_model_selection:setting}%
 
-\md{Might be only in intro}
-\subsection{The Neyman-Rubin Potential Outcomes framework}%
-\label{subsec:causal_model_selection:framework}%
+\begin{background_box_left}
 
-\paragraph{Settings}
+  \section{Formal setting: causal inference and model selection}%
+  \label{sec:causal_model_selection:setting}%
 
-The Neyman-Rubin Potential Outcomes framework
-\citep{naimi2023defining,imbens_causal_2015} enables statistical reasoning on
-causal treatment effects: Given an outcome $Y \in \mathbb R$ (eg. mortality risk
-or hospitalization length), function of a binary treatment $A \in \mathcal{A} =
-  \{0, 1\}$ (eg.~a medical procedure, a drug administration), and baseline
-covariates $X \in \mathcal{X} \subset \mathbb{R}^d$, we observe the factual
-distribution, $O = (Y(A), X, A) \sim \mathcal D = \mathbb P(y, x, a)$. However,
-we want to model the existence of potential observations (unobserved ie.
-counterfactual) that correspond to a different treatment. Thus we want
-quantities on the counterfactual distribution $O^{*} = (Y(1), Y(0), X, A) \sim
-  \mathcal D^{*} = \mathbb P(y(1), y(0), x, a)$.
+  \subsection{The Neyman-Rubin Potential Outcomes framework}%
+  \label{subsec:causal_model_selection:framework}%
 
-Popular quantities of interest (estimands) are:
-at the population level, the
-Average Treatment Effect
-\begin{flalign*}
-  \text{ATE} &  &
-  \tau \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal D^*}[Y(1) - Y(0)];
-             &  &
-\end{flalign*}
-at the individual level, to model heterogeneity, the Conditional Average Treatment Effect
-\begin{flalign*}
-  \text{CATE} &  &
-  \tau (x) \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal{D}^\star}[Y(1) - Y(0) | X=x].
-              &  &
-\end{flalign*}
+  \paragraph{Settings} We consider the Potential Outcomes framework introduced in
+  \ref{par:intro:causal_framework:neyman_rubin}.
 
-\md{duplicated with chapter 4: move back there, and only refer to it here.}
-\paragraph{Causal assumptions}
+  \paragraph{Causal assumptions}\label{par:causal_assumptions}
+  \md{duplicated with chapter 4: move back there, and only refer to it here.}
 
-Assumptions are necessary for causal estimands to be
-identifiability
-in observational settings \citep{rubin_causal_2005}. We assume the usual
-strong ignorability assumptions: \emph{1)}
-\emph{unconfoundedness} \mbox{$\{Y(0),
-    Y(1) \} \indep A | X$}, \emph{~2)} \emph{strong overlap} ie. every patient has a
-strictly positive probability to receive each treatment, \emph{3)}
-\emph{consistency}, and \emph{4)} \emph{generalization} (detailed in
-\ref{apd:causal_assumptions}).
+  Assumptions are necessary for causal estimands to be
+  identifiability
+  in observational settings \citep{rubin_causal_2005}. We assume the usual
+  strong ignorability assumptions: \emph{1)}
+  \emph{unconfoundedness} \mbox{$\{Y(0),
+      Y(1) \} \indep A | X$}, \emph{~2)} \emph{strong overlap} ie. every patient has a
+  strictly positive probability to receive each treatment, \emph{3)}
+  \emph{consistency}, and \emph{4)} \emph{generalization} (detailed in
+  \ref{apd:causal_assumptions}).
 
-\paragraph{Estimating treatment effects with outcome models}\label{subsec:estimators}
+  \paragraph{Estimating treatment effects with outcome models}\label{subsec:estimators}
 
-Should we know the two expected outcomes for a given $X$,
-we could compute the
-difference between them, which gives the causal effect of the treatment.
-%
-These two expected outcomes can be computed from the observed data:
-the consistency \ref{assumption:consistency} and unconfoundedness
-\ref{assumption:ignorability} assumptions imply the equality of two different
-expectations:
-\begin{equation}\label{eq:mu_identification}
-  \mathbb E_{Y(a) \sim \mathcal{D^{\star}}} [Y(a)|X=x] = \mathbb E_{Y \sim \mathcal{D}} [Y|X=x, A=a]
-\end{equation}
-On the left, the expectation is taken on the counterfactual unobserved
-distribution. On the right, the expectation is taken on the factual observed
-distribution conditionally on the treatment. This equality is referred as the
-g-formula identification \citep{robins_new_1986}. For the rest of the
-paper, the expectations will always be taken on the factual observed
-distribution $\mathcal{D}$. This identification leads to outcome based estimators (ie.
-g-computation estimators \citep{snowden_implementation_2011}), targeting the
-ATE $\tau$ with outcome modeling:
-\begin{eqnarray}
-  \tau =& \mathbb E_{Y \sim \mathcal{D^{\star}}}[Y(1) - Y(0)|X=x]
-  = \mathbb E_{Y \sim \mathcal{D}}[Y|A=1] - \mathbb E_{Y \sim \mathcal{D}}[Y| A=0]
-  \label{eq:tau_population}
-\end{eqnarray}
-This equation builds on two quantities: the conditional expectancy
-of the outcome given the covariates and either
-treatment or no no treatment, called \emph{response function}:
-\begin{flalign*}
-  \text{Response function}
-   &  &
-  \mu_{a}(x) \myeq \; \mathbb E_{Y \sim \mathcal{D}} [Y|X=x, A=a]
-   &  &
-\end{flalign*}
+  Should we know the two expected outcomes for a given $X$,
+  we could compute the
+  difference between them, which gives the causal effect of the treatment.
+  %
+  These two expected outcomes can be computed from the observed data:
+  the consistency \ref{assumption:consistency} and unconfoundedness
+  \ref{assumption:ignorability} assumptions imply the equality of two different
+  expectations:
+  \begin{equation}\label{eq:mu_identification}
+    \mathbb E_{Y(a) \sim \mathcal{D^{\star}}} [Y(a)|X=x] = \mathbb E_{Y \sim \mathcal{D}} [Y|X=x, A=a]
+  \end{equation}
+  On the left, the expectation is taken on the counterfactual unobserved
+  distribution. On the right, the expectation is taken on the factual observed
+  distribution conditionally on the treatment. This equality is referred as the
+  g-formula identification \citep{robins_new_1986}. For the rest of the
+  paper, the expectations will always be taken on the factual observed
+  distribution $\mathcal{D}$. This identification leads to outcome based estimators (ie.
+  g-computation estimators \citep{snowden_implementation_2011}), targeting the
+  ATE $\tau$ with outcome modeling:
+  \begin{eqnarray}
+    \tau =& \mathbb E_{Y \sim \mathcal{D^{\star}}}[Y(1) - Y(0)|X=x]
+    = \mathbb E_{Y \sim \mathcal{D}}[Y|A=1] - \mathbb E_{Y \sim \mathcal{D}}[Y| A=0]
+    \label{eq:tau_population}
+  \end{eqnarray}
+  This equation builds on two quantities: the conditional expectancy
+  of the outcome given the covariates and either
+  treatment or no no treatment, called \emph{response function}:
+  \begin{flalign*}
+    \text{Response function}
+     &  &
+    \mu_{a}(x) \myeq \; \mathbb E_{Y \sim \mathcal{D}} [Y|X=x, A=a]
+     &  &
+  \end{flalign*}
 
-Given a sample of data and the oracle response functions $\mu_0, \mu_1$, the
-finite sum version of \autoref{eq:tau_population} leads to an
-estimator of the ATE written:
-\begin{equation}
-  \hat \tau = \frac{1}{n} \biggl(\sum_{i=1}^n \mu_{1}(x_i) - \mu_{0}(x_i) \biggr)
-  \label{eq:ate_estimate}
-\end{equation}
-This estimator is an oracle \textbf{finite sum estimator} by opposition to the
-population expression of $\tau$, $\mathbb{E}[\mu_{1}(x_i) - \mu_{0}(x_i)]
-$,
-which involves an expectation taken on the full
-distribution $\mathcal D$, which is observable but requires infinite data. For
-each estimator $\ell$ taking an expectation over $\mathcal D$, we use the symbol
-$\hat \ell$ to note its finite sum version.
+  Given a sample of data and the oracle response functions $\mu_0, \mu_1$, the
+  finite sum version of \autoref{eq:tau_population} leads to an
+  estimator of the ATE written:
+  \begin{equation}
+    \hat \tau = \frac{1}{n} \biggl(\sum_{i=1}^n \mu_{1}(x_i) - \mu_{0}(x_i) \biggr)
+    \label{eq:ate_estimate}
+  \end{equation}
+  This estimator is an oracle \textbf{finite sum estimator} by opposition to the
+  population expression of $\tau$, $\mathbb{E}[\mu_{1}(x_i) - \mu_{0}(x_i)]
+  $,
+  which involves an expectation taken on the full
+  distribution $\mathcal D$, which is observable but requires infinite data. For
+  each estimator $\ell$ taking an expectation over $\mathcal D$, we use the symbol
+  $\hat \ell$ to note its finite sum version.
 
-Similarly to the ATE, at the individual level, the CATE:
-\begin{equation}
-  \tau(x) = \mu_{1}(x) - \mu_{0}(x)
-  \label{eq:cate_estimate}
-\end{equation}
+  Similarly to the ATE, at the individual level, the CATE:
+  \begin{equation}
+    \tau(x) = \mu_{1}(x) - \mu_{0}(x)
+    \label{eq:cate_estimate}
+  \end{equation}
 
-\paragraph{Robinson decomposition}
-The \emph{R-decomposition}
-of the outcome model plays an important role,
-\citep{robinson_rootnconsistent_1988}:
-introducing two quantities, the conditional mean outcome
-and the probability to be treated (known as propensity score \citep{rosenbaum_central_1983}):
-\begin{flalign}
-  \text{Conditional mean outcome} &                    & m(x) \myeq \; & \mathbb E_{Y \sim
-  \mathcal{D}} [Y|X=x]            &                    &
-  \label{def:m}
-  \\
-  \text{Propensity score}         &                    &
-  e(x) \myeq \;                   & \mathbb P[A=1|X=x]
-  \label{def:propensity_score}
-\end{flalign}
-the outcome can be written
-\begin{flalign}\label{eq:r_decomposition}
-  \text{R-decomposition}                                                                   &  & y(a) = m(x) + \big( a - e(x) \big)
-  \tau(x) + \varepsilon(x; a) \quad \text{with}\quad \mathbb E[\varepsilon(X; A)|X, A] = 0 &  &
-\end{flalign}
-$m$ and $e$ are often called
-\emph{nuisances} \citep{chernozhukov_double_2018}; they are unknown.
+  \paragraph{Robinson decomposition}
+  The \emph{R-decomposition}
+  of the outcome model plays an important role,
+  \citep{robinson_rootnconsistent_1988}:
+  introducing two quantities, the conditional mean outcome
+  and the probability to be treated (known as propensity score \citep{rosenbaum_central_1983}):
+  \begin{flalign}
+    \text{Conditional mean outcome} &                    & m(x) \myeq \; & \mathbb E_{Y \sim
+    \mathcal{D}} [Y|X=x]            &                    &
+    \label{def:m}
+    \\
+    \text{Propensity score}         &                    &
+    e(x) \myeq \;                   & \mathbb P[A=1|X=x]
+    \label{def:propensity_score}
+  \end{flalign}
+  the outcome can be written
+  \begin{flalign}\label{eq:r_decomposition}
+    \text{R-decomposition}                                                                   &  & y(a) = m(x) + \big( a - e(x) \big)
+    \tau(x) + \varepsilon(x; a) \quad \text{with}\quad \mathbb E[\varepsilon(X; A)|X, A] = 0 &  &
+  \end{flalign}
+  $m$ and $e$ are often called
+  \emph{nuisances} \citep{chernozhukov_double_2018}; they are unknown.
+
+\end{background_box_left}
 
 %As noted by \citep{johansson2022generalization}, the machine learning
 %community often referred to the CATE by ITE, the Individual Treatment Effect.
@@ -1581,32 +1608,35 @@ As extreme inverse propensity weights induce high variance, clipping can be
 useful for numerical stability
 \citep{swaminathan_counterfactual_2015, ionides_truncated_2008}.
 
-\begin{algorithm}[!htbp]
-  \caption{Model selection procedure}\label{problem:estimation_procedure:algo} {%
-    Given train and test sets $(\mathcal{T}, \mathcal{S}) \sim \mathcal{D}$,
-    a candidate estimators $f$, a causal
-    metrics $\ell$:
-    \begin{enumerate}
-      \item Prefit: Learn estimators for unknown nuisance quantities $(\check e,\,\check m)$ on the training set $\mathcal{T}$
-      \item Fit: learn $\hat f(\cdot, a)$ on
-            $\mathcal T$
-      \item Model selection: $\forall{x} \in \mathcal{S}$ predict
-            $\big(\hat f(x, 1), \hat f(x, 0)\big)$ and evaluate the estimator storing the metric value: $\ell(f, \mathcal S)$ -- possibly
-            function of $\check e$ and $\check m$
-            %\item Metric evaluation: return the oracle evaluation metrics
-            %evaluated on $\mathcal{S}$: $\big(\widehat{\tau\text{-risk}}(\hat
-            %f^*_{\ell}); \widehat{\ell}_{ATE}(\hat f^*_{\ell}) \big)$
-    \end{enumerate}
+\begin{minipage}{.4\textwidth}
+  \begin{algorithm}[H]
+    \caption{Model selection procedure}\label{problem:estimation_procedure:algo} {%
+      Given train and test sets $(\mathcal{T}, \mathcal{S}) \sim \mathcal{D}$,
+      a candidate estimators $f$, a causal
+      metrics $\ell$:
+      \begin{enumerate}
+        \item Prefit: Learn estimators for unknown nuisance quantities $(\check e,\,\check m)$ on the training set $\mathcal{T}$
+        \item Fit: learn $\hat f(\cdot, a)$ on
+              $\mathcal T$
+        \item Model selection: \\
+              $\forall{x} \in \mathcal{S}$ predict
+              $\big(\hat f(x, 1), \hat f(x, 0)\big)$ and evaluate the estimator storing the metric value: $\ell(f, \mathcal S)$ -- possibly
+              function of $\check e$ and $\check m$
+              %\item Metric evaluation: return the oracle evaluation metrics
+              %evaluated on $\mathcal{S}$: $\big(\widehat{\tau\text{-risk}}(\hat
+              %f^*_{\ell}); \widehat{\ell}_{ATE}(\hat f^*_{\ell}) \big)$
+      \end{enumerate}
 
-  }
-\end{algorithm}
-
-
-\begin{figure}[h!]
-  \includegraphics[width=0.9\linewidth]{img/chapter_5/estimation_procedure_causal_selection_procedure.png}
-  \caption{Estimation procedure for causal model
-    selection.}\label{problem:estimation_procedure:figure}
-\end{figure}
+    }
+  \end{algorithm}
+\end{minipage}
+\begin{minipage}{.55\textwidth}
+  \begin{figure}[H]
+    \includegraphics[width=\linewidth]{img/chapter_5/estimation_procedure_causal_selection_procedure.png}
+    \caption{Estimation procedure for causal model
+      selection.}\label{problem:estimation_procedure:figure}
+  \end{figure}
+\end{minipage}
 
 
 
@@ -1991,7 +2021,7 @@ score (see \ref{apd:motivation_ntv}).
 
 \begin{figure}[!b]
   \centering
-  \includegraphics[width=\linewidth]{img/chapter_5/_1_r_risk_domination_r_risk_domination__ref_metric_mean_risks_by_Dataset_feasible_only.png}
+  \includegraphics[width=0.9\linewidth]{img/chapter_5/_1_r_risk_domination_r_risk_domination__ref_metric_mean_risks_by_Dataset_feasible_only.png}
   %\hfill
   \caption{\textbf{The $R$-risk is the best metric}: Relative Kendall's $\tau$ agreement with $\tau\text{-risk}$.
     Strong and Weak overlap correspond to the first and last tertiles of the overlap distribution measured with
@@ -2061,7 +2091,7 @@ both Caussim and ACIC 2018
 (\ref{apd:experiments:additional_results}).
 
 \begin{figure}[h!]
-  \begin{minipage}{.3\linewidth}
+  \begin{minipage}{.35\linewidth}
     \caption{\textbf{Model selection is harder for low population
         overlap}:
       Kendall's $\tau$ agreement with $\tau\text{-risk}$. Strong, medium and Weak overlap
@@ -2071,7 +2101,7 @@ both Caussim and ACIC 2018
         {\ref{apd:fig:all_datasets_tau_risk_ranking_agreement}}.}\label{fig:all_datasets_overlap_effect_r_risk}
   \end{minipage}
   \hfill
-  \begin{minipage}{0.67\linewidth}
+  \begin{minipage}{0.6\linewidth}
     \centering
     \includegraphics[width=\linewidth]{img/chapter_5/_2_overlap_influence_overlap_by_bin_comparaison_kendall_by_Dataset_r_risk_only.png}
   \end{minipage}
@@ -2091,7 +2121,7 @@ model estimation and selection. However, Figure
 nuisance set and the simpler shared nuisance-candidate set procedure.
 
 \begin{figure}[!tb]
-  \includegraphics[width=\linewidth]{img/chapter_5/_3_procedure_r_risk_only_3datasets.png}
+  \includegraphics[width=0.8\linewidth]{img/chapter_5/_3_procedure_r_risk_only_3datasets.png}
 
   \caption{\textbf{Nuisances can be estimated on the same data as outcome
       models}: Results for the R-risk are similar between the
@@ -2122,7 +2152,7 @@ confirms that using adaptive models --as built by
 stacking linear models and gradient-boosted trees-- suffices to estimate nuisance.
 
 \begin{figure}[!tb]
-  \includegraphics[width=\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_3datasets.png}
+  \includegraphics[width=0.8\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_3datasets.png}
 
   \caption{\textbf{\textcolor{DarkOrchid}{Stacked
         models} are good overall estimators of the nuisances}:
