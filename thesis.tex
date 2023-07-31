@@ -33,6 +33,8 @@
 \addbibresource{references.bib} 
 % appendix
 \usepackage[toc,titletoc,page]{appendix}
+% layout
+\usepackage[Lenny]{fncychap}
 
 % notes in the margin
 \usepackage{todonotes}
@@ -455,6 +457,18 @@ help practitioners during consultation \citep{lee2023benefits}.
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}\label{chapter:cdw}
 
 \section{Abstract}\label{sec:cdw:abstract}
+
+
+\vfill
+\textit{This chapter has been published in Plos Digital Health as:\\
+  Doutreligne, M., Degremont, A., Jachiet, P. A., Lamer, A., \& Tannier, X. (2023).
+  Good practices for clinical data warehouse implementation: A case study in
+  France. PLOS Digital Health, 2(7), e0000298. \\
+  As the first author I formulated the research question, designed the study,
+  led the interviews and wrote the manuscript.}
+
+
+\clearpage
 \section{Motivation and background: A changing world}\label{sec:cdw:motivation}
 
 \subsection{Data for primary or secondary
@@ -677,6 +691,13 @@ Heterogeneity of data collection calls for distributed information sharing model
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 \section{Abstract}\label{sec:predictive_models:abstract}
 
+\vfill
+\textit{This chapter has not been submitted to any journals or conference until
+  now.\\ XXX \\
+  As the first author I formulated the research question, designed the study,
+  performed the experiments and wrote the manuscript.}
+
+\clearpage
 \section{Predictive models in healthcare: Less fascination, more practical utility}\label{sec:predictive_models:motivation}
 
 \subsection{Why such interest in predictive models in healthcare}\label{subsec:predictive_models:importance}
@@ -795,6 +816,13 @@ Arguments for ease of deployment.
 \chapter{Prediction is not all we need: Causal analysis of EHRs to ground decision making}\label{chapter:causal_tuto}
 \section{Abstract}\label{sec:causal_tuto:abstract}
 
+
+\vfill
+\textit{This chapter has been submitted to Nature Digital Medicine as:\\ XXX \\
+  As the first author I formulated the research question, designed the study,
+  performed the experiments and wrote the manuscript.}
+
+\clearpage
 \section{Motivation : Healthcare is concerned with decision making, not mere
   prediction}\label{sec:causal_tuto:motivation}
 
@@ -877,7 +905,6 @@ Varying inclusion criteria: illustration of immortal time bias
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
 \section{Abstract}\label{sec:causal_model_selection:abstract}
 
-
 As predictive models --\emph{eg} from machine learning-- give likely outcomes,
 they may be used to support decision making, choosing whether to treat or not to
 treat. Such reasoning on the effect of an intervention is a causal-inference
@@ -897,6 +924,14 @@ decisions: use the so-called $R\text{-risk}$, use flexible estimators to compute
 the nuisance models on the train set, and split out 10\% of the data to compute
 risks.
 
+\vfill
+\textit{This chapter has been submitted to Artificial Intelligence in Medicine
+  as:\\ Matthieu Doutreligne, Gaël Varoquaux. How to select predictive models for
+  decision making or causal inference?. 2023. ⟨hal-03946902v3⟩. \\ As the first
+  author I formulated the research question, designed the study, did the proves
+  of the theoretical part, performed the experiments and wrote the manuscript.}
+
+\clearpage
 \section{Motivation: predictive models for causality cannot rely on the Machine Learning
   toolbox}\label{sec:causal_model_selection:motivation}
 
@@ -1565,7 +1600,7 @@ useful for numerical stability
 
 
 \begin{figure}[h!]
-  \includegraphics[width=\linewidth]{img/chapter_5/estimation_procedure_causal_selection_procedure.png}
+  \includegraphics[width=0.9\linewidth]{img/chapter_5/estimation_procedure_causal_selection_procedure.png}
   \caption{Estimation procedure for causal model
     selection.}\label{problem:estimation_procedure:figure}
 \end{figure}
