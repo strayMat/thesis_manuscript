@@ -32,7 +32,7 @@
 \usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2]{biblatex}
 \bibliography{references} 
 % appendix
-\usepackage[title,toc,titletoc,page]{appendix}
+\usepackage[toc,titletoc,page]{appendix}
 
 % notes in the margin
 \usepackage{todonotes}
@@ -979,23 +979,27 @@ general; model selection is needed.
 
 %\idea{It is crucial to have tools for model selection.}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_5/_2023-03-08-11-10-28_acic_2016_ate_heterogeneity.parquet_abs_bias_ylog_scale=True.pdf}%
-  \caption{\textbf{Different outcome models lead to different
-      estimation errors on the Average Treatment Effects},
-    on 77 classic simulations with known true causal effect
-    \citep{dorie_automated_2019}. The different models are ridge regression
-    and random forests with different hyper-parameters
-    (details
-    \ref{apd:toy_example:acic_2016_ate_variability}). The different configurations are
-    plotted as a function of increasing difference between treated and
-    untreated population --see
-    \autoref{subsec:measuring_overlap}.
-    There is no systematic best performer; data-driven model
-    selection is important.
-    \label{fig:acic_2016_ate_heterogeneity}%
-  }
+\begin{figure}[b!]
+  \begin{minipage}{.3\linewidth}
+    \caption{\textbf{Different outcome models lead to different
+        estimation errors on the Average Treatment Effects},
+      on 77 classic simulations with known true causal effect
+      \citep{dorie_automated_2019}. The different models are ridge regression
+      and random forests with different hyper-parameters
+      (details
+      \ref{apd:toy_example:acic_2016_ate_variability}). The different configurations are
+      plotted as a function of increasing difference between treated and
+      untreated population --see
+      \autoref{subsec:causal_model_selection:measuring_overlap}.
+      There is no systematic best performer; data-driven model
+      selection is important.
+      \label{fig:acic_2016_ate_heterogeneity}
+    }
+  \end{minipage}
+  \begin{minipage}{.65\linewidth}
+    %\centering
+    \includegraphics[width=\linewidth]{img/chapter_5/_2023-03-08-11-10-28_acic_2016_ate_heterogeneity.parquet_abs_bias_ylog_scale=True.pdf}%
+  \end{minipage}
 \end{figure}
 
 Standard practices to select models in predictive settings rely on
@@ -1115,8 +1119,9 @@ counterfactual nearest neighbors, which has been shown ineffective
 \section{Formal setting: causal inference and model selection}%
 \label{sec:causal_model_selection:setting}%
 
+\md{Might be only in intro}
 \subsection{The Neyman-Rubin Potential Outcomes framework}%
-\label{sec:causal_model_selection:setting}%
+\label{subsec:causal_model_selection:framework}%
 
 \paragraph{Settings}
 
@@ -1147,6 +1152,7 @@ at the individual level, to model heterogeneity, the Conditional Average Treatme
               &  &
 \end{flalign*}
 
+\md{duplicated with chapter 4: move back there, and only refer to it here.}
 \paragraph{Causal assumptions}
 
 Assumptions are necessary for causal estimands to be
@@ -2171,6 +2177,7 @@ ontologies, ...).
 \clearpage
 \begin{appendices}
 
+  %\addappheadtotoc
   %\section{Statistical models}\label{apd:statistical_models}
 
   %\section{Causal Diagrams}\label{apd:causal_diagrams}
