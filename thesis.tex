@@ -138,6 +138,7 @@
 \tableofcontents
 
 
+\chapter*{Remerciements}
 
 
 \chapter{Introduction: Amazing opportunities of health data?}\label{chap:intro}
@@ -334,17 +335,17 @@ Rise of digitalization and computing power suggesting new research methods
 
 \section{Two cultures of statistics for health}\label{sec:intro:two_cultures}
 
-In 2001, \cite{breiman2001statistical} clearly separates two statistical
+In 2001, \cite{breiman2001statistical} clearly distinguished two statistical
 cultures: a predominant community at the time focused on models, another one
 relying on predictive accuracy.
 
-Epidemiological statistics tends to be closer to the first model-based culture
+Epidemiology and biostatistics tend to be closer to the first model-based culture
 whereas artificial intelligence in medicine embraced the second one. This
 cultural differences might be explained by different objectives. Clinical
 Epidemiology seeks to uncover nature mechanisms from data, to understand how
 nature works. AIM adopts a more pragmatic approach, trying to understand what
 deployed healthcare system is improving outcomes or not, without trying to
-uncover the full causal mechanism leading to observed results.
+uncover the full causal mechanism leading to the observed results.
 
 \begin{background_box_left}
 
@@ -353,11 +354,15 @@ uncover the full causal mechanism leading to observed results.
   Departing from carefully designing functional forms for statistical models,
   seeking algorithm efficiency and out-of sample predictive accuracy.
 
+
   \paragraph{Rashomon effect: multiple models can equally well model a given dataset}
   % ref to appendix to describe ML algorithms: at least ridge, random forest, boosting.
 
-  \paragraph{Model selection}
-  Hyper-parameters selection, cross-validation (stone, 1974) and Textbook figure
+  \paragraph{Model selection: A conceptually simple but powerful tool}
+
+  The need for hyper-parameters selection,
+
+  Cross-validation \citep{stone1974cross} and a textbook figure
 
   \paragraph{Pre-training}
 
@@ -1062,28 +1067,22 @@ risks.
 
 \md{watchout that I did not say the same thing as in chapter 4}
 \paragraph{Progress in machine learning brings predictive models to new health
-  data} \citep{beam2018big,rajkomar2019machine}, with the promise of
-precision medicine.
-Automated analysis of
-medical images is increasingly accurate, \emph{eg} for brain images,
-\citep{khojaste2022deep,zhang2019radiological} or mammography
-\citep{yala2019deep,shen2019deep,nassif2022breast}.
-New prognostic models leverage routinely-collected
-patient records
-\citep{mooney2018bigdata}: predicting heart
-failure from claims \citep{desai2020comparison}, suicide attempts
-from questionnaires \citep{simon2018predicting}...
-Clinical notes contain much prognostic information
-but require text modeling  \citep{horng2017creating,wang2020prediction,spasic2020clinical}.
-Data may be difficult to
-control and model, but the accuracy of the prediction can be verified
-on left-out data
+  data} \citep{beam2018big,rajkomar2019machine}, with the promise of precision
+medicine. Automated analysis of medical images is increasingly accurate,
+\emph{eg} for brain images, \citep{khojaste2022deep,zhang2019radiological} or
+mammography \citep{yala2019deep,shen2019deep,nassif2022breast}. New prognostic
+models leverage routinely-collected patient records \citep{mooney2018bigdata}:
+predicting heart failure from claims \citep{desai2020comparison}, suicide
+attempts from questionnaires \citep{simon2018predicting}... Clinical notes
+contain much prognostic information but require text modeling
+\citep{horng2017creating,wang2020prediction,spasic2020clinical,
+  jiang2023health}. Data may be difficult to control and model, but the accuracy
+of the prediction can be verified on left-out data
 \citep{altman2009prognosis,poldrack2020establishment,varoquaux2022evaluating}.
-Given a model predicting a health outcome, precision medicine
-would like it to guide decisions: will an individual benefit from an
-intervention such as surgery \citep{fontana2019can}?
-Contrasting predictions with and without the treatment gives an answer,
-but statistical validity requires causal inference
+Given a model predicting a health outcome, precision medicine would like it to
+guide decisions: will an individual benefit from an intervention such as
+surgery \citep{fontana2019can}? Contrasting predictions with and without the
+treatment gives an answer, but statistical validity requires causal inference
 \citep{snowden_implementation_2011,blakely2020reflection}.
 
 % - Causal inference is difficult
