@@ -347,6 +347,9 @@ nature works. AIM adopts a more pragmatic approach, trying to understand what
 deployed healthcare system is improving outcomes or not, without trying to
 uncover the full causal mechanism leading to the observed results.
 
+\citep{rothman2012epidemiology}: \textit{In many epidemiologic applications, it is the choice among effect
+  measures that dictates the type of model the investigator ought to use.}
+
 \begin{background_box_left}
 
   \subsection{Machine Learning Framework}\label{subsec:intro:machine_learning}
@@ -452,9 +455,9 @@ help practitioners during consultation \citep{lee2023benefits}.
 
   \subsection{Neyman-rubin causal framework}\label{subsec:intro:causal_framework}
 
-  I quickly introduce the statistical framework for causality, and will
-  progressively introduce supplementary concepts as needed in
-  Chapters \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
+  Here, I introduce briefly the statistical framework for causality. I will
+  progressively introduce supplementary concepts as needed in Chapters
+  \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
 
   \paragraph{The Neyman-Rubin Potential Outcomes framework}\label{par:intro:causal_framework:neyman_rubin}
   \citep{naimi2023defining,imbens_causal_2015} enables statistical reasoning on
@@ -1026,18 +1029,20 @@ Varying inclusion criteria: illustration of immortal time bias
 
 % Predictive models are not sufficient for decision making: I showed it in
 % chapter 4
-Predictive models --\emph{eg} from machine learning-- give likely outcomes, but
-they are not immediately transposable to decision making, choosing whether to
-treat or not to treat. Such reasoning on the effect of an intervention is a
-causal-inference task. I demonstrated that causal thinking was necessary to
-avoid introducing biases in the study design or during confounders selection.
+In the previous chapters, we showed the strong interest in predictive models for
+healthcare, bridging to increasingly complex machine learning algorithms. We
+also pointed out that even when giving likely outcomes, they are not immediately
+transposable to decision making --choosing whether to treat or not to treat.
+Such reasoning on the effect of an intervention is a causal-inference task. We
+demonstrated that causal thinking was necessary to avoid introducing biases in
+the study design or during confounders selection.
 % Even with causal framework, there are too many models to choose from
-Even with a robust causal framework, the practitioner is left to choose among
+But, even with a robust causal framework, the practitioner is left to choose among
 the plethora of predictive models available for health data (some detailed in
 \ref{subsec:predictive_models:importance}). In a given situation, which of these
 models yield the most valid causal estimates?
 % scope of the paper 
-Here, I highlight that classic machine-learning model selection does not pick
+Here, we highlight that classic machine-learning model selection does not pick
 the best models for causal inference. Indeed, causal model selection should
 control both outcomes for each individual, treated or not treated, whereas only
 one outcome is observed.
@@ -1046,11 +1051,12 @@ effects when treated and non-treated population differ too much. More elaborate
 risks use ``nuisances'' re-weighting to approximate the causal error on the
 observed data. But does estimating these nuisances adds noise to model selection?
 % Contributions
-Drawing from an extensive empirical study, I outline an efficient causal
+Drawing from an extensive empirical study, we outline an efficient causal
 model-selection procedure. To select the best predictive model to guide
 decisions: use the so-called $R\text{-risk}$, use flexible estimators to compute
 the nuisance models on the train set, and split out 10\% of the data to compute
 risks.
+
 
 \vfill
 \textit{This chapter has been submitted to Artificial Intelligence in Medicine
@@ -1183,9 +1189,9 @@ yield valid causal estimates? As no single learner performs
 best on all data sets, there is a pressing need for clear guidelines to select
 outcome models for causal inference.
 
-\paragraph{Objectives and structure of the paper}
+\paragraph{Objectives and structure of the chapter}
 
-In this paper, we study \textit{model selection procedures}
+In this chapter, we study \textit{model selection procedures}
 in practical settings: \textit{finite samples} settings and without
 \textit{well-specification} assumption. Asymptotic causal-inference
 theory calls for complex risks, but a practical question is
