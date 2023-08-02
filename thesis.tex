@@ -17,6 +17,9 @@
 \usepackage{lipsum}
 % fonts
 \usepackage{lmodern}
+% striketrhough text
+\usepackage[normalem]{ulem}
+
 %---------------------------------------------------------
 % Semi-bold condensed. Works only with lmodern
 \def\sbc{\sffamily\fontseries{sbc}\selectfont}
@@ -531,6 +534,20 @@
 \newpage
 \chapter*{Remerciements}
 
+
+J'aimerais également remercier tous les membres de la mission Data de la HAS. :
+Timothée pour ses PR magnifiques, Pavel pour Despacito et les discussions de
+NLP, Morgane pour les poules, Adeline pour ses conseils \sout{psys} rigoureux,
+Catherine pour les cafés du lundi matin, Christine pour sa bonne humeur, et
+Viktor pour les Ti Punch. Malgré une présence en dent de scie de ma part, vous
+m'avez intégré pleinement dans l'équipe. C'est magique d'avoir vu cette équipe
+se construire et d'en faire partie aujourd'hui. Merci également aux autres
+personnes que j'ai cotoyées à la HAS, et qui m'ont accompagné durant cette
+aventure: Judith Fernandez, Pierre Liot, Agnès Solomniac, Sandrine Morin. Merci
+à Aude-Marie Lalanne Berdouticq et Emmanuel Didier (Institut Santé numérique en
+Société) pour leur regard de sociologues lors de la revue sur les entrepôts de
+données de santé.
+
 \pagestyle{basic}%
 
 \newpage
@@ -989,7 +1006,6 @@ help practitioners during consultation \citep{lee2023benefits}.
 \end{footnotesize}
 
 
-
 \clearpage
 \section{Motivation and background: A changing world}\label{sec:cdw:motivation}
 
@@ -1009,7 +1025,7 @@ The notion of learning health system \citep{mcginnis2013best}.
 
 Mix usages such as learning algorithms
 
-\subsection{Healthcare data collection is heavily influenced from the local healthcare organization}
+\subsection{Healthcare data collection is tightly linked with local organization}
 
 In practice, the possibility of mobilizing these routinely collected data
 depends very much on their degree of concentration, in a gradient that goes from
@@ -1065,7 +1081,8 @@ call for projects to set up and strengthen a network of hospital Clinical Data
 Warehouses (CDWs) coordinated with the national platform, the Health Data Hub by
 2025.
 
-\subsection{The multiplication of Clinical Data Warehouses}\label{subsec:cdw:cdw_definition}
+\subsection{The multiplication of Clinical Data Warehouses}%
+\label{subsec:cdw:cdw_definition}%
 
 \paragraph{An infrastructure} is needed to pool data data from one or more
 medical information systems --whatever the organizational framework-- to
@@ -1100,8 +1117,9 @@ four phases of data flow from the various sources that make up the HIS:
 \end{figure*}
 
 
-\section{Speaking to the data collectors: Interviews of French
-  University Hospitals}\label{sec:cdw:methods}
+\section{Speaking to the data collectors: Interviews of French University
+  Hospitals}%
+\label{sec:cdw:methods}%
 
 Based on an overview of university hospital CDWs in France, this study make
 general recommendations for properly leveraging the potential of CDWs to improve
@@ -1133,8 +1151,8 @@ them based on the notes taken during the interviews, the recordings, and by
 asking the participants for additional information. Detailed tables are
 available on \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/}.
 
-\subsection{A classification of observational
-  studies}\label{subsec:cdw:classification}
+\subsection{A classification of observational studies}%
+\label{subsec:cdw:classification}%
 
 In addition to the interviews, we reviewed the study reporting portals, which we
 found for 8 out of 14 operational CDWs. We developed a classification of
@@ -1170,8 +1188,8 @@ their title and description.
 \end{itemize}
 
 
-\section{Observations from a rapidly evolving and heterogeneous
-  ecosystem}\label{sec:cdw:results}
+\section{Observations from a rapidly evolving and heterogeneous ecosystem}%
+\label{sec:cdw:results}
 
 Fig \ref{results:image:eds_map} summarizes the development state of progress
 of CDWs in France. Out of 32 regional and university hospitals in France, 14
@@ -1191,8 +1209,8 @@ hospitals.
 \end{figure*}
 
 
-\subsection{Governance: CDW are federating multiple teams in the
-  hospital}\label{subsec:cdw:results:governance}
+\subsection{Governance: CDWs are federating multiple teams in the hospital}%
+\label{subsec:cdw:results:governance}%
 
 \paragraph{Initiation and actors}
 
@@ -1244,12 +1262,10 @@ ethical committee. A local submission and follow-up platform is often mentioned
 authorization of the project to the automatic provision of data into a Trusted
 Research Environment (TRE) \cite{goldacre_better_2022}. The processes for
 starting a new project on the CDW are always communicated internally but rarely
-documented publicly (8/21). \subsection{Uneven transparency of ongoing
-  studies}\label{subsec:cdw:results:transparency} Uneven public reference on
-hospital websites of ongoing studies.
+documented publicly (8/21).
 
-
-\subsection{Uneven transparency of ongoing studies}
+\subsection{Uneven transparency of ongoing studies}%
+\label{subsec:cdw:results:transparency}%
 
 Ongoing studies in CDWs are unevenly referenced publicly on hospital websites.
 Some institutions have comprehensive study portals, while others list only a
@@ -1261,8 +1277,8 @@ and fragmented between several sources: \url{clinicaltrials.gov}, the mandatory
 project portal of the Health Data Hub \cite{health_data_hub_portal_2023} or the
 website of the hospital data warehouse.
 
-\subsection{Triple usage of data: Research, management,
-  clinic}\label{subsec:cdw:results:data}
+\subsection{Triple usage of data: Research, management, clinic}%
+\label{subsec:cdw:results:data}%
 
 \paragraph{Strong dependance to the HIS}
 
@@ -1322,14 +1338,15 @@ they are sometimes considered important and included in the CDW work program.
 \end{table}
 
 
-\paragraph{Today, CDWs are built predominantly for scientific research.}
+\paragraph{Today, CDWs are built predominantly for scientific research (21/21)}
 
 The studies are mainly observational (non-interventional). Fig
 \ref{results:usage:image:study_objective} presents the distribution of the six
 categories defined in \ref{subsec:cdw:classification} for 231 studies collected
 on the study portals of nine hospitals. The studies focus first on population
 characterization (25 \%), followed by the development of decision support
-processes (24 \%), the study of risk factors (19 \%) and the treatment effect
+processes (24 \%), the study of risk factors (19ga .
+\%) and the treatment effect
 evaluations (15 \%).
 
 \begin{figure*}[!h]
@@ -1391,8 +1408,8 @@ also highlighted. Concrete examples are the automatic sorting of hospital
 prescriptions by order of complexity or the setting up of specialized channels
 for primary or secondary prevention.
 
-\subsection{A multi-layered technical
-  architecture}\label{subsec:cdw:results:architecture}
+\subsection{A multi-layered technical architecture}%
+\label{subsec:cdw:results:architecture}%
 
 
 The technical architecture of modern CDWs has several layers:
@@ -1415,8 +1432,8 @@ all of them have decided to provide it to researchers. Currently, clinical
 research teams are still often working on data extractions, in less secure
 environments.
 
-\subsection{Too little data quality and too many data
-  formats}\label{subsec:cdw:results:data_quality}
+\subsection{Rare data quality checks and mutliple standard formats}%
+\label{subsec:cdw:results:data_quality}%
 
 \paragraph{Quality tools}
 
@@ -1447,74 +1464,197 @@ university hospitals. This allows eHop adopters to launch ambitious
 interregional projects. However, eHop does not define a standard nomenclature to
 be used in its model and is not aligned with emerging international standards.
 
-
 \paragraph{Documentation}
-Half of the CDWs have put in place documentation accessible within the organization
-No documentation is public
 
-\section{Recommendations: How to consolidate EHRs and expand
-  usages}\label{sec:cdw:recommendations}
+Half of the CDWs have put in place documentation accessible within the
+organization on data flows, the meaning and proper use of qualified data (10/21
+mentioned). This documentation is used by the team that develops and maintains
+the warehouse. It is also used by users to understand the transformations
+performed on the data. However, it is never publicly available. No schema of the
+data once it has been transformed and prepared for analysis is published.
 
-\subsection{Governance: CDWs are
-  infrastructures}\label{subsec:cdw:recommendations:governance}
+\section{Recommendations: How to consolidate EHRs and expand usages}%
+\label{sec:cdw:recommendations}%
 
-CDW becomes an essential component of data management in the hospital Resources
-specific to the warehouse are rare and only project-based. Should promote
-long-middle term teams (eg. inria ?) Multi-layered governance
-
-\subsection{Transparency: Keep the bar
-  high}\label{subsec:cdw:recommendations:transparency} Public registration of
-comparative observational study protocols for research Patient information stays
-limited
-
-\subsection{Data: Complex data collection requires a variety of
-  expertise}\label{subsec:cdw:recommendations:data} study design : change of
-focus from data collection to data preprocessing -> other complementary skills
-needed Link with the HIS, lack of standard at the HIS level, lack of sharing of
-data schema Data reuse oriented towards primary care is still rare and rarely
-supported by appropriate funding.
+\md{Might go into the conclusion}
+We give the first overview of the CDWs in university hospitals of France with 32
+hospitals reviewed. The implementation of CDW dates from 2011 and accelerated in
+the late 2020. Today, 24 of the university hospitals have an ongoing CDW
+project.
+From this case study, some general considerations can be drawn, that should be
+valuable to all healthcare system implementing CDWs on a national scale.
 
 
-\subsection{Technical architecture: Towards more harmonization and open source ?
-}\label{subsec:cdw:recommendations:architecture} Lack of harmonization: focus on
-fewer solutions Commercial solutions emerging Case for open source:
-transparency, less technological lock-in, mutualization, favor modularity, help
-build consensus Opportunity for open source solutions Data quality, standard
-formats Quality is not sufficiently considered as a relevant scientific topic
-itself. Tooling: Link with devops/ automated CI in industrial data science there
-is a need for open-source publication of research code to ensure quality
-retrospective research
+\subsection{Governance: CDWs are infrastructures}%
+\label{subsec:cdw:recommendations:governance}%
 
-\subsection{Data quality an document: more incentives needed}\label{subsec:cdw:recommendations:quality}
+As the CDW becomes an essential component of data management in the hospital,
+the creation of an autonomous internal team dedicated to data architecture,
+process automation and data documentation should be encouraged
+\cite{goldacre_better_2022}. This multidisciplinary team should develop an
+excellent knowledge of the data collection process and potential reuses in order
+to qualify the different flows coming from the source IS, standardize them
+towards a homogenous schema and harmonize the semantics. It should have a sound
+knowledge of public health, as well as the technical and statistical skills to
+develop high-quality software that facilitates data reuse.
+
+The resources specific to the warehouse are rare and often taken from other
+budgets, or from project-based credits. While this is natural for an initial
+prototyping phase, it does not seem adapted to the perennial and transversal
+nature of the tool. As a research infrastructure of growing importance, it must
+have the financial and organizational means to plan for the long term.
+
+The governance of the CDW has multiple layers: local within the university
+hospital, interregional, and national/international. The first level allow to ensure the
+quality of data integration as well as the pertinence of data reuse by
+clinicians themselves. The interregional level is well adapted for resources
+mutualization and collaboration. Finally, the national and international levels
+assure coordination, encourage consensus for committing choices such as metadata
+or interoperability, and provide financial, technical and regulatory support.
+
+
+\subsection{Transparency: Keep the bar high}%
+\label{subsec:cdw:recommendations:transparency}%
+
+Health Technology Assessment agencies advocate for public registration of
+comparative observational study protocols before conducting the analysis
+\cite{berger2017good,fda_real-world_2021,has_real-world_2021}. They often refer
+to \url{clinicaltrials.gov} as potential but not ideal registration portal for
+observational studies. The research community advocates for public registrations
+of all observational studies \cite{rushton2011should,plos2014observational}.
+More recently, it emphasizes the need for more easy data access and the
+publication of study code \cite{pavlenko_implementation_2020,
+  kohane_what_2021,nih_2023}. We embrace these recommendations and we point to the
+unfortunate duplication of these study reporting systems in France. One source
+could be favored at the national level and the second one automatically fed from
+the reference source, by agreeing on common metadata.
+
+From a patient's perspective, there is currently no way to know if their
+personal data is included for a specific project. Better patient information
+about the reuse of their data is needed to build trust over the long term. A
+strict minimum is the establishment and update of the declarative portals of
+ongoing studies at each institution.
+
+\subsection{Data: Complex data collection requires a variety of expertise}%
+\label{subsec:cdw:recommendations:data}%
+
+When using CDW, the analyst has not defined the data collection process and is
+generally unaware of the context in which the information is logged. This new
+dimension of medical research requires a much greater development of data
+science skills to change the focus from the implementation of the statistical
+design to the data engineering process. Data reuse requires more effort to
+prepare the data and document the transformations performed.
+
+The more heterogeneous a HIS system is, the less qualitative would be the CDW
+built on top of it. There is a need for increasing interoperability, to help EHR
+vendors interfacing the different hospital softwares, thus facilitating CDW
+development. One step in this direction would be the open source publication of
+HIR data schema and vocabularies. At the analysis level, international recommendations insist
+on the need for common data formats \cite{zhang_best_2022,kohane_what_2021}.
+However, there is still a lack of adoption of research standards from hospital
+CDWs to conduct robust studies across multiple sites. Building open-source tools
+on top of these standards such as those of OHDSI \cite{schuemie_book_2021} could
+foster their adoption. Finally, in many clinical domains, sufficient sample size
+is hard to obtain without international data sharing collaborations. Thus, more
+incitation is needed to maintain and update the terminology mappings between
+local nomenclatures and international standards.
+
+Many ongoing studies concern the development of decision support processes whose
+goal is to save time for healthcare professionals. These are often research
+projects, not yet integrated into routine care. The analysis of study portals
+and the interviews revealed that data reuse oriented towards primary care is
+still rare and rarely supported by appropriate funding. The translation from
+research to clinical practice takes time and need to be supported on the long
+run to yield substantial results.
+
+\subsection{Technical architecture: Towards more harmonization and open source
+  ?}%
+\label{subsec:cdw:recommendations:architecture} %
+
+Tools, methods and data formats of CDW lack harmonization due to the strong
+technical innovation and the presence of many actors. As suggested by the recent
+report on the use of data for research in the UK \cite{goldacre_better_2022}, it
+would be wise to focus on a small number of model technical platforms.
+
+These platforms should favor open-source solutions to assure transparency by
+default, foster collaboration and consensus and avoid technological lock-in of
+the hospitals.
+\md{More on open-source from the french version of the report? }
+% Case for open source: transparency, less technological lock-in, mutualization,
+% favor modularity, help build consensus Opportunity for open source solutions
+
+\subsection{Data quality an document: more incentives needed}%
+\label{subsec:cdw:recommendations:quality}%
 
 Quality is not sufficiently considered as a relevant scientific topic itself.
-However, it is the backbone of all research done within a CDW. In order to
+However, it is the backbone of all research done within an CDW. In order to
 improve the quality of the data with respect to research uses, it is necessary
-to conduct continuous studies dedicated to this topic [52,54–56]. These studies
-should contribute to a reflection on methodologies and standard tools for data
-quality, such as those developed by the OHDSI research network [41].
+to conduct continuous studies dedicated to this topic
+\cite{zhang_best_2022,kohane_what_2021,shang_conceptual_2018,looten_what_2019}.
+These studies should contribute to a reflection on methodologies and standard
+tools for data quality, such as those developed by the OHDSI research network
+\cite{schuemie_book_2021}.
 
 Finally, there is a need for open-source publication of research code to ensure
-quality retrospective research [55,57]. Recent research in data analysis has
-shown that innumerable biases can lurk in training data sets [58,59]. Open
-publication of data schemas is considered an indispensable prerequisite for all
-data science and artificial intelligence uses [58]. Inspired by data set cards
-  [58] and data set publication guides, it would be interesting to define a
-standard CDW card documenting the main data flows.
+quality retrospective research
+\cite{shang_conceptual_2018,seastedt_global_2022}. Recent research in data
+analysis has shown that innumerable biases can lurk in training data sets
+\cite{gebru_datasheets_2021,mehrabi_survey_2021}. Open publication of data
+schemas is considered an indispensable prerequisite for all data science and
+artificial intelligence uses \cite{gebru_datasheets_2021}. Inspired by dataset
+cards \cite{gebru_datasheets_2021} and dataset publication guides, it would be
+interesting to define a standard CDW card documenting the main data flows.
 
 \section{Conclusion}\label{sec:cdw:conclusion}
 
-The French CDW ecosystem is beginning to take shape
+\paragraph{Limitations}
 
-The priority is the creation and perpetuation of multidisciplinary warehouse teams
+The interviews were conducted in a semi-structured manner within a limited time
+frame. As a result, some topics were covered more quickly and only those
+explicitly mentioned by the participants could be recorded. The uneven existence
+of study portals introduces a bias in the recording of the types of studies
+conducted on CDW. Those with a transparency portal already have more maturity in
+use cases.
 
-Constitution of a multilevel collaboration network is another priority.
+For clarity, our results are focused on the perimeter of university hospitals.
+We have not covered the exhaustive health care landscape in France. CDW
+initiatives also exist in primary care, in smaller hospital groups and in
+private companies.
 
-Common data model should be encouraged
+\paragraph{The French CDW ecosystem is beginning to take shape,} benefiting from
+an acceleration thanks to national funding, the multiplication of industrial
+players specializing in health data and the beginning of a supra-national
+reflection on the European Health Data Space\cite{ehds_2022}. However, some
+points require special attention to ensure that the potential of the CDW
+translates into patient benefits.
 
-The question of expanding the scope of the data beyond the purely hospital domain must be asked.
+\paragraph{The priority is the creation and perpetuation of multidisciplinary
+  warehouse teams} capable of operating the CDW and supporting the various
+projects. A combination of public health, data engineering, data stewardship,
+statistics and IT competences is a prerequisite for the success of the CDW. The
+team should be the privileged point of contact for data exploitation issues and
+should collaborate closely with the existing hospital departments.
 
-Heterogeneity of data collection calls for distributed information sharing models.
+\paragraph{The constitution of a multi-level collaboration network} is another
+priority. The local level is essential to structure the data and understand its
+possible uses. Interregional, national and international coordination would make
+it possible to create thematic working groups, in order to stimulate a dynamic
+of cooperation and mutualization.
+
+\paragraph{A common data model should be encouraged,} with precise metadata allowing to map
+the integrated data, in order to qualify the uses to be developed today from the
+CDWs. More broadly, open-source documentation of data flows and transformations
+performed for quality enhancement would require more incentives to unleash the
+potential for innovation for all health data reusers.
+
+\paragraph{Expanding the scope of the data beyond the purely hospital domain}
+in a systematic way should be considered. Many risk factors and patient
+follow-up data are missing from the CDWs, but are crucial for understanding
+pathologies. Combining city data and hospital data would provide a complete view
+of patient care.
+
+
+%%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 \section{Abstract}\label{sec:predictive_models:abstract}
