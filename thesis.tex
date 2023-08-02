@@ -1121,80 +1121,254 @@ themes: the initiation and construction of the CDWs; the current status of the
 project and the studies carried out; opportunities and obstacles; quality
 criteria for observational research. S1 Table list
 all interviewed people with their team title. The complete form, with the
-precised questions, is available in \ref{apd:cdw:interviews}.
+precised questions, is available in \ref{apd:cdw:interview_form}.
 
 The interview form was sent to participants in advance, and then used as a
 support to conduct the interviews. The interviews lasted 90 minutes and were
 recorded for reference.
 
-\paragraph{Regional and university hospitals in France: different levels of maturity}
-
-Scope of 32 CHUs, out of the 3000 care sites in France to yield exhaustive
-conclusion on a restricted scope. Drive most specialized care, research in their
-core mission. Date of interview
-
-\paragraph{Focus on the 18 CDWs with highest level of maturity}
-
-The denominator for the quantitative results is the 18 CDWs in production
+Based on these interviews, we collected structured information on both the
+characteristics of the actors, and those of the data warehouses. We completed
+them based on the notes taken during the interviews, the recordings, and by
+asking the participants for additional information. Detailed tables are
+available on \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/}.
 
 \subsection{A classification of observational
   studies}\label{subsec:cdw:classification}
 
-Contrast with classical epidemiology study types and the notion of experiment \citep{rothman2012epidemiology}.
+In addition to the interviews, we reviewed the study reporting portals, which we
+found for 8 out of 14 operational CDWs. We developed a classification of
+studies, based on the typology of retrospective studies described by the OHDSI
+research network \cite{schuemie_book_2021}. We enriched this typology by
+comparing it with the collected studies resulting in the six following
+categories. Studies were classified according to this nomenclature based on
+their title and description.
 
-\paragraph{Outcome frequency}
-\paragraph{Population characterization}
-\paragraph{Risk factors}
-\paragraph{Treatment effect}
-\paragraph{Development of diagnostic or prognostic algorithms}
-\paragraph{Medical informatics}
+\begin{itemize}
+  \item \textbf{Outcome frequency}: Incidence or prevalence estimation for a
+        medically well-defined target population.
+  \item \textbf{Population characterization}: Characterization of a specific set
+        of covariates. Feasibility and pre-screening studies belong to this category \cite{pasco_pre-screening_2019}.
+  \item \textbf{Risk factors}: Identification of covariates most associated with
+        a well-defined clinical target (disease course, care event). These
+        studies look at  association study without quantifying the causal effect
+        of the factors on the outcome of interest.
+  \item \textbf{Treatment Effect}: Evaluation of the effect of a well-defined
+        intervention on a specific outcome target. These studies intend to show
+        a causal link between these two variables \cite{hernan_methods_2021}.
+  \item \textbf{Development of diagnostic and prognostic algorithms}: Improve or automate a
+        diagnostic or prognostic process, based on clinical data from a given
+        patient. This can take the form of a risk, a preventive score, or the
+        implementation of a diagnostic assistance system. These studies are part
+        of the individualized medicine approach, with the goal of inferring
+        relevant information at the level of individual patient's files.
+  \item \textbf{Medical informatics}: Methodological or tool oriented. These
+        studies aim to improve the understanding and capacity for action of
+        researchers and clinicians. They include the evaluation
+        of a decision support tool, the extraction of information from
+        unstructured data, or automatic phenotyping methods.
+\end{itemize}
 
 
 \section{Observations from a rapidly evolving and heterogeneous
   ecosystem}\label{sec:cdw:results}
 
+Fig \ref{results:image:eds_map} summarizes the development state of progress
+of CDWs in France. Out of 32 regional and university hospitals in France, 14
+have a CDW in production, 5 are experimenting, 5 have a prospective CDW
+project, 8 did not have any CDW project at the time of writing. The results
+are described for all projects that are at least in the prospective stage
+minus the three that we were unable to interview after multiple reminders
+(Orléans, Metz and Caen), resulting in a denominator of 21 university
+hospitals.
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/chapter_2/Fig2.pdf}
+  \caption{Repartition of CDWs in France. \\The base layer map comes from
+    \url{https://wiki.openstreetmap.org/wiki/Mapnik}.}
+  \label{results:image:eds_map}
+\end{figure*}
+
+
 \subsection{Governance: CDW are federating multiple teams in the
   hospital}\label{subsec:cdw:results:governance}
+
 \paragraph{Initiation and actors}
-Figure temporality of CDW
-Federating potential
-Multiple departments involved
-Multiple skills involved, strong ties with the academics
-In-house solution development vs industrialization
 
-\paragraph{Management of studies}
 
-Scientific committee and project follow-up platform
+Fig \ref{results:governance:image:timeline} shows the history of the
+implementation of CDWs. A distinction must be made between the first works --in
+blue--, which systematically precede the regulatory authorization --in green--
+from the French Commission on Information Technology and Liberties (CNIL).
 
-\subsection{Uneven transparency of ongoing
+\begin{figure*}
+  \centering
+  \includegraphics[width=\linewidth]{img/chapter_2/Fig3.pdf}
+  \caption{The French CDWs implementations date back to the first academic works in data reuse in early 2010s and accelerated recently.}
+  \label{results:governance:image:timeline}
+\end{figure*}
+
+The CDWs have so far been initiated by one or two people from the hospital world
+with an academic background in bioinformatics, medical informatics or
+statistics. The sustainability of the CDW is accompanied by the construction of
+a cooperative environment between different actors: Medical Information
+Department (MID), Information Systems Department (IT), Clinical Research
+Department (CRD), clinical users, and the support of the management or the
+Institutional Medical Committee. It is also accompanied by the creation of a
+team, or entity, dedicated to the maintenance and implementation of the CDW.
+More recent initiatives, such as those of the HCL (Hospitals of the city of
+Lyon) or the \textit{Grand-Est} region, are distinguished by an initial,
+institutional and high-level support.
+
+The CDW has a federating potential for the different business departments of the
+hospital with the active participation of the CRD, the IT Department and the
+MID. Although there is always an operational CDW team, the human resources
+allocated to it vary greatly: from half a full-time equivalent to 80 people for
+the AP-HP, with a median of 6.0 people. The team systematically includes a
+coordinating physician. It is multidisciplinary with skills in public health,
+medical informatics, informatics (web service, database, network,
+infrastructure), data engineering and statistics.
+
+Historically, the first CDWs were based on in-house solution development. More
+recently, private actors are offering their services for the implementation and
+implementation of CDWs (15/21). These services range from technical
+expertise in order to build up the data flows and data cleaning up to the delivery
+of a platform integrating the different stages of data processing.
+
+\subsection{Management of studies}
+
+Before starting, projects are systematically analyzed by a scientific and
+ethical committee. A local submission and follow-up platform is often mentioned
+(12/21), but its functional scope is not well defined. It ranges from simple
+authorization of the project to the automatic provision of data into a Trusted
+Research Environment (TRE) \cite{goldacre_better_2022}. The processes for
+starting a new project on the CDW are always communicated internally but rarely
+documented publicly (8/21). \subsection{Uneven transparency of ongoing
   studies}\label{subsec:cdw:results:transparency} Uneven public reference on
 hospital websites of ongoing studies.
+
+
+\subsection{Uneven transparency of ongoing studies}
+
+Ongoing studies in CDWs are unevenly referenced publicly on hospital websites.
+Some institutions have comprehensive study portals, while others list only a
+dozen studies on their public site while mentioning several hundreds ongoing
+projects during interviews. In total, we found 8 of these portals out of 14 CDWs
+in production. Uses other than ongoing scientific studies are very rarely
+documented. The publication of the list of ongoing studies is very heterogeneous
+and fragmented between several sources: \url{clinicaltrials.gov}, the mandatory
+project portal of the Health Data Hub \cite{health_data_hub_portal_2023} or the
+website of the hospital data warehouse.
 
 \subsection{Triple usage of data: Research, management,
   clinic}\label{subsec:cdw:results:data}
 
 \paragraph{Strong dependance to the HIS}
 
-Data collected reflect data collection
-Exemples, AP-HP, HCLs
+CDW data reflect the HIS used on a daily basis by hospital staff. Stakeholders
+point out that the quality of CDW data and the amount of work required for rapid
+and efficient reuse are highly dependent on the source HIS. The possibility of
+accessing data from an HIS in a structured and standardized format greatly
+simplifies its integration into the CDW and then its reuse.
 
 \paragraph{Categories of Data}
 
-Main functionalities of HIS are the same. Common base Details: Table Takeaway:
-most of the current accessible data are billing, administrative and text,
-importantly, low access to temporality.
+Although the software landscape is varied across the country, the main
+functionalities of HIS are the same. We can therefore conduct an analysis of the
+content of the CDWs, according to the main categories of common data present in
+the HIS.
 
-\paragraph{Data reuse: Research}
-Details of current study types.
-Details of specialty of the principal investigator
-Interest for research data network but lack of resources
+The common base for all CDWs is constituted by data from the Patient
+Administrative Management software (patient identification, hospital movements)
+and the billing codes. Then, data flows are progressively developed from the
+various softwares that make up the HIS. The goal is to build a homogeneous data
+schema, linking the sources together, controlled by the CDW team. The
+prioritization of sources is done through thematic projects, which feed the CDW
+construction process. These projects improve the understanding of the sources
+involved, by confronting the CDW team with the quality issues present in the
+data.
 
-\paragraph{Data reuse: CDW are used for monitoring and management}
-Initialization for billing
-Potential for professional feedbacks
-Pharmacovigilance
+Table \ref{results:data:img:data_categories} presents the different ratio of
+data categories integrated in French CDWs. Structured biology and texts are
+almost always integrated (20/21 and 20/21). The texts contain a large amount of
+information. They constitute unstructured data and are therefore more difficult
+to use than structured tables. Other integrated sources are the hospital drug
+circuit (prescriptions and administration, 16/21), Intense Care Unit (ICU, 2/21)
+or nurse forms (4/21). Imaging is rarely integrated (4/21), notably for reasons
+of volume. Genomic data are well identified, but never integrated, even though
+they are sometimes considered important and included in the CDW work program.
 
-\paragraph{Data reuse: Strong interest for CDW in the context of care}
+\begin{table}[!ht]
+  \centering
+  \caption{Type of data integrated into the French CDWs.}
+  \label{results:data:img:data_categories}
+  \begin{tabular}{lrl}
+    \thickhline
+    Category of data     & Number of CDW & Ratio  \\
+    \thickhline
+    Administrative       & 21            & 100 \% \\
+    Billing Codes        & 20            & 95 \%  \\
+    Biology              & 20            & 95 \%  \\
+    Texts                & 20            & 95 \%  \\
+    Drugs                & 16            & 76 \%  \\
+    Imagery              & 4             & 19 \%  \\
+    Nurse Forms          & 4             & 19 \%  \\
+    Anatomical pathology & 3             & 14 \%  \\
+    ICU                  & 2             & 10 \%  \\
+    Medical devices      & 2             & 10 \%  \\
+    \thickhline
+  \end{tabular}
+\end{table}
+
+
+\paragraph{Today, CDWs are built predominantly for scientific research.}
+
+The studies are mainly observational (non-interventional). Fig
+\ref{results:usage:image:study_objective} presents the distribution of the six
+categories defined in \ref{subsec:cdw:classification} for 231 studies collected
+on the study portals of nine hospitals. The studies focus first on population
+characterization (25 \%), followed by the development of decision support
+processes (24 \%), the study of risk factors (19 \%) and the treatment effect
+evaluations (15 \%).
+
+\begin{figure*}[!h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{img/chapter_2/Fig4.pdf}
+  \caption{Percentage of studies by objective.}
+  \label{results:usage:image:study_objective}
+\end{figure*}
+
+The CDWs are used extensively for internal projects such as student theses (at
+least in 9/21) and serve as an infrastructure for single-service research: their
+great interest being the de-siloing of different information systems. For most
+of the institutions interviewed, there is still a lack of resources and maturity
+of methods and tools for conducting inter-institutional research (such as in the
+\textit{Grand-Ouest} region of France) or via European calls for projects
+(EHDEN). These two research networks are made possible by supra-local governance
+and a common data schema, respectively eHop \cite{madec_ehop_2019} and OMOP
+\cite{hripcsak_observational_2015}. The Paris hospitals, thanks to its regional
+coverage and the choice of OMOP, is also well advanced in multi-centric
+research. At the same time, the \textit{Grand-Est} region is building a network
+of CDW based on the model of the \textit{Grand-Ouest} region, also using eHop.
+
+\paragraph{Data reuse: CDW are used for monitoring and management (16/21)}
+
+
+The CDW have sometimes been initiated to improve and optimize billing coding
+(4/21). The clinical texts gathered in the same database are queried using
+keywords to facilitate the structuring of information. The data are then
+aggregated into indicators, some of which are reported at the national level.
+The construction of indicators from clinical data can also be used for the
+administrative management of the institution. Finally, closer to the clinic,
+some actors state that the CDW could also be used to provide regular and
+appropriate feedback to healthcare professionals on their practices. This
+feedback would help to increase the involvement and interest of healthcare
+professionals in CDW projects. The CDW is sometimes of interest for health
+monitoring (eg. during Covid-19) or pharmacovigilance (13/21).
+
+
+\paragraph{Data reuse: Strong interest for CDW in the context of care (13/21)}
 
 Some CDWs develop specific applications that provide new functionalities
 compared to care software. Search engines can be used to query all the
@@ -1203,8 +1377,12 @@ different softwares. Dedicated interfaces can then offer a unified view of the
 history of a patient's data, with inter-specialty transversality, which is
 particularly valuable in internal medicine. These cross-disciplinary search
 tools also enable healthcare professionals to conduct rapid searches in all the
-texts, for example, to find similar patients \citep{garcelon2017finding}.
-%
+texts, for example to find similar patients \cite{garcelon_finding_2017}. Uses
+for prevention, automation of repetitive tasks and care coordination are also
+highlighted. Concrete examples are the automatic sorting of hospital
+prescriptions by order of complexity, or the setting up of specialized channels
+for primary or secondary prevention.
+
 There is a growing interest in such computational phenotyping tools to support
 the development of digital health solutions \citep{wen2023impact}.
 %
@@ -1214,19 +1392,62 @@ prescriptions by order of complexity or the setting up of specialized channels
 for primary or secondary prevention.
 
 \subsection{A multi-layered technical
-  architecture}\label{subsec:cdw:results:architecture} Three layer : Data
-preprocessing (acquisition and normalization), storage, exposure Datalab: a
-crucial technological brick
+  architecture}\label{subsec:cdw:results:architecture}
+
+
+The technical architecture of modern CDWs has several layers:
+\begin{itemize}
+  \item Data processing: connection and export of source data, diverse
+        transformation (cleaning, aggregation, filtering, standardization).
+  \item Data storage: database engines, file storage (on file servers or object
+        storage), indexing engines to optimize certain queries.
+  \item Data exposure: raw data, APIs, dashboards, development and analysis
+        environments, specific web applications.
+\end{itemize}
+Supplementary cross-functional components ensure the efficient and secure
+operation of the platform: identity and authorization management, activity
+logging, automated administration of servers and applications.
+
+The analysis environment (Jupyterhub or RStudio datalabs) is a key component of
+the platform, as it allows data to be processed within the CDW infrastructure. A
+few CDWs had such operational datalab at the time of our study (6/21) and almost
+all of them have decided to provide it to researchers. Currently, clinical
+research teams are still often working on data extractions, in less secure
+environments.
 
 \subsection{Too little data quality and too many data
   formats}\label{subsec:cdw:results:data_quality}
+
 \paragraph{Quality tools}
-Automatic tooling for acquisition
-First development for automatic data checks
+
+Systematic data quality monitoring processes are
+being built in some CDWs. Often (8/21), scripts are run at regular intervals to
+detect technical anomalies in data flows. Rare data quality investigation tools,
+in the form of dashboards, are beginning to be developed internally (3/21).
+Theoretical reflections are underway on the possibility of automating data
+consistency checks, for example, demographic or temporal. Some facilities
+randomly pull records from the EHR to compare them with the information in the
+CDW.
+
 \paragraph{Standard format}
-No single standard data model,
-Omop
-eHop
+
+No single standard data model stands out as being used by all CDWs. All are
+aware of the existence of the OMOP (research standard)
+\cite{hripcsak_observational_2015} and HL7 FHIR (communication standard) models
+\cite{braunstein_health_2019}. Several CDWs consider the OMOP model to be a
+central part of the warehouse, particularly for research purposes (9/21). This
+tendency has been encouraged by the European call for projects EHDEN, launched
+by the OHDSI research consortium, the originator of this data model. In the
+\textit{Grand-Ouest} region of France, the CDWs use the eHop warehouse software.
+The latter uses a common data model also named eHop. This model will be extended
+with the future warehouse network of the  \textit{Grand Est} region also
+choosing this solution. Including this grouping and the other establishments
+that have chosen eHop, this model includes 12 establishments out of the 32
+university hospitals. This allows eHop adopters to launch ambitious
+interregional projects. However, eHop does not define a standard nomenclature to
+be used in its model and is not aligned with emerging international standards.
+
+
 \paragraph{Documentation}
 Half of the CDWs have put in place documentation accessible within the organization
 No documentation is public
