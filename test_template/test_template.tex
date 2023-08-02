@@ -14,14 +14,35 @@
 %\usepackage[french]{babel} % deactivating french babel that yields an error
 %\usepackage{csquotes} % for csquotes not present in babel french
 \usepackage[absolute]{textpos} 
+\usepackage{lipsum}
+% fonts
+\usepackage{lmodern}
+%---------------------------------------------------------
+% Semi-bold condensed. Works only with lmodern
+\def\sbc{\sffamily\fontseries{sbc}\selectfont}
 
 
 \usepackage[dvipsnames]{xcolor} % colors
 % links and url
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
+\hypersetup{%pdftex,  % needed for pdflatex
+  breaklinks=true,  % so long urls are correctly broken across lines
+  colorlinks=true,
+  urlcolor=deep_brown,
+  linkcolor=deep_blue,
+  citecolor=dark_green,
+  }
+
+  \usepackage{enumitem}
+  \setlist[itemize]{label=\textcolor{myblue}{\rule{1ex}{1ex}}}
+  \setlist[description]{font=\bfseries\sffamily}
+  \setlist[enumerate]{font=\bfseries\sffamily\color{myblue}}
+  
+  
 % figures
 \usepackage{graphicx}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage{placeins}
 % tables
@@ -40,9 +61,50 @@
 
 \usepackage{siunitx}
 \usepackage{algorithm, algorithmicx, algpseudocode}
+% TODO: test if not happy with current algo styling
+%\usepackage[ruled, linesnumbered, fillcomment]{algorithm2e}
+
+% color commands
+\colorlet{P}{ForestGreen}
+\colorlet{I}{MidnightBlue}
+\colorlet{C}{YellowOrange}
+\colorlet{O}{DarkOrchid}
+\definecolor{Prune}{RGB}{99,0,60}
+\definecolor{light_grey}{rgb}{0.3,.3,.3}
+\definecolor{deep_blue}{rgb}{0,.2,.5}
+\definecolor{dark_blue}{rgb}{0,.15,.5}
+\definecolor{myblue}{rgb}{.01,0.21,0.71}
+% Less saturation in the green for citations
+\definecolor{dark_green}{rgb}{0.2,0.5,.3}
+%\definecolor{dark_green}{rgb}{0,0.5,.15}
+\definecolor{firebrick}{rgb}{0.75,0.125,0.125}
+\definecolor{indigo}{rgb}{0.3,0,0.5}
+% Color from http://paletton.com/#uid=30v0u0kllllaFw0g0qFqFg0w0aF
+\definecolor{dark_brown}{RGB}{85, 39, 0}
+\definecolor{deep_brown}{RGB}{128, 70, 21}
+\definecolor{lightgreen}{RGB}{138,255,138}
+\definecolor{lightblue}{RGB}{138,138,255}
+\definecolor{lightorange}{RGB}{255,212,138}
+\colorlet{deep_color}{deep_blue}
+\colorlet{dark_color}{dark_blue}
+\colorlet{mycolor}{myblue}
+\colorlet{chaptercolor}{deep_blue}
+ % strange need to upper case for section numbering
+\colorlet{CHAPTERCOLOR}{chaptercolor}
+\colorlet{GRAY}{Gray}
+
 % bibliography
 \usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber]{biblatex}
-\addbibresource{references.bib}
+% separators for bib
+\DeclareDelimFormat{finalnamedelim}{\addsemicolon\space}
+\DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space}
+\DeclareDelimFormat[bib]{titleyeardelim}{\addcomma\space}
+% color for citations
+\DeclareFieldFormat{biblabelnumber}{\textcolor{dark_green}{#1}}
+% small bibliography
+\DeclareFieldFormat{bibfont}{\footnotesize\sloppy #1}
+\addbibresource{../references.bib}
+
 % appendix
 \usepackage[toc,titletoc,page]{appendix}
 
@@ -59,17 +121,18 @@
   \snaptodo[margin block/.append style=blue]{%
     \sloppy\textbf{Matthieu}: #1}}
 
-% boxes
+%%%%%%% boxes %%%%%%%%
 \usepackage{tikz}
 \usepackage{mdframed}
 \usepackage[skins]{tcolorbox}
-% lefthandside background information box
+
+% Define a new box environment lefthandside background information box
 \tcbuselibrary{breakable}
 \tcbset{%
   mytitle/.style={%
       enhanced,
       overlay={
-          \node [rotate=90, anchor=south, fill=tcbcolframe!25] at (frame.west) {\itshape #1};
+          \node [rotate=90, anchor=south, fill=tcbcolframe!25] at (frame.west) {\itshape \scriptsize #1};
         },
     },
   rightrule=0pt,
@@ -77,12 +140,13 @@
 }
 \colorlet{background_info_color}{green!10!orange}
 \newtcolorbox{background_box_left}[1][]{
-  mytitle=\textcolor{background_info_color}{Background},
+  mytitle=\textcolor{background_info_color}{Background Information},
+  %title style={flushright},
   colframe=background_info_color, enhanced, colback=white, frame hidden, enlarge
   left by=-1cm,boxsep=0mm, left=1cm, borderline west =
     {2pt}{0pt}{background_info_color}, #1 }
 
-% Define a new environment for citations
+% Define a new box environment for citations
 \newenvironment{citationbox}{
   \begin{tcolorbox}[
       enhanced,
@@ -112,35 +176,6 @@
     }\noindent\keywordname\enspace\ignorespaces#1\par}}
 
 
-
-% color commands
-\colorlet{P}{ForestGreen}
-\colorlet{I}{MidnightBlue}
-\colorlet{C}{YellowOrange}
-\colorlet{O}{DarkOrchid}
-\definecolor{Prune}{RGB}{99,0,60}
-\definecolor{light_grey}{rgb}{0.3,.3,.3}
-\definecolor{deep_blue}{rgb}{0,.2,.5}
-\definecolor{dark_blue}{rgb}{0,.15,.5}
-\definecolor{myblue}{rgb}{.01,0.21,0.71}
-%\definecolor{dark_green}{rgb}{0,0.5,.15}
-% Less saturation in the green for citations
-\definecolor{dark_green}{rgb}{0.2,0.5,.3}
-\definecolor{firebrick}{rgb}{0.75,0.125,0.125}
-\definecolor{indigo}{rgb}{0.3,0,0.5}
-% Color from http://paletton.com/#uid=30v0u0kllllaFw0g0qFqFg0w0aF
-\definecolor{dark_brown}{RGB}{85, 39, 0}
-\definecolor{deep_brown}{RGB}{128, 70, 21}
-
-\definecolor{lightgreen}{RGB}{138,255,138}
-\definecolor{lightblue}{RGB}{138,138,255}
-\definecolor{lightorange}{RGB}{255,212,138}
-
-\colorlet{deep_color}{deep_blue}
-\colorlet{dark_color}{dark_blue}
-\colorlet{mycolor}{myblue}
-
-
 % equations commands
 \newcommand{\indep}{\perp \!\!\! \perp}
 \newtheorem{assumption}{Assumption}
@@ -154,15 +189,10 @@
 \usepackage{mathtools}
 \newcommand\myeq{\stackrel{\mathclap{\text{def}}}{=}}
 
-\usepackage{lmodern}
+%%%%%%%%%%%%% Styling for contents (chapter, title, caption, ...) %%%%%%%%%%%%
 
-% styling for contents (chapter, title, caption, ...)
-
-% Change the styling of section numbering to have the chapter number hang
-
+% Styling of section numbering to have the chapter number hang
 % The color of the chapter number outside of the section titles
-\colorlet{chaptercolor}{deep_blue}
-\colorlet{CHAPTERCOLOR}{deep_blue}
 % The font of section numbers in titles
 \let\fontnumber\relax
 % A box to retrieve the width of section labels.
@@ -172,23 +202,65 @@
 \renewcommand\thesection{\fontnumber{\color{chaptercolor}\arabic{chapter}.}\arabic{section}}
 \renewcommand\thesubsection{\fontnumber{\color{chaptercolor}\arabic{chapter}.}\arabic{section}.\arabic{subsection}}
 
+% Section fonts
+\titleformat{\chapter}[display]
+  {\Huge\sffamily\raggedright}
+  {\chaptertitlename\ \thechapter}
+  {20pt}
+  {\Huge}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily}
+  {\thesubsection}
+  {1em}
+  {}
+
+\titleformat{\subsubsection}
+  {\bfseries\sffamily}
+  {\thesubsubsection}
+  {1em}
+  {}
+
+\titleformat{\paragraph}
+  {\bfseries}
+  {}
+  {0em}
+  {}
+
+\titleformat{\subparagraph}
+  {\sffamily\bfseries}
+  {}
+  {0em}
+  {}
+
 % The caption
-% \captionnamefont{\small\sbc\sffamily\color{deep_blue}}
-% \captiontitlefont{\small\sffamily}
-% \renewcommand\figurename{Fig.}
-% \addto\captionsenglish{\renewcommand{\figurename}{Fig.\!}}
 
+\DeclareCaptionFont{captionnamefont}{\small\sffamily\color{MidnightBlue}}
+\DeclareCaptionFont{captiontitlefont}{\small\sffamily}
 
+\captionsetup{
+  font={captionnamefont,captiontitlefont},
+  labelfont=bf,
+  labelsep=period,
+  format=plain,
+  figurename=Fig.
+}
 % ------------------------------------------------------------------
-% chapter styling
+% chapter color
 \definecolor{ared}{rgb}{.647,.129,.149}
 
 \titleformat{\chapter}[display]
   {\normalfont\Huge\bfseries\color{ared}}
-  {\chaptertitlename\ \thechapter}
+  {\hfill \chaptertitlename\ \thechapter}
   {20pt}
-  {\Huge}
-%\chapterstyle{pedersen} 
+  {\Huge\itshape\filleft}
+  
 
 % ------------------------------------------------------------------
 % Table of content
@@ -197,7 +269,58 @@
 \renewcommand{\cftsecfont}{\sffamily}
 \renewcommand{\cftsubsecfont}{\small\sffamily}
 
+% headers
+\usepackage{lastpage}
+\usepackage{textcase}
+
+\fancypagestyle{basic}{%
+  \fancyhf{} % Clear header and footer
+  \fancyhead[R]{\small \sffamily \nouppercase{\rightmark}} % Display subsections in the head
+  %\fancyhead{\scriptsize \sffamily\rightmark} % Clear header
+  \fancyfoot[C]{} % Centered footer
+  \fancyfoot[R]{\small\sffamily M. Doutreligne} % Right footer
+  \fancyfoot[L]{\small \thepage\,/\,\protect\pageref*{LastPage}} % Left footer
+}
+
+% ------------------------------------------------------------------
+% The title page
+\newlength{\drop}%
+\setlength{\drop}{2cm}%
+\makeatletter%
+\renewcommand*{\maketitle}{\begingroup%
+  \thispagestyle{empty}%
+  \raggedleft%
+  \vspace*{\baselineskip}
+  \textcolor{ared}{\LARGE\bfseries\sffamily \@title}%
+  %\vfill%
+  \\[0.067\textheight]%
+  \sffamily\Large\@author
+  %\\[\baselineskip]
+  \vfill
+  %{\Large The Publisher}\par%\plogo}\par
+  %\vspace*{3\baselineskip}%
+  \endgroup}
+\makeatother%
+
+
+% ------------------------------------------------------------------
+% The styling of the abstract
+\newenvironment{abstract}
+{%
+  \hfill%
+  \begin{minipage}{.8\linewidth}\rmfamily\small
+    \hrule\vspace*{.5ex}
+    }
+    {%
+    \hrule%
+  \end{minipage}%
+  \vfill
+}
+
+
+
 \begin{document}
+\frontmatter
 
 %%%%%%%% TITLE PAGE %%%%%%%
 \begin{titlepage}
@@ -246,8 +369,7 @@
 
   \normalsize
   \color{black}
-  \Large{\textit{  Representations and inference from time-varying routine care data
-    }}
+  \Large{\textit{Representations and inference from time-varying routine care data}}
   %*****************************************************
 
   %\fontfamily{fvs}\fontseries{m}\fontsize{8}{12}\selectfont
@@ -318,97 +440,69 @@
 \end{titlepage}
 
 
+
 %%%%% ABSTRACT PAGE %%%%%%
 
+\title{Representations and inference from time-varying routine care data}
+\author{Matthieu Doutreligne}
+\maketitle%
 
-% ------------------------------------------------------------------
-% The title page
-\newlength{\drop}%
-\setlength{\drop}{2cm}%
-\makeatletter%
-\renewcommand*{\maketitle}{\begingroup%
-  \thispagestyle{empty}%
-  \raggedleft%
-  \vspace*{\baselineskip}
-  \textcolor{ared}{\LARGE\bfseries\sffamily \@title}%
-  %\vfill%
-  \\[0.067\textheight]%
-  \sffamily\Large\@author
-  %\\[\baselineskip]
-  \vfill
-  %{\Large The Publisher}\par%\plogo}\par
-  \vspace*{3\baselineskip}%
-  \endgroup}
-\makeatother%
+\begin{abstract}
 
+  Real World Databases are increasingly accessible, exhaustive and with
+  fine temporal details. Unlike traditional data used in clinical research, they
+  describe the routine organization of care. These day-to-day records of
+  patients care enable new research questions, notably concerning the efficiency
+  of interventions after market access, the heterogeneity of their benefits in
+  under-served populations or the development of personalized medicine. On the
+  other hand, the complexity and large-scale nature of these databases pose a
+  number of challenges for effectively answering these questions. To remedy
+  these problems, econometricians and epidemiologists have recently proposed
+  the use of flexible models combining causal inference with high-dimensional
+  machine learning.
 
-% ------------------------------------------------------------------
-% The styling of the abstract
-\newenvironment{abstract}
-{%
-  \hfill%
-  \begin{minipage}{.8\linewidth}\rmfamily\small
-    \hrule\vspace*{.5ex}
-    }
-    {%
-    \hrule
-  \end{minipage}%
-}
+  Chapter 1 uses a national case study of the 32 French regional and
+  university hospitals to highlight key aspects of modern Clinical Data
+  Warehouses (CDWs), the cornerstone infrastructure of precision medicine. From
+  semi-structured interviews and an analysis of declared observational studies
+  on CDWs in France, I highlight both the current potential and challenges of
+  leveraging these routinely collected data for research purposes.
 
+  % Acknowledging the difficulty to access large sample sizes and computational
+  % power to develop generalizable predictive models, Chapter 2 leverages
+  % distributional representations of medical concepts for clinical tasks. I show
+  % that these sharable representations out-perform more complex models for
+  % small sample datasets.
+
+  % Despite a current focus on artificial intelligence, healthcare does not seek
+  % purely predictive models, but appropriate interventions that will benefit
+  % specific patients. This is a decision making problem highly amenable to
+  % counterfactual prediction rather than statistical learning. Chapter 3 emulates
+  % a clinical trial to evaluate an intervention in the intensive care unit. I
+  % highlight the importance of the different practical choices when developing
+  % counterfactual prediction algorithms on time-varying data collected in routine
+  % care.
+
+  % In high-dimensional settings such as time-varying data and heterogeneity of
+  % interventions on subgroups, the selection of hyper-parameters for the causal
+  % model is crucial to avoid under- or over-learning. Chapter 4 demonstrates the
+  % fragility of the usual evaluation metrics (Mean Squared Error) for
+  % counterfactual predictions. I highlight the performance of the doubly robust
+  % R-risk over other existing risks and discuss their effectiveness regimes in a
+  % simulation and three semi-simulated datasets.
+
+  % Chapter 5 concludes by highlighting the potential of combining machine
+  % learning methods and routine care data to shed light on current public health
+  % issues. I discuss new avenues to improve the development and the evaluation of
+  % tailored interventions, public health policies or quality-of-care indicators.
+\end{abstract}
+\newpage
+
+\pagestyle{basic}%
 
 \tableofcontents
 
-
-\chapter*{Abstract}
-
-
-Real World Databases are increasingly accessible, exhaustive and with
-fine temporal details. Unlike traditional data used in clinical research, they
-describe the routine organization of care. These day-to-day records of
-patients care enable new research questions, notably concerning the efficiency
-of interventions after market access, the heterogeneity of their benefits in
-under-served populations or the development of personalized medicine. On the
-other hand, the complexity and large-scale nature of these databases pose a
-number of challenges for effectively answering these questions. To remedy
-these problems, econometricians and epidemiologists have recently proposed
-the use of flexible models combining causal inference with high-dimensional
-machine learning.
-
-Chapter 1 uses a national case study of the 32 French regional and
-university hospitals to highlight key aspects of modern Clinical Data
-Warehouses (CDWs), the cornerstone infrastructure of precision medicine. From
-semi-structured interviews and an analysis of declared observational studies
-on CDWs in France, I highlight both the current potential and challenges of
-leveraging these routinely collected data for research purposes.
-
-Acknowledging the difficulty to access large sample sizes and computational
-power to develop generalizable predictive models, Chapter 2 leverages
-distributional representations of medical concepts for clinical tasks. I show
-that these sharable representations out-perform more complex models for
-small sample datasets.
-
-Despite a current focus on artificial intelligence, healthcare does not seek
-purely predictive models, but appropriate interventions that will benefit
-specific patients. This is a decision making problem highly amenable to
-counterfactual prediction rather than statistical learning. Chapter 3 emulates
-a clinical trial to evaluate an intervention in the intensive care unit. I
-highlight the importance of the different practical choices when developing
-counterfactual prediction algorithms on time-varying data collected in routine
-care.
-
-In high-dimensional settings such as time-varying data and heterogeneity of
-interventions on subgroups, the selection of hyper-parameters for the causal
-model is crucial to avoid under- or over-learning. Chapter 4 demonstrates the
-fragility of the usual evaluation metrics (Mean Squared Error) for
-counterfactual predictions. I highlight the performance of the doubly robust
-R-risk over other existing risks and discuss their effectiveness regimes in a
-simulation and three semi-simulated datasets.
-
-Chapter 5 concludes by highlighting the potential of combining machine
-learning methods and routine care data to shed light on current public health
-issues. I discuss new avenues to improve the development and the evaluation of
-tailored interventions, public health policies or quality-of-care indicators.
-
+\mainmatter
 
 \chapter{Introduction: amazing opportunities of health data?}\label{chap:intro}
 \section{How I came into this landscape}\label{sec:intro:landscape}
@@ -1236,7 +1330,14 @@ efficient techniques that make the best of medium-sized data or rely on sharable
 sources of knowledge (aggregated statistics, federated learning approaches,
 ontologies, ...).
 
-\printbibliography
+\clearpage
+%\sloppy%
+%\bibliographystyle{hdr_abbrvnat}
+%\bibliographystyle{abbrvnat}
+%\bibliographystyle{plainnat}
+\begin{multicols}{2}
+  \printbibliography
+\end{multicols}
 
 \clearpage
 \begin{appendices}
