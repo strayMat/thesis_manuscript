@@ -195,19 +195,17 @@
 % The color of the chapter number outside of the section titles
 % The font of section numbers in titles
 \let\fontnumber\relax
-% A box to retrieve the width of section labels.
-\newsavebox{\mysectionbox}
-% Use it to offset titles in the display of sections
-
-\renewcommand\thesection{\fontnumber{\color{chaptercolor}\arabic{chapter}.}\arabic{section}}
-\renewcommand\thesubsection{\fontnumber{\color{chaptercolor}\arabic{chapter}.}\arabic{section}.\arabic{subsection}}
 
 % Section fonts
+% chapter color
+\definecolor{ared}{rgb}{.647,.129,.149}
+
 \titleformat{\chapter}[display]
-  {\Huge\sffamily\raggedright}
-  {\chaptertitlename\ \thechapter}
+  {\normalfont\Huge\bfseries\color{ared}}
+  {\hfill \chaptertitlename\ \thechapter}
   {20pt}
-  {\Huge}
+  {\Huge\itshape\filleft}
+  
 
 \titleformat{\section}
   {\Large\bfseries\sffamily}
@@ -251,16 +249,6 @@
   format=plain,
   figurename=Fig.
 }
-% ------------------------------------------------------------------
-% chapter color
-\definecolor{ared}{rgb}{.647,.129,.149}
-
-\titleformat{\chapter}[display]
-  {\normalfont\Huge\bfseries\color{ared}}
-  {\hfill \chaptertitlename\ \thechapter}
-  {20pt}
-  {\Huge\itshape\filleft}
-  
 
 % ------------------------------------------------------------------
 % Table of content
@@ -268,6 +256,7 @@
 \renewcommand{\cftchapfont}{\bfseries\sffamily}
 \renewcommand{\cftsecfont}{\sffamily}
 \renewcommand{\cftsubsecfont}{\small\sffamily}
+
 
 % headers
 \usepackage{lastpage}
@@ -281,6 +270,11 @@
   \fancyfoot[R]{\small\sffamily M. Doutreligne} % Right footer
   \fancyfoot[L]{\small \thepage\,/\,\protect\pageref*{LastPage}} % Left footer
 }
+
+% renew section numbering
+% Redefine the format for section numbers in the Table of Contents
+\renewcommand{\thesection}{\fontnumber{\color{Gray}\arabic{chapter}.}\arabic{section}}
+\renewcommand{\thesubsection}{\fontnumber{\color{Gray}\arabic{chapter}.}\arabic{section}.\arabic{subsection}}
 
 % ------------------------------------------------------------------
 % The title page
