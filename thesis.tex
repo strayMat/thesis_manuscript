@@ -1,9 +1,9 @@
-\documentclass[french,12pt,a4paper]{book}
+\documentclass[french,12pt,twoside,a4paper]{book}
+\usepackage[margin=2.3cm]{geometry}
 
 % headers and typo stuffs
 \usepackage{fancyhdr}
 \usepackage{array}
-\usepackage{geometry}
 \usepackage{multirow} %% Pour mettre un texte sur plusieurs rangées
 \usepackage{multicol} %% Pour mettre un texte sur plusieurs colonnes
 \usepackage{scrextend} %Forcer la 4eme  de couverture en page pair
@@ -21,8 +21,10 @@
 % Semi-bold condensed. Works only with lmodern
 \def\sbc{\sffamily\fontseries{sbc}\selectfont}
 
+\setlength{\textwidth}{\dimexpr\paperwidth-2.3cm-2.3cm\relax}
+\setlength{\marginparsep}{.85cm}
+\setlength{\marginparwidth}{3.4cm}
 
-\usepackage[dvipsnames]{xcolor} % colors
 % links and url
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
@@ -65,6 +67,7 @@
 %\usepackage[ruled, linesnumbered, fillcomment]{algorithm2e}
 
 % color commands
+\usepackage[dvipsnames]{xcolor} % colors
 \colorlet{P}{ForestGreen}
 \colorlet{I}{MidnightBlue}
 \colorlet{C}{YellowOrange}
@@ -148,6 +151,7 @@
 
 % Define a new box environment for citations
 \newenvironment{citationbox}{
+  %\def\boxcontent{#1}%
   \begin{tcolorbox}[
       enhanced,
       colback=gray!10, % Background color of the box (gray with 10% intensity)
@@ -160,14 +164,17 @@
       right=0pt, % Right margin (0pt means no extra margin on the right)
       top=0pt, % Top margin (0pt means no extra margin on the top)
       bottom=0pt, % Bottom margin (0pt means no extra margin on the bottom)
-      rightupper=10mm, % Extra space on the right side for the citation
-      rightlower=10mm, % Extra space on the right side for the citation
+      rightupper=0mm, % Extra space on the right side for the citation
+      rightlower=0mm, % Extra space on the right side for the citation
       %halign=flush right, % Text alignment within the box (right-aligned)
-      width=0.7\textwidth,
-      flush right
-    ]
+      width=0.9\textwidth,
+      flush right,
+      ]
+    \footnotesize % Set the font size to script size
+    \itshape % Make the text content italic
     }{
-  \end{tcolorbox}
+  \end{tcolorbox}%
+  %\textcolorbox{\boxcolor}{\textit{\boxcontent}}
 }
 %Handling Keywords
 \def\keywordname{{\bfseries \emph Keywords}}%
@@ -175,7 +182,17 @@
     \def\and{\ifhmode\unskip\nobreak\fi\ $\cdot$
     }\noindent\keywordname\enspace\ignorespaces#1\par}}
 
-
+% 
+\newenvironment{chapterabstract}{%
+    \par\nobreak\noindent
+    \textbf{\textit{Chapter's content}\hrulefill}\par\nobreak
+    \small
+    \noindent\ignorespaces
+  }{%
+    \par\nobreak\normalsize
+    \vskip-\ht\strutbox\noindent
+    \textbf{\hrulefill}%
+}
 % equations commands
 \newcommand{\indep}{\perp \!\!\! \perp}
 \newtheorem{assumption}{Assumption}
@@ -205,7 +222,7 @@
   {\hfill \chaptertitlename\ \thechapter}
   {20pt}
   {\Huge\itshape\filleft}
-  
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}  
 
 \titleformat{\section}
   {\Large\bfseries\sffamily}
@@ -501,8 +518,6 @@
 \tableofcontents
 
 \mainmatter
-
-
 
 \chapter{Introduction: Amazing opportunities of health data?}\label{chap:intro}
 \section{How I came into this landscape}\label{sec:intro:landscape}
@@ -895,16 +910,50 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}\label{chapter:cdw}
 
-\section{Abstract}\label{sec:cdw:abstract}
 
+\begin{citationbox}
+  L'espace général du savoir n'est plus celui des identités et des différences,
+  [...] celui d'une caractérisation universelle, d'une taxinomia générale [...],
+  mais un espace fait d'organisations, c'est-à-dire de rapports internes entre
+  des éléments dont l'ensemble assure une fonction.
+  \par\hfill -- Michel Foucault
+\end{citationbox}
+
+\begin{chapterabstract}\label{sec:cdw:abstract}
+
+  Real World Data (RWD) bears great promises to improve the quality of care.
+  However, specific infrastructures and methodologies are required to derive
+  robust knowledge and brings innovations to the patient. Drawing upon the
+  national case study of the 32 French regional and university hospitals
+  governance, we highlight key aspects of modern Clinical Data Warehouses (CDWs):
+  governance, transparency, types of data, data reuse, technical tools,
+  documentation and data quality control processes. Semi-structured interviews as
+  well as a review of reported studies on French CDWs were conducted in a
+  semi-structured manner from March to November 2022. Out of 32 regional and
+  university hospitals in France, 14 have a CDW in production, 5 are
+  experimenting, 5 have a prospective CDW project, 8 did not have any CDW project
+  at the time of writing.  The implementation of CDW in France dates from 2011 and
+  accelerated in the late 2020. From this case study, we draw some general
+  guidelines for CDWs. The actual orientation of CDWs towards research requires
+  efforts in governance stabilization, standardization of data schema and
+  development in data quality and data documentation. Particular attention must be
+  paid to the sustainability of the warehouse teams and to the multi-level
+  governance. The transparency of the studies and the tools of transformation of
+  the data must improve to allow successful multi-centric data reuses as well as
+  innovations in routine care.
+\end{chapterabstract}
 
 \vfill
-\textit{This chapter has been published in Plos Digital Health as:\\
-  Matthieu Doutreligne, Adeline Degremont, Pierre-Alain Jachiet, Antoine Lamer, \& Xavier Tannier. (2023).
-  Good practices for clinical data warehouse implementation: A case study in
-  France. PLOS Digital Health, 2(7), e0000298. \\
-  As the first author I formulated the research question, designed the study,
-  led the interviews and wrote the manuscript.}
+\begin{scriptsize}
+  \textit{This chapter has been published in Plos Digital Health as: %
+    Matthieu Doutreligne, Adeline Degremont, Pierre-Alain Jachiet, Antoine Lamer,
+    \& Xavier Tannier. (2023). Good practices for clinical data warehouse
+    implementation: A case study in France. PLOS Digital Health, 2(7),
+    e0000298.%
+    As the first author I formulated the research question, designed the study,
+    led the interviews and wrote the manuscript.}
+\end{scriptsize}
+
 
 
 \clearpage
@@ -1426,46 +1475,48 @@ Varying inclusion criteria: illustration of immortal time bias
   \par\hfill -- Paracelsus
 \end{citationbox}
 
-
-\section*{Abstract}\label{sec:causal_model_selection:abstract}
-
-% Predictive models are not sufficient for decision making: I showed it in
-% chapter 4
-In the previous chapters, we showed the strong interest in predictive models for
-healthcare, bridging to increasingly complex machine learning algorithms. We
-also pointed out that even when giving likely outcomes, they are not immediately
-transposable to decision making --choosing whether to treat or not to treat.
-Such reasoning on the effect of an intervention is a causal-inference task. We
-demonstrated that causal thinking was necessary to avoid introducing biases in
-the study design or during confounders selection.
-% Even with causal framework, there are too many models to choose from
-But, even with a robust causal framework, the practitioner is left to choose among
-the plethora of predictive models available for health data (some detailed in
-\ref{subsec:predictive_models:importance}). In a given situation, which of these
-models yield the most valid causal estimates?
-% scope of the paper 
-Here, we highlight that classic machine-learning model selection does not pick
-the best models for causal inference. Indeed, causal model selection should
-control both outcomes for each individual, treated or not treated, whereas only
-one outcome is observed.
-Theoretically, simple risks used in machine learning do not control causal
-effects when treated and non-treated population differ too much. More elaborate
-risks use ``nuisances'' re-weighting to approximate the causal error on the
-observed data. But does estimating these nuisances adds noise to model selection?
-% Contributions
-Drawing from an extensive empirical study, we outline an efficient causal
-model-selection procedure. To select the best predictive model to guide
-decisions: use the so-called $R\text{-risk}$, use flexible estimators to compute
-the nuisance models on the train set, and split out 10\% of the data to compute
-risks.
-
+\begin{chapterabstract}
+  % Predictive models are not sufficient for decision making: I showed it in
+  % chapter 4
+  In the previous chapters, we showed the strong interest in predictive models for
+  healthcare, bridging to increasingly complex machine learning algorithms. We
+  also pointed out that even when giving likely outcomes, they are not immediately
+  transposable to decision making --choosing whether to treat or not to treat.
+  Such reasoning on the effect of an intervention is a causal-inference task. We
+  demonstrated that causal thinking was necessary to avoid introducing biases in
+  the study design or during confounders selection.
+  % Even with causal framework, there are too many models to choose from
+  But, even with a robust causal framework, the practitioner is left to choose among
+  the plethora of predictive models available for health data (some detailed in
+  \ref{subsec:predictive_models:importance}). In a given situation, which of these
+  models yield the most valid causal estimates?
+  % scope of the paper 
+  Here, we highlight that classic machine-learning model selection does not pick
+  the best models for causal inference. Indeed, causal model selection should
+  control both outcomes for each individual, treated or not treated, whereas only
+  one outcome is observed.
+  Theoretically, simple risks used in machine learning do not control causal
+  effects when treated and non-treated population differ too much. More elaborate
+  risks use ``nuisances'' re-weighting to approximate the causal error on the
+  observed data. But does estimating these nuisances adds noise to model selection?
+  % Contributions
+  Drawing from an extensive empirical study, we outline an efficient causal
+  model-selection procedure. To select the best predictive model to guide
+  decisions: use the so-called $R\text{-risk}$, use flexible estimators to compute
+  the nuisance models on the train set, and split out 10\% of the data to compute
+  risks.
+\end{chapterabstract}
+%\section*{Abstract}\label{sec:causal_model_selection:abstract}
 
 \vfill
-This chapter has been submitted to \textit{Artificial Intelligence in Medicine} as:
-\\ \textit{Matthieu Doutreligne, Gaël Varoquaux. How to select predictive models for
-  decision making or causal inference?. 2023. ⟨hal-03946902v3⟩. \\
-  As the first author I formulated the research question, designed the study, did the proves
-  of the theoretical part, performed the experiments and wrote the manuscript.}
+
+\begin{footnotesize}
+  This chapter has been submitted to \textit{Artificial Intelligence in Medicine} as:
+  \\ \textit{Matthieu Doutreligne, Gaël Varoquaux. How to select predictive models for
+    decision making or causal inference?. 2023. ⟨hal-03946902v3⟩. \\
+    As the first author I formulated the research question, designed the study, did the proves
+    of the theoretical part, performed the experiments and wrote the manuscript.}
+\end{footnotesize}
 
 \clearpage
 \section{Motivation: causal predictive models cannot rely on the Machine Learning
@@ -1892,13 +1943,14 @@ counterfactual nearest neighbors, which has been shown ineffective
 %around X. %Too cultivate
 
 \begin{table*}[!tb]
-  \makebox[\linewidth]{
+  %\makebox[\textwidth]{
+  \caption{Review of causal risks
+    ---
+    The $R\text{-risk}^*$ is called $\tau \text{-risk}_R$ in
+    \citet{schuler_comparison_2018}.
+    \label{tab:evaluation_metrics}}
+  \resizebox*{\textwidth}{!}{
     \begin{threeparttable}[b]
-      \caption{Review of causal risks
-        ---
-        The $R\text{-risk}^*$ is called $\tau \text{-risk}_R$ in
-        \citet{schuler_comparison_2018}.
-        \label{tab:evaluation_metrics}}
       \centering
       \begin{tabular}{llr}
         \toprule
@@ -2343,7 +2395,7 @@ uniformly random overlap parameters. Details in
   \hfill
   \begin{minipage}{0.65\textwidth}
     \centering
-    \includegraphics[width=0.6\linewidth]{img/chapter_5/caussim_example_rs_gaussian=8_rs_rotation=8_ntv=0.37_D=2_overlap=0.7_p_A=0.1.pdf}
+    \includegraphics[width=0.8\linewidth]{img/chapter_5/caussim_example_rs_gaussian=8_rs_rotation=8_ntv=0.37_D=2_overlap=0.7_p_A=0.1.pdf}
   \end{minipage}
 \end{figure}
 
@@ -2599,7 +2651,7 @@ nuisance set and the simpler shared nuisance-candidate set procedure.
 
 \begin{figure}[!tb]
   \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_5/_3_procedure_r_risk_only_3datasets.pdf}
+  \includegraphics[width=\linewidth]{img/chapter_5/_3_procedure_r_risk_only_3datasets.pdf}
   \caption{\textbf{Nuisances can be estimated on the same data as outcome
       models}: Results for the R-risk are similar between the
     \textcolor{MidnightBlue}{shared
@@ -2630,7 +2682,7 @@ stacking linear models and gradient-boosted trees-- suffices to estimate nuisanc
 
 \begin{figure}[!tb]
   \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_3datasets.pdf}
+  \includegraphics[width=\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_3datasets.pdf}
   \caption{\textbf{\textcolor{DarkOrchid}{Stacked
         models} are good overall estimators of the nuisances}:
     Results are shown only for the
