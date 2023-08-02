@@ -37,9 +37,9 @@
   }
 
   \usepackage{enumitem}
-  \setlist[itemize]{label=\textcolor{myblue}{\rule{1ex}{1ex}}}
+  \setlist[itemize]{label=\textcolor{ared}{\rule{1ex}{1ex}}}
   \setlist[description]{font=\bfseries\sffamily}
-  \setlist[enumerate]{font=\bfseries\sffamily\color{myblue}}
+  \setlist[enumerate]{font=\bfseries\sffamily\color{ared}}
   
   
 % figures
@@ -76,7 +76,6 @@
 \definecolor{light_grey}{rgb}{0.3,.3,.3}
 \definecolor{deep_blue}{rgb}{0,.2,.5}
 \definecolor{dark_blue}{rgb}{0,.15,.5}
-\definecolor{myblue}{rgb}{.01,0.21,0.71}
 % Less saturation in the green for citations
 \definecolor{dark_green}{rgb}{0.2,0.5,.3}
 %\definecolor{dark_green}{rgb}{0,0.5,.15}
@@ -87,10 +86,12 @@
 \definecolor{deep_brown}{RGB}{128, 70, 21}
 \definecolor{lightgreen}{RGB}{138,255,138}
 \definecolor{lightblue}{RGB}{138,138,255}
-\definecolor{lightorange}{RGB}{255,212,138}
+\definecolor{ared}{rgb}{.647,.129,.149}
 \colorlet{deep_color}{deep_blue}
 \colorlet{dark_color}{dark_blue}
-\colorlet{mycolor}{myblue}
+\definecolor{lightorange}{RGB}{255,212,138}
+\colorlet{background_info_color}{green!10!orange}
+
 \colorlet{chaptercolor}{deep_blue}
  % strange need to upper case for section numbering
 \colorlet{CHAPTERCOLOR}{chaptercolor}
@@ -141,7 +142,6 @@
   rightrule=0pt,
   skin=enhanced,parbox=false,breakable
 }
-\colorlet{background_info_color}{green!10!orange}
 \newtcolorbox{background_box_left}[1][]{
   mytitle=\textcolor{background_info_color}{Background Information},
   %title style={flushright},
@@ -215,7 +215,7 @@
 
 % Section fonts
 % chapter color
-\definecolor{ared}{rgb}{.647,.129,.149}
+
 
 \titleformat{\chapter}[display]
   {\normalfont\Huge\bfseries\color{ared}}
@@ -670,26 +670,26 @@ Market access, tailored recommendations.
 
 
 Health Information Systems (HIS) are increasingly collecting routine care data
-\cite{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
-This source of Real World Data (RWD) \cite{fda_real-world_2021} bears great
+\citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
+This source of Real World Data (RWD) \citep{fda_real-world_2021} bears great
 promises to improve the quality of care. On the one hand, the use of this data
 translates into direct benefits --primary uses-- for the patient by serving as
 the cornerstone of the developing personalized medicine
-\cite{mann_artificial_2022,ziegler_high_2022}. They also bring
+\citep{mann_artificial_2022,ziegler_high_2022}. They also bring
 indirect benefits --secondary uses-- by accelerating and improving knowledge
-production: on pathologies \cite{campbell_characterizing_2022}, on the conditions of use of health products and
-technologies\cite{safran_toward_2007,tuppin_value_2017}, on the measures of
-their safety \cite{wisniewski_development_2003}, efficacy or usefulness in
-everyday practice \cite{richesson_electronic_2013}. They can also be used to
+production: on pathologies \citep{campbell_characterizing_2022}, on the conditions of use of health products and
+technologies\citep{safran_toward_2007,tuppin_value_2017}, on the measures of
+their safety \citep{wisniewski_development_2003}, efficacy or usefulness in
+everyday practice \citep{richesson_electronic_2013}. They can also be used to
 assess the organizational impact of health products and technologies
-\cite{has_guide_2020,has_real-world_2021}.
+\citep{has_guide_2020,has_real-world_2021}.
 
 In recent years, health agencies in many countries have conducted extensive work
 to better support the generation and use of real-life data
-\cite{has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022,fda_real-world_2021}.
+\citep{has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022,fda_real-world_2021}.
 Study programs have been launched by regulatory agencies: the DARWIN EU
 program by the European Medicines Agency and the Real World Evidence Program by
-the Food and Drug Administration \cite{fda_real_2018}.
+the Food and Drug Administration \citep{fda_real_2018}.
 
 \md{Insist on the gradient and distinction between research data and opportunistic data
   collection.}
@@ -741,7 +741,7 @@ on observation alone to estimate intervention probability.
 Conditional probabilities are interventional as well: conditionally randomized
 experiments in epidemiology \citep{hernan2020causal}. This concept is known as
 reinforcement learning in the Machine Learning community (bareinboim2015bandits)
-where intervention probabilities are known \cite{bareinboim2015bandits}.
+where intervention probabilities are known \citep{bareinboim2015bandits}.
 Decision making processes rely to the correct estimations of these
 conditional probabilities, hence the link between this work and precision medicine.
 
@@ -751,7 +751,7 @@ Inconvenient of interventional data : Increasing costs of RCTs,
 
 Today's public health issues are closely linked to routine care, not ideal care:
 resource constraint, chronic disease. Not so new as it was already major issues
-mentioned in the late 60s \cite{rutstein1967coming}: \textit{1) modern
+mentioned in the late 60s \citep{rutstein1967coming}: \textit{1) modern
   medicine's skyrocketing costs; 2) the chaos of an information explosion
   involving both paperwork proliferation and large amounts of new knowledge that
   no single physician could hope to digest; 3) a geographic maldistribution of
@@ -992,26 +992,93 @@ Mix usages such as learning algorithms
 
 \subsection{Healthcare data collection is heavily influenced from the local healthcare organization}
 
-\paragraph{Centralized data collections: ex. Israël, HIRA}
+In practice, the possibility of mobilizing these routinely collected data
+depends very much on their degree of concentration, in a gradient that goes from
+centralization in a single, homogenous HIS to fragmentation in a multitude of
+HIS with heterogeneous formats. The structure of the HIS reflects the governance
+structure. Thus, the ease of working with these data depends heavily on the
+organization of the healthcare actors. The two main sources of RWD are insurance
+claims --more centralized-- and clinical data --more fragmented.
 
-\paragraph{More heterogeneous data collections structured into networks} ex. from
+\paragraph{Claims data} is often collected by national agencies into centralized
+repositories. In South Korea, the government agency responsible for healthcare
+system performance and quality (HIRA) is connected to the HIS of all healthcare
+stakeholders. HIRA data consists of national insurance claims
+\cite{kyoung2022understanding}. England has a centralized health care system
+under the National Health Service (NHS). Despite, not having detailed clinical
+data, this allowed the NHS to merge claims data with detailed data from two
+large urban medicine databases, corresponding to the two major software
+publishers \cite{opensafely_system_one_data_2023}. This data is currently
+accessed through Opensafely, a first platform focused on Covid-19 research
+\cite{opensafely_2022}. In the United States, even if scattered between different
+insurance providers, claims are pooled into large databases such as
+Medicare, Medicaid or IBM MarketScan. Lastly, in Germany, the distinct federal
+claims have been centralized only very recently \cite{kreis2016status}.
 
-US, Korea, Germany,
+\paragraph{Clinical data} on the other hand, tends to be distributed among many
+entities, that made different choices, without common management or
+interoperability. But large institutional data-sharing networks begin to emerge.
+South Korea very recently launched an initiative to build a national wide data
+network focused on intensive care. United States is building Chorus4ai, an
+analysis platform pooling data from 14 university hospitals
+\cite{chorus4ai_2023}. To unlock the potential of clinical data, the German
+Medical Informatics Initiative \cite{gehring_german_2018} created four consortia
+in 2018. They aim at developing technical and organizational solutions to
+improve the consistency of clinical data.\\
+
+Israel stands out as one of the rare countries that pooled together both claims
+and clinical data at a large scale: half of the population depends on one single
+healthcare provider and insurer \cite{clalit_data_2023}.
 
 \paragraph{The case of France}
 
-centralized national insurer but scattered hospital ehrs. Projects in other areas: eg. cancer (unicancer), gp (cnge project, darmoni). National initiative to develop and structure hospital cdws.
+In France, the national insurer collects all hospital activity and city care
+claims into a unique reimbursement database \cite{tuppin_value_2017}. However,
+clinical data is historically scattered at each care site in numerous HISs.
+Several hospitals deployed efforts for about ten years to create CDWs from
+electronic medical records
+\cite{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
+lamer_development_2022}. This work has accelerated recently, with the growing
+development of dedicated infrastructures at the regional and national levels.
+Regional cooperation networks are being set up --such as the Ouest Data Hub
+\cite{hugo_2022}. In July 2022, the Ministry of Health opened a 50 million euros
+call for projects to set up and strengthen a network of hospital Clinical Data
+Warehouses (CDWs) coordinated with the national platform, the Health Data Hub by
+2025.
 
 \subsection{The multiplication of Clinical Data Warehouses}\label{subsec:cdw:cdw_definition}
 
-An infrastructure is needed to pool data from one or more medical information
-systems. Definition of Clinical Data Warehouse: Health data warehouses (HDWs)
-refer to the pooling of data from one or more medical information systems, in a
-homogeneous format for reuse in management, research or care.
+\paragraph{An infrastructure} is needed to pool data data from one or more
+medical information systems --whatever the organizational framework-- to
+homogeneous formats, for management, research or care reuses
+\cite{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
+\ref{background:CDW:fig:ehr_flow} illustrates for a Clinical Data Warehouse, the
+four phases of data flow from the various sources that make up the HIS:
 
+\begin{enumerate}
+  \item \textbf{Collection} and copying of original sources.
+  \item \textbf{Transformation}: Integration and harmonization
+        \begin{itemize}
+          \item Integration of sources into a unique database.
+          \item Deduplication of identifiers.
+          \item Standardization: A unique data model, independent of the
+                software models harmonizes the different sources in a common schema,
+                possibly with common nomenclatures.
+          \item Pseudonymization: Removal of directly identifying elements.
+        \end{itemize}
+  \item \textbf{Provision} of sub-population data sets and transformed datamarts
+        for primary and secondary reuse.
+  \item \textbf{Usages} thanks to dedicated applications and tools accessing the
+        datamarts and data sets.
+\end{enumerate}
 
-The 4 phases of data flow from the various sources that make up the HIS (figure)
-Focus of this thesis: Clinical Data Warehouse and EHR, though most of my work should apply to claims
+%\vfill
+\begin{figure*}
+  \centering
+  \includegraphics[width=1\linewidth]{img/chapter_2/Fig1.pdf}
+  \caption{Clinical Data Warehouse: Four steps of data flow from the Hospital Information System: 1) collection, 2) transformations and 3) provisioning.}
+  \label{background:CDW:fig:ehr_flow}
+\end{figure*}
 
 
 \section{Speaking to the data collectors: Interviews of French
