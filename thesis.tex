@@ -1,15 +1,23 @@
-\documentclass{report}
+\documentclass[french,12pt,a4paper]{book}
 
+% headers and typo stuffs
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{multirow} %% Pour mettre un texte sur plusieurs rangées
+\usepackage{multicol} %% Pour mettre un texte sur plusieurs colonnes
+\usepackage{scrextend} %Forcer la 4eme  de couverture en page pair
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[french]{babel} % deactivating french babel that yields an error
+%\usepackage{csquotes} % for csquotes not present in babel french
+\usepackage[absolute]{textpos} 
 
-\usepackage{arxiv}
-
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+% colors
+\usepackage[dvipsnames]{xcolor} % colors
+% links and url
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
-\usepackage{pifont}
 % figures
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -17,6 +25,7 @@
 % tables
 \usepackage{booktabs} % professional-quality tables
 \usepackage{tabularx}
+\usepackage{colortbl}
 \usepackage{threeparttable}
 \usepackage{multirow}
 \usepackage{makecell}
@@ -26,37 +35,88 @@
 \usepackage{amsfonts}  % blackboard math symbols
 \usepackage{amsmath}
 \usepackage{amssymb} %mathbb packages
+
 \usepackage{siunitx}
 \usepackage{algorithm, algorithmicx, algpseudocode}
 % bibliography
 \usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber]{biblatex}
-\addbibresource{references.bib} 
+\addbibresource{references.bib}
 % appendix
 \usepackage[toc,titletoc,page]{appendix}
-% layout
-\usepackage[Lenny]{fncychap}
 
 % notes in the margin
 \usepackage{todonotes}
 \usepackage{snaptodo}
 
-\setlength{\marginparwidth}{1.4cm}
-\setlength{\marginparsep}{-.01cm}
-%\setlength\textwidth{177.8mm}
-
+% comments
 \snaptodoset{block rise=1em}
 \snaptodoset{margin block/.style={font=\tiny}} \newcommand{\gv}[1]{%
-    \snaptodo[margin block/.append style=green!50!black]{%
-	\sloppy\textbf{Gael}: #1}}
+  \snaptodo[margin block/.append style=green!50!black]{%
+    \sloppy\textbf{Gael}: #1}}
 \snaptodoset{margin block/.style={font=\tiny}} \newcommand{\md}[1]{%
-    \snaptodo[margin block/.append style=blue]{%
-	\sloppy\textbf{Matthieu}: #1}}
-  
+  \snaptodo[margin block/.append style=blue]{%
+    \sloppy\textbf{Matthieu}: #1}}
+
+% boxes
+\usepackage{tikz}
+\usepackage{mdframed}
+\usepackage[skins]{tcolorbox}
+% lefthandside background information box
+\tcbuselibrary{breakable}
+\tcbset{%
+  mytitle/.style={%
+      enhanced,
+      overlay={
+          \node [rotate=90, anchor=south, fill=tcbcolframe!25] at (frame.west) {\itshape #1};
+        },
+    },
+  rightrule=0pt,
+  skin=enhanced,parbox=false,breakable
+}
+\colorlet{background_info_color}{green!10!orange}
+\newtcolorbox{background_box_left}[1][]{
+  mytitle=\textcolor{background_info_color}{Background},
+  colframe=background_info_color, enhanced, colback=white, frame hidden, enlarge
+  left by=-1cm,boxsep=0mm, left=1cm, borderline west =
+    {2pt}{0pt}{background_info_color}, #1 }
+
+% Define a new environment for citations
+\newenvironment{citationbox}{
+  \begin{tcolorbox}[
+      enhanced,
+      colback=gray!10, % Background color of the box (gray with 10% intensity)
+      colframe=white, % Border color of the box (white)
+      arc=0mm, % Roundness of the corners (0mm means sharp corners)
+      boxrule=0.5pt, % Border width (adjust as needed)
+      rightrule=0pt, % Right border width (0pt for no border on the right side)
+      %enlarge left by=8cm,
+      left=0pt, % Left margin (0pt means no extra margin on the left)
+      right=0pt, % Right margin (0pt means no extra margin on the right)
+      top=0pt, % Top margin (0pt means no extra margin on the top)
+      bottom=0pt, % Bottom margin (0pt means no extra margin on the bottom)
+      rightupper=10mm, % Extra space on the right side for the citation
+      rightlower=10mm, % Extra space on the right side for the citation
+      %halign=flush right, % Text alignment within the box (right-aligned)
+      width=0.7\textwidth,
+      flush right
+    ]
+    }{
+  \end{tcolorbox}
+}
+%Handling Keywords
+\def\keywordname{{\bfseries \emph Keywords}}%
+\def\keywords#1{\par\addvspace\medskipamount{\rightskip=0pt plus1cm
+    \def\and{\ifhmode\unskip\nobreak\fi\ $\cdot$
+    }\noindent\keywordname\enspace\ignorespaces#1\par}}
+
+
+
 % color commands
 \colorlet{P}{ForestGreen}
 \colorlet{I}{MidnightBlue}
 \colorlet{C}{YellowOrange}
 \colorlet{O}{DarkOrchid}
+\definecolor{Prune}{RGB}{99,0,60}
 
 % equations commands
 \newcommand{\indep}{\perp \!\!\! \perp}
@@ -72,68 +132,123 @@
 \newcommand\myeq{\stackrel{\mathclap{\text{def}}}{=}}
 
 
-\title{
-  Representations and inference from time-varying routine care data 
-}
-
-\author{Matthieu Doutreligne}
-\date{}
-
 \begin{document}
-\maketitle
 
-\begin{abstract}
+\begin{titlepage}
 
-  Real World Databases are increasingly accessible, exhaustive and with
-  fine temporal details. Unlike traditional data used in clinical research, they
-  describe the routine organization of care. These day-to-day records of
-  patients care enable new research questions, notably concerning the efficiency
-  of interventions after market access, the heterogeneity of their benefits in
-  under-served populations or the development of personalized medicine. On the
-  other hand, the complexity and large-scale nature of these databases pose a
-  number of challenges for effectively answering these questions. To remedy
-  these problems, econometricians and epidemiologists have recently proposed
-  the use of flexible models combining causal inference with high-dimensional
-  machine learning.
 
-  Chapter 1 uses a national case study of the 32 French regional and
-  university hospitals to highlight key aspects of modern Clinical Data
-  Warehouses (CDWs), the cornerstone infrastructure of precision medicine. From
-  semi-structured interviews and an analysis of declared observational studies
-  on CDWs in France, I highlight both the current potential and challenges of
-  leveraging these routinely collected data for research purposes.
+  %\thispagestyle{empty}
 
-  Acknowledging the difficulty to access large sample sizes and computational
-  power to develop generalizable predictive models, Chapter 2 leverages
-  distributional representations of medical concepts for clinical tasks. I show
-  that these sharable representations out-perform more complex models for
-  small sample datasets.
+  \newgeometry{left=6cm,bottom=2cm, top=1cm, right=1cm}
 
-  Despite a current focus on artificial intelligence, healthcare does not seek
-  purely predictive models, but appropriate interventions that will benefit
-  specific patients. This is a decision making problem highly amenable to
-  counterfactual prediction rather than statistical learning. Chapter 3 emulates
-  a clinical trial to evaluate an intervention in the intensive care unit. I
-  highlight the importance of the different practical choices when developing
-  counterfactual prediction algorithms on time-varying data collected in routine
-  care.
+  \tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (-13mm,-135mm){\includegraphics{img/Bandeau_UPaS.pdf}};
 
-  In high-dimensional settings such as time-varying data and heterogeneity of
-  interventions on subgroups, the selection of hyper-parameters for the causal
-  model is crucial to avoid under- or over-learning. Chapter 4 demonstrates the
-  fragility of the usual evaluation metrics (Mean Squared Error) for
-  counterfactual predictions. I highlight the performance of the doubly robust
-  R-risk over other existing risks and discuss their effectiveness regimes in a
-  simulation and three semi-simulated datasets.
+  % fonte sans empattement pour la page de titre
+  \fontfamily{fvs}\fontseries{m}\selectfont
 
-  Chapter 5 concludes by highlighting the potential of combining machine
-  learning methods and routine care data to shed light on current public health
-  issues. I discuss new avenues to improve the development and the evaluation of
-  tailored interventions, public health policies or quality-of-care indicators.
 
-\end{abstract}
-% keywords can be removed
-%\keywords{First keyword \and Second keyword \and More}
+  %*****************************************************
+  %******** NUMÉRO D'ORDRE DE LA THÈSE À COMPLÉTER *****
+  %******** POUR LE SECOND DÉPOT                   *****
+  %*****************************************************
+
+  \color{white}
+
+  \begin{picture}(0,0)
+
+    \put(-110,-743){\rotatebox{90}{NNT: 2020UPASA000}}
+  \end{picture}
+
+  %*****************************************************
+  %**  LOGO  ÉTABLISSEMENT PARTENAIRE SI COTUTELLE
+  %**  CHANGER L'IMAGE PAR DÉFAUT **
+  %*****************************************************
+  \vspace{-10mm} % à ajuster en fonction de la hauteur du logo
+  \flushright \includegraphics[scale=1]{img/logo2.png}
+
+
+  %*****************************************************
+  %******************** TITRE **************************
+  %*****************************************************
+  \flushright
+  \vspace{10mm} % à régler éventuellement
+  \color{Prune}
+  \fontfamily{cmss}\fontseries{m}\fontsize{22}{26}\selectfont Représentations et
+  inférence à partir de données de santé temporelles collectées en routine
+
+  \normalsize
+  \color{black}
+  \Large{\textit{Representations and inference from time-varying routine care data
+    }}
+  %*****************************************************
+
+  %\fontfamily{fvs}\fontseries{m}\fontsize{8}{12}\selectfont
+
+  \vspace{1.5cm}
+  \normalsize
+
+  \textbf{Thèse de doctorat de l'Université Paris-Saclay}
+
+
+  \vspace{15mm}
+
+  École doctorale n$^{\circ}$ 580,
+  Sciences et technologies de l'information et de la communication (STIC)\\
+  \small Spécialité de doctorat: voir annexe\\
+  \footnotesize Unité de recherche: Inria, Social Data\\
+  \footnotesize Référent: : voir annexe
+  \vspace{15mm}
+
+  \textbf{Thèse présentée et soutenue à .....,\\ le .... 202X, par}\\
+  \bigskip
+  \Large {\color{Prune} \textbf{Matthieu DOUTRELIGNE}}
+
+
+  %************************************
+  \vspace{\fill} % ALIGNER LE TABLEAU EN BAS DE PAGE
+  %************************************
+
+  %\flushleft \small \textbf{Composition du jury:}
+  \bigskip
+
+  \flushleft
+
+  \scriptsize
+  \begin{tabular}{|p{7cm}l}
+    \arrayrulecolor{Prune}
+    {\footnotesize \textbf{Composition du jury}} \\
+                        &                        \\
+    \textbf{Prénom Nom} & Président/e            \\
+    Titre, Affiliation  &                        \\
+    \textbf{Prénom Nom} & Rapportrice            \\
+    Titre, Affiliation  &                        \\
+    \textbf{Prénom Nom} & Rapporteur             \\
+    Titre, Affiliation  &                        \\
+    \textbf{Prénom Nom} & Examinatrice           \\
+    Titre, Affiliation  &                        \\
+    \textbf{Prénom Nom} & Examinateur            \\
+    Titre, Affiliation  &                        \\
+    \textbf{Prénom Nom} & Examinateur            \\
+    Titre, Affiliationt &                        \\
+  \end{tabular}
+
+  \medskip
+  \begin{tabular}{|p{7cm}l}
+    \arrayrulecolor{Prune}
+    {\footnotesize \textbf{Direction de la thèse}}                          \\
+                                                 &                          \\
+    \textbf{Gaël Varoquaux}                      & Directeur de thèse       \\
+    Directeur de recherches, Institut National de Recherche en Informatique et
+    en Automatique                               &                          \\
+    \textbf{Claire Morgand}                      & Co-encadrante            \\
+    Dr., Agence Régionale de Santé Ile-de-France &                          \\
+    \textbf{Pierre-Alain Jachiet}                & Tuteur en administration \\
+    Dr., Haute Autorité de Santé
+  \end{tabular}
+
+
+\end{titlepage}
+
 
 \tableofcontents
 
@@ -144,33 +259,61 @@
 \chapter{Introduction: Amazing opportunities of health data?}\label{chap:intro}
 \section{How I came into this landscape}\label{sec:intro:landscape}
 
-I will present my progression among these opportunities.
+Ideas and research exist in a given environment that influence their development. I will
+present how my progression among these opportunities shaped the worked developed
+in this thesis.
 
 \subsection{Context: From a modern statistical formation to epidemiology}\label{subsec:intro:context}
 
 \paragraph{Learning statistics during the Natural Language Processing revolution}
 
+\md{Too technical for the intro: make shorter}
 Machine learning techniques, a subfield of artificial intelligence, became
 increasingly good as solving complex tasks where previous pattern recognition
-techniques were struggling. First, categorized into supervised and unsupervised
-approaches, the pre-training paradigm became increasingly popular in the 2010's:
-\cite{halevy2009unreasonable} proposed to take advantages of regularities
-present in large piles of data to design automatically interesting features for
-large application domains. The practical successes came in image processing
-\citep{}, then Natural Language Processing \citep{} and structural biology.
+techniques were struggling. In the 2010's, machine learning techniques were
+developed by learning auxiliary tasks --such as general image classification--
+on vast amount of data. \cite{halevy2009unreasonable} proposed to take
+advantages of regularities present in large piles of data to automatically
+design interesting features for large application domains. This paradigm
+--called pre-training-- has been very successful in applied domains such as
+image processing \citep{krizhevsky2012imagenet}, then Natural Language
+Processing \citep{devlin2018bert} and structural biology
+\citep{jumper2021highly}.
+
+% context (I think, it is sufficient to give the idea on my priors)
+I was trained in statistics and machine learning from 2014 to 2018, precisely
+between this the image and text revolutions in Artificial Intelligence. Despite textbooks largely focused
+on flexible pattern recognition techniques, the fascination for pre-training
+techniques left me wonder in which other areas those techniques could be
+successfully applied.
+% Problem
+On the other hand, being a civil servant, part of the National Institute
+(Institut National de la Statistique EE), I was also interested in the use of
+data for public policy. Economics and econometrics taught during this formation
+left very few . Does flexible machine learning techniques, or even pre-training
+methods could help inform public policies ?
+% 
+
 %
 
 \paragraph{APHP: Removing identification elements from clinical notes}
 
+% opportunity
 Continuous improvements in natural language processing led to the intuition that
-soon the information contained in clinical texts could be mined by appropriate
-to serve clinical research.
-
-However, privacy concern: the access to very detailed elements of patient cares
-is no more restricted to the medical staff.
-
-Need for pseudonymization : use newly to reach State of the Art pseudonymization
-\citep{dernoncourt2017identification, paris2019desidentification}.
+the information contained in clinical texts could soon be mined appropriately to
+serve medical research.
+% problem
+However, letting researchers outside the medical staff access very detailed
+elements of patient cares embedded in clinical notes raised new privacy
+concerns.
+% solution
+The Paris Hospitals (AP-HP) decided to remove all identification elements from
+the clinical notes of their patients. This process is called pseudonymization
+and I helped merge rule-based pseudonymization systems with a state-of-the-art
+approach relying on neural networks \citep{dernoncourt2017identification,
+  paris2019desidentification}.
+% apport
+This first contact
 
 \paragraph{Billing claims: An underused huge pile of data}
 
@@ -739,6 +882,9 @@ Heterogeneity of data collection calls for distributed information sharing model
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 \section{Abstract}\label{sec:predictive_models:abstract}
 
+The previous chapter demonstrate the strong interest within French CDWs in using to develop
+accurate prediction models.
+
 \vfill
 \textit{This chapter has not been submitted to any journals or conference until
   now.\\ XXX \\
@@ -872,8 +1018,8 @@ Arguments for ease of deployment.
 \vfill
 This chapter has been submitted to \textit{npj Digital Medicine} as:\\
 \textit{Matthieu Doutreligne, Tristan Struja, Judith Abecassis, Claire Morgand, Gaël
-Varoquaux, \& Leo Anthony Celi. (2023). Step-by-step causal analysis of Electronic Health Records to ground
-decision making.} \\
+  Varoquaux, \& Leo Anthony Celi. (2023). Step-by-step causal analysis of Electronic Health Records to ground
+  decision making.} \\
 As the first author I formulated the research question, designed the study,
 performed the experiments and wrote the manuscript.
 
@@ -2104,7 +2250,7 @@ score (see \ref{apd:motivation_ntv}).
 
 \begin{figure}[!b]
   \centering
-  \includegraphics[width=0.9\linewidth]{img/chapter_5/_1_r_risk_domination_r_risk_domination__ref_metric_mean_risks_by_Dataset_feasible_only.png}
+  \includegraphics[width=0.9\linewidth]{img/chapter_5/_1_r_risk_domination_r_risk_domination__ref_metric_mean_risks_by_Dataset_feasible_only.pdf}
   %\hfill
   \caption{\textbf{The $R$-risk is the best metric}: Relative Kendall's $\tau$ agreement with $\tau\text{-risk}$.
     Strong and Weak overlap correspond to the first and last tertiles of the overlap distribution measured with
@@ -2186,7 +2332,7 @@ both Caussim and ACIC 2018
   \hfill
   \begin{minipage}{0.6\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{img/chapter_5/_2_overlap_influence_overlap_by_bin_comparaison_kendall_by_Dataset_r_risk_only.png}
+    \includegraphics[width=\linewidth]{img/chapter_5/_2_overlap_influence_overlap_by_bin_comparaison_kendall_by_Dataset_r_risk_only.pdf}
   \end{minipage}
 \end{figure}
 
@@ -2205,7 +2351,7 @@ nuisance set and the simpler shared nuisance-candidate set procedure.
 
 \begin{figure}[!tb]
   \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_5/_3_procedure_r_risk_only_3datasets.png}
+  \includegraphics[width=0.8\linewidth]{img/chapter_5/_3_procedure_r_risk_only_3datasets.pdf}
   \caption{\textbf{Nuisances can be estimated on the same data as outcome
       models}: Results for the R-risk are similar between the
     \textcolor{MidnightBlue}{shared
@@ -2236,7 +2382,7 @@ stacking linear models and gradient-boosted trees-- suffices to estimate nuisanc
 
 \begin{figure}[!tb]
   \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_3datasets.png}
+  \includegraphics[width=0.8\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_3datasets.pdf}
   \caption{\textbf{\textcolor{DarkOrchid}{Stacked
         models} are good overall estimators of the nuisances}:
     Results are shown only for the
@@ -2281,12 +2427,12 @@ of the best selected model applied on the holdout set $\mathcal{V}$. We explore 
 \begin{figure}[!t]
   \begin{minipage}{.5\textwidth}
     \centerline{\textbf{a) CATE estimation error}}
-    \includegraphics[width=\linewidth]{img/chapter_5/_5_train_size_evaluated_metric_r_risk__evaluation_validation_tau_risk__best_tau_norm__False_norm_False__acic16.png}
+    \includegraphics[width=\linewidth]{img/chapter_5/_5_train_size_evaluated_metric_r_risk__evaluation_validation_tau_risk__best_tau_norm__False_norm_False__acic16.pdf}
   \end{minipage}
   %\hspace{0.3\textwidth}
   \begin{minipage}{.5\textwidth}
     \centerline{\textbf{b) ATE estimation error}}
-    \includegraphics[width=\linewidth]{img/chapter_5/_5_train_size_evaluated_metric_r_risk__evaluation_validation_test_abs_bias_ate__best_tau_norm__False_norm_True__acic16.png}
+    \includegraphics[width=\linewidth]{img/chapter_5/_5_train_size_evaluated_metric_r_risk__evaluation_validation_test_abs_bias_ate__best_tau_norm__False_norm_True__acic16.pdf}
   \end{minipage}%
   \caption{\textbf{a) For CATE, a train/test ratio of 0.9/0.1 appears a good
       trade-off.} b) For ATE, there is a small signal pointing also to
@@ -2923,7 +3069,7 @@ ontologies, ...).
 
   \begin{figure}[!b]
     \centering
-    \includegraphics[width=\linewidth]{img/chapter_5/_1_r_risk_domination_r_risk_domination__ref_metric_mean_risks_by_Dataset.png}
+    \includegraphics[width=\linewidth]{img/chapter_5/_1_r_risk_domination_r_risk_domination__ref_metric_mean_risks_by_Dataset.pdf}
     %\hfill
     \caption{\textbf{The $R$-risk is the best metric}: Relative Kendall's $\tau$
       agreement with $\tau\text{-risk}$. Strong and weak overlap correspond to
@@ -3089,7 +3235,7 @@ ontologies, ...).
 
   \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{img/chapter_5/_2_overlap_influence_overlap_by_bin_comparaison_kendall_by_Dataset.png}
+    \includegraphics[width=\textwidth]{img/chapter_5/_2_overlap_influence_overlap_by_bin_comparaison_kendall_by_Dataset.pdf}
     \hfill
     \caption{\textbf{Low population overlap hinders causal model selection for all
         metrics}:
@@ -3149,7 +3295,7 @@ ontologies, ...).
     in linear setups}
 
   \begin{figure}
-    \includegraphics[width=\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_twins_nuisances.png}
+    \includegraphics[width=\linewidth]{img/chapter_5/_4_nuisance_models_r_risk_only_twins_nuisances.pdf}
     \hfill
     \caption{\textbf{Flexible models are performant in recovering nuisances
         in the downsampled Twins dataset.} The propensity score is linear in this
@@ -3241,4 +3387,63 @@ ontologies, ...).
 \end{appendices}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4eme de couverture
+\ifthispageodd{\newpage\thispagestyle{empty}\null\newpage}{}
+\thispagestyle{empty}
+\newgeometry{top=1.5cm, bottom=1.25cm, left=2cm, right=2cm}
+\fontfamily{rm}\selectfont
+
+\lhead{}
+\rhead{}
+\rfoot{}
+\cfoot{}
+\lfoot{}
+
+\noindent
+%*****************************************************
+%***** LOGO DE L'ED À CHANGER IMPÉRATIVEMENT *********
+%*****************************************************
+\includegraphics[height=2.45cm]{img/EOBE}
+\vspace{1cm}
+%*****************************************************
+\fontfamily{cmss}\fontseries{m}\selectfont
+
+\small
+
+\begin{mdframed}[linecolor=Prune,linewidth=1]
+
+  \textbf{Titre:} Titre de la thèse en français
+
+
+  \noindent \textbf{Mots clés:} Quelques mots-clé
+
+  \vspace{-.5cm}
+  \begin{multicols}{2}
+    \noindent \textbf{Résumé:}Blabla
+  \end{multicols}
+
+\end{mdframed}
+
+\begin{mdframed}[linecolor=Prune,linewidth=1]
+
+  \textbf{Title:} Thesis title in English
+
+  \noindent \textbf{Keywords:} Some keywords
+
+  \begin{multicols}{2}
+    \noindent \textbf{Abstract:} Blabla
+  \end{multicols}
+\end{mdframed}
+
+%************************************
+\vspace{\fill} % ALIGNER EN BAS DE PAGE
+%************************************
+
+\noindent
+\color{Prune} \footnotesize Maison du doctorat de Université Paris-Saclay\\
+2$^{\mathrm{e}}$ étage, aile ouest, École normale supérieure Paris-Saclay\\
+4 avenue des Sciencs\\
+91190 Gif-sur-Yvette, France
 \end{document}
