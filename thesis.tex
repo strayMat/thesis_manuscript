@@ -54,6 +54,25 @@
 \usepackage{threeparttable}
 \usepackage{multirow}
 \usepackage{makecell}
+\usepackage[right]{lineno}
+\usepackage[nopatch=eqnum]{microtype}
+\usepackage{lscape}
+% Define some commands for table
+\newcolumntype{+}{!{\vrule width 2pt}}
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth \newcommand\thickcline[1]{%
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth
+2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+
 % csv
 \usepackage{csvsimple}
 % maths
@@ -1038,7 +1057,7 @@ clinical data is historically scattered at each care site in numerous HISs.
 Several hospitals deployed efforts for about ten years to create CDWs from
 electronic medical records
 \cite{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
-lamer_development_2022}. This work has accelerated recently, with the growing
+  lamer_development_2022}. This work has accelerated recently, with the growing
 development of dedicated infrastructures at the regional and national levels.
 Regional cooperation networks are being set up --such as the Ouest Data Hub
 \cite{hugo_2022}. In July 2022, the Ministry of Health opened a 50 million euros
@@ -1084,11 +1103,29 @@ four phases of data flow from the various sources that make up the HIS:
 \section{Speaking to the data collectors: Interviews of French
   University Hospitals}\label{sec:cdw:methods}
 
+Based on an overview of university hospital CDWs in France, this study make
+general recommendations for properly leveraging the potential of CDWs to improve
+healthcare. It focuses on: governance, transparency, types of
+data, data reuse, technical tools, documentation and data quality control
+processes.
+
+Interviews were conducted from March to November 2022 with 32 French regional
+and university hospitals, both with existing and prospective CDWs.
+
 \subsection{Interviews and study coverage}\label{subsec:cdw:interviews}
 
 \paragraph{Semi-structured interviews}
 
-Topics, questions, link to full data and questionnaires in appendix.
+Semi-structured interviews were conducted on the following
+themes: the initiation and construction of the CDWs; the current status of the
+project and the studies carried out; opportunities and obstacles; quality
+criteria for observational research. S1 Table list
+all interviewed people with their team title. The complete form, with the
+precised questions, is available in \ref{apd:cdw:interviews}.
+
+The interview form was sent to participants in advance, and then used as a
+support to conduct the interviews. The interviews lasted 90 minutes and were
+recorded for reference.
 
 \paragraph{Regional and university hospitals in France: different levels of maturity}
 
@@ -2979,7 +3016,505 @@ ontologies, ...).
   %\section{Statistical models}\label{apd:statistical_models}
 
   %\section{Causal Diagrams}\label{apd:causal_diagrams}
+  \chapter{Chapter 2}\label{apd:cdw}
 
+
+  \section*{Supplementary information}
+  %\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+  % Include only the SI item label in the paragraph heading. Use the
+  % \nameref{label} command to cite SI items in the text.
+  \section{List of interviewed stakeholders with their
+    teams}\label{apd:cdw:table:expert_teams}
+
+  \begin{table}[!ht]
+    \centering
+    \begin{tabular}{ll}
+      \thickhline
+      Clinical Data Warehouse & Teams                                             \\
+      \thickhline
+      CDW\_AMIENS             & IT : 1,MID : 1                                    \\
+      CDW\_ANGERS             & Data Direction : 1                                \\
+      CDW\_APHM               & Clinician : 1,CDW team : 2                        \\
+      CDW\_APHP               & CDW team : 4,IT : 5                               \\
+      CDW\_BORDEAUX           & CDW team : 1,Inserm : 1,public health : 2         \\
+      CDW\_BREST              & CDW team : 1,MID : 1                              \\
+      CDW\_DIJON              & CDW team : 1                                      \\
+      CDW\_EDSAN              & CDW team : 2,MID : 1                              \\
+      CDW\_HCL                & Clinician : 1,Data Direction : 1,IT : 1,Inserm    \\
+      CDW\_INCLUDE\_LILLE     & Administration : 2,CDW team : 3,public health : 2 \\
+      CDW\_MARTINIQUE         & CDW team : 1,public health : 1                    \\
+      CDW\_MONTPELLIER        & Data Direction : 2,MID : 1,public health : 1      \\
+      CDW\_NANCY              & CDW team : 2,public health : 2                    \\
+      CDW\_NANTES             & CDW team : 2,public health : 1                    \\
+      CDW\_POITIERS           & IT : 2,CRD : 1                                    \\
+      CDW\_PREDIMED\_CHUGA    & CDW team : 3,public health : 2                    \\
+      CDW\_REIMS              & Clinician : 1,CDW team : 1                        \\
+      CDW\_RENNES             & CDW team : 2,public health : 2                    \\
+      CDW\_STRASBOURG         & CDW team : 2,public health : 2                    \\
+      CDW\_TOULOUSE           & CDW team : 1                                      \\
+      CDW\_TOURS              & CDW team : 1                                      \\
+      \thickhline
+    \end{tabular}
+  \end{table}
+
+  \clearpage
+
+
+  \begin{landscape}
+    \section{Interview form} \label{apd:cdw:interview_form}
+    \begin{table}[h!]
+      \centering
+      \resizebox{1.6\textwidth}{!}{%
+        \begin{tabular}{|l|l|}
+          \hline
+          \textbf{Topics}                                                        &
+          \textbf{Questions}
+          \\ \hline
+          \multirow{5}{*}{\begin{tabular}[c]{@{}l@{}}Initiation and Construction
+                              of \\ the Clinical Data Warehouse\end{tabular}} &
+          How was the initiative born, when, which team(s) involved in the
+          construction? A Data warehouse to meet what initial needs ?                                                                 \\
+          \cline{2-2}                                                            & What was (is) the articulation between the medical
+          informatics / engineer(s) / Clinical Research Department  and user
+          team(s), biostatistics ?                                                                                                    \\ \cline{2-2} & Governance: How
+          should the teams be organized for the creation and maintenance of the
+          warehouse, data access, and project teams?                                                                                  \\ \cline{2-2} &
+          \begin{tabular}[c]{@{}l@{}}What types of data are present in the
+            warehouse
+            from the
+            following
+            non-exhaustive
+            list: \\
+            Billing
+            codes ,
+            other
+            administrative
+            data,
+            other
+            procedures,
+            structured
+            procedures
+            and
+            diagnoses,
+            structured
+            biology
+            measures,
+            \\
+            structured
+            drug
+            treatments,
+            emergencies,
+            resuscitation,
+            anesthesia,
+            texts
+            (letters,
+            Clinician
+            Reports),
+            imaging,
+            anatomopathology,
+            sequencing.\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 & What
+          are the
+          medico-social/social
+          data,
+          especially
+          from
+          social
+          and
+          medico-social
+          institutions
+          ?
+          \\
+          \hline
+          \multirow{6}{*}{Current status - Ongoing and finished projects}        &
+          \begin{tabular}[c]{@{}l@{}}Who are the main users? For what purposes
+            (research,
+            quality
+            improvement,
+            management,
+            clinical
+            usage)?
+            \\ Which
+            therapeutic
+            area(s)?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}What are the major types of projects from the
+            following
+            non-exhaustive
+            list: \\
+            Cohort
+            development,
+            descriptive
+            epidemiology,
+            analytical
+            (comparative)
+            epidemiology
+            with/without
+            randomization,
+            monitoring
+            and
+            dashboards,
+            \\indicators,
+            inclusion
+            in
+            clinical
+            trials.\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 & How
+          many
+          projects
+          are
+          completed
+          /
+          started
+          /
+          planned?
+          \\
+          \cline{2-2}
+                                                                                 & What
+          are the
+          tools
+          and
+          methods
+          used for
+          these
+          projects?
+          Cohort
+          building
+          tool,
+          standard
+          data
+          formats,
+          NLPs,
+          ...
+          \\
+          \cline{2-2}
+                                                                                 & Is
+          there a
+          valorization
+          strategy
+          for the
+          Clinical
+          Data
+          Warehouse?
+          \\
+          \cline{2-2}
+                                                                                 & What
+          connections
+          with
+          external
+          sources
+          such as
+          the
+          national
+          health
+          data
+          platform,
+          the
+          outpatient
+          data,
+          the
+          general
+          practitioner
+          data,
+          the
+          research
+          cohorts
+          ?                                                                                                                           \\
+          \hline
+          \multirow{3}{*}{Opportunity and obstacles}                             & What
+          are the main difficulties encountered during data warehouse projects?
+          \\ \cline{2-2} & Are there themes that deserve more encouragement from
+          the HAS?
+          \\ \cline{2-2} & What skills are needed? Are there any skills or
+          technical resources missing?
+          \\ \hline
+          \multirow{11}{*}{\begin{tabular}[c]{@{}l@{}}Quality criteria for
+                               observational research\end{tabular}}       & Coverage: How
+          is it monitored? Geographically/by department? Time-wise? By what means?
+          \\ \cline{2-2} & Cleaning: How are patient duplicates and source
+          alignment managed?
+          \\ \cline{2-2} &
+          \begin{tabular}[c]{@{}l@{}}Database Network: Does the warehouse belong
+            to a
+            health
+            database
+            network?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Data quality: Are there automatic reports on
+            data
+            quality?
+            Frequency,
+            design,
+            code and
+            documentation
+            available?
+            Presence
+            of
+            dedicated
+            personnel
+            \\ or
+            even a
+            team to
+            check
+            the
+            quality
+            of the
+            data
+            continuously,
+            and to
+            carry
+            out
+            quality
+            controls
+            of the
+            data on
+            the
+            central
+            base, on
+            the
+            study
+            bases?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Data life cycle: Is there a reference
+            document
+            on the
+            different
+            stages
+            of the
+            data
+            life
+            cycle?
+            \\ How
+            is this
+            document
+            kept up
+            to date
+            with the
+            constant
+            evolution
+            of the
+            warehouse?
+            In what
+            form? \\
+            How is
+            this
+            documentation
+            managed,
+            accessed,
+            updated
+            and
+            corrected?
+            Precise
+            description
+            of the
+            integrated
+            fields?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Harmonization procedure: What are the data
+            structures/formats
+            and
+            coding
+            systems
+            used? \\
+            (eHop,
+            I2B2,
+            OMOP,
+            HL7
+            FHIR,
+            other
+            ?)\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Machine learning: If machine learning systems
+            are used
+            (e.g.
+            for
+            extracting
+            and
+            structuring
+            information),
+            is there
+            specific
+            documentation
+            on their
+            performance?
+            \\ For
+            manual
+            coding
+            (e.g.
+            labelling),
+            is there
+            a coding
+            guide?
+            Has a
+            measurement
+            of
+            inter-coder
+            consistency
+            been
+            conducted?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          De-identification:
+          Elements
+          on
+          de-identification
+          if
+          applicable,
+          performance
+          metrics
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Constructed phenotypes: Are there operational
+            definitions
+            of
+            target
+            populations
+            (study
+            cohorts)
+            and how
+            are
+            these
+            compared
+            to
+            conceptual
+            definitions,
+            i.e., \\
+            business
+            and
+            scientific
+            definitions?
+            Is there
+            a study
+            of
+            FPR/TPR
+            in
+            relation
+            to a
+            reference
+            standard?
+            Are
+            these
+            definitions
+            made
+            public
+            either
+            with the
+            study \\
+            results
+            or in
+            the
+            documentation
+            of the
+            warehouse?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Transparency: Are the studies registered on a
+            dedicated
+            or
+            pre-existing
+            portal
+            (epidemio-France,
+            encepp
+            (EU),
+            clinicaltrials.gov
+            (US))?
+            \\ Are
+            the
+            study
+            codes
+            made
+            accessible
+            as for
+            opensafely?
+            Are the
+            publications
+            accessible
+            in open
+            access,
+            once the
+            studies
+            are
+            completed?\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Multidisciplinarity: Are the project teams
+            multidisciplinary? Specification of the participations for each part of
+            the analysis from the data collection \\ from the raw Information
+            System.\end{tabular}
+          \\ \hline
+          \multirow{2}{*}{Topics of interest to the HAS}                         &
+          \begin{tabular}[c]{@{}l@{}}Quality Department: quality indicators
+            (french
+            IQSS):
+            coordination
+            (patient
+            assessment
+            for
+            discharge,
+            patient
+            contact
+            at D+1),
+            quality
+            of the
+            liaison
+            letter),
+            \\
+            management
+            (eligibility
+            for the
+            outpatient
+            surgeries,
+            pain
+            management)\end{tabular}
+          \\
+          \cline{2-2}
+                                                                                 &
+          \begin{tabular}[c]{@{}l@{}}Health Technology Assessment Department:
+            hospital biology activity (description), adverse events associated with
+            procedures, post-registration studies \\(procedures, early access
+            oncology). Evaluation of procedures: e.g. biological and imaging
+            procedures performed in hospitals, genetic tests in oncology and rare
+            diseases.\end{tabular}
+          \\ \hline
+          open discussion                                                        &                                                    \\
+          \hline
+        \end{tabular}%
+      }
+      %\caption*{Interview form.}
+
+    \end{table}
+  \end{landscape}
+
+  \section{Study data tables}\label{apd:cdw:study_tables}
+
+  The data tables used to produce the figures in the results section are available
+  at the following url:
+
+  \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/}.
+
+  The guests table concerns the individuals interviewed, the interview dates, the
+  positions and the membership of a specific team. The warehouse table collects
+  information about the CDW. The table of studies is the referencing of the
+  studies informed on 10 portals of studies in progress (or completed if
+  available) available in free access.
   \chapter{Chapter 5}\label{apd:causal_model_selection}
 
 
