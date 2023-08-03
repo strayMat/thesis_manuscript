@@ -127,6 +127,37 @@
 \usepackage[skins]{tcolorbox}
 
 % Define a new box environment lefthandside background information box
+
+\usepackage{environ}
+\usepackage[%
+  linewidth=2pt,
+  linecolor=background_info_color,
+  middlelinewidth=0.4pt,
+  roundcorner=1pt,
+  topline = false,
+  rightline = false,
+  bottomline = false,
+  rightmargin=0pt,
+  skipabove=0pt,
+  skipbelow=0pt,
+  leftmargin=-30pt,
+  innerleftmargin=0pt,
+  innerrightmargin=0pt,
+  innertopmargin=0pt,
+  innerbottommargin=0pt,
+  usetwoside=false
+  ]{mdframed}
+  \newlength{\coloredrulerwidth}
+\setlength{\coloredrulerwidth}{\dimexpr 1cm+\mdflength{innerleftmargin}}
+  \NewEnviron{background_box_left}{%
+  \begin{mdframed}
+      \noindent\hspace*{\dimexpr -\mdflength{innerleftmargin}-\coloredrulerwidth}\rule[-\textheight]{\coloredrulerwidth}{\textheight}
+      \hspace*{\dimexpr \coloredrulerwidth + 5pt} % Adjust the spacing between ruler and label
+      \rotatebox[origin=c]{90}{\textit{HELLO}} % Rotate the label text vertically
+      \BODY % Content of the environment
+  \end{mdframed}
+}
+
 \tcbuselibrary{breakable}
 \tcbset{%
   mytitle/.style={%
@@ -139,7 +170,7 @@
   skin=enhanced,parbox=false,breakable
 }
 \colorlet{background_info_color}{green!10!orange}
-\newtcolorbox{background_box_left}[1][]{
+\newtcolorbox{background_box_left_old}[1][]{
   mytitle=\textcolor{background_info_color}{Background Information},
   %title style={flushright},
   colframe=background_info_color, enhanced, colback=white, frame hidden, enlarge
@@ -221,20 +252,8 @@
   {1em}
   {}
 
-\titleformat{\subsubsection}
-  {\bfseries\sffamily}
-  {\thesubsubsection}
-  {1em}
-  {}
-
 \titleformat{\paragraph}
   {\bfseries}
-  {}
-  {0em}
-  {}
-
-\titleformat{\subparagraph}
-  {\sffamily\bfseries}
   {}
   {0em}
   {}

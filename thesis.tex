@@ -147,57 +147,6 @@
   \snaptodo[margin block/.append style=blue]{%
     \sloppy\textbf{Matthieu}: #1}}
 
-%%%%%%% boxes %%%%%%%%
-\usepackage{tikz}
-\usepackage{mdframed}
-\usepackage[skins]{tcolorbox}
-
-% Define a new box environment lefthandside background information box
-\tcbuselibrary{breakable}
-\tcbset{%
-  mytitle/.style={%
-      enhanced,
-      overlay={
-          \node [rotate=90, anchor=south, fill=tcbcolframe!25] at (frame.west) {\itshape \scriptsize #1};
-        },
-    },
-  rightrule=0pt,
-  skin=enhanced,parbox=false,breakable
-}
-\newtcolorbox{background_box_left}[1][]{
-  mytitle=\textcolor{background_info_color}{Background Information},
-  %title style={flushright},
-  colframe=background_info_color, enhanced, colback=white, frame hidden, enlarge
-  left by=-1cm,boxsep=0mm, left=1cm, borderline west =
-    {2pt}{0pt}{background_info_color}, #1 }
-
-% Define a new box environment for citations
-\newenvironment{citationbox}{
-  %\def\boxcontent{#1}%
-  \begin{tcolorbox}[
-      enhanced,
-      colback=gray!10, % Background color of the box (gray with 10% intensity)
-      colframe=white, % Border color of the box (white)
-      arc=0mm, % Roundness of the corners (0mm means sharp corners)
-      boxrule=0.5pt, % Border width (adjust as needed)
-      rightrule=0pt, % Right border width (0pt for no border on the right side)
-      %enlarge left by=8cm,
-      left=0pt, % Left margin (0pt means no extra margin on the left)
-      right=0pt, % Right margin (0pt means no extra margin on the right)
-      top=0pt, % Top margin (0pt means no extra margin on the top)
-      bottom=0pt, % Bottom margin (0pt means no extra margin on the bottom)
-      rightupper=0mm, % Extra space on the right side for the citation
-      rightlower=0mm, % Extra space on the right side for the citation
-      %halign=flush right, % Text alignment within the box (right-aligned)
-      width=0.9\textwidth,
-      flush right,
-      ]
-    \footnotesize % Set the font size to script size
-    \itshape % Make the text content italic
-    }{
-  \end{tcolorbox}%
-  %\textcolorbox{\boxcolor}{\textit{\boxcontent}}
-}
 %Handling Keywords
 \def\keywordname{{\bfseries \emph Keywords}}%
 \def\keywords#1{\par\addvspace\medskipamount{\rightskip=0pt plus1cm
@@ -206,14 +155,14 @@
 
 % 
 \newenvironment{chapterabstract}{%
-    \par\nobreak\noindent
-    \textbf{\textit{Chapter's content}\hrulefill}\par\nobreak
-    \small
-    \noindent\ignorespaces
-  }{%
-    \par\nobreak\normalsize
-    \vskip-\ht\strutbox\noindent
-    \textbf{\hrulefill}%
+  \par\nobreak\noindent
+  \textbf{\textit{Chapter's content}\hrulefill}\par\nobreak
+  \small
+  \noindent\ignorespaces
+}{%
+  \par\nobreak\normalsize
+  \vskip-\ht\strutbox\noindent
+  \textbf{\hrulefill}%
 }
 % equations commands
 \newcommand{\indep}{\perp \!\!\! \perp}
@@ -240,42 +189,105 @@
 
 
 \titleformat{\chapter}[display]
-  {\normalfont\Huge\bfseries\color{ared}}
-  {\hfill \chaptertitlename\ \thechapter}
-  {20pt}
-  {\Huge\itshape\filleft}
-\titlespacing*{\chapter}{0pt}{0pt}{20pt}  
+{\normalfont\Huge\bfseries\color{ared}}
+{\hfill \chaptertitlename\ \thechapter}
+{20pt}
+{\Huge\itshape\filleft}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
 
 \titleformat{\section}
-  {\Large\bfseries\sffamily}
-  {\thesection}
-  {1em}
-  {}
+{\Large\bfseries\sffamily}
+{\thesection}
+{1em}
+{}
+\titlespacing*{\section}{-10pt}{20pt}{10pt}
+
 
 \titleformat{\subsection}
-  {\large\bfseries\sffamily}
-  {\thesubsection}
-  {1em}
-  {}
+{\large\bfseries\sffamily}
+{\thesubsection}
+{1em}
+{}
+\titlespacing*{\subsection}{-10pt}{20pt}{10pt}
 
-\titleformat{\subsubsection}
-  {\bfseries\sffamily}
-  {\thesubsubsection}
-  {1em}
-  {}
 
-\titleformat{\paragraph}
-  {\bfseries}
-  {}
-  {0em}
-  {}
+\titleformat{\paragraph}[runin]
+{\bfseries}
+{}
+{0em}
+{}
+% \titlespacing{\paragraph}{1em}{10pt}{0pt} 
+\setlength{\parskip}{0pt plus 1pt minus 1pt}
+% \setlength{\parindent}{10pt}
 
-\titleformat{\subparagraph}
-  {\sffamily\bfseries}
-  {}
-  {0em}
-  {}
 
+%%%%%%% boxes %%%%%%%%
+\usepackage{tikz}
+\usepackage{mdframed}
+\usepackage[skins]{tcolorbox}
+
+% Define a new box environment lefthandside background information box
+\tcbuselibrary{breakable}
+\tcbsetforeverylayer{%
+  mytitle/.style={%
+      enhanced,
+      overlay={
+          \node [rotate=90, anchor=south, fill=tcbcolframe!25] at (frame.west) {\itshape \scriptsize #1};
+        },
+    },
+  textmarker/.style={%
+  skin=enhancedmiddle jigsaw,breakable,parbox=false,
+  boxrule=0mm,leftrule=5mm,rightrule=5mm,boxsep=0mm,arc=0mm,outer arc=0mm,
+  left=3mm,right=3mm,top=1mm,bottom=1mm,toptitle=1mm,bottomtitle=1mm,oversize
+}
+}
+\newtcolorbox{background_box_left}{
+  textmarker,
+  mytitle=\textcolor{background_info_color}{Background Information},
+  colback=white,
+  colframe=background_info_color, 
+  frame hidden, 
+  borderline west={2pt}{0pt}{background_info_color}, 
+  code={
+      \titleformat{\subsection}
+      {\large\bfseries\sffamily}
+      {\thesubsection}
+      {1em}
+      {}
+      \titlespacing{\subsection}{-10pt}{20pt}{10pt}
+      
+      % I don't succeed to force the parskip to be 0pt together with space before paragraph sections to be 10pt
+      \setlength{\parskip}{10pt plus 1pt minus 1pt}
+    },
+  }
+  
+% Define a new box environment for citations
+\newenvironment{citationbox}{
+  %\def\boxcontent{#1}%
+  \begin{tcolorbox}[
+      enhanced,
+      colback=gray!10, % Background color of the box (gray with 10% intensity)
+      colframe=white, % Border color of the box (white)
+      arc=0mm, % Roundness of the corners (0mm means sharp corners)
+      boxrule=0.5pt, % Border width (adjust as needed)
+      rightrule=0pt, % Right border width (0pt for no border on the right side)
+      %enlarge left by=8cm,
+      left=0pt, % Left margin (0pt means no extra margin on the left)
+      right=0pt, % Right margin (0pt means no extra margin on the right)
+      top=0pt, % Top margin (0pt means no extra margin on the top)
+      bottom=0pt, % Bottom margin (0pt means no extra margin on the bottom)
+      rightupper=0mm, % Extra space on the right side for the citation
+      rightlower=0mm, % Extra space on the right side for the citation
+      %halign=flush right, % Text alignment within the box (right-aligned)
+      width=0.9\textwidth,
+      flush right,
+    ]
+    \footnotesize % Set the font size to script size
+    \itshape % Make the text content italic
+    }{
+  \end{tcolorbox}%
+  %\textcolorbox{\boxcolor}{\textit{\boxcontent}}
+}
 % The caption
 
 \DeclareCaptionFont{captionnamefont}{\small\sffamily\color{MidnightBlue}}
@@ -702,22 +714,21 @@ Market access, tailored recommendations.
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
-\subsection{Various types of data: Real World Data}\label{subsec:intro:real_world_data}
+\subsection{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
 
-
-Health Information Systems (HIS) are increasingly collecting routine care data
+Healthcare data is increasingly collected in electronic form.
 \citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
-This source of Real World Data (RWD) \citep{fda_real-world_2021} bears great
-promises to improve the quality of care. On the one hand, the use of this data
-translates into direct benefits --primary uses-- for the patient by serving as
-the cornerstone of the developing personalized medicine
-\citep{mann_artificial_2022,ziegler_high_2022}. They also bring
-indirect benefits --secondary uses-- by accelerating and improving knowledge
-production: on pathologies \citep{campbell_characterizing_2022}, on the conditions of use of health products and
-technologies\citep{safran_toward_2007,tuppin_value_2017}, on the measures of
-their safety \citep{wisniewski_development_2003}, efficacy or usefulness in
-everyday practice \citep{richesson_electronic_2013}. They can also be used to
-assess the organizational impact of health products and technologies
+These new sources of Real World Data (RWD) \citep{fda_real-world_2021} bear
+great promises to improve the quality of care. On the one hand, the use of this
+data translates into direct benefits --primary uses-- for the patient by serving
+as the cornerstone of the developing personalized medicine
+\citep{mann_artificial_2022,ziegler_high_2022}. They also bring indirect
+benefits --secondary uses-- by accelerating and improving knowledge production:
+on pathologies \citep{campbell_characterizing_2022}, on the conditions of use of
+health products and technologies\citep{safran_toward_2007,tuppin_value_2017}, on
+the measures of their safety \citep{wisniewski_development_2003}, efficacy or
+usefulness in everyday practice \citep{richesson_electronic_2013}. They can also
+be used to assess the organizational impact of health products and technologies
 \citep{has_guide_2020,has_real-world_2021}.
 
 In recent years, health agencies in many countries have conducted extensive work
@@ -736,17 +747,28 @@ Hand made data collection for one research question with a specific protocol,
 Specialized registry and cohorts
 
 
-\paragraph{Claims}
+\paragraph{Billing data: claims}
 
 Billing system, eg. PMSI.
 
 Advantages (space and time coverage, scale, structure), disadvantages (not clinic, no exam results, few measures, heterogeneity of collection)
 
-\paragraph{EHRs and Hospital Information System}
+\paragraph{Clinical data: EHRs and Hospital Information System}
 
-Increasing informatization
-EHR at the center
-Other applications part of HIS: give examples.
+The computerization of paper-based patient records led hospitals to adopt
+Electronic Health Record (EHR) solutions beginning in the 1990s. These are de-
+defined as the longitudinal collection of health data in an electronic
+information system (IS) \citep{gunter2005emergence}. Used routinely by
+clinicians, EHRs enable them to record and interrogate clinically relevant
+information for patient care mainly through notes. EHRs can be specific to an
+institution, or shared between several actors \citep{hoerbst2010electronic}.
+This central system is accompanied by other business applications, such as
+patient administrative management, computerized prescribing, biology software,
+reanimation software, and imaging software. Together, these softwares make up
+the Hospital Information System (HIS). Depending on the degree of maturity of
+the HIS, the various data sources communicate more or less well with each other.
+
+\md{Advantages}
 
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
@@ -1009,74 +1031,92 @@ help practitioners during consultation \citep{lee2023benefits}.
 \clearpage
 \section{Motivation and background: A changing world}\label{sec:cdw:motivation}
 
-\subsection{Data for primary or secondary
-  usages?}\label{subsec:cdw:data_usages}
+\begin{background_box_left}
 
-\paragraph{Primary data usages}
-Primary usages directly serve one patient care.
+  \subsection{Data for primary or secondary usages?}%
+  \label{subsec:cdw:data_usages}%
 
-\paragraph{Secondary data usages}
-Secondary usages do not concern directly the care and support of one patient:
-research, quality or management indicators, billings.
 
-\paragraph{Towards mix usages: the learning health system paradigm}
+  \paragraph{Health data is first collected for a primary use:  patient care.}
+  EHRs are primarily used to record patients' state of health and their care
+  (26). These might be shared within the healthcare team, but always with a view
+  to caring for the patient whose data is collected. The use of a patient's data
+  is said to be primary when it is used patient's care
+  \footnote{\url{https://ec.europa.eu/commission/presscorner/detail/en/qanda_22_2712}}.
 
-The notion of learning health system \citep{mcginnis2013best}.
 
-Mix usages such as learning algorithms
+  \paragraph{Secondary uses do not directly concern patient care.} They are reuses
+  of data for other purposes, such as research, activity indicators for the
+  management or quality of care, optimization of the coding of medical
+  information, and feasibility studies
+  \citep{safran_toward_2007,cnil_referentiel_2021}.
 
-\subsection{Healthcare data collection is tightly linked with local organization}
 
-In practice, the possibility of mobilizing these routinely collected data
-depends very much on their degree of concentration, in a gradient that goes from
-centralization in a single, homogenous HIS to fragmentation in a multitude of
-HIS with heterogeneous formats. The structure of the HIS reflects the governance
-structure. Thus, the ease of working with these data depends heavily on the
-organization of the healthcare actors. The two main sources of RWD are insurance
-claims --more centralized-- and clinical data --more fragmented.
+  \paragraph{Towards mix usages: the learning health system paradigm}
+  Some purposes can encompass both types of use, as in the case of learning
+  systems that give rise to diagnosis, prognosis or decision-making tools. During
+  the \textit{learning phase}, data from a set of patients is reused --secondary
+  use-- to create the knowledge required to operate the tool. In production, the
+  tool takes input data from a specific patient to improve his or her care
+  --primary use. This concept is part of the learning health system \citep{mcginnis2013best},
+  which aims to continuously improve the quality of care by integrating research
+  and innovation into the care process.
 
-\paragraph{Claims data} is often collected by national agencies into centralized
-repositories. In South Korea, the government agency responsible for healthcare
-system performance and quality (HIRA) is connected to the HIS of all healthcare
-stakeholders. HIRA data consists of national insurance claims
-\cite{kyoung2022understanding}. England has a centralized health care system
-under the National Health Service (NHS). Despite, not having detailed clinical
-data, this allowed the NHS to merge claims data with detailed data from two
-large urban medicine databases, corresponding to the two major software
-publishers \cite{opensafely_system_one_data_2023}. This data is currently
-accessed through Opensafely, a first platform focused on Covid-19 research
-\cite{opensafely_2022}. In the United States, even if scattered between different
-insurance providers, claims are pooled into large databases such as
-Medicare, Medicaid or IBM MarketScan. Lastly, in Germany, the distinct federal
-claims have been centralized only very recently \cite{kreis2016status}.
 
-\paragraph{Clinical data} on the other hand, tends to be distributed among many
-entities, that made different choices, without common management or
-interoperability. But large institutional data-sharing networks begin to emerge.
-South Korea very recently launched an initiative to build a national wide data
-network focused on intensive care. United States is building Chorus4ai, an
-analysis platform pooling data from 14 university hospitals
-\cite{chorus4ai_2023}. To unlock the potential of clinical data, the German
-Medical Informatics Initiative \cite{gehring_german_2018} created four consortia
-in 2018. They aim at developing technical and organizational solutions to
-improve the consistency of clinical data.\\
+  \subsection{Healthcare data collection is tightly linked with local organization}%
+  \label{subec:cdw:local_organization}%
 
-Israel stands out as one of the rare countries that pooled together both claims
-and clinical data at a large scale: half of the population depends on one single
-healthcare provider and insurer \cite{clalit_data_2023}.
+  In practice, the possibility of mobilizing routinely collected data depends
+  very much on their degree of concentration, in a gradient that goes from
+  centralization in a single, homogenous HIS to fragmentation in a multitude of
+  HIS with heterogeneous formats. The structure of the HIS reflects the governance
+  structure. Thus, the ease of working with these data depends heavily on the
+  organization of the healthcare actors.
+  \paragraph{Claims data are often centralized by national agencies}
+
+  In South Korea, the government agency responsible for healthcare system
+  performance and quality (HIRA) is connected to the HIS of all healthcare
+  stakeholders. HIRA data consists of national insurance claims
+  \citep{kyoung2022understanding}. England has a centralized health care system
+  under the National Health Service (NHS). Despite, not having detailed clinical
+  data, this allowed the NHS to merge claims data with detailed data from two
+  large urban medicine databases, corresponding to the two major software
+  publishers \citep{opensafely_system_one_data_2023}. This data is currently
+  accessed through Opensafely, a first platform focused on Covid-19 research
+  \citep{opensafely_2022}. In the United States, even if scattered between
+  different insurance providers, claims are pooled into large databases such as
+  Medicare, Medicaid or IBM MarketScan. Lastly, in Germany, the distinct federal
+  claims have been centralized only very recently \citep{kreis2016status}.
+
+  \paragraph{Clinical data are mostly distributed among many entities}
+
+  Despite different interoperability choices, large institutional clinical
+  data-sharing networks begin to emerge. South Korea very recently launched an
+  initiative to build a national wide data network focused on intensive care.
+  United States is building Chorus4ai, an analysis platform pooling data from 14
+  university hospitals \citep{chorus4ai_2023}. To unlock the potential of clinical
+  data, the German Medical Informatics Initiative \citep{gehring_german_2018}
+  created four consortia in 2018. They aim at developing technical and
+  organizational solutions to improve the consistency of clinical data.
+
+  Israel stands out as one of the rare countries that pooled together both claims
+  and clinical data at a large scale: half of the population depends on one single
+  healthcare provider and insurer \citep{clalit_data_2023}.
+
+\end{background_box_left}
 
 \paragraph{The case of France}
 
 In France, the national insurer collects all hospital activity and city care
-claims into a unique reimbursement database \cite{tuppin_value_2017}. However,
+claims into a unique reimbursement database \citep{tuppin_value_2017}. However,
 clinical data is historically scattered at each care site in numerous HISs.
 Several hospitals deployed efforts for about ten years to create CDWs from
 electronic medical records
-\cite{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
+\citep{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
   lamer_development_2022}. This work has accelerated recently, with the growing
 development of dedicated infrastructures at the regional and national levels.
 Regional cooperation networks are being set up --such as the Ouest Data Hub
-\cite{hugo_2022}. In July 2022, the Ministry of Health opened a 50 million euros
+\citep{hugo_2022}. In July 2022, the Ministry of Health opened a 50 million euros
 call for projects to set up and strengthen a network of hospital Clinical Data
 Warehouses (CDWs) coordinated with the national platform, the Health Data Hub by
 2025.
@@ -1087,7 +1127,7 @@ Warehouses (CDWs) coordinated with the national platform, the Health Data Hub by
 \paragraph{An infrastructure} is needed to pool data data from one or more
 medical information systems --whatever the organizational framework-- to
 homogeneous formats, for management, research or care reuses
-\cite{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
+\citep{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
 \ref{background:CDW:fig:ehr_flow} illustrates for a Clinical Data Warehouse, the
 four phases of data flow from the various sources that make up the HIS:
 
@@ -1157,7 +1197,7 @@ available on \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/}.
 In addition to the interviews, we reviewed the study reporting portals, which we
 found for 8 out of 14 operational CDWs. We developed a classification of
 studies, based on the typology of retrospective studies described by the OHDSI
-research network \cite{schuemie_book_2021}. We enriched this typology by
+research network \citep{schuemie_book_2021}. We enriched this typology by
 comparing it with the collected studies resulting in the six following
 categories. Studies were classified according to this nomenclature based on
 their title and description.
@@ -1166,14 +1206,14 @@ their title and description.
   \item \textbf{Outcome frequency}: Incidence or prevalence estimation for a
         medically well-defined target population.
   \item \textbf{Population characterization}: Characterization of a specific set
-        of covariates. Feasibility and pre-screening studies belong to this category \cite{pasco_pre-screening_2019}.
+        of covariates. Feasibility and pre-screening studies belong to this category \citep{pasco_pre-screening_2019}.
   \item \textbf{Risk factors}: Identification of covariates most associated with
         a well-defined clinical target (disease course, care event). These
         studies look at  association study without quantifying the causal effect
         of the factors on the outcome of interest.
   \item \textbf{Treatment Effect}: Evaluation of the effect of a well-defined
         intervention on a specific outcome target. These studies intend to show
-        a causal link between these two variables \cite{hernan_methods_2021}.
+        a causal link between these two variables \citep{hernan_methods_2021}.
   \item \textbf{Development of diagnostic and prognostic algorithms}: Improve or automate a
         diagnostic or prognostic process, based on clinical data from a given
         patient. This can take the form of a risk, a preventive score, or the
@@ -1260,7 +1300,7 @@ Before starting, projects are systematically analyzed by a scientific and
 ethical committee. A local submission and follow-up platform is often mentioned
 (12/21), but its functional scope is not well defined. It ranges from simple
 authorization of the project to the automatic provision of data into a Trusted
-Research Environment (TRE) \cite{goldacre_better_2022}. The processes for
+Research Environment (TRE) \citep{goldacre_better_2022}. The processes for
 starting a new project on the CDW are always communicated internally but rarely
 documented publicly (8/21).
 
@@ -1274,7 +1314,7 @@ projects during interviews. In total, we found 8 of these portals out of 14 CDWs
 in production. Uses other than ongoing scientific studies are very rarely
 documented. The publication of the list of ongoing studies is very heterogeneous
 and fragmented between several sources: \url{clinicaltrials.gov}, the mandatory
-project portal of the Health Data Hub \cite{health_data_hub_portal_2023} or the
+project portal of the Health Data Hub \citep{health_data_hub_portal_2023} or the
 website of the hospital data warehouse.
 
 \subsection{Triple usage of data: Research, management, clinic}%
@@ -1363,8 +1403,8 @@ of the institutions interviewed, there is still a lack of resources and maturity
 of methods and tools for conducting inter-institutional research (such as in the
 \textit{Grand-Ouest} region of France) or via European calls for projects
 (EHDEN). These two research networks are made possible by supra-local governance
-and a common data schema, respectively eHop \cite{madec_ehop_2019} and OMOP
-\cite{hripcsak_observational_2015}. The Paris hospitals, thanks to its regional
+and a common data schema, respectively eHop \citep{madec_ehop_2019} and OMOP
+\citep{hripcsak_observational_2015}. The Paris hospitals, thanks to its regional
 coverage and the choice of OMOP, is also well advanced in multi-centric
 research. At the same time, the \textit{Grand-Est} region is building a network
 of CDW based on the model of the \textit{Grand-Ouest} region, also using eHop.
@@ -1394,7 +1434,7 @@ different softwares. Dedicated interfaces can then offer a unified view of the
 history of a patient's data, with inter-specialty transversality, which is
 particularly valuable in internal medicine. These cross-disciplinary search
 tools also enable healthcare professionals to conduct rapid searches in all the
-texts, for example to find similar patients \cite{garcelon_finding_2017}. Uses
+texts, for example to find similar patients \citep{garcelon_finding_2017}. Uses
 for prevention, automation of repetitive tasks and care coordination are also
 highlighted. Concrete examples are the automatic sorting of hospital
 prescriptions by order of complexity, or the setting up of specialized channels
@@ -1450,8 +1490,8 @@ CDW.
 
 No single standard data model stands out as being used by all CDWs. All are
 aware of the existence of the OMOP (research standard)
-\cite{hripcsak_observational_2015} and HL7 FHIR (communication standard) models
-\cite{braunstein_health_2019}. Several CDWs consider the OMOP model to be a
+\citep{hripcsak_observational_2015} and HL7 FHIR (communication standard) models
+\citep{braunstein_health_2019}. Several CDWs consider the OMOP model to be a
 central part of the warehouse, particularly for research purposes (9/21). This
 tendency has been encouraged by the European call for projects EHDEN, launched
 by the OHDSI research consortium, the originator of this data model. In the
@@ -1491,7 +1531,7 @@ valuable to all healthcare system implementing CDWs on a national scale.
 As the CDW becomes an essential component of data management in the hospital,
 the creation of an autonomous internal team dedicated to data architecture,
 process automation and data documentation should be encouraged
-\cite{goldacre_better_2022}. This multidisciplinary team should develop an
+\citep{goldacre_better_2022}. This multidisciplinary team should develop an
 excellent knowledge of the data collection process and potential reuses in order
 to qualify the different flows coming from the source IS, standardize them
 towards a homogenous schema and harmonize the semantics. It should have a sound
@@ -1518,12 +1558,12 @@ or interoperability, and provide financial, technical and regulatory support.
 
 Health Technology Assessment agencies advocate for public registration of
 comparative observational study protocols before conducting the analysis
-\cite{berger2017good,fda_real-world_2021,has_real-world_2021}. They often refer
+\citep{berger2017good,fda_real-world_2021,has_real-world_2021}. They often refer
 to \url{clinicaltrials.gov} as potential but not ideal registration portal for
 observational studies. The research community advocates for public registrations
-of all observational studies \cite{rushton2011should,plos2014observational}.
+of all observational studies \citep{rushton2011should,plos2014observational}.
 More recently, it emphasizes the need for more easy data access and the
-publication of study code \cite{pavlenko_implementation_2020,
+publication of study code \citep{pavlenko_implementation_2020,
   kohane_what_2021,nih_2023}. We embrace these recommendations and we point to the
 unfortunate duplication of these study reporting systems in France. One source
 could be favored at the national level and the second one automatically fed from
@@ -1550,10 +1590,10 @@ built on top of it. There is a need for increasing interoperability, to help EHR
 vendors interfacing the different hospital softwares, thus facilitating CDW
 development. One step in this direction would be the open source publication of
 HIR data schema and vocabularies. At the analysis level, international recommendations insist
-on the need for common data formats \cite{zhang_best_2022,kohane_what_2021}.
+on the need for common data formats \citep{zhang_best_2022,kohane_what_2021}.
 However, there is still a lack of adoption of research standards from hospital
 CDWs to conduct robust studies across multiple sites. Building open-source tools
-on top of these standards such as those of OHDSI \cite{schuemie_book_2021} could
+on top of these standards such as those of OHDSI \citep{schuemie_book_2021} could
 foster their adoption. Finally, in many clinical domains, sufficient sample size
 is hard to obtain without international data sharing collaborations. Thus, more
 incitation is needed to maintain and update the terminology mappings between
@@ -1573,7 +1613,7 @@ run to yield substantial results.
 
 Tools, methods and data formats of CDW lack harmonization due to the strong
 technical innovation and the presence of many actors. As suggested by the recent
-report on the use of data for research in the UK \cite{goldacre_better_2022}, it
+report on the use of data for research in the UK \citep{goldacre_better_2022}, it
 would be wise to focus on a small number of model technical platforms.
 
 These platforms should favor open-source solutions to assure transparency by
@@ -1590,24 +1630,24 @@ Quality is not sufficiently considered as a relevant scientific topic itself.
 However, it is the backbone of all research done within an CDW. In order to
 improve the quality of the data with respect to research uses, it is necessary
 to conduct continuous studies dedicated to this topic
-\cite{zhang_best_2022,kohane_what_2021,shang_conceptual_2018,looten_what_2019}.
+\citep{zhang_best_2022,kohane_what_2021,shang_conceptual_2018,looten_what_2019}.
 These studies should contribute to a reflection on methodologies and standard
 tools for data quality, such as those developed by the OHDSI research network
-\cite{schuemie_book_2021}.
+\citep{schuemie_book_2021}.
 
 Finally, there is a need for open-source publication of research code to ensure
 quality retrospective research
-\cite{shang_conceptual_2018,seastedt_global_2022}. Recent research in data
+\citep{shang_conceptual_2018,seastedt_global_2022}. Recent research in data
 analysis has shown that innumerable biases can lurk in training data sets
-\cite{gebru_datasheets_2021,mehrabi_survey_2021}. Open publication of data
+\citep{gebru_datasheets_2021,mehrabi_survey_2021}. Open publication of data
 schemas is considered an indispensable prerequisite for all data science and
-artificial intelligence uses \cite{gebru_datasheets_2021}. Inspired by dataset
-cards \cite{gebru_datasheets_2021} and dataset publication guides, it would be
+artificial intelligence uses \citep{gebru_datasheets_2021}. Inspired by dataset
+cards \citep{gebru_datasheets_2021} and dataset publication guides, it would be
 interesting to define a standard CDW card documenting the main data flows.
 
 \section{Conclusion}\label{sec:cdw:conclusion}
 
-\paragraph{Limitations} 
+\paragraph{Limitations}
 
 The interviews were conducted in a semi-structured manner within a limited time
 frame. As a result, some topics were covered more quickly and only those
@@ -1624,7 +1664,7 @@ private companies.
 \paragraph{The French CDW ecosystem is beginning to take shape,} benefiting from
 an acceleration thanks to national funding, the multiplication of industrial
 players specializing in health data and the beginning of a supra-national
-reflection on the European Health Data Space\cite{ehds_2022}. However, some
+reflection on the European Health Data Space\citep{ehds_2022}. However, some
 points require special attention to ensure that the potential of the CDW
 translates into patient benefits.
 
@@ -1685,10 +1725,10 @@ seven features on 5300 patients: age, cholesterol, systolic blood pressure,
 hematocrit, ECG status, smoking at intake, and relative body weight
 \citep{brand1976multivariate}.
 
-\cite{harrell2001regression} mention diagnosis, prognosis, confounder adjustment
+\citep{harrell2001regression} mention diagnosis, prognosis, confounder adjustment
 and heterogeneous treatment effects (mainly for cost-effectiveness analyses) as
 the main uses of predictive models in healthcare. Ten years later,
-\cite{steyerberg2009applications} also mentions diagnosis, prognosis and therapy
+\citep{steyerberg2009applications} also mentions diagnosis, prognosis and therapy
 (He has a great figure from pubmed). I should do the same for 2023.
 
 Some are used in clinical practice every day : the Glasgow coma scale
@@ -1747,7 +1787,7 @@ inconvenience for specific problems and resources.
 
 We build upon the criteria for adoption from \cite{wyatt1995commentary}.
 
-More modern sources eg. \cite{subbaswamy2020development}.
+More modern sources eg. \citep{subbaswamy2020development}.
 
 \paragraph{We can share it easily: } Hence, people can use it AND contribute to
 external validity and continuous improvements.
