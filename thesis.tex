@@ -40,9 +40,9 @@
   }
 
   \usepackage{enumitem}
-  \setlist[itemize]{label=\textcolor{ared}{\rule{1ex}{1ex}}}
+  \setlist[itemize]{label=\textcolor{ared}{\rule{1ex}{1ex}},itemsep=0pt}
   \setlist[description]{font=\bfseries\sffamily}
-  \setlist[enumerate]{font=\bfseries\sffamily\color{ared}}
+  \setlist[enumerate]{font=\bfseries\sffamily\color{ared},itemsep=0pt}
   
   
 % figures
@@ -1003,22 +1003,23 @@ help practitioners during consultation \citep{lee2023benefits}.
   \par\hfill -- Michel Foucault
 \end{citationbox}
 
-\begin{chapterabstract}\label{sec:cdw:abstract}
-  Reusing routine care data does not come free of charges. Attention must be paid
-  to the entire life cycle of the data to create robust knowledge and develop
-  innovation. Building upon the first overview of CDWs in France, we document key
-  aspects of the collection and organization of routine care data into homogeneous
-  databases: governance, transparency, types of data, data reuse main objectives,
-  technical tools, documentation and data quality control processes. The landscape
-  of CDWs in France dates from 2011 and accelerated in the late 2020, showing a
-  progressive but still incomplete homogenization. National and European projects
-  are emerging, supporting local initiatives in standardization, methodological
-  work and tooling. From this sample of CDWs, we draw general recommendations
-  aimed at consolidating the potential of routine care data to improve healthcare.
+\begin{chapterabstract}\label{sec:cdw:abstract}%
+  Despite increasing collection of routine care data, reusing it does not come
+  free of charges. Attention must be paid to the entire life cycle of the data
+  to create robust knowledge and develop innovation. Building upon the first
+  overview of CDWs in France, we document key aspects of the collection and
+  organization of routine care data into homogeneous databases: governance,
+  transparency, types of data, data reuse main objectives, technical tools,
+  documentation and data quality control processes. The landscape of CDWs in
+  France dates from 2011 and accelerated in the late 2020, showing a progressive
+  but still incomplete homogenization. National and European projects are
+  emerging, supporting local initiatives in standardization, methodological work
+  and tooling. From this sample of CDWs, we draw general recommendations aimed
+  at consolidating the potential of routine care data to improve healthcare.
   Particular attention must be paid to the sustainability of the warehouse teams
   and to the multi-level governance. The transparency of the data transformation
-  tools and studies must improve to allow successful multi-centric data reuses as
-  well as innovations for the patient.
+  tools and studies must improve to allow successful multi-centric data reuses
+  as well as innovations for the patient.
 \end{chapterabstract}
 
 \vfill
@@ -1037,33 +1038,6 @@ help practitioners during consultation \citep{lee2023benefits}.
 \section{Motivation and background: A changing world}\label{sec:cdw:motivation}
 
 \begin{background_box_left}
-
-  \subsection{Data for primary or secondary usages?}%
-  \label{subsec:cdw:data_usages}%
-
-
-  \paragraph{Primary use of health data focus on patient care.}
-  EHRs are primarily used to record patients' health state and care
-  \citep{safran_toward_2007,eu_primary_2022}. This information might be shared within the
-  healthcare team, but always with the goal to cary for the patient whose data is
-  collected.
-
-
-  \paragraph{Secondary use do not directly concern patient care.} Data can be
-  reused for other purposes, such as research, activity indicators for the
-  management or quality of care, optimization of the coding of medical
-  information, and feasibility studies
-  \citep{safran_toward_2007,cnil_referentiel_2021}.
-
-  \paragraph{Towards mix usages?}
-  Emerging paradigms such as personalized medicine encompass both types of use,
-  as in the case of learning systems that give rise to diagnosis, prognosis or
-  decision-making tools. During the \textit{learning phase}, data from a set of
-  patients is reused --secondary use-- to create the knowledge required to
-  operate the tool. In production, the tool takes input data from a specific
-  patient to improve his or her care --primary use.
-
-
 
   \subsection{Healthcare data collection is tightly linked with local organization}%
   \label{subec:cdw:local_organization}%
@@ -1105,15 +1079,17 @@ help practitioners during consultation \citep{lee2023benefits}.
   and clinical data at a large scale: half of the population depends on one single
   healthcare provider and insurer \citep{clalit_data_2023}.
 
+  \paragraph{The case of France}
+
+  In France, the national insurer collects all hospital activity and city care
+  claims into a unique reimbursement database \citep{tuppin_value_2017}. However,
+  clinical data is historically scattered at each care site in numerous HISs.
+
 \end{background_box_left}
 
-\paragraph{The case of France}
 
-In France, the national insurer collects all hospital activity and city care
-claims into a unique reimbursement database \citep{tuppin_value_2017}. However,
-clinical data is historically scattered at each care site in numerous HISs.
-
-\subsection{The multiplication of Clinical Data Warehouses}%
+\subsection{An infrastructure fo healthcare data : The Clinical Data
+  Warehouses}%
 \label{subsec:cdw:cdw_definition}%
 
 \paragraph{Dedicated infrastructures, called Clinical Data Warehouse (CDW)} are
@@ -1149,8 +1125,8 @@ flow from the various sources that make up the HIS:
 \end{figure*}
 
 
-In France, several hospitals deployed efforts for about ten years to create CDWs
-from electronic medical records
+\paragraph{The multiplication of CDW in France.} Several hospitals deployed
+efforts for about ten years to create CDWs from electronic medical records
 \citep{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
   lamer_development_2022}. This work has accelerated recently, with the growing
 development of dedicated infrastructures at the regional and national levels.
@@ -1159,6 +1135,13 @@ Regional cooperation networks are being set up --such as the Ouest Data Hub
 euros call for projects to set up and strengthen a network of hospital Clinical
 Data Warehouses (CDWs) coordinated with the national platform, the Health Data
 Hub by 2025.
+
+Despite these examples, there is still a lack of undestanding of the precise
+scope of CDWs: How are they created ? What data do they process ? How common are
+they ? What studies do they run ? Acknowledging the key importance of better
+structure healthcare data, we create the first overview of CDWs in France. We
+build upon this landscape, to draw general recommendations aimed at
+consolidating the potential of routine care data to improve healthcare.
 
 \section{Speaking to the data collectors: Interviews of French University
   Hospitals}%
@@ -1243,7 +1226,7 @@ minus the three that we were unable to interview after multiple reminders
 (Orléans, Metz and Caen), resulting in a denominator of 21 university
 hospitals.
 
-\begin{figure*}
+\begin{figure*}[!b]
   \centering
   \includegraphics[width=0.8\linewidth]{img/chapter_2/Fig2.pdf}
   \caption{Repartition of CDWs in France. \\The base layer map comes from
@@ -1358,28 +1341,40 @@ or nurse forms (4/21). Imaging is rarely integrated (4/21), notably for reasons
 of volume. Genomic data are well identified, but never integrated, even though
 they are sometimes considered important and included in the CDW work program.
 
-\begin{table}[!ht]
-  \centering
-  \caption{Type of data integrated into the French CDWs.}
-  \label{results:data:img:data_categories}
-  \begin{tabular}{lrl}
-    \thickhline
-    Category of data     & Number of CDW & Ratio  \\
-    \thickhline
-    Administrative       & 21            & 100 \% \\
-    Billing Codes        & 20            & 95 \%  \\
-    Biology              & 20            & 95 \%  \\
-    Texts                & 20            & 95 \%  \\
-    Drugs                & 16            & 76 \%  \\
-    Imagery              & 4             & 19 \%  \\
-    Nurse Forms          & 4             & 19 \%  \\
-    Anatomical pathology & 3             & 14 \%  \\
-    ICU                  & 2             & 10 \%  \\
-    Medical devices      & 2             & 10 \%  \\
-    \thickhline
-  \end{tabular}
-\end{table}
 
+\begin{minipage}{0.45\textwidth}
+  \begin{table}[H]
+    \centering
+    \resizebox*{\textwidth}{!}{
+      \begin{tabular}{lrl}
+        \thickhline
+        Category of data     & Number of CDW & Ratio  \\
+        \thickhline
+        Administrative       & 21            & 100 \% \\
+        Billing Codes        & 20            & 95 \%  \\
+        Biology              & 20            & 95 \%  \\
+        Texts                & 20            & 95 \%  \\
+        Drugs                & 16            & 76 \%  \\
+        Imagery              & 4             & 19 \%  \\
+        Nurse Forms          & 4             & 19 \%  \\
+        Anatomical pathology & 3             & 14 \%  \\
+        ICU                  & 2             & 10 \%  \\
+        Medical devices      & 2             & 10 \%  \\
+        \thickhline
+      \end{tabular}
+      }
+      \caption{Type of data integrated into the French CDWs.}
+      \label{results:data:img:data_categories}
+  \end{table}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{img/chapter_2/Fig4.pdf}
+    \caption{Percentage of studies by objective.}
+    \label{results:usage:image:study_objective}
+  \end{figure}
+\end{minipage}
 
 \paragraph{Today, CDWs are built predominantly for scientific research (21/21)}
 
@@ -1392,12 +1387,6 @@ processes (24 \%), the study of risk factors (19ga .
 \%) and the treatment effect
 evaluations (15 \%).
 
-\begin{figure*}[!h]
-  \centering
-  \includegraphics[width=0.7\linewidth]{img/chapter_2/Fig4.pdf}
-  \caption{Percentage of studies by objective.}
-  \label{results:usage:image:study_objective}
-\end{figure*}
 
 The CDWs are used extensively for internal projects such as student theses (at
 least in 9/21) and serve as an infrastructure for single-service research: their
@@ -1699,10 +1688,13 @@ of patient care.
 %%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
-\section{Abstract}\label{sec:predictive_models:abstract}
+
+\begin{chapterabstract}
+\label{sec:predictive_models:abstract}
 
 The previous chapter demonstrate the strong interest within French CDWs in using to develop
 accurate prediction models.
+\end{chapterabstract}
 
 \vfill
 \textit{This chapter has not been submitted to any journals or conference until
@@ -1827,12 +1819,15 @@ Arguments for ease of deployment.
 \section{Conclusion}\label{sec:predictive_models:conclusion}
 
 \chapter{Prediction is not all we need: Causal analysis of EHRs to ground decision making}\label{chapter:causal_tuto}
-\section{Abstract}\label{sec:causal_tuto:abstract}
 
 \begin{citationbox}
   Nature marks each growth ... according to its curative benefit.
   \par\hfill -- Paracelsus
 \end{citationbox}
+
+\begin{chapterabstract}\label{sec:causal_tuto:abstract}%
+  
+\end{chapterabstract}  
 
 \vfill
 This chapter has been submitted to \textit{npj Digital Medicine} as:\\
