@@ -2287,7 +2287,7 @@ non-treated that are not due to the intervention
       following][]{attia2022proposal}
   \end{minipage}
   \caption{The five categories of causal variables needed for our
-    framework.}\label{fig:causal_variables}\md{Might take some work to put this figure in a colourbox.}
+    framework.}\label{fig:causal_variables}
 \end{figure}
 
 \begin{background_box_left}
@@ -2840,7 +2840,8 @@ specific individuals, such as patients undergoing sceptic shock.
 
 \subsection{Extending prediction to prescription needs causality}\label{subsec:causal_model_selection:extending_prediction}
 
-\md{watchout that I did not say the same thing as in chapter 4}
+\md{watchout that I did not say the same thing as in chapter 4 or introduction}
+
 \paragraph{Progress in machine learning brings predictive models to new health
   data} \citep{beam2018big,rajkomar2019machine}, with the promise of precision
 medicine. Automated analysis of medical images is increasingly accurate,
@@ -3453,35 +3454,35 @@ As extreme inverse propensity weights induce high variance, clipping can be
 useful for numerical stability
 \citep{swaminathan_counterfactual_2015, ionides_truncated_2008}.
 
-\begin{minipage}{.4\textwidth}
-  \begin{algorithm}[H]
-    \caption{Model selection procedure}\label{problem:estimation_procedure:algo} {%
-      Given train and test sets $(\mathcal{T}, \mathcal{S}) \sim \mathcal{D}$,
-      a candidate estimators $f$, a causal
-      metrics $\ell$:
-      \begin{enumerate}
-        \item Prefit: Learn estimators for unknown nuisance quantities $(\check e,\,\check m)$ on the training set $\mathcal{T}$
-        \item Fit: learn $\hat f(\cdot, a)$ on
-              $\mathcal T$
-        \item Model selection: \\
-              $\forall{x} \in \mathcal{S}$ predict
-              $\big(\hat f(x, 1), \hat f(x, 0)\big)$ and evaluate the estimator storing the metric value: $\ell(f, \mathcal S)$ -- possibly
-              function of $\check e$ and $\check m$
-              %\item Metric evaluation: return the oracle evaluation metrics
-              %evaluated on $\mathcal{S}$: $\big(\widehat{\tau\text{-risk}}(\hat
-              %f^*_{\ell}); \widehat{\ell}_{ATE}(\hat f^*_{\ell}) \big)$
-      \end{enumerate}
+%\begin{minipage}{.4\textwidth} %% @help:specify H instead of !h for minipages
+\begin{algorithm}[!h]
+  \caption{Model selection procedure}\label{problem:estimation_procedure:algo} {%
+    Given train and test sets $(\mathcal{T}, \mathcal{S}) \sim \mathcal{D}$,
+    a candidate estimators $f$, a causal
+    metrics $\ell$:
+    \begin{enumerate}
+      \item Prefit: Learn estimators for unknown nuisance quantities $(\check e,\,\check m)$ on the training set $\mathcal{T}$
+      \item Fit: learn $\hat f(\cdot, a)$ on
+            $\mathcal T$
+      \item Model selection: \\
+            $\forall{x} \in \mathcal{S}$ predict
+            $\big(\hat f(x, 1), \hat f(x, 0)\big)$ and evaluate the estimator storing the metric value: $\ell(f, \mathcal S)$ -- possibly
+            function of $\check e$ and $\check m$
+            %\item Metric evaluation: return the oracle evaluation metrics
+            %evaluated on $\mathcal{S}$: $\big(\widehat{\tau\text{-risk}}(\hat
+            %f^*_{\ell}); \widehat{\ell}_{ATE}(\hat f^*_{\ell}) \big)$
+    \end{enumerate}
 
-    }
-  \end{algorithm}
-\end{minipage}
-\begin{minipage}{.55\textwidth}
-  \begin{figure}[H]
-    \includegraphics[width=\linewidth]{img/chapter_5/estimation_procedure_causal_selection_procedure.png}
-    \caption{Estimation procedure for causal model
-      selection.}\label{problem:estimation_procedure:figure}
-  \end{figure}
-\end{minipage}
+  }
+\end{algorithm}
+%\end{minipage}
+%\begin{minipage}{.55\textwidth}
+\begin{figure}[!h]
+  \includegraphics[width=0.9\linewidth]{img/chapter_5/estimation_procedure_causal_selection_procedure.png}
+  \caption{Estimation procedure for causal model
+    selection.}\label{problem:estimation_procedure:figure}
+\end{figure}
+%\end{minipage}
 
 
 
@@ -4257,7 +4258,7 @@ ontologies, ...).
     \section{Interview form} \label{apd:cdw:interview_form}
     \begin{table}[h!]
       \centering
-      \resizebox{1.6\textwidth}{!}{%
+      \resizebox{1.4\textwidth}{!}{%
         \begin{tabular}{|l|l|}
           \hline
           \textbf{Topics}                                                        &
@@ -4743,13 +4744,13 @@ ontologies, ...).
   \begin{figure}[!h]
     \begin{subfigure}{\linewidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{img/chapter_4/predictive_failure__pr_auc.pdf}
+      \includegraphics[width=0.9\linewidth]{img/chapter_4/predictive_failure__pr_auc.pdf}
       \caption{}\label{apd:fig:motivating_example_pr_auc}
     \end{subfigure}
     \hfill
     \begin{subfigure}{\linewidth}
       \centering
-      \includegraphics[width=0.8\linewidth]{img/chapter_4/predictive_failure__roc_auc.pdf}
+      \includegraphics[width=0.9\linewidth]{img/chapter_4/predictive_failure__roc_auc.pdf}
       \caption{}\label{apd:fig:motivating_example_roc_auc}
     \end{subfigure}
     \caption{Failure to predict 28-day mortality from a model fitted on
@@ -5006,8 +5007,6 @@ ontologies, ...).
         \\ \hline
       \end{tabular}%
     }
-    \caption{}
-    \label{tab:my-table}
     \caption{Eligibility criteria and resulting populations for potential target trials in MIMIC-IV.}\label{apd:table:emulated_trials_populations}
   \end{table}
 
@@ -5273,13 +5272,13 @@ ontologies, ...).
   \subsection{Hyper-parameter search for the nuisance models}\label{apd:hyper_parameter_search}
 
   \begin{figure}[!b]
-    \begin{minipage}{.38\linewidth}
-      \caption{Hyper-parameter search procedure.}\label{apd:fig:hyper_parameter_search}
-    \end{minipage}%
-    \hfill
-    \begin{minipage}{.6\linewidth}
-      \includegraphics[width=\linewidth]{img/chapter_4/hp_search_procedure.pdf}
-    \end{minipage}%
+    %  \begin{minipage}{.38\linewidth}
+    % \end{minipage}%
+    %\hfill
+    %\begin{minipage}{.6\linewidth}
+    \includegraphics[width=0.9\linewidth]{img/chapter_4/hp_search_procedure.pdf}
+    \caption{Hyper-parameter search procedure.}\label{apd:fig:hyper_parameter_search}
+    %\end{minipage}%
   \end{figure}
 
 
@@ -5320,11 +5319,14 @@ ontologies, ...).
 
   \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.7\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__flowchart_albumin_for_sepsis.pdf}
+    \includegraphics[width=0.8\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__flowchart_albumin_for_sepsis.pdf}
     \caption{Selection flowchart on MIMIC-IV for the emulated trial.}\label{fig:selection_flowchart}
   \end{figure}
 
   \section{Complete description of the confounders for the main analysis}\label{apd:albumin_for_sepsis:table1_complete}
+
+  Figure \ref{apd:table:albumin_for_sepsis:table1_complete} detail the characteristics of the emulated trial population with all confounders used in our study.
+
   \begin{table}[b!]
     \resizebox{\textwidth}{!}{%
       \input{img/chapter_4/albumin_for_sepsis__obs_1d__table1_24h_supplementary.tex}
@@ -5488,7 +5490,7 @@ ontologies, ...).
   shock. One see that the downside linear trend is reflected by the
   forest only for patients aged between 55 and 80.
 
-  \begin{figure}[b!]
+  \begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\linewidth]{img/chapter_4/boxplot_est__DML__nuisances__Forests__final_RandomForestRegressor.pdf}
     \caption{Distribution of Conditional Average Treatment effects on sex, age,
