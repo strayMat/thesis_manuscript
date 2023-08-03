@@ -738,6 +738,11 @@ Study programs have been launched by regulatory agencies: the DARWIN EU
 program by the European Medicines Agency and the Real World Evidence Program by
 the Food and Drug Administration \citep{fda_real_2018}.
 
+\md{TODO: place somewhere lhs that preceed this interest for RWD: the learning health system
+  \citep{mcginnis2013best}, which aims to continuously improve the quality of
+  care by integrating research and innovation into the care process.}
+
+
 \md{Insist on the gradient and distinction between research data and opportunistic data
   collection.}
 
@@ -768,7 +773,7 @@ reanimation software, and imaging software. Together, these softwares make up
 the Hospital Information System (HIS). Depending on the degree of maturity of
 the HIS, the various data sources communicate more or less well with each other.
 
-\md{Advantages}
+\md{Advantages of EHR}
 
 \subsection{Interventional data vs observational
   data}\label{subsec:intro:interventional_vs_observational}
@@ -1037,30 +1042,27 @@ help practitioners during consultation \citep{lee2023benefits}.
   \label{subsec:cdw:data_usages}%
 
 
-  \paragraph{Health data is first collected for a primary use:  patient care.}
-  EHRs are primarily used to record patients' state of health and their care
-  (26). These might be shared within the healthcare team, but always with a view
-  to caring for the patient whose data is collected. The use of a patient's data
-  is said to be primary when it is used patient's care
-  \footnote{\url{https://ec.europa.eu/commission/presscorner/detail/en/qanda_22_2712}}.
+  \paragraph{Primary use of health data focus on patient care.}
+  EHRs are primarily used to record patients' health state and care
+  \citep{safran_toward_2007,eu_primary_2022}. This information might be shared within the
+  healthcare team, but always with the goal to cary for the patient whose data is
+  collected.
 
 
-  \paragraph{Secondary uses do not directly concern patient care.} They are reuses
-  of data for other purposes, such as research, activity indicators for the
+  \paragraph{Secondary use do not directly concern patient care.} Data can be
+  reused for other purposes, such as research, activity indicators for the
   management or quality of care, optimization of the coding of medical
   information, and feasibility studies
   \citep{safran_toward_2007,cnil_referentiel_2021}.
 
+  \paragraph{Towards mix usages?}
+  Emerging paradigms such as personalized medicine encompass both types of use,
+  as in the case of learning systems that give rise to diagnosis, prognosis or
+  decision-making tools. During the \textit{learning phase}, data from a set of
+  patients is reused --secondary use-- to create the knowledge required to
+  operate the tool. In production, the tool takes input data from a specific
+  patient to improve his or her care --primary use.
 
-  \paragraph{Towards mix usages: the learning health system paradigm}
-  Some purposes can encompass both types of use, as in the case of learning
-  systems that give rise to diagnosis, prognosis or decision-making tools. During
-  the \textit{learning phase}, data from a set of patients is reused --secondary
-  use-- to create the knowledge required to operate the tool. In production, the
-  tool takes input data from a specific patient to improve his or her care
-  --primary use. This concept is part of the learning health system \citep{mcginnis2013best},
-  which aims to continuously improve the quality of care by integrating research
-  and innovation into the care process.
 
 
   \subsection{Healthcare data collection is tightly linked with local organization}%
@@ -1110,26 +1112,16 @@ help practitioners during consultation \citep{lee2023benefits}.
 In France, the national insurer collects all hospital activity and city care
 claims into a unique reimbursement database \citep{tuppin_value_2017}. However,
 clinical data is historically scattered at each care site in numerous HISs.
-Several hospitals deployed efforts for about ten years to create CDWs from
-electronic medical records
-\citep{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
-  lamer_development_2022}. This work has accelerated recently, with the growing
-development of dedicated infrastructures at the regional and national levels.
-Regional cooperation networks are being set up --such as the Ouest Data Hub
-\citep{hugo_2022}. In July 2022, the Ministry of Health opened a 50 million euros
-call for projects to set up and strengthen a network of hospital Clinical Data
-Warehouses (CDWs) coordinated with the national platform, the Health Data Hub by
-2025.
 
 \subsection{The multiplication of Clinical Data Warehouses}%
 \label{subsec:cdw:cdw_definition}%
 
-\paragraph{An infrastructure} is needed to pool data data from one or more
-medical information systems --whatever the organizational framework-- to
-homogeneous formats, for management, research or care reuses
-\citep{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
-\ref{background:CDW:fig:ehr_flow} illustrates for a Clinical Data Warehouse, the
-four phases of data flow from the various sources that make up the HIS:
+\paragraph{Dedicated infrastructures, called Clinical Data Warehouse (CDW)} are
+needed to pool data data from one or more medical information systems --whatever
+the organizational framework-- to homogeneous formats, for management, research
+or care reuses \citep{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
+\ref{background:CDW:fig:ehr_flow} illustrates for a CDW, the four phases of data
+flow from the various sources that make up the HIS:
 
 \begin{enumerate}
   \item \textbf{Collection} and copying of original sources.
@@ -1148,7 +1140,7 @@ four phases of data flow from the various sources that make up the HIS:
         datamarts and data sets.
 \end{enumerate}
 
-%\vfill
+
 \begin{figure*}
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_2/Fig1.pdf}
@@ -1156,6 +1148,17 @@ four phases of data flow from the various sources that make up the HIS:
   \label{background:CDW:fig:ehr_flow}
 \end{figure*}
 
+
+In France, several hospitals deployed efforts for about ten years to create CDWs
+from electronic medical records
+\citep{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
+  lamer_development_2022}. This work has accelerated recently, with the growing
+development of dedicated infrastructures at the regional and national levels.
+Regional cooperation networks are being set up --such as the Ouest Data Hub
+\citep{hugo_2022}. In July 2022, the Ministry of Health opened a 50 million
+euros call for projects to set up and strengthen a network of hospital Clinical
+Data Warehouses (CDWs) coordinated with the national platform, the Health Data
+Hub by 2025.
 
 \section{Speaking to the data collectors: Interviews of French University
   Hospitals}%
@@ -1516,7 +1519,6 @@ data once it has been transformed and prepared for analysis is published.
 \section{Recommendations: How to consolidate EHRs and expand usages}%
 \label{sec:cdw:recommendations}%
 
-\md{Might go into the conclusion}
 We give the first overview of the CDWs in university hospitals of France with 32
 hospitals reviewed. The implementation of CDW dates from 2011 and accelerated in
 the late 2020. Today, 24 of the university hospitals have an ongoing CDW
