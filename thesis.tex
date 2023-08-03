@@ -1885,16 +1885,14 @@ This chapter has been submitted to \textit{npj Digital Medicine} as:\\
 \textit{Matthieu Doutreligne, Tristan Struja, Judith Abecassis, Claire Morgand, Gaël
   Varoquaux, \& Leo Anthony Celi. (2023). Step-by-step causal analysis of Electronic Health Records to ground
   decision making.} \\
-As the first author I formulated the research question, designed the study,
-performed the experiments and wrote the manuscript.
+As the first author I designed the study, performed the experiments and wrote
+the manuscript.
 
 \clearpage
 \section{Motivation : Healthcare is concerned with decision making, not mere
   prediction}%
 \label{sec:causal_tuto:motivation}%
 
-\md{I need to subdvide this motivation to be more readable}
-% \subsection{Predictive medicine currently suffers from biases}%
 % \label{subsec:causal_tuto:predictive_medicine_biases}%
 % \subsection{A key ingredient to ground data-driven decision making is causal thinking}%
 % \label{subsec:causal_tuto:causal_thinking}%
@@ -1903,9 +1901,8 @@ performed the experiments and wrote the manuscript.
 \label{subsec:causal_tuto:synthetic_materials}%
 
 
-Medicine increasingly relies on data, with the promise of better
-clinical decision-making. Machine learning is central to this
-endeavor.
+\paragraph{Medicine increasingly relies on data,} with the promise of better
+clinical decision-making. Machine learning is central to this endeavor.
 % Other formulation: "For such endeavor, machine learning is the darling
 % of data scientists."
 On medical images, it achieves human-level performance to
@@ -1932,7 +1929,7 @@ These shortcuts are at odds with healthcare's ultimate goal: appropriate care
 for optimal health outcome for each and every patient
 \citep{cma_policy_appropriateness_2015, ghassemi2020review}. Making the right decisions requires more than accurate predictions.
 
-The key ingredient to ground data-driven decision making is causal thinking
+\paragraph{Causal thinking} The key ingredient to ground data-driven decision making is
 \citep{prosperi2020causal}. Indeed, decision-making logic cannot rely purely on
 learning from the data, which itself results from a history of prior
 decisions \citep{plecko2022causal}. Rather, reasoning about a putative
@@ -1962,7 +1959,7 @@ are not usable for decision making. Rather dedicated statistical
 techniques are needed to emulate a ``target trial'' from \emph{observational} data
 -- without controlled interventions.
 
-EHRs and claims are two prominent sources of real-life healthcare data with different time resolutions.
+\paragraph{Different time resolutions} EHRs and claims are two prominent sources of real-life healthcare data with different time resolutions.
 EHRs are particularly suited to guide clinical decisions, as they are
 rich in high-resolution and time-varying features, including vital signs,
 laboratory tests, medication dosages, etc. Claims, on the other
@@ -1978,8 +1975,9 @@ tricky, as it is easy to induce time-related biases
 \citep{suissa2008immortal,wang2023emulation}.
 
 % Position of our paper
-Here we summarize the main considerations to derive valid decision-making
-evidence from EHRs and claims data.
+\paragraph{Objectives and structure of the chapter} Here we summarize the main
+considerations to derive valid decision-making evidence from EHRs and claims
+data.
 %
 Many guidelines on causal inference from observational data have been
 written in various
@@ -2089,15 +2087,15 @@ individualized decision.
 
 
 \begin{figure}[b!]
-  \begin{minipage}{.2\linewidth}
-    \caption{\textbf{Study design} -- The first step of the analysis consists in identifying a valid
-      treatment effect question from patient healthcare trajectories and defining
-      a target trial emulating a RCT using the PICO(T) framework.}\label{fig:counterfactual_event_format}
-  \end{minipage}%
-  \hfill%
-  \begin{minipage}{.78\linewidth}
-    \includegraphics[width=\linewidth]{img/chapter_4/counterfactual_event_format.pdf}
-  \end{minipage}%
+  %  \begin{minipage}{.2\linewidth}
+  % \end{minipage}%
+  % \hfill%
+  % \begin{minipage}{.78\linewidth}
+  \includegraphics[width=\linewidth]{img/chapter_4/counterfactual_event_format.pdf}
+  \caption{\textbf{Study design} -- The first step of the analysis consists in identifying a valid
+    treatment effect question from patient healthcare trajectories and defining
+    a target trial emulating a RCT using the PICO(T) framework.}\label{fig:counterfactual_event_format}
+  %\end{minipage}%
 \end{figure}
 
 
@@ -2245,7 +2243,6 @@ non-treated that are not due to the intervention
 
 \end{background_box_left}
 
-\md{Might take some work to put this figure in a colourbox.}
 \begin{figure}
   \begin{minipage}[t]{0.18\linewidth}
     \includegraphics[width=0.72\linewidth]{img/chapter_4/confounder.pdf}
@@ -2290,7 +2287,7 @@ non-treated that are not due to the intervention
       following][]{attia2022proposal}
   \end{minipage}
   \caption{The five categories of causal variables needed for our
-    framework.}\label{fig:causal_variables}
+    framework.}\label{fig:causal_variables}\md{Might take some work to put this figure in a colourbox.}
 \end{figure}
 
 \begin{background_box_left}
@@ -2334,7 +2331,7 @@ of confounders, resulting in a larger covariate space, hence increasing the
 estimate's variance and endangering the positivity assumption. The choices
 should be guided by expert knowledge. If multiple choices appear reasonable, one
 should compare them in a vibration analysis (see Section
-\ref{sec:vibration_analysis}). Indeed, aggregation may impact results, as
+\ref{subsec:causal_tuto:vibration_analysis}). Indeed, aggregation may impact results, as
 \cite{sofrygin2019targeted} show, revealing that some choices of averaging time
 scale lead to inconclusive links between HbA1c levels and survival in diabetes.
 
@@ -2476,7 +2473,7 @@ patients do benefit from albumin.
 
 \begin{figure}[p!]
   \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_4/timeline_albumin_for_sepsis.pdf}
+  \includegraphics[width=\linewidth]{img/chapter_4/timeline_albumin_for_sepsis.pdf}
   \caption{Defining the inclusion event, the starting time T0 for follow-up, the
     intervention's assignment time and the observation window for confounders is
     crucial to avoid time and selection biases. In our study, the gap
@@ -2505,20 +2502,21 @@ Appendix \ref{apd:albumin_for_sepsis:table1_complete} details confounders
 summary statistics for treated and controls.
 
 
-\begin{table}[p!]
-  \centering\small
-  \input{img/chapter_4/albumin_for_sepsis__obs_1d__table1_24h.tex}%
-  \\[.5ex]
-
+\begin{table*}[!tb]
+  \resizebox*{\textwidth}{!}{
+    %\centering%\small
+    \input{img/chapter_4/albumin_for_sepsis__obs_1d__table1_24h.tex}%
+    %\\[.5ex]
+  }
   \caption{Characteristics of the trial population measured on the first 24
     hours of ICU stay. Appendix \ref{apd:table:albumin_for_sepsis:table1_complete}
     describes all confounders used in the analysis.}\label{table:albumin_for_sepsis:table1_simple}
-\end{table}
+\end{table*}
 
 
 \begin{figure}[p!]
   \centering%
-  \includegraphics[width=.8\linewidth]{img/chapter_4/dagitty_graph.pdf}
+  \includegraphics[width=.9\linewidth]{img/chapter_4/dagitty_graph.pdf}
   \caption{\textbf{Causal graph for the Albumin vs crystalloids emulated
       trial} -- The
     green arrow indicates the effect studied. Black arrows show causal links
@@ -2581,7 +2579,7 @@ double machine learning or doubly robust approaches.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.9\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__estimates_20230712__est_lr_rf__bs_50.pdf}
+  \includegraphics[width=\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__estimates_20230712__est_lr_rf__bs_50.pdf}
   \caption{\textbf{Forest plot for the vibration analysis} -- Different
     estimators give different results, sometimes even outside of
     each-other's bootstrap confidence intervals. Score matching yields
@@ -2596,22 +2594,23 @@ double machine learning or doubly robust approaches.
 
 \paragraph{Study design -- Illustration of immortal time bias:}
 
-To illustrate the risk of immortal-time bias, we varied the eligibility period by allowing
-patients to receive the treatment or the control in a shorter or longer time
-window than 24 hours. As explained in \autoref{sec:framing}, a large
-eligibility period means that patients in the study are more likely to be
-treated if they survived till the intervention and hence the study is biased to overestimate the
+To illustrate the risk of immortal-time bias, we varied the eligibility period
+by allowing patients to receive the treatment or the control in a shorter or
+longer time window than 24 hours. As explained in
+\autoref{subsec:causal_tuto:framing}, a large eligibility period
+means that patients in the study are more likely to be treated if they survived
+till the intervention and hence the study is biased to overestimate the
 beneficial effect of the intervention. Figure
-\ref{fig:albumin_for_sepsis:immortal_time_bias} shows that
-larger eligibility periods change the direction of the estimate and lead
-to Albumin seeming markedly more efficient. Should the analyst not have
-in mind the mechanism of immortal time bias, this vibration analysis
-ought to raise an alarm and hopefully lead to correct the study design.
+\ref{fig:albumin_for_sepsis:immortal_time_bias} shows that larger eligibility
+periods change the direction of the estimate and lead to Albumin seeming
+markedly more efficient. Should the analyst not have in mind the mechanism of
+immortal time bias, this vibration analysis ought to raise an alarm and
+hopefully lead to correct the study design.
 
 
 \begin{figure}
   \centering
-  \includegraphics[width=.9\linewidth]{img/chapter_4/itb__immortal_time_bias_double_robust_forest_agg_first_last__bs_30.pdf}
+  \includegraphics[width=\linewidth]{img/chapter_4/itb__immortal_time_bias_double_robust_forest_agg_first_last__bs_30.pdf}
   \caption{\textbf{Detecting immortal time bias} -- Increasing the observation period increases the temporal blank period
     between inclusion and treatment initialization, associating thus
     patients surviving longer with treatment: Immortal
@@ -2640,7 +2639,7 @@ with patient with septic shock before fluid administration, consistent with the
 >=60) and males, consistent with \citep{zhou2021early}, as well as white patients.
 
 \begin{figure}[!h]
-  \begin{minipage}{.25\linewidth}
+  \begin{minipage}{.3\linewidth}
     \caption{The subgroup distributions of Individual Treatment effects showed
       better treatment efficacy for patients older than 60 years, septic shock,
       and to a lower extent males. The final estimator is ridge regression. The
@@ -2649,7 +2648,7 @@ with patient with septic shock before fluid administration, consistent with the
       extend to 1.5 times the inter-quartile range of the
       distribution.}\label{fig:albumin_for_sepsis:cate_results} \end{minipage}%
   \hfill%
-  \begin{minipage}{.7\linewidth}
+  \begin{minipage}{.67\linewidth}
     \includegraphics[width=\linewidth]{img/chapter_4/boxplot_est__DML__nuisances__Forests__final_Ridge.pdf}
   \end{minipage}%
 \end{figure}
@@ -2674,8 +2673,8 @@ it unreliable for decision making.
 %
 EHR data come with particular challenges: information may be available
 indirectly, \emph{e.g.} via billing codes, the time-wise dimension requires
-aggregations (\autoref{sec:estimation}). These challenges can create
-subtle causal biases (\autoref{sec:framing}).
+aggregations (\autoref{subsec:causal_tuto:estimation}). These challenges can create
+subtle causal biases (\autoref{subsec:causal_tuto:framing}).
 %
 To ensure that our framework addresses all aspects of EHR analysis and to
 expose it in a didactic way, we detailed a complete analysis of a publicly-available EHR dataset,
@@ -3623,8 +3622,8 @@ have access to the oracle Bayes predictor for the outcome ie.~$f(x,
   \tau\text{-risk}(\mu) = \mathbb E_{X\sim p(X)}[(\tau(X) - \tau_{\mu}(X))^2] = 0
 \end{equation}
 \begin{align}
-  \mu\text{-risk}(\mu) & = \mathbb E_{(Y, X, A) \sim p(Y;X;A)}[\big( Y - \mu_A(X)\big)^2]
-  = \int_{\mathcal X, \mathcal A}
+  \mu\text{-risk}(\mu) & = \mathbb E_{(Y, X, A) \sim p(Y;X;A)}[\big( Y - \mu_A(X)\big)^2] \\
+                       & = \int_{\mathcal X, \mathcal A}
   \,\varepsilon(x,a)^2 p(a \mid x) \,p(x) \,dx\,da  \leq \sigma_B^{2}(0) + \sigma_B^{2}(1)
 \end{align}
 \begin{equation}
@@ -4172,11 +4171,7 @@ signals could be highly delayed).
 Modern collection of data in healthcare makes it a domain closer to social
 sciences than usually considered. It involves institutions and individuals with
 complex data collection patterns and choices that are seldom well controlled by
-the researcher alone: \textit{l'espace général du savoir n'est plus celui des
-identités et des différences, [...]celui d'une caractérisation universelle,
-d'une taxinomia générale [...], mais un espace fait d'organisations,
-c'est-à-dire de rapports internes entre des éléments dont l'ensemble assure une
-fonction} \citep{foucault1990mots}. Therefore, we should bridge traditional
+the researcher alone. Therefore, we should bridge traditional
 statistics with econometrics and social sciences to analyze it. This does not
 impose to abandon the scientific method, but to adapt it to constant
 distribution shifts and unkown complex mechanisms.
@@ -5015,61 +5010,6 @@ ontologies, ...).
     \label{tab:my-table}
     \caption{Eligibility criteria and resulting populations for potential target trials in MIMIC-IV.}\label{apd:table:emulated_trials_populations}
   \end{table}
-
-
-  \section{Assumptions: what is needed for causal inference from observational studies}\label{apd:causal_assumptions}
-
-
-  The following four assumptions, referred as strong ignorability, are
-  needed to assure identifiability of the causal estimands with observational
-  data with most causal-inference methods \citep{rubin2005causal}, in
-  particular these we use:
-
-  \begin{assumption}[Unconfoundedness]\label{assumption:ignorability}
-    \begin{equation}\label{eq:ignorability}
-      \{Y(0), Y(1) \} \indep A | X
-    \end{equation}
-    This condition --also called ignorability-- is equivalent to the conditional
-    independence on the propensity score $e(X)=\mathbb P(A=1|X)$ \citep{rosenbaum1983central}: $\{Y(0), Y(1) \}\indep  A | e(X)$.
-  \end{assumption}
-
-
-  \begin{assumption}[Overlap, also known as Positivity]\label{assumption:overlap}
-    \begin{equation}\label{eq:overlap}
-      \eta < e(x) < 1 - \eta \quad \forall x \in \mathcal{X} \text{ and some }   \eta > 0
-    \end{equation}
-    The treatment is not perfectly predictable. Or in other words, every
-    patient has a chance to be treated and not to be treated. For a given set of
-    covariates, we need examples of both to recover the ATE.
-  \end{assumption}
-
-  As noted by \cite{damour2020overlap}, the choice of covariates $X$ can
-  be viewed as a trade-off between these two central assumptions. A bigger
-  covariate set generally reinforces the ignorability assumption. In the
-  contrary, overlap can be weakened by large $\mathcal{X}$ because of the
-  potential inclusion of instrumental variables: variables only linked to the treatment which
-  could lead to arbitrarily small propensity scores.
-
-  % remark: There is a major counter example to these colliders (variables which
-  % are caused by both the outcome and the treatment),
-
-  \begin{assumption}[Consistency]\label{assumption:consistency} The observed
-    outcome is the potential outcome of the assigned treatment:
-    \begin{equation}\label{eq:consistancy}
-      Y = A \, Y(1) + (1-A) \, Y(0)
-    \end{equation}
-    Here, we assume that the intervention $A$ has been well defined. This
-    assumption focuses on the design of the experiment. It clearly states the link
-    between the observed outcome and the potential outcomes through the
-    intervention \citep{hernan2020causal}.
-  \end{assumption}
-
-  \begin{assumption}[Generalization]\label{assumption:generalization} The training
-    data on which we build the estimator and the test data on which we make the
-    estimation are drawn from the same distribution, also known as
-    the ``no covariate shift'' assumption \citep{jesson2020identifying}.
-  \end{assumption}
-
 
   \section{Major causal-inference methods}\label{apd:causal_methods}
 
