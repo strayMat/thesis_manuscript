@@ -4,8 +4,6 @@
 % headers and typo stuffs
 \usepackage{fancyhdr}
 \usepackage{array}
-\usepackage{multirow} %% Pour mettre un texte sur plusieurs rangées
-\usepackage{multicol} %% Pour mettre un texte sur plusieurs colonnes
 \usepackage{scrextend} %Forcer la 4eme  de couverture en page pair
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -56,7 +54,10 @@
 \usepackage{colortbl}
 \usepackage{threeparttable}
 \usepackage{multirow}
+\usepackage{multicol} %% Pour mettre un texte sur plusieurs colonnes
 \usepackage{makecell}
+\usepackage{pifont}
+
 \usepackage[right]{lineno}
 \usepackage[nopatch=eqnum]{microtype}
 \usepackage{lscape}
@@ -82,6 +83,7 @@
 \usepackage{amsfonts}  % blackboard math symbols
 \usepackage{amsmath}
 \usepackage{amssymb} %mathbb packages
+\usepackage{nicefrac}              % compact symbols for 1/2, etc.
 
 \usepackage{siunitx}
 \usepackage{algorithm, algorithmicx, algpseudocode}
@@ -2447,24 +2449,340 @@ patients do benefit from albumin.
 \subsection{Study design: effect of crystalloids on mortality in sepsis}%
 \label{subsec:causal_tuto:framing_mimic}%
 
-%%%%%%%%% TODO:continue from here (l. 654 in preprint)
 
-\subsection{Identification}
-Covariates and dag
+\begin{itemize}[leftmargin=2ex]
+  \item \textcolor{P}{Population}: Patients with sepsis within the ICU stay
+        according to the sepsis-3 definition. Other inclusion criteria:
+        sufficient follow-up of at least 24 hours, and age over 18 years
+        described in table \ref{table:albumin_for_sepsis:table1_simple}.
+
+  \item \textcolor{I}{Intervention}: Treatment with a combination of
+        crystalloids and albumin during the first 24 hours of an ICU stay.
+
+  \item \textcolor{C}{Control}: Treatment with crystalloids only in the first 24
+        hours of an ICU stay.
+
+  \item \textcolor{O}{Outcome}: 28-day mortality.
+
+  \item \textcolor{T}{Time}: Follow-up begins after the first administration of
+        crystalloids. Thus, we potentially introduce a small immortal time bias
+        by allowing a time gap between follow-up and the start of the albumin
+        treatment --shown in Figure \ref{fig:cohort_timeline_albumin}. Because
+        we are only considering the first 24 hours of an ICU stay, we
+        hypothesize that this gap is insufficient to affect our results. We test
+        this hypothesis in the vibration analysis step.
+\end{itemize}
+
+
+\begin{figure}[p!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/chapter_4/timeline_albumin_for_sepsis.pdf}
+  \caption{Defining the inclusion event, the starting time T0 for follow-up, the
+    intervention's assignment time and the observation window for confounders is
+    crucial to avoid time and selection biases. In our study, the gap
+    between the intervention and the inclusion is small
+    compared to the occurrence of the outcome to limit immortal time bias: 6.7 hours vs 40
+    days for mortality.\label{fig:cohort_timeline_albumin}}
+\end{figure}
+
+
+In MIMIC-IV, these inclusion criteria yield 18,121 patients with 3,559 patients
+treated with a combination of crystalloids and albumin (Appendix
+\ref{apd:selection_flowchart} details the selection flowchart).
+
+
+\subsection{Identification: listing confounders}%
+\label{subsec:causal_tuto:confounders_mimic}%
+
+We enrich the confounders selection procedure described by \cite{zhou2021early}
+with expert knowledge, creating the causal DAG shown in Figure
+\ref{fig:causal_diagram_albumin}. Gray confounders are not controlled for, since
+they are not available in the data. However, resulting confounding biases are
+captured by proxies such as comorbidity scores (SOFA or SAPS II) or other
+variables (eg. race, gender, age, weight).
+%
+Appendix \ref{apd:albumin_for_sepsis:table1_complete} details confounders
+summary statistics for treated and controls.
+
+
+\begin{table}[p!]
+  \centering\small
+  \input{img/chapter_4/albumin_for_sepsis__obs_1d__table1_24h.tex}%
+  \\[.5ex]
+
+  \caption{Characteristics of the trial population measured on the first 24
+    hours of ICU stay. Appendix \ref{apd:table:albumin_for_sepsis:table1_complete}
+    describes all confounders used in the analysis.}\label{table:albumin_for_sepsis:table1_simple}
+\end{table}
+
+
+\begin{figure}[p!]
+  \centering%
+  \includegraphics[width=.8\linewidth]{img/chapter_4/dagitty_graph.pdf}
+  \caption{\textbf{Causal graph for the Albumin vs crystalloids emulated
+      trial} -- The
+    green arrow indicates the effect studied. Black arrows show causal links
+    known to medical expertise. Dotted red arrows highlight confounders not directly
+    observed. For readability, we draw only the most important edges from an
+    expert point of view. All white nodes corresponds to variables included in
+    our study.}\label{fig:causal_diagram_albumin}
+\end{figure}
+
 
 \subsection{Estimation}\label{subsec:causal_tuto:estimation_mimic}
-Confounders extractions
-Confounders aggregation
-Causal estimators
-Nuisance estimators
 
-\subsection{Vibration analysis}\label{subsection:causal_tuto:vibration_mimic}
-Varying estimation choices:
-Varying inclusion criteria: illustration of immortal time bias
+\paragraph{Confounder aggregation:}
 
-\subsection{Heterogeneity of treatment}\label{subsec:causal_tuto:heterogeneity_mimic}
+We tested multiple aggregations such as the last value before the start of the
+follow-up period, the first observed value, and both the first and last values as
+separated features.
 
-\section{Discussion}\label{subsec:causal_tuto:discussion}
+\paragraph{Causal estimators:}
+
+We implemented multiple estimation strategies, including Inverse Propensity
+Weighting (IPW), outcome modeling (G-formula) with T-Learner, Augmented Inverse
+Propensity Weighting (AIPW) and Double Machine Learning (DML). We used the
+python packages dowhy \citep{sharma2018tutorial} for IPW implementation and
+EconML \citep{battocchi2019econml} for all other estimation strategies.
+Confidence intervals were estimated by bootstrap (50 repetitions).
+Appendices \ref{apd:causal_estimators} and
+\ref{apd:packages} detail the estimators and the available Python
+implementations.
+
+\paragraph{Outcome and treatment estimators:}
+
+To model the outcome and treatment, we used two common but different estimators:
+random forests and ridge logistic regression implemented with scikit-learn
+\citep{pedregosa2011scikit}. We chose the hyperparameters with a random search
+procedure (detailed in Appendix \ref{apd:hyper_parameter_search}). While
+logistic regression handles predictors in a linear fashion, random forests
+should have the benefit of modeling non-linear relations as well.
+
+\subsection{Vibration analysis: Understanding variance or sources of
+  systematic errors in our study}\label{subsection:causal_tuto:vibration_mimic}
+
+\paragraph{Varying estimation choices: Confounders aggregation, causal and nuisance estimators:}
+
+Figure \ref{fig:albumin_for_sepsis:results} shows varying confidence intervals
+(CI) depending on the method. Doubly-robust methods provide the narrowest CIs,
+whereas the outcome-regression methods have the largest CI. The estimates of the
+forest models are closer to the consensus across prior studies (no effect) than the estimates
+from the logistic regression indicating a better fit of the non-linear
+relationships in the data.
+We only report the first and last
+pre-treatment feature aggregation strategies, since detailed analysis showed
+little differences for other choices of feature aggregation (see Appendix
+\ref{apd:detailed_results}).
+%
+Confronting this analysis with the prior published evidence of
+little-to-no effect, it seems reasonable to select the models using
+random forests for nuisance. Out of these, theory suggests to trust more
+double machine learning or doubly robust approaches.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__estimates_20230712__est_lr_rf__bs_50.pdf}
+  \caption{\textbf{Forest plot for the vibration analysis} -- Different
+    estimators give different results, sometimes even outside of
+    each-other's bootstrap confidence intervals. Score matching yields
+    unconvincingly high estimates, inconsistent with the published RCT.
+    With other causal approaches, using linear estimators for nuisances
+    suggest a reduced mortality risk for albumin, while using forests for
+    nuisance models points to no effect, which is consistent with the RCT gold standard.
+    The diamonds
+    depict the mean effect and the bar are the 95\% confidence intervals
+    obtained by 50 bootstrap repetitions.}\label{fig:albumin_for_sepsis:results}
+\end{figure}
+
+\paragraph{Study design -- Illustration of immortal time bias:}
+
+To illustrate the risk of immortal-time bias, we varied the eligibility period by allowing
+patients to receive the treatment or the control in a shorter or longer time
+window than 24 hours. As explained in \autoref{sec:framing}, a large
+eligibility period means that patients in the study are more likely to be
+treated if they survived till the intervention and hence the study is biased to overestimate the
+beneficial effect of the intervention. Figure
+\ref{fig:albumin_for_sepsis:immortal_time_bias} shows that
+larger eligibility periods change the direction of the estimate and lead
+to Albumin seeming markedly more efficient. Should the analyst not have
+in mind the mechanism of immortal time bias, this vibration analysis
+ought to raise an alarm and hopefully lead to correct the study design.
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.9\linewidth]{img/chapter_4/itb__immortal_time_bias_double_robust_forest_agg_first_last__bs_30.pdf}
+  \caption{\textbf{Detecting immortal time bias} -- Increasing the observation period increases the temporal blank period
+    between inclusion and treatment initialization, associating thus
+    patients surviving longer with treatment: Immortal
+    Time Bias. A longer observation period (72h) artificially favors the
+    efficacy of Albumin. The estimator is a doubly robust learner (AIPW) with random
+    forests for nuisances. This result is consistent across estimators as shown
+    in Appendix \ref{apd:detailed_results_itb}. The green diamonds depict the
+    mean effect and the bar are the 95\% confidence intervals obtained by 30
+    bootstrap repetitions. }\label{fig:albumin_for_sepsis:immortal_time_bias}
+\end{figure}
+
+
+\subsection{Treatment heterogeneity: Which treatment for a given
+  sub-population?}%
+\label{subsec:causal_tuto:heterogeneity_mimic}%
+
+
+We now study treatment heterogeneity using the pipeline validated by confronting
+the vibration analysis to the literature: a study design avoiding immortal time
+bias, and the double machine learning model using forest for nuisances and a
+linear model for the final heterogeneity regression. We explore heterogeneity
+along four binary patient characteristics, displayed on Figure
+\ref{fig:albumin_for_sepsis:cate_results}. We find that albumin is beneficial
+with patient with septic shock before fluid administration, consistent with the
+\cite{caironi2014albumin} RCT. It is also beneficial for older patients (age
+>=60) and males, consistent with \citep{zhou2021early}, as well as white patients.
+
+\begin{figure}[!h]
+  \begin{minipage}{.25\linewidth}
+    \caption{The subgroup distributions of Individual Treatment effects showed
+      better treatment efficacy for patients older than 60 years, septic shock,
+      and to a lower extent males. The final estimator is ridge regression. The
+      boxes contain the $25^\text{th}$ and $75^\text{th}$ percentiles of the CATE
+      distributions with the median indicated by the vertical line. The whiskers
+      extend to 1.5 times the inter-quartile range of the
+      distribution.}\label{fig:albumin_for_sepsis:cate_results} \end{minipage}%
+  \hfill%
+  \begin{minipage}{.7\linewidth}
+    \includegraphics[width=\linewidth]{img/chapter_4/boxplot_est__DML__nuisances__Forests__final_Ridge.pdf}
+  \end{minipage}%
+\end{figure}
+
+\section{Discussion and conclusion}\label{subsec:causal_tuto:discussion}
+
+
+Our analytic framework strives to streamline extracting valid decision-making
+rules from EHR data. Decision-making is tied to a choice: to treat or not
+to treat, for a given intervention. A major pitfall, source of numerous
+shortcuts of machine-learning systems, is to extract non-causal
+associations between the intervention and the outcome. Our framework is
+designed to avoid these pitfalls by starting with rigorous causal analysis, in the
+form of a target trial, to validate study design and analytic choices
+before more elaborate analysis, potentially using machine-learning for
+individual predictions.
+%
+We argue that in the absence of a precise framing including treatment
+allocation, automated decision making is brittle. It is all too easy, for
+instance, to build a predictive system on post-treatment data, rendering
+it unreliable for decision making.
+%
+EHR data come with particular challenges: information may be available
+indirectly, \emph{e.g.} via billing codes, the time-wise dimension requires
+aggregations (\autoref{sec:estimation}). These challenges can create
+subtle causal biases (\autoref{sec:framing}).
+%
+To ensure that our framework addresses all aspects of EHR analysis and to
+expose it in a didactic way, we detailed a complete analysis of a publicly-available EHR dataset,
+supported by \href{https://github.com/soda-inria/causal_ehr_mimic}{open code}.
+% Now scare the reader: many moving parts, things can go wrong?
+
+\paragraph{A well-framed target trial can be validated}
+
+Assessing the validity of an analysis is challenging even for experts
+\citep{ioannidis2005most,breznau2022observing}. Our framework recommends
+using a well-specific target trial to establish a valid pipeline because
+it helps confronting the resulting average treatment effect to other
+evidence \citep{hernan_using_2016,wang2023emulation}. Our
+resuscitation-fluid analysis matches well published findings:
+Pooling evidence from high-quality RCTs, no effect of albumin in severe sepsis
+was demonstrated for both 28-day mortality (odds ratio (OR) 0.93, 95\% CI
+0.80-1.08) and 90-day mortality (OR 0.88, 95\% CI 0.76-1.01) \citep{xu2014comparison}. This consistency validates
+our study design and analytic choices.
+% The immortal time bias
+Varying analytic choices and confronting them to prior studies can reveal
+loopholes in the analysis, as we demonstrated with immortal time bias:
+extending the time between ICU admission and intervention to 72 hours,
+we observed an inflation of effect size consistent with such
+bias. Looping back to reference RCTs reveals that these
+include patients within 8
+to 24 hours of ICU admission \citep{safe2011impact,annane2013effects,
+  caironi2014albumin}.
+
+
+\paragraph{Decision-making from EHRs}
+
+Once the causal analysis has been validated, it can be used for decision
+making. A sub-population analysis (as in
+Figure \ref{fig:albumin_for_sepsis:cate_results}) can distill rules on
+which groups of patients should receive the treatment. Ideally, dedicated
+RCTs can be run with inclusion criteria matching these sub-groups.
+However, the cost and the ethical concerns of running RCTs limit the
+number of sub-groups that can be explored.
+%
+In addition, the sub-group
+view risks oversimplifying, as opposed to patient-specific effect
+estimates to support more individualized clinical decision making
+\citep{kent2018personalized}.  For this, predictive modeling shines.
+Causally-grounded machine learning can give good counter-factual prediction
+\citep{prosperi2020causal,hernan2019second,richens2020improving}, if it
+predicts well the treated and untreated outcomes
+\citep{doutreligne2023select}. Even without focusing on a specific
+intervention, anchoring machine learning on causal mechanisms gives
+models that are more robust to distributional shift \citep{scholkopf2021toward},
+safer for clinical use \citep{richens2020improving}, and more fair
+\citep{plecko2022causal}.
+%
+Capturing individualized effects via machine-learning models does require
+to probe many diverse individuals. EHRs and claims data are well suited
+for these models, as they easily cover much more individuals
+than a typical clinical study.
+
+% Loop to limitations by saying that learning on EHR cannot inform on
+% trade-offs that have never been explored in the data
+
+But EHRs cannot inform on trade-offs that have not been explored in the
+data. No matter how sophisticated, causal inference cannot conclude if
+there is no data to support an apple-to-apple comparison between treated
+and non-treated individuals. For example, treatment allocation is known
+to be influenced by race- and gender-concordance between the patient and the
+care provider. Yet, if the EHR data does no contain this information, it
+cannot nourish evidence-based decisions on such matter.
+%
+EHRs and RCTs complement each other:
+a dedicated study, with a randomized intervention, as an RCT, can be
+crafted to answer a given question on a given population. But RCTs cannot
+address all the subpopulations, local practices, healthcare systems
+\citep{rothwell2006factors,travers2007external,kennedy2015literature}.
+Our framework suggest to integrate the evidence from RCTs designed with
+matching PICO formulation to ensure the validity of the analysis and to
+use the EHR to explore heterogeneity.
+
+
+\paragraph{Conclusion}
+
+Without causal thinking machine learning does not suffice for optimal
+clinical decision making for each and every patient. It will replicate
+non-causal associations such as shortcuts improper for decision making.
+As models can pick up information such as race implicitly from the data
+\citep{adam2022write}, they risk propagating biases when building AI
+models which can further reinforce health disparities. This problem is
+acknowledged by the major tech companies which are deploying
+causal inference tooling to mitigate biases
+\citep{tensorflow_responsible_ai, microsoft_responsible_ai, pwc_responsible_ai}.
+%
+On the medical side, causal modeling can create actionable
+decision-making systems that reduce inequities
+\citep{mitra2022future,ehrmann2023making}.
+%
+However, as we have seen, subtle errors can make an intervention seemingly more
+--or less-- beneficial to patients. No sophisticated data-processing
+tool can safeguard against invalid study design or modeling choices.
+%
+The goal of our step-by-step analytic framework is to help the data
+analyst work around these loopholes, building models that avoid shortcuts
+and extract the best decision-making evidence.
+%
+Applied to study the addition of albumin to crystalloids to
+resuscitate sepsis patients, it shows that this addition is not
+beneficial in general, but that it does improve survival on
+specific individuals, such as patients undergoing sceptic shock.
+
 
 %%%%%%%%%%%%%%%%%%%%%%% CHAPTER 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
@@ -4395,6 +4713,877 @@ ontologies, ...).
   information about the CDW. The table of studies is the referencing of the
   studies informed on 10 portals of studies in progress (or completed if
   available) available in free access.
+
+  \chapter{Chapter 4}\label{apd:causal_tuto}
+
+  \section{Motivating example: Failure of predictive models to predict mortality
+    from pretreatment variables}%
+  \label{apd:motivating_example}%
+
+  To illustrate how machine learning frameworks can fail to inform decision
+  making, we present a motivating example from MIMIC-IV. Using the same
+  population and covariates as in the main analysis (described in Table
+  \ref{apd:table:albumin_for_sepsis:table1_complete}), we train a predictive
+  model for 28-day mortality. We split the data into a training set (80\%) and a
+  test set (20\%). The training set uses the last measurements from the first 24
+  hours, whereas the validation set only uses the last measurements before the
+  administration of crystalloids. We split the train set into a train and a
+  validation set. We fit a HistGradientBoosting classifier
+  \footnote{\url{https://scikit-learn.org/stable/modules/ensemble.html\#histogram-based-gradient-boosting}}
+  on the train set and evaluate the performance on the validation set and on the
+  test set. We see good area under the Precision-recall curve (PR AUC) on the
+  validation set, but a deterioration of 10 points on the test set (Figure
+  \ref{apd:fig:motivating_example_pr_auc}). The same is seen in Figure
+  \ref{apd:fig:motivating_example_roc_auc} when measuring performance with Area
+  Under the Curve of the Receiving Operator Characteristic (ROC AUC). In the
+  contrary, a model trained on pre-treatment features yield competitive
+  performances. This failure illustrates well the shortcuts on which predictive
+  models could rely to make predictions. A clinically useful predictive model
+  should support decision making --in this case, addition of albumin to
+  crystalloids-- rather than maximizing predictive performance. In this example,
+  causal thinking would have helped to identify the bias introduced by
+  post-treatment features. In fact, these features should not be included in a
+  causal analysis since they are post-treatment colliders.
+
+  \begin{figure}[!h]
+    \begin{subfigure}{\linewidth}
+      \centering
+      \includegraphics[width=0.8\linewidth]{img/chapter_4/predictive_failure__pr_auc.pdf}
+      \caption{}\label{apd:fig:motivating_example_pr_auc}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\linewidth}
+      \centering
+      \includegraphics[width=0.8\linewidth]{img/chapter_4/predictive_failure__roc_auc.pdf}
+      \caption{}\label{apd:fig:motivating_example_roc_auc}
+    \end{subfigure}
+    \caption{Failure to predict 28-day mortality from a model fitted on
+      pre-treatment variables. The model is trained on the last features from
+      the whole stay and tested on two validation sets: one with all stay
+      features and one with last features before crystalloids administration
+      (Pre-treatment only). The all-stay model performance markedly decreases in
+      the pre-treatment only dataset.}\label{apd:fig:motivating_example}
+  \end{figure}
+
+  \section{Estimation of Treatment effect with MIMIC data}\label{apd:ate_on_mimic}
+
+  We searched for causal inference studies in MIMIC using PubMed and Google
+  scholar with the following search terms ((MIMIC-III OR MIMIC-IV) AND (causal
+  inference OR treatment effect)). We retained eleven treatment effect studies
+  clearly following the PICO framework:  \begin{itemize}
+
+    \item \cite{liu2021effects} studied the effect of \textcolor{I}{High-flow
+            nasal cannula oxygen (HFNC)} against \textcolor{C}{noninvasive
+            mechanical ventilation} on \textcolor{P}{801 patients with hypoxemia
+            during ventilator weaning} on \textcolor{O}{28-day mortality}. They
+          used propensity score matching, and found non-negative effects as
+          previous RCTs reported -- though those were focused on reintubation as the
+          main outcome \citep{stephan2015high, hernandez2016effect}.
+
+    \item \cite{yarnell2023oxygenation} studied the effect of \textcolor{I}{lower hypoxemia} vs \textcolor{C}{higher
+          hypoxemia thresholds for the initiation of invasive ventilation} (defined with saturation-to-inspired oxygen ratio (SF)) for
+          \textcolor{P}{3,357 patients from MIMIC receiving inspired oxygen fraction >= 0.4} on \textcolor{O}{28-day
+            moratlity}. Using bayesian G-computation (time-varying treatment model with
+          gaussian process and outcome-model with BART, taking the treatment model as
+          entry), they found protective effects for initialization at low hypoxemia.
+          However, when externally validation their findings in the AmsterdamUMCdb dataset,
+          they found the highest mortality probability for patients with low hypoxemia.
+          Authors concluded that their model was heavily dependent on clinical context
+          and baseline caracteristics. There might be some starting-time bias in this study since it is really close
+
+    \item \cite{hsu2015association} studied the effect of \textcolor{I}{indwelling
+            arterial catheters (IACs)} vs \textcolor{C}{non-IAC} for
+          \textcolor{P}{1,776 patients who are mechanically ventilated and did
+            not require vasopressor support} on \textcolor{O}{28-day mortality}.
+          They used propensity score matching and found no effect. A notebook based on google cloud access to MIMIC-IV
+          replicating the study is available \href{https://github.com/alistairewj/mimic-iv-aline-study/blob/main/mimic_iv_aline.ipynb}{here}.
+
+    \item \cite{feng2018transthoracic} studied the effect of
+          \textcolor{I}{transthoracic echocardiography} vs \textcolor{C}{no
+            intervention} for \textcolor{P}{6,361 patients with sepsis} on
+          \textcolor{O}{28-day mortality}. They used IPW, PSM, g-formula and a
+          doubly robust estimation. The propensity score was modeled with boosting
+          and the outcome model with a logistic regression. They
+          found a significant positive reduction of mortality (odd ratio 0.78, 95\% CI 0.68-0.90).
+          \href{https://github.com/nus-mornin-lab/echo-mimiciii}{Study code is
+            open source}.
+
+    \item \cite{gani2023structural} studied the effect of \textcolor{I}{liberal
+            --target SpO2 greater than 96\%--} vs \textcolor{C}{conservative
+            oxygenation --target SpO2 between 88-95\%--} in \textcolor{P}{4,062
+            mechanically ventilated patients} on \textcolor{O}{90-day mortality}.
+          They found an advantage of the liberal strategy over liberal
+          (ATE=0.13) by adjusting on age and apsii. This is not consistent with
+          previous RCTs where no effects have been reported \citep{panwar2016conservative, mackle2019conservative}.
+
+    \item \cite{shahn2020fluid} studied the effect of \textcolor{I}{fluid-limiting
+            treatment --caped between 6 and 10 L--} vs \textcolor{C}{no cap on
+            fluid administration} strategies for \textcolor{P}{1,639 sepsis
+            patients} on \textcolor{O}{30 day-mortality}. Using a dynamic Marginal
+          Structural Model with IPW, they found a protective effect of
+          fluid-limitation on ATE -0.01 (95\%CI -0.016, -0.03). This is somehow
+          concordant with the RIFTS RCT that found no effect of fluid limitation
+          \citep{corl2019restrictive} and two previous meta-analyses
+          \citep{malbrain2014fluid,meyhoff2020lower}.
+
+    \item \cite{chinaeke2021impact} studied the effect of \textcolor{I}{statin use
+            prior to ICU admission} vs \textcolor{C}{absence of pre-ICU
+            prescription} for \textcolor{P}{8,200 patients with sepsis} on
+          \textcolor{O}{30-day mortality}. Using AIPW (no estimator reported)
+          and PSM (logistic regression), they found a decrease on mortality (ATE
+          -0.039, 95\%CI -0.084, -0.026). This partly supports previous
+          findings in Propensity Matching bases observational studies
+          \citep{lee2017preadmission,kyu2019preadmission}. But all RCTs
+          \citep{national2014rosuvastatin, singh2017effects} found no improvement for sepsis (not
+          pre-admission administration though). The \cite{wan2014effect}
+          meta-analysis concludes that there is lack of evidence for the use of
+          statins in sepsis with inconsistent results between RCTs (no effect)
+          and observational studies (protective effect).
+    \item \cite{adibuzzaman2019323} studied the effect of \textcolor{I}{higher} vs
+          \textcolor{C}{lower positive end-expiratory pressures (PEEP)} in
+          \textcolor{P}{1,411 patients with Acute Respiratory Distress Syndrome
+            (ARDS) syndrome} on \textcolor{O}{30 day mortality}. Very few details on
+          the methods were reported, but they found a protective effect for higher PEEP
+          consistent results from a target trial \citep{national2004higher}.
+    \item \cite{adibuzzaman2019323} also studied the effect of \textcolor{I}{early
+            use of a neuromuscular blocking agent } vs \textcolor{C}{placebo} in
+          \textcolor{P}{752 patients moderate-severe ARDS} on \textcolor{O}{30
+            day mortality}. Very few details on the methods were reported, but they found a
+          protective effect for the use of a neuromuscular blocking agent,
+          consistent with the results from a target trial
+          \citep{papazian2010neuromuscular}.
+    \item \cite{zhou2021early} studied the administration of \textcolor{I}{a
+            combination of albumin within the first 24-h after crystalloids} vs
+          \textcolor{C}{crystalloids alone} for \textcolor{P}{6,641 patients
+            with sepsis} on \textcolor{O}{28-day mortality}. Using PSM, they found
+          protective effect of combination on mortality, but insist on the
+          importance of initialization timing. This is consistent with \cite{xu2014comparison}, who
+          found a non-significant trend
+          in favor of albumin used for severe sepsis patients and a significant
+          reduction for septic shock patients, both on 90-day mortality. These
+          results are aligned with \cite{caironi2014albumin} that found no effect
+          for severe sepsis patient but positive effect for septic shock patients.
+    \item \cite{wang2023early} studied \textcolor{I}{early enteral nutrition (EN)
+            --<=53 ICU admission hours--} vs \textcolor{C}{delayed EN} for
+          \textcolor{P}{2,364 patients with sepsis and EN} on
+          \textcolor{O}{acute kidney injury}. With PSM, IPW and g-formula
+          (logistic estimator each time), they found a protective effect
+          (OR 0.319, 95\%CI 0.245, 0.413) of EEN.
+  \end{itemize}
+
+  These eleven studies mainly used propensity score matching (6) and IPW (4), two of
+  them used Double robust methods, and only one included a non-linear estimator in
+  either the outcome or the treatment model. None of them performed a vibration
+  analysis on the confounders selection or the feature transformations. They have a
+  strong focus on sepsis patients. Only four of them found concordant results with
+  previous RCTs \citep{liu2021effects,shahn2020fluid,adibuzzaman2019323}.
+
+  \section{Target trials proposal suitable to be replicated in MIMIC}\label{apd:target_trials}
+
+  \cite{guzmanopen} suggested the creation of a causal inference database based
+  on MIMIC with a list of replicable RCTs, which has not been
+  accomplished yet. We reviewed the following RCTs, which could be replicated within the MIMIC-IV
+  database. Table \ref{apd:table:emulated_trials_populations} details the sample
+  sizes of the eligible, control and treated populations for the identified RCTs.
+  % Please add the following required packages to your document preamble:
+  % \usepackage{multirow}
+  % \usepackage{graphicx}
+  % Please add the following required packages to your document preamble:
+  % \usepackage{multirow}
+  % \usepackage{graphicx}
+  \begin{table}[!b]
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+        \textbf{Trial name}                                                                                                                                                                                                                                                                                                                                    &
+        \textbf{Criteria description}                                                                                                                                                                                                                                                                                                                          &
+        \textbf{\begin{tabular}[c]{@{}l@{}}Number of \\ patients\end{tabular}}                                                                                                                                                                                                                                                                                 &
+        \textbf{\begin{tabular}[c]{@{}l@{}}Criteria \\ status\end{tabular}}                                                                                                                                                                                                                                                                                    &
+        \textbf{Implemented}                                                                                                                                                                                                                                                                                                                                   &
+        \textbf{\begin{tabular}[c]{@{}l@{}}Target RCT or \\ meta-analysis reference\end{tabular}}                                                                                                                                                                                                                                                                                                                                                                                                    \\ \hline
+        \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Fludrocortisone \\ combination for sepsis\end{tabular}}                                                                                                                                                                                                                                                     &
+        \begin{tabular}[c]{@{}l@{}}Septic shock defined by the sepsis-3 criteria, \\ first stay, over 18, not deceased during first 24 hours of ICU\end{tabular}                                                                                                                                                                                               &
+        28,763                                                                                                                                                                                                                                                                                                                                                 &
+        target population                                                                                                                                                                                                                                                                                                                                      &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \begin{tabular}[c]{@{}l@{}} \citep{yamamoto2020hydrocortisone} \end{tabular}                                                                                                                                                                                                                                                                                                                                                                                                                 \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Hydrocortisone administred and sepsis                                                                                                                                                                                                                                                                                                                  &
+        1,855                                                                                                                                                                                                                                                                                                                                                  &
+        control                                                                                                                                                                                                                                                                                                                                                &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Both corticoides administered and sepsis                                                                                                                                                                                                                                                                                                               &
+        153                                                                                                                                                                                                                                                                                                                                                    &
+        intervention                                                                                                                                                                                                                                                                                                                                           &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \hline
+        \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}High flow \\ oxygen therapy\\ for hypoxemia\end{tabular}}                                                                                                                                                                                                                                                   &
+        \begin{tabular}[c]{@{}l@{}}Over 18, hypoxemia 4 h before planed extubation \\ (PaO2, FiO2) $\leq$ 300 mmHg), and either High Flow \\ Nasal Cannula (HFNC) or Non Invasive Ventilation (NIV)\end{tabular}                                                                                                                                               &
+        801                                                                                                                                                                                                                                                                                                                                                    &
+        target population                                                                                                                                                                                                                                                                                                                                      &
+        \ding{55}                                                                                                                                                                                                                                                                                                                                              &
+        \begin{tabular}[c]{@{}l@{}} \citep{stephan2015high}, \\ \citep{hernan_using_2016} \end{tabular}                                                                                                                                                                                                                                                                                                                                                                                              \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Eligible hypoxemia and HFNC                                                                                                                                                                                                                                                                                                                            &
+        358                                                                                                                                                                                                                                                                                                                                                    &
+        intervention                                                                                                                                                                                                                                                                                                                                           &
+        \ding{55}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Eligible hypoxemia and NIV                                                                                                                                                                                                                                                                                                                             &
+        443                                                                                                                                                                                                                                                                                                                                                    &
+        control                                                                                                                                                                                                                                                                                                                                                &
+        \ding{55}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \hline
+        \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Routine oxygen for  \\ myocardial infarction\end{tabular}}                                                                                                                                                                                                                                                  &
+        \begin{tabular}[c]{@{}l@{}}Myocardial infarction without hypoxemia at admission:\\ \\ - Myocardial infarction defined with ICD9-10 codes, \\  first stay, over 18, not deceased during first 24 hours of ICU\\ \\ - Hypoxemia during first 2 hours defined as either  \\ (PaO2/FiO2) $leq$ 300mmHg OR SO2 $leq$ 90  \\  OR SpO2 $\leq$ 90\end{tabular} &
+        3,379                                                                                                                                                                                                                                                                                                                                                  &
+        target population                                                                                                                                                                                                                                                                                                                                      &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \begin{tabular}[c]{@{}l@{}} \citep{hofmann2017oxygen}, \\ \citep{stewart2021high} \end{tabular}                                                                                                                                                                                                                                                                                                                                                                                              \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        \begin{tabular}[c]{@{}l@{}}Myocardial infarction without hypoxemia at admission AND \\ Supplemental Oxygen OR Non Invasive Vent\end{tabular}                                                                                                                                                                                                           &
+        1,901                                                                                                                                                                                                                                                                                                                                                  &
+        intervention                                                                                                                                                                                                                                                                                                                                           &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        \begin{tabular}[c]{@{}l@{}}Myocardial infarction without hypoxemia at admission AND\\ no ventilation of any kind during first 12 hours\end{tabular}                                                                                                                                                                                                    &
+        605                                                                                                                                                                                                                                                                                                                                                    &
+        control                                                                                                                                                                                                                                                                                                                                                &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \hline
+        \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Prone positioning \\ for ARDS\end{tabular}}                                                                                                                                                                                                                                                                 &
+        \begin{tabular}[c]{@{}l@{}}Acute Respiratory Distress Syndrome (ARDS) during \\ the first 12 hours defined as (PaO2,FiO2) $leq$ 300mmHg, \\ first stay, over 18, not deceased during 24 hours of ICU\end{tabular}                                                                                                                                      &
+        11506                                                                                                                                                                                                                                                                                                                                                  &
+        trial population                                                                                                                                                                                                                                                                                                                                       &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \citep{munshi2017prone}                                                                                                                                                                                                                                                                                                                                                                                                                                                                      \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Prone positioning and ARDS                                                                                                                                                                                                                                                                                                                             &
+        547                                                                                                                                                                                                                                                                                                                                                    &
+        intervention                                                                                                                                                                                                                                                                                                                                           &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Supline position and no prone position                                                                                                                                                                                                                                                                                                                 &
+        10,904                                                                                                                                                                                                                                                                                                                                                 &
+        control                                                                                                                                                                                                                                                                                                                                                &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \hline
+        \multirow{3}{*}{NMBA for ARDS}                                                                                                                                                                                                                                                                                                                         &
+        \begin{tabular}[c]{@{}l@{}}ARDS during the first 12 hours defined as \\ (PaO2,FiO2) $leq$ 300mmHg, first stay, \\ over 18, not deceased during 24 hours of ICU\end{tabular}                                                                                                                                                                            &
+        11,506                                                                                                                                                                                                                                                                                                                                                 &
+        trial population                                                                                                                                                                                                                                                                                                                                       &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              & \begin{tabular}[c]{@{}l@{}} \citep{papazian2010neuromuscular}, \\ \citep{ho2020neuromuscular} \end{tabular}
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        \begin{tabular}[c]{@{}l@{}}Neuromuscular blocking agent  (NBMA) as cisatracurium \\ injections during the stay.\end{tabular}                                                                                                                                                                                                                           &
+        709                                                                                                                                                                                                                                                                                                                                                    &
+        intervention                                                                                                                                                                                                                                                                                                                                           &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        No NBMA during the stay                                                                                                                                                                                                                                                                                                                                &
+        10,797                                                                                                                                                                                                                                                                                                                                                 &
+        control                                                                                                                                                                                                                                                                                                                                                &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \hline
+        \multirow{3}{*}{Albumin for sepsis}                                                                                                                                                                                                                                                                                                                    &
+        \begin{tabular}[c]{@{}l@{}}Septic shock defined by the sepsis-3 criteria, \\ first stay, over 18, not deceased during first 24 hours \\ of ICU, having crystalloids\end{tabular}                                                                                                                                                                       &
+        18,421                                                                                                                                                                                                                                                                                                                                                 &
+        trial population                                                                                                                                                                                                                                                                                                                                       &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              & \begin{tabular}[c]{@{}l@{}}\citep{caironi2014albumin},\\ \citep{li2020resuscitation},\\ \citep{tseng2020resuscitation}\end{tabular}
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        Sepsis-3 and crystalloids during first 24h, no albumin                                                                                                                                                                                                                                                                                                 &
+        14,862                                                                                                                                                                                                                                                                                                                                                 &
+        control                                                                                                                                                                                                                                                                                                                                                &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \cline{2-6}
+                                                                                                                                                                                                                                                                                                                                                               &
+        \begin{tabular}[c]{@{}l@{}}Sepsis-3 and combination of crystalloids followed by \\ albumin during first 24h\end{tabular}                                                                                                                                                                                                                               &
+        3,559                                                                                                                                                                                                                                                                                                                                                  &
+        intervention                                                                                                                                                                                                                                                                                                                                           &
+        \ding{51}                                                                                                                                                                                                                                                                                                                                              &
+        \\ \hline
+      \end{tabular}%
+    }
+    \caption{}
+    \label{tab:my-table}
+    \caption{Eligibility criteria and resulting populations for potential target trials in MIMIC-IV.}\label{apd:table:emulated_trials_populations}
+  \end{table}
+
+
+  \section{Assumptions: what is needed for causal inference from observational studies}\label{apd:causal_assumptions}
+
+
+  The following four assumptions, referred as strong ignorability, are
+  needed to assure identifiability of the causal estimands with observational
+  data with most causal-inference methods \citep{rubin2005causal}, in
+  particular these we use:
+
+  \begin{assumption}[Unconfoundedness]\label{assumption:ignorability}
+    \begin{equation}\label{eq:ignorability}
+      \{Y(0), Y(1) \} \indep A | X
+    \end{equation}
+    This condition --also called ignorability-- is equivalent to the conditional
+    independence on the propensity score $e(X)=\mathbb P(A=1|X)$ \citep{rosenbaum1983central}: $\{Y(0), Y(1) \}\indep  A | e(X)$.
+  \end{assumption}
+
+
+  \begin{assumption}[Overlap, also known as Positivity]\label{assumption:overlap}
+    \begin{equation}\label{eq:overlap}
+      \eta < e(x) < 1 - \eta \quad \forall x \in \mathcal{X} \text{ and some }   \eta > 0
+    \end{equation}
+    The treatment is not perfectly predictable. Or in other words, every
+    patient has a chance to be treated and not to be treated. For a given set of
+    covariates, we need examples of both to recover the ATE.
+  \end{assumption}
+
+  As noted by \cite{damour2020overlap}, the choice of covariates $X$ can
+  be viewed as a trade-off between these two central assumptions. A bigger
+  covariate set generally reinforces the ignorability assumption. In the
+  contrary, overlap can be weakened by large $\mathcal{X}$ because of the
+  potential inclusion of instrumental variables: variables only linked to the treatment which
+  could lead to arbitrarily small propensity scores.
+
+  % remark: There is a major counter example to these colliders (variables which
+  % are caused by both the outcome and the treatment),
+
+  \begin{assumption}[Consistency]\label{assumption:consistency} The observed
+    outcome is the potential outcome of the assigned treatment:
+    \begin{equation}\label{eq:consistancy}
+      Y = A \, Y(1) + (1-A) \, Y(0)
+    \end{equation}
+    Here, we assume that the intervention $A$ has been well defined. This
+    assumption focuses on the design of the experiment. It clearly states the link
+    between the observed outcome and the potential outcomes through the
+    intervention \citep{hernan2020causal}.
+  \end{assumption}
+
+  \begin{assumption}[Generalization]\label{assumption:generalization} The training
+    data on which we build the estimator and the test data on which we make the
+    estimation are drawn from the same distribution, also known as
+    the ``no covariate shift'' assumption \citep{jesson2020identifying}.
+  \end{assumption}
+
+
+  \section{Major causal-inference methods}\label{apd:causal_methods}
+
+  \subsection{Causal estimators: When to use which method ?}\label{apd:causal_estimators}
+
+
+  \paragraph{G-formula} also called conditional mean regression
+  \citep{wendling2018comparing}, g-computation \citep{robins1986role}, or
+  Q-model \citep{snowden2011implementation}. This approach is directly modeling
+  the outcome, also referred to as the response surface: $\mu_{(a)}(x)
+    =\mathbb{E}\left(Y \mid A=a, \mathbf{X}=x\right)$
+
+  Using an outcome estimator to learn a model for the response surface $\hat
+    \mu$ (eg. a linear model), the ATE estimator is an average over the n samples:
+  \begin{equation}
+    \hat{\tau}_G(f) = \frac{1}{n} \sum_{i=1}^n \hat \mu(x_i, 1) - \hat \mu(x_i, 0) = \frac{1}{n} \sum_{i=1}^n \hat \mu_{(1)}(x_i) - \hat \mu_{(0)}(x_i)
+  \end{equation}
+
+  This estimator is unbiased if the model of the conditional response surface
+  $\hat \mu_{(a)}$ is well-specified. This approach assumes than $Y(a) =
+    \mu_a(X) + \epsilon_a$ with $\mathbb E[\epsilon|X] = 0$. The main drawback is
+  the extrapolation of the learned outcome estimator from samples with similar
+  covariates X but different intervention A.
+
+  \paragraph{Propensity Score Matching (PSM)} To avoid confounding bias, the
+  ignorability assumption \ref{assumption:ignorability}) requires to contrast
+  treated and control outcomes only between comparable patients with respect to
+  treatment allocation probabilities. A simple way to do this is to group
+  patients into bins, or subgroups, of similar confounders and contrast the two
+  population outcomes by matching patients inside of these bins
+  \citep{stuart2010matching}. However, the number of confounder bins grows
+  exponentially with the number of variables. \cite{rosenbaum1983central} proved
+  that matching patients on the individual probabilities to receive treatment
+  --propensity scores-- is sufficient to verify ignorability. PSM is a
+  conceptually simple method, but has delicate parameters to tune such as
+  choosing a model for the propensity score, deciding what is the maximum
+  distance between two potential matches (the caliper width), the number of
+  matches by sample, and matching with or without replacement. It also prunes data
+  not meeting the caliper width criteria, and suffers form high estimation
+  variance in highly-dimensional data where extreme propensity weights are common.
+  Finally, the simple bootstrap confidence intervals are not theoretically
+  grounded \citep{abadie2008failure}, making PSM more difficult
+  to use for applied practitioners.
+
+
+  \paragraph{Inverse Propensity Weighting (IPW)}
+
+  A simple alternative to propensity score matching is to weight the outcome by
+  the inverse of the propensity score: Inverse Propensity Weighting
+  \citep{austin2015moving}. It relies on the same idea than matching but builds
+  automatically balanced population by reweighting the outcomes with the
+  propensity score model $\hat{e}$ to estimate the ATE:
+  \begin{equation}
+    \hat \tau_{IPW}(\hat e) = \frac{1}{n} \sum_{i=1}^N \frac{A_i Y_i}{\hat e(X_i)} - \frac{(1-A_i)Y_i}{(1-\hat e(X_i))}
+  \end{equation}
+
+  This estimate is unbiased if $\hat e$ is well-specified. IPW suffers from high
+  variance if some weights are too close to 0 or 1. In high-dimensional cases
+  where poor overlap between treated and control is common, one can clip extreme
+  weights to limit estimation instability.
+
+
+  \paragraph{Doubly Robust Learning, DRL} also called Augmented Inverse
+  Probability Weighting (AIPW) \citep{robins1994estimation}.
+
+  The underlying idea of DRL is to combine the G-formula and IPW estimators to
+  protect against a mis-specification of one of them. It first requires to
+  estimate the two nuisance parameters: a model for the intervention $\hat{e}$
+  and a model for the outcome $f$. If one of the two nuisance is unbiased, the
+  following ATE estimator is as well:
+
+  $$\begin{aligned} \widehat{\tau}_{A I P W}=\frac{1}{n}
+      \sum_{i=1}^{n}\left(\hat \mu_{(1)}\left(x_{i}\right)-\hat \mu_{(0)}\left(x_{i}\right)+a_{i}
+      \frac{y_{i}-\hat \mu_{(1)}\left(x_{i}\right)}{\hat{e}\left(x_{i}\right)}-\left(1-a_{i}\right)
+      \frac{y_{i}-\hat \mu_{(0)}\left(x_{i}\right)}{1-\hat{e}\left(x_{i}\right)}\right)
+    \end{aligned}$$
+
+  Moreover, despite the need to estimate two models, this estimator is more
+  efficient in the sense that it converges quicker than single model estimators
+  \citep{wager2020stats}. For this propriety to hold, one need to fit and apply
+  the two nuisance models in a cross-fitting manner. This means that we split
+  the data into K folds. Then for each fold, we fit the nuisance models on the
+  K-1 complementary folds, and predict on the remaining fold.
+
+  To recover Conditional Treatment Effects from the AIPW estimator,
+  \cite{foster2019orthogonal} suggested to regress the Individual Treatment
+  Effect estimates from AIPW on potential sources of heterogeneity $X^{cate}$:
+  $\hat tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
+  for $\Theta$ some class of model (eg. linear model).
+
+  \paragraph{Double Machine Learning} \citep{chernozhukov2018double} also known
+  as the R-learner \citep{nie2021quasi}. It is based on the R-decomposition,
+  \citep{robinson1988root}, and the modeling of the conditional mean outcome,
+  $m(x)=\mathbb E[Y|X=x]$ and the propensity score, $e(x)=\mathbb E[A=1|X=x]$:
+  \begin{equation}\label{eq:r_decomposition}
+    y_{i}-m\left(x_{i}\right)=\left(a_{i}-e\left(x_{i}\right)\right) \tau\left(x_{i}\right)+\varepsilon_{i} \quad \text{with} \; \varepsilon_{i}=y_{i}-\varepsilon\left[4_{i} \mid x_{i}, a_{i}\right]
+  \end{equation}
+  Note that we can impose that the conditional treatment effect $\tau(x)$ only
+  relies on a subset of the features, $x^{cate}$ on which we want to study
+  treatment heterogeneity.
+
+  From this decomposition, we can derive an estimation of the ATE $\tau$, where
+  the right hand-side term is the empirical R-Loss:
+  \begin{align}\label{eq:r_loss}
+    \hat{\tau}(\cdot)=\operatorname{argmin}_{\tau}\left\{\frac{1}{n} \sum_{i=1}^{n}\left(\left(y_{i}-m\left(x_{i}\right)\right)-\left(a_{i}-e(x_{i})\right) \tau\left(x^{cate}_{i}\right)\right)^{2}\right\}
+  \end{align}
+
+  The full procedure for R-learning is:
+  \begin{itemize}
+    \item Fit nuisances: $\hat m$ and $\hat e$
+    \item Minimize the estimated R-loss eq.\ref{eq:r_loss}, where the oracle nuisances $(e, m)$
+          have been replaced by their estimated counterparts $(\hat e, \hat m)$.
+          Minimization can be done by regressing the outcome residuals weighted by the
+          treatment residuals
+    \item Get the ATE by averaging conditional treatment effect $\tau(x^{cate})$ over the population
+  \end{itemize}
+
+  This estimator has also the doubly robust proprieties described for AIPW. it
+  should have less variance than AIPW since it does not use the propensity score
+  in the denominator.
+
+  \subsection{Statistical considerations when implementing
+    estimation}\label{apd:statistical_considerations}
+
+  \paragraph{Counterfactual prediction lacks off-the-shelf cross-fitting estimators}
+
+  Doubly robust methods use cross-fit estimation of the nuisance parameters, which
+  is not available off-the-shelf for IPW and T-Learner estimators. For
+  reproducibility purposes, we did not reimplement internal cross-fitting for
+  treatment or outcome estimators. However, when flexible models such as random
+  forests are used, a fairer comparison between single and double robust methods
+  should use cross-fitting for both. This lack in the scikit-learn API reflects
+  different needs between purely predictive machine learning focused on
+  generalization performances and counterfactual prediction aiming at unbiased
+  inference on the input data.
+
+  \paragraph{Good practices for imputation not implemented in EconML}
+
+  Good practices in machine learning recommend to input distinctly each fold
+  when performing cross-fitting
+  \footnote{\url{https://scikit-learn.org/stable/modules/compose.html\#combining-estimators}}.
+  However, EconML estimators test for missing data at instantiation
+  preventing the use of scikit-learn imputation pipelines. We thus have been
+  forced to transform the full dataset before feeding it to causal estimators.
+  An issue mentioning the problem has been filed, so we can hope that future
+  versions of the package will comply with best practices. \footnote{\url{https://github.com/py-why/EconML/issues/664}}
+
+  \paragraph{Bootstrap may not yields the more efficient confidence intervals}
+
+  To ensure a fair comparison between causal estimators, we always used
+  bootstrap estimates for the confidence intervals. However, closed form
+  confidence intervals are available for some estimators -- see \cite{wager2020stats}
+  for IPW and AIPW (DRLeaner) variance estimations. These formulas exploit the
+  estimator properties, thus tend to have smaller confidence intervals. On the
+  other hand, they usually do not include the variance of the outcome and
+  treatment estimators, which is naturally dealt with in bootstrap confidence
+  intervals. Closed form confidence intervals are rarely implemented in the
+  packages. Dowhy did not implement the well-known confidence interval method for
+  the IPW estimator, nor did EconML for the AIPW confidence intervals.
+
+  Bootstrap was particularly costly to run for the EconML doubly robust
+  estimators (AIPW and Double ML), especially when combined with random forest nuisance
+  estimators (from 10 to 47 min depending on the aggregation choice and the
+  estimator). See Table \ref{apd:table:compute_times} for details.
+
+  \begin{table}[]
+    % \resizebox{\textwidth}{!}{%
+    \centering\small
+    \input{img/chapter_4/albumin_for_sepsis__obs_1d__compute_time_estimates_20230712__est_lr_rf__bs_50.tex}
+    % }
+    \\
+    \caption{Compute times for the different estimation methods with 50 bootstrap replicates.}\label{apd:table:compute_times}
+  \end{table}
+
+  \subsection{Packages for causal estimation in the python
+    ecosystem}\label{apd:packages}
+
+  We searched for causal inference packages in the python ecosystem. The focus
+  was on the identification methods. Important features were ease of
+  installation, sklearn estimator support, sklearn pipeline support, doubly
+  robust estimators, confidence interval computation, honest splitting
+  (cross-validation), Targeted Maximum Likelihood Estimation. These criteria are
+  summarized in \ref{apd:table:causal_packages}. We finally chose EconML despite
+  lacking \texttt{sklearn.\_BaseImputer} support through the
+  \texttt{sklearn.Pipeline} object as well as a TMLE implementation.
+
+  The zEpid package is primarily intended for epidemiologists. It is well documented
+  and provides pedagogical tutorials. It does not support sklearn estimators,
+  pipelines and honest splitting.
+
+  EconML implements almost all estimators except propensity score methods. Despite
+  focusing on Conditional Average Treatment Effect, it provides all. One downside
+  is the lack of support for scikit-learn pipelines with missing value imputers.
+  This opens the door to information leakage when imputing data before splitting
+  into train/test folds.
+
+  Dowhy focuses on graphical models and relies on EconML for most of the causal
+  inference methods (identifications) and estimators. Despite, being interesting
+  for complex inference --such as mediation analysis or instrumental variables--,
+  we considered that it added an unnecessary layer of complexity for our use case
+  where a backdoor criterion is the most standard adjustment methodology.
+
+  Causalml implements all methods, but has a lot of package dependencies
+  which makes it hard to install.
+
+  % Please add the following required packages to your document preamble:
+  % \usepackage{graphicx}
+  \begin{table}[h!]
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{|l|l|l|l|l|l|l|l|l|}
+        \hline
+        \multicolumn{1}{|c|}{\textbf{Packages}}                                                           &
+        \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Simple \\ installation\end{tabular}}}      &
+        \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Confidence \\ Intervals\end{tabular}}}     &
+        \textbf{\begin{tabular}[c]{@{}l@{}}sklearn \\ estimator\end{tabular}}                             &
+        \textbf{\begin{tabular}[c]{@{}l@{}}sklearn \\ pipeline\end{tabular}}                              &
+        \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Propensity \\ estimators\end{tabular}}}    &
+        \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Doubly Robust \\ estimators\end{tabular}}} &
+        \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}TMLE\\ estimator\end{tabular}}}            &
+        \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Honest splitting \\ (cross validation)\end{tabular}}} \\ \hline
+        \textbf{\href{https://github.com/py-why/dowhy}{dowhy}}                                            &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{55}                                                                                         &
+        \ding{55}                                                                                         &
+        \ding{55}                                                                                                    \\ \hline
+        \textbf{\href{https://github.com/py-why/EconML}{EconML}}                                          &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \begin{tabular}[c]{@{}l@{}}Yes except\\ for imputers\end{tabular}                                 &
+        \ding{55}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{55}                                                                                         &
+        \begin{tabular}[c]{@{}l@{}}Only for doubly \\ robust estimators\end{tabular}                                 \\ \hline
+        \textbf{\href{https://github.com/pzivich/zEpid}{zEpid}}                                           &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{55}                                                                                         &
+        \ding{55}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        Only for TMLE                                                                                                \\ \hline
+        \textbf{\href{https://github.com/uber/causalml}{causalml}}                                        &
+        \ding{55}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \ding{51}                                                                                         &
+        \begin{tabular}[c]{@{}l@{}}Only for doubly \\ robust estimators\end{tabular}                                 \\ \hline
+      \end{tabular}%
+    }\caption{Selection criteria for causal python packages}\label{apd:table:causal_packages}
+  \end{table}
+
+  \subsection{Hyper-parameter search for the nuisance models}\label{apd:hyper_parameter_search}
+
+  \begin{figure}[!b]
+    \begin{minipage}{.38\linewidth}
+      \caption{Hyper-parameter search procedure.}\label{apd:fig:hyper_parameter_search}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{.6\linewidth}
+      \includegraphics[width=\linewidth]{img/chapter_4/hp_search_procedure.pdf}
+    \end{minipage}%
+  \end{figure}
+
+
+  We followed a two-step procedure to train the nuisance models (eg. ($\hat e,
+    \hat \mu$) for the AIPW causal estimator), taking inspiration from the
+  computationally cheap procedure from
+  \cite[section~3.3]{bouthillier2021accounting}. First, for each nuisance
+  model, we fit a random parameter search with 5-fold cross validation and 10
+  iterations on the full dataset. Each iteration fit a model with a random
+  combination of parameters in a predefined grid, then evaluate the
+  performance by cross-validation. The best hyper-parameters $\hat
+    \lambda^{\star}$ are selected as the ones reaching the minimal score across
+  all iterations. Then, we feed this parameters to the causal estimator. The
+  single robust estimators (matching, IPW and TLearner) refit the
+  corresponding estimator only once on the full dataset, then estimate the
+  ATE. The doubly-robust estimators use a cross-fitting procedure (K=5) to fit
+  the nuisances then estimate the ATE. Figure
+  \ref{apd:fig:hyper_parameter_search} illustrates the procedure and Table
+  \ref{apd:table:hyper_parameter_search} details the hyper-parameters grid for
+  the random search.
+
+
+  \begin{table}[]
+    \resizebox{\textwidth}{!}{%
+      \input{img/chapter_4/gridsearch.tex}
+    }\\
+    \caption{Hyper-parameter grid used during random search
+      optimization.}\label{apd:table:hyper_parameter_search}
+  \end{table}
+
+
+  \section{Computing resources}
+
+  The whole project was run on a laptop running Ubuntu 22.04.2 LTS with the following hardware:
+  CPU 12th Gen Intel(R) Core(TM) i7-1270P with 16 threads and 15 GB of RAM.
+
+  \section{Selection flowchart}\label{apd:selection_flowchart}
+
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__flowchart_albumin_for_sepsis.pdf}
+    \caption{Selection flowchart on MIMIC-IV for the emulated trial.}\label{fig:selection_flowchart}
+  \end{figure}
+
+  \section{Complete description of the confounders for the main analysis}\label{apd:albumin_for_sepsis:table1_complete}
+  \begin{table}[b!]
+    \resizebox{\textwidth}{!}{%
+      \input{img/chapter_4/albumin_for_sepsis__obs_1d__table1_24h_supplementary.tex}
+    }\\
+    \caption{Characteristics of the trial population measured on the first 24
+      hours of ICU stay. \\
+      Risk scores (AKI, SOFA, SAPSII) and lactates have been summarized as the
+      maximum value during the 24 hour period for each stay. Total cumulative urine output has
+      been computed. Other variables have been aggregated by taking mean during
+      the 24 hour period.}\label{apd:table:albumin_for_sepsis:table1_complete}
+  \end{table}
+
+
+  \section{Complete results for the main analysis}\label{apd:detailed_results}
+
+  Compared to figure \ref{fig:albumin_for_sepsis:results}, we also report in
+  figure \ref{apd:fig:detailed_results} the estimates for Causal forest
+  estimators and other choices of feature aggregation (first and last).
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth]{img/chapter_4/albumin_for_sepsis__obs_1d__estimates_20230712__est_lr_rf__bs_50_supplementary.pdf}
+    \caption{Full sensitivity analysis: The estimators with forest nuisances
+      point to no effect for almost every causal estimator consistently with the
+      RCT gold standard. Only matching with forest yields an unconvincingly high
+      estimate. Linear nuisance used with doubly robust methods suggest a
+      reduced mortality risk for albumin. The choices of aggregation only
+      marginally modify the results expect for propensity score matching. The
+      green diamonds depict the mean effect and the bar are the 95\% confidence
+      intervals obtained by 50 bootstrap
+      repetitions.}\label{apd:fig:detailed_results}
+  \end{figure}
+
+  \section{Complete results for the Immortal time bias}\label{apd:detailed_results_itb}
+
+  Compared to figure \ref{fig:immortal_time_bias}, we also report in figure
+  \ref{apd:fig:detailed_results_itb} the estimates for Double Machine Learning,
+  Inverse Propensity Weighting for both Random Forest and Ridge Regression.
+  Feature aggregation was concatenation of first and last for all estimates.
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=\linewidth]{img/chapter_4/itb__immortal_time_bias_double_robust_forest_agg_first_last__bs_30_supp.pdf}
+    \caption{Sensitivity analysis for immortal time bias: Every choice of
+      estimates show an improvement of the albumin treatment when increasing the
+      observation period, thus increasing the blank period between inclusion and
+      administration of albumin. Aggregation was concatenation of first and last
+      features. The green diamonds depict the mean effect and the bar are the
+      95\% confidence intervals obtained by 50 bootstrap
+      repetitions.}\label{apd:fig:detailed_results_itb}
+  \end{figure}
+
+
+  \section{Vibration analysis for aggregation}\label{apd:vibration_analysis_for_aggregation}
+
+  We conducted a dedicated vibration analysis on the different choices of features aggregation, studying the impact on the estimated ATE. We also studied if some choices of aggregation led to substantially poorer overlap.
+
+  We assessed overlap with two different methods. As recommended by
+  \citep{austin2015moving}, we did a graphical assessment by plotting the
+  distribution of the estimated. The treatment model hyper-parameters were chosen
+  by random search, then predicted propensity scores were obtained by refitting
+  this estimator with cross-fitting on the full dataset.
+
+  As shown in Figure \ref{apd:fig:albumin_for_sepsis:overlap_measure}, we did not find substantial differences between methods
+  when plotting graphically the distribution of the estimated propensity score.
+
+  \begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{img/chapter_4/sensitivity__ps_distribution__first_last_median__Forests.pdf}
+      \caption{}\label{apd:fig:albumin_for_sepsis:overlap_measure_first_last_median}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{img/chapter_4/sensitivity__ps_distribution__first__Forests.pdf}
+      \caption{}\label{apd:fig:albumin_for_sepsis:overlap_measure_first}
+    \end{subfigure}
+    \caption{Different choices of aggregation yield qualitatively close
+      distributions of the propensity score: Figure
+      \ref{apd:fig:albumin_for_sepsis:overlap_measure_first_last_median})a)
+      shows a concatenation of first, last and median measures whereas Figure
+      \ref{apd:fig:albumin_for_sepsis:overlap_measure_first})b) shows an
+      aggregation by taking the first measure only. The underlying treatment
+      effect estimator is a random
+      forest.}\label{apd:fig:albumin_for_sepsis:overlap_measure}
+  \end{figure}
+
+  We also used normalized total variation (NTV) as a summary statistic of the
+  estimated propensity score to measure the distance between treated and control
+  population \citep{doutreligne2023select}. This statistic varies between 0 --
+  perfect overlap -- and 1 -- no overlap at all. Fig
+  \ref{apd:fig:albumin_for_sepsis:vibration_analysis_for_aggregation} shows no
+  marked differences in overlap as measured by NTV between aggregation choices,
+  comforting us in our expert-driven choice of the aggregation: a concatenation
+  of first and last feature observed before inclusion time.
+
+  \begin{figure}[b!]
+    \centering
+    \includegraphics[width=1.0\linewidth]{img/chapter_4/sensitivity_feature_aggregation_albumin_for_sepsis__bs_50.pdf}
+    \caption{Vibration analysis dedicated to the aggregation choices. The
+      choices of aggregation only marginally modify the results. When assessed
+      with Normalized Total Variation, the overlap assumption is respected for all
+      our choices of aggregation. The green diamonds depict the mean effect and
+      the bar are the 95\% confidence intervals obtained by 50 bootstrap
+      repetitions.}\label{apd:fig:albumin_for_sepsis:vibration_analysis_for_aggregation}
+  \end{figure}
+
+  \section{Details on treatment heterogeneity analysis}\label{apd:hte}
+
+  \subsection{Detailed estimation procedure}
+
+  The estimation of heterogeneous effect based on Double Machine Learning adds
+  another step after the computation, regressing the residuals of the outcome
+  nuisance $\tilde{Y} - \mu(X)$ against the residuals of the treatment nuisance
+  $\tilde{A} = A - e(X)$ with the heterogeneity features $X_{CATE}$. Noting the
+  final CATE model $\theta$, Double ML solves:
+
+  $$\argmin_{\theta} \mathbb E_n \big[(\tilde{Y} - \tau (X_CATE) \cdot \tilde{A})^2\big ]$$
+
+  Where $\tilde{Y} = Y - \hat m(X)$ and $\tilde{A} = A - \hat e(X)$
+
+  To avoid the over-fitting of this last regression model, we split the dataset of
+  the main analysis into a train set (size=0.8) where the causal estimator and the final
+  model are learned, and a test set (size=0.2) on which we report the predicted Conditional Average
+  Treatment Effects.
+
+  \subsection{Known heterogeneity of treatment for the emulated trial}\label{apd:cate_literature}
+
+  \cite{caironi2014albumin} observed statistical differences in the post-hoc
+  subgroup analysis between patient with and without septic shock at inclusion.
+  They found increasing treatment effect measured as relative risk for patients
+  with septic shock (RR=0.87; 95\% CI, 0.77 to 0.99 vs 1.13;95\% CI, 0.92 to 1.39).
+
+  \cite{safe2007saline} conducted a post-hoc subgroup analysis of patients with or
+  without brain injury --defined as Glasgow Coma Scale between 3 to 8--. The
+  initial population was patients with traumatic brain injury (defined as history
+  or evidence on A CT scan of head trauma, and a GCS score <= 13). They found
+  higher mortality rate at 24 months in the albumin group for patients with severe
+  head injuries.
+
+  \cite{zhou2021early} conducted a subgroup analysis on age (<60 vs >60), septic
+  shock and sex. They conclude for increasing treatment effect measured as
+  Restricted Mean Survival Time for Sepsis vs septic shock (3.47 vs. 2.58), for
+  age >=60 (3.75 vs 2.44), for Male (3.4 vs 2.69). None of these differences were
+  statistically significant.
+
+  \subsection{Vibration analysis}\label{apd:cate_results}
+
+  The choice of the final model for the CATE estimation should also be informed
+  by statistical and clinical rationals. Figure
+  \ref{apd:fig:albumin_for_sepsis:cate_boxplot_forest} shows the distribution of
+  the individual effects of a final random forest estimator, yielding CATE
+  estimates that are not consistent with the main ATE analysis. Figure
+  \ref{apd:fig:albumin_for_sepsis:cate_age_forest_failure} shows that the choice
+  of this final model imposes a inductive bias on the form of the heterogeneity
+  and different sources of noise depending of the nature of the model. A random
+  forest is more noisy than a linear model. Figure
+  \ref{apd:fig:albumin_for_sepsis:cate_age_forest_failure} shows the difference
+  of modelization on the subpopulation of non white male patients without septic
+  shock. One see that the downside linear trend is reflected by the
+  forest only for patients aged between 55 and 80.
+
+  \begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/chapter_4/boxplot_est__DML__nuisances__Forests__final_RandomForestRegressor.pdf}
+    \caption{Distribution of Conditional Average Treatment effects on sex, age,
+      race and pre-treatment septic shock estimated with a final forest
+      estimator. The CATE are positive for each subgroups, which is not
+      consistent with the null treatment effect obtained in the main analysis.
+      The boxes contain between the 25th and 75th percentiles of the CATE
+      distributions with the median indicated by a vertical line. The whiskers
+      extends to 1.5 the inter-quartile range of the
+      distribution.}\label{apd:fig:albumin_for_sepsis:cate_boxplot_forest}
+  \end{figure}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/chapter_4/cate_age_forest_failure_all_category__est__DML__nuisances__Forests__final_RandomForestRegressor.pdf}
+    \caption{Distribution of Conditional Average Treatment effects on sex, age,
+      race and pre-treatment septic shock plotted for different ages. On the top
+      the final estimator is a linear model; on the bottom, it is a random
+      forest. The forest-based CATE displays more noisy trends than the
+      linear-based CATE. This suggest that the flexibility of the random forest
+      might be underfitting the data.}\label{apd:fig:albumin_for_sepsis:cate_age_forest_failure}
+  \end{figure}
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{img/chapter_4/cate_age_forest_failure_w1_f0_shock0_est__DML__nuisances__Forests__final_RandomForestRegressor.pdf}
+    \caption{Figure \ref{apd:fig:albumin_for_sepsis:cate_age_forest_failure} on
+      the subpopulation of white male patients without septic shock. Contrary to
+      the ridge regression (on top) inducing a nicely interpretable trend, using
+      random forests as the final estimator failed to recover CATE on ages: the
+      predicted estimates do not exhibit any trend and display inconsistently
+      large effect sizes, suggesting data underfitting.
+    }\label{apd:fig:albumin_for_sepsis:cate_failure}
+  \end{figure}
+
   \chapter{Chapter 5}\label{apd:causal_model_selection}
 
 
