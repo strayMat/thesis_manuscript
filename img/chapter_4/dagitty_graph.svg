@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1429.7157"
+   height="890.3175"
+   style="font-family:Arial, sans-serif"
+   version="1.1"
+   id="svg446"
+   sodipodi:docname="dagitty_graph.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:export-filename="dagitty_graph.pdf"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs450" />
+  <sodipodi:namedview
+     id="namedview448"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.76318416"
+     inkscape:cx="709.52731"
+     inkscape:cy="466.46671"
+     inkscape:window-width="1920"
+     inkscape:window-height="1046"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g364" />
+  <g
+     class="path"
+     id="g6"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1240.52,658.07 791.67,877.2"
+       id="path2" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-26.021275,2294.007,-1274.4887)"
+       id="path4" />
+  </g>
+  <g
+     class="path"
+     id="g12"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1254.7,665.53 1218.17,865.2"
+       id="path8" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-79.63352,1128.001,-298.00911)"
+       id="path10" />
+  </g>
+  <g
+     class="path"
+     id="g18"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 108.42,118.74 754.05,870.96"
+       id="path14" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-130.63923,577.1427,262.22463)"
+       id="path16" />
+  </g>
+  <g
+     class="path"
+     id="g24"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 95.27,121.73 48.24,860.94"
+       id="path20" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-86.359306,482.85161,404.76753)"
+       id="path22" />
+  </g>
+  <g
+     class="path"
+     id="g30"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#4dac26"
+       stroke-width="1.5"
+       fill="none"
+       d="m 66.74,881.04 677.87,5.27"
+       id="path26" />
+    <path
+       stroke="#4dac26"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-179.55458,374.029,441.70795)"
+       id="path28" />
+  </g>
+  <g
+     class="path"
+     id="g36"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1193.82,884.95 794.61,886.4"
+       id="path32" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-0.20825661,244264.63,-218170.95)"
+       id="path34" />
+  </g>
+  <g
+     class="path"
+     id="g42"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 311.63,282.52 755.24,870.24"
+       id="path38" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-127.04518,594.34598,247.03102)"
+       id="path40" />
+  </g>
+  <g
+     class="path"
+     id="g48"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 293.72,284.12 55.77,862.31"
+       id="path44" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-67.6305,671.5664,389.5236)"
+       id="path46" />
+  </g>
+  <g
+     class="path"
+     id="g54"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 742.73,221.3 25.93,645.19"
+       id="path50" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-92.301148,800.51798,64.050708)"
+       id="path52" />
+  </g>
+  <g
+     class="path"
+     id="g60"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 728.68,217.48 63.92,866.52"
+       id="path56" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-44.31439,1095.9016,354.78296)"
+       id="path58" />
+  </g>
+  <g
+     class="path"
+     id="g66"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1155.66,290.24 782.51,869.45"
+       id="path62" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-57.208688,1188.4501,-282.7571)"
+       id="path64" />
+  </g>
+  <g
+     class="path"
+     id="g72"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 663.05,115.27 766.39,866.65"
+       id="path68" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-97.830957,761.00367,99.226801)"
+       id="path70" />
+  </g>
+  <g
+     class="path"
+     id="g78"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 649.32,112.75 61.43,864.84"
+       id="path74" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-51.986374,917.5774,369.43152)"
+       id="path76" />
+  </g>
+  <g
+     class="path"
+     id="g84"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 1332.47,515.62 -116.73,51.84"
+       id="path80" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-23.948633,1945.6707,-2582.3914)"
+       id="path82" />
+  </g>
+  <g
+     class="path"
+     id="g90"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="none"
+       d="M 424.41,186.62 759.15,868.38"
+       id="path86"
+       style="stroke-dasharray:4.5,4.5;stroke-dashoffset:0" />
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-116.15106,650.09528,197.70144)"
+       id="path88" />
+  </g>
+  <g
+     class="path"
+     id="g96"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 397.01,169.33 120.77,111.17"
+       id="path92" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(11.890099,-473.38344,635.43745)"
+       id="path94" />
+  </g>
+  <g
+     class="path"
+     id="g102"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="none"
+       d="M 408.13,186.5 57.66,862.99"
+       id="path98"
+       style="stroke-dasharray:4.5,4.5;stroke-dashoffset:0" />
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-62.612159,738.34417,384.09063)"
+       id="path100" />
+  </g>
+  <g
+     class="path"
+     id="g108"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 396.52,174.11 140.64,192.79"
+       id="path104" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-4.1761765,2714.2057,-1832.2318)"
+       id="path106" />
+  </g>
+  <g
+     class="path"
+     id="g114"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 1366.27,647.98 -83.31,2.2"
+       id="path110" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-1.5149537,25230.074,-48193.661)"
+       id="path112" />
+  </g>
+  <g
+     class="path"
+     id="g120"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1337.05,222.31 785.1,870.91"
+       id="path116" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-49.603055,1334.9021,-414.04298)"
+       id="path118" />
+  </g>
+  <g
+     class="path"
+     id="g126"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="none"
+       d="M 820.41,335.15 771.77,866.56"
+       id="path122"
+       style="stroke-dasharray:4.5,4.5;stroke-dashoffset:0" />
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-84.770602,860.63262,10.460665)"
+       id="path124" />
+  </g>
+  <g
+     class="path"
+     id="g132"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="none"
+       d="M 806.69,329.82 66.32,868.63"
+       id="path128"
+       style="stroke-dasharray:4.5,4.5;stroke-dashoffset:0" />
+    <path
+       stroke="#d01c8b"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-36.045541,1368.0371,332.39562)"
+       id="path130" />
+  </g>
+  <g
+     class="path"
+     id="g138"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 826.49,334.83 33.77,135.61"
+       id="path134" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-103.98451,613.95571,-100.93144)"
+       id="path136" />
+  </g>
+  <g
+     class="path"
+     id="g144"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 838.71,328.48 90.47,54.49"
+       id="path140" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-148.94303,517.79375,62.392012)"
+       id="path142" />
+  </g>
+  <g
+     class="path"
+     id="g150"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 323.13,82.01 435,786.79"
+       id="path146" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-118.93749,635.26448,210.83414)"
+       id="path148" />
+  </g>
+  <g
+     class="path"
+     id="g156"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 308.81,82.93 54.09,861.83"
+       id="path152" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-71.891039,621.33542,393.61145)"
+       id="path154" />
+  </g>
+  <g
+     class="path"
+     id="g162"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 327.33,79.94 72.41,78.19"
+       id="path158" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-132.80636,234.40666,-8.2452679)"
+       id="path160" />
+  </g>
+  <g
+     class="path"
+     id="g168"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 641.94,230.65 765.11,866.82"
+       id="path164" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-100.95731,740.10178,117.81673)"
+       id="path166" />
+  </g>
+  <g
+     class="path"
+     id="g174"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 626.31,227.72 62.58,865.57"
+       id="path170" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-48.530059,991.36526,363.37022)"
+       id="path172" />
+  </g>
+  <g
+     class="path"
+     id="g180"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 261.99,84.03 756.94,869.34"
+       id="path176" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-122.22178,618.31241,225.83639)"
+       id="path178" />
+  </g>
+  <g
+     class="path"
+     id="g186"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 247.94,85.55 52.52,861.47"
+       id="path182" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-75.863598,578.92687,397.04312)"
+       id="path184" />
+  </g>
+  <g
+     class="path"
+     id="g192"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 268.52,79.67 127.3,82.05"
+       id="path188" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-147.19396,221.71088,22.60209)"
+       id="path190" />
+  </g>
+  <g
+     class="path"
+     id="g198"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1177.87,585.56 789.09,874.1"
+       id="path194" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-36.581524,1716.7763,-756.58897)"
+       id="path196" />
+  </g>
+  <g
+     class="path"
+     id="g204"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1102.13,442.65 783.89,870.18"
+       id="path200" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-53.336318,1258.2211,-345.28239)"
+       id="path202" />
+  </g>
+  <g
+     class="path"
+     id="g210"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 78.03,335.12 750.76,873.5"
+       id="path206" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-141.32959,528.62772,305.03784)"
+       id="path208" />
+  </g>
+  <g
+     class="path"
+     id="g216"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 62.77,339.97 47.44,860.91"
+       id="path212" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-88.314132,467.0305,406.02975)"
+       id="path214" />
+  </g>
+  <g
+     class="path"
+     id="g222"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1350.8,324.18 786.84,872.14"
+       id="path218" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-44.175613,1467.9837,-533.40235)"
+       id="path220" />
+  </g>
+  <g
+     class="path"
+     id="g228"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="m 128.42,205.95 624.8,665.57"
+       id="path224" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-133.19026,565.22347,272.74968)"
+       id="path226" />
+  </g>
+  <g
+     class="path"
+     id="g234"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 113.95,209.3 49.08,861"
+       id="path230" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-84.315383,500.02023,403.39206)"
+       id="path232" />
+  </g>
+  <g
+     class="path"
+     id="g240"
+     transform="translate(-0.13479888,-48.451377)">
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="none"
+       d="M 1162.81,122.81 780.44,868.53"
+       id="path236" />
+    <path
+       stroke="#000000"
+       stroke-width="1.5"
+       fill="#ffffff"
+       class="arrowfront"
+       d="M -1,0 15,5 V -5 Z"
+       transform="rotate(-62.85289,1100.918,-204.3532)"
+       id="path238" />
+  </g>
+  <g
+     transform="translate(769.47709,838.02844)"
+     id="g250">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#00a2e0"
+       stroke="#000000"
+       id="path242" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="120.95556"
+       height="18"
+       x="-60.477779"
+       y="20.333334"
+       id="rect244" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text246"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">28 days mortality</text>
+    <path
+       d="M -2,-6 H 2 V 6 h -4 z"
+       fill="#000000"
+       id="path248" />
+  </g>
+  <g
+     transform="translate(1257.8305,602.27766)"
+     id="g258">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path252" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="69.366669"
+       height="18"
+       x="-34.683334"
+       y="20.333334"
+       id="rect254" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text256"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">AKI stage</text>
+  </g>
+  <g
+     transform="translate(96.266685,58.298663)"
+     id="g266">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path260" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="122.74445"
+       height="18"
+       x="-61.372223"
+       y="20.333334"
+       id="rect262" />
+    <text
+       class="nodelabel"
+       y="43.051064"
+       text-anchor="middle"
+       id="text264"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="8.0510645">Age at admission</text>
+  </g>
+  <g
+     transform="translate(46.603622,832.45325)"
+     id="g276">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#bed403"
+       stroke="#000000"
+       id="path268" />
+    <text
+       class="nodelabel"
+       y="52.252281"
+       text-anchor="middle"
+       id="text272"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle"
+       x="101.21339">Albumin + crystalloids</text>
+    <path
+       d="M -4,-6 7,0 -4,6 Z"
+       fill="#000000"
+       id="path274" />
+  </g>
+  <g
+     transform="translate(1213.6856,836.43553)"
+     id="g284">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path278" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="102.83334"
+       height="18"
+       x="-51.416668"
+       y="20.333334"
+       id="rect280" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text282"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Dialysis (RRT)</text>
+  </g>
+  <g
+     transform="translate(300.43705,221.572)"
+     id="g292">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path286" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="175.21112"
+       height="18"
+       x="-87.60556"
+       y="20.333334"
+       id="rect288" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text290"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Emergency at admission</text>
+  </g>
+  <g
+     transform="translate(741.8865,157.85557)"
+     id="g300">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path294" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="71.155556"
+       height="18"
+       x="-35.577778"
+       y="20.333334"
+       id="rect296" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text298"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Heart rate</text>
+  </g>
+  <g
+     transform="translate(1165.4021,228.7401)"
+     id="g308">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path302" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="144.98889"
+       height="18"
+       x="-72.494446"
+       y="20.333334"
+       id="rect304" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text306"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Insurance, Medicare</text>
+  </g>
+  <g
+     transform="translate(660.49425,51.927013)"
+     id="g316">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path310" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="153.87778"
+       height="18"
+       x="-76.938889"
+       y="20.333334"
+       id="rect312" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text314"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle">Mean Blood Pressure</text>
+  </g>
+  <g
+     transform="translate(1350.259,460.50861)"
+     id="g324">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path318" />
+    <text
+       class="nodelabel"
+       y="-39.759888"
+       text-anchor="middle"
+       id="text322"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="-25.303347">Respiratory rate</text>
+  </g>
+  <g
+     transform="translate(416.31753,124.40445)"
+     id="g332">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#dddddd"
+       stroke="#aaaaaa"
+       id="path326" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="170.76666"
+       height="18"
+       x="-85.383339"
+       y="20.333334"
+       id="rect328" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text330"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Socio-economical factor</text>
+  </g>
+  <g
+     transform="translate(1386.1268,599.09184)"
+     id="g340">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path334" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="87.177773"
+       height="18"
+       x="-43.58889"
+       y="20.333334"
+       id="rect336" />
+    <text
+       class="nodelabel"
+       y="-32.858974"
+       text-anchor="middle"
+       id="text338"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="-33.354412">Urine output</text>
+  </g>
+  <g
+     transform="translate(1348.8795,161.83785)"
+     id="g348">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path342" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="72.922218"
+       height="18"
+       x="-36.461113"
+       y="20.333334"
+       id="rect344" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text346"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Antibiotics</text>
+  </g>
+  <g
+     transform="translate(821.89921,271.74869)"
+     id="g356">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#dddddd"
+       stroke="#aaaaaa"
+       id="path350" />
+    <text
+       class="nodelabel"
+       y="-36.309433"
+       text-anchor="middle"
+       id="text354"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="39.105171">Comorbidity</text>
+  </g>
+  <g
+     transform="translate(314.23235,20.068802)"
+     id="g364">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path358" />
+    <text
+       class="nodelabel"
+       y="7.2070827"
+       text-anchor="middle"
+       id="text362"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="76.026505">Gender</text>
+  </g>
+  <g
+     transform="translate(638.42178,167.41304)"
+     id="g372">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path366" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="52.488888"
+       height="18"
+       x="-26.244446"
+       y="20.333334"
+       id="rect368" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text370"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Lactate</text>
+  </g>
+  <g
+     transform="translate(252.15352,22.458168)"
+     id="g380">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path374" />
+    <text
+       class="nodelabel"
+       y="9.6966534"
+       text-anchor="middle"
+       id="text378"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="-67.858978">Race</text>
+  </g>
+  <g
+     transform="translate(866.04415,441.39368)"
+     id="g388">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path382" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="51.555557"
+       height="18"
+       x="-25.777779"
+       y="20.333334"
+       id="rect384" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text386"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">SAPSII</text>
+  </g>
+  <g
+     transform="translate(950.19545,345.02258)"
+     id="g396">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path390" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="42.666668"
+       height="18"
+       x="-21.333334"
+       y="20.333334"
+       id="rect392" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text394"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">SOFA</text>
+  </g>
+  <g
+     transform="translate(1192.9926,527.41086)"
+     id="g404">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path398" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="40.91111"
+       height="18"
+       x="-20.455557"
+       y="20.333334"
+       id="rect400" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text402"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">SpO2</text>
+  </g>
+  <g
+     transform="translate(1112.9799,381.65953)"
+     id="g412">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path406" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="89.844444"
+       height="18"
+       x="-44.922222"
+       y="20.333334"
+       id="rect408" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text410"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Temperature</text>
+  </g>
+  <g
+     transform="translate(63.157977,276.52742)"
+     id="g420">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path414" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="96.655556"
+       height="18"
+       x="-48.327778"
+       y="20.333334"
+       id="rect416" />
+    <text
+       class="nodelabel"
+       y="36.15015"
+       text-anchor="middle"
+       id="text418"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+       x="17.252281">Vasopressors</text>
+  </g>
+  <g
+     transform="translate(1364.0543,264.58059)"
+     id="g428">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path422" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="73.844444"
+       height="18"
+       x="-36.922222"
+       y="20.333334"
+       id="rect424" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text426"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Ventilation</text>
+  </g>
+  <g
+     transform="translate(115.5801,145.90874)"
+     id="g436">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#ffffff"
+       stroke="#000000"
+       id="path430" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="49.511112"
+       height="18"
+       x="-24.755556"
+       y="20.333334"
+       id="rect432" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text434"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Weight</text>
+  </g>
+  <g
+     transform="translate(1170.9202,60.688023)"
+     id="g444">
+    <path
+       fill-opacity="0.7"
+       stroke-width="2"
+       z-index="1"
+       d="M 0,0 M 20,0 A 20,15 0 1 1 -20,0 20,15 0 1 1 20,0"
+       fill="#dddddd"
+       stroke="#aaaaaa"
+       id="path438" />
+    <rect
+       class="textbg"
+       fill="#ffffff"
+       width="53.355556"
+       height="18"
+       x="-26.677778"
+       y="20.333334"
+       id="rect440" />
+    <text
+       class="nodelabel"
+       y="35"
+       text-anchor="middle"
+       id="text442"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.6667px;font-family:Arial, sans-serif;-inkscape-font-specification:'Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">lifestyle</text>
+  </g>
+</svg>

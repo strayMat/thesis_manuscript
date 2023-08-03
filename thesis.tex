@@ -94,6 +94,8 @@
 \colorlet{I}{MidnightBlue}
 \colorlet{C}{YellowOrange}
 \colorlet{O}{DarkOrchid}
+\colorlet{T}{Gray}
+
 \definecolor{Prune}{RGB}{99,0,60}
 \definecolor{light_grey}{rgb}{0.3,.3,.3}
 \definecolor{deep_blue}{rgb}{0,.2,.5}
@@ -951,6 +953,24 @@ help practitioners during consultation \citep{lee2023benefits}.
   generalization is considered by \cite{rothman2012epidemiology} as applied
   epidemiology, focused on specific cases and not as the core of epidemiological
   science.
+
+  Even the early Framingham study concludes that risk reduction is more important
+  than identifying the strength of specific risk factors since this quantity is
+  subject to slight changes in the risk model \citep{brand1976multivariate}:
+  \textit{It further suggests that the strength of a particular risk factor may
+    not be as important from the point of view of intervention as the ability to
+    safely and conveniently achieve even a moderate risk reduction in a large number
+    of persons.}
+  In a foundational article on EHR, the use-case of heart failure prediction is
+  motivated by agressive interventions \citep{wu2010prediction}: \textit{heart
+    failure could potentially lead to improved outcomes through aggressive
+    intervention, such as treatment with angiotensin converting enzyme
+    (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs).}. It is almost
+  always the case that prognosis models are motivated by decision making
+  processes. It is clearly described by \cite{steyerberg2009applications} for
+  diagnosis: \textit{If we do a diagnostic test, we may detect an underlying
+    disease. But some diseases are not treatable, or the natural course might be
+    very similar to what is achieved with treatment.}
 
   \paragraph{Causality in Machine Learning}
 
@@ -1828,7 +1848,8 @@ Arguments for ease of deployment.
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
 
-\chapter{Prediction is not all we need: Causal analysis of EHRs to ground decision making}\label{chapter:causal_tuto}
+\chapter{Prediction is not all we need: Causal thinking for decision making on
+  Electronic Health Records}\label{chapter:causal_tuto}
 
 \begin{citationbox}
   Nature marks each growth ... according to its curative benefit.
@@ -1836,7 +1857,25 @@ Arguments for ease of deployment.
 \end{citationbox}
 
 \begin{chapterabstract}\label{sec:causal_tuto:abstract}%
-
+  Accurate predictions, as with machine learning, may not suffice to
+  provide optimal healthcare for every patient. Indeed, prediction can be driven
+  by shortcuts in the data, such as racial biases.
+  Causal thinking is needed for data-driven decisions. Here, we
+  give an introduction to the key elements, focusing on routinely-collected data,
+  electronic health records (EHRs) and claims data. Using such data to assess the
+  value of an intervention requires care: temporal dependencies
+  and existing practices easily confound the causal effect.
+  We present a step-by-step framework to help build \emph{valid}
+  decision making from real-life patient records by emulating a randomized
+  trial before individualizing decisions, \emph{eg} with machine
+  learning.
+  Our framework highlights the most important pitfalls and considerations
+  in analysing EHRs or claims data to draw causal conclusions.
+  We illustrate the various choices in studying the effect of albumin on sepsis mortality
+  in the Medical Information Mart for Intensive Care database (MIMIC-IV).
+  We study the impact of various choices at every step, from feature
+  extraction to causal-estimator selection. In a tutorial
+  spirit, the code and the data are openly available.
 \end{chapterabstract}
 
 \vfill
@@ -1852,64 +1891,297 @@ performed the experiments and wrote the manuscript.
   prediction}%
 \label{sec:causal_tuto:motivation}%
 
+\md{I need to subdvide this motivation to be more readable}
+% \subsection{Predictive medicine currently suffers from biases}%
+% \label{subsec:causal_tuto:predictive_medicine_biases}%
+% \subsection{A key ingredient to ground data-driven decision making is causal thinking}%
+% \label{subsec:causal_tuto:causal_thinking}%
 
-Even the early Framingham study concludes that risk reduction is more important
-than identifying the strength of specific risk factors since this quantity is
-subject to slight changes in the risk model \citep{brand1976multivariate}:
-\textit{It further suggests that the strength of a particular risk factor may
-  not be as important from the point of view of intervention as the ability to
-  safely and conveniently achieve even a moderate risk reduction in a large number
-  of persons.}
-In a foundational article on EHR, the use-case of heart failure prediction is
-motivated by agressive interventions \citep{wu2010prediction}: \textit{heart
-  failure could potentially lead to improved outcomes through aggressive
-  intervention, such as treatment with angiotensin converting enzyme
-  (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs).}. It is almost
-always the case that prognosis models are motivated by decision making
-processes. It is clearly described by \cite{steyerberg2009applications} for
-diagnosis: \textit{If we do a diagnostic test, we may detect an underlying
-  disease. But some diseases are not treatable, or the natural course might be
-  very similar to what is achieved with treatment.}
-
-\subsection{Predictive medicine currently suffers from biases}%
-\label{subsec:causal_tuto:predictive_medicine_biases}%
-(shortcuts,
-population shifts). Racial, gender and under-served population biases raise
-concern on fairness.
-
-\subsection{A key ingredient to ground data-driven decision making is causal thinking}\label{subsec:causal_tuto:causal_thinking}
-
-\subsection{The need for synthetic materials for practitioners}%
+% \subsection{The need for synthetic materials for practitioners}%
 \label{subsec:causal_tuto:synthetic_materials}%
 
-The relevant concepts for causal inference are scattered in different literatures. A dedicated exposition to time-varying data in EHRs would help practitioners and data scientists that study them.
-\subsection{Motivating example}\label{subsec:causal_tuto:motivating_example}
+
+Medicine increasingly relies on data, with the promise of better
+clinical decision-making. Machine learning is central to this
+endeavor.
+% Other formulation: "For such endeavor, machine learning is the darling
+% of data scientists."
+On medical images, it achieves human-level performance to
+diagnose various conditions
+\citep{aggarwal2021diagnostic,esteva2021deep,liu2019comparison}.
+Using Electronic Health Records (EHRs) or administrative data, it
+outperforms traditional rule-based clinical scores to predict a patient's
+readmission risk, mortality, or future comorbidities
+\citep{rajkomar2018scalable,li2020behrt,beaulieu2021machine}.
+%
+And yet, there is growing evidence that machine-learning models may not benefit
+patients equally. They reproduce and amplify biases in the data
+\citep{rajkomar2018ensuring}, such as gender or racial biases
+\citep{singh2022generalizability,gichoya2022ai,roosli2022peeking},
+or marginalization of under-served populations
+\citep{seyyed2021underdiagnosis}. The models
+typically encode these biases by capturing shortcuts: stereotypical features in the data or inequal sampling \citep{geirhos2020shortcut,winkler2019association,degrave2021ai}.
+%
+For instance, an excellent predictive model of mortality in the Intense Care Unit
+(ICU) might be of poor clinical value if it uses information available
+only too late.
+%
+These shortcuts are at odds with healthcare's ultimate goal: appropriate care
+for optimal health outcome for each and every patient
+\citep{cma_policy_appropriateness_2015, ghassemi2020review}. Making the right decisions requires more than accurate predictions.
+
+The key ingredient to ground data-driven decision making is causal thinking
+\citep{prosperi2020causal}. Indeed, decision-making logic cannot rely purely on
+learning from the data, which itself results from a history of prior
+decisions \citep{plecko2022causal}. Rather, reasoning about a putative
+intervention requires comparing the potential outcomes with and without the
+intervention, the difference between these being the causal
+effect.
+% TODO: reintroduce counterfactual predictions? Not sure, given that it
+% does not fit well with the rest of our manuscript
+In medicine, causal effects
+are typically measured by Randomized Control Trials
+(RCTs).
+Yet, RCTs may not suffice for individualized decision making: They
+may suffer from selection biases \citep{travers2007external,
+  averitt2020translating}, failure to recruit disadvantaged groups, and
+become outdated by evolving clinical practice. Their limited sample size
+seldom allows to explore treatment heterogeneity across subgroups.
+%
+Rather, routinely-collected data naturally probes real-world practice and
+displays much less sampling bias. It provides a unique opportunity to assess benefit-risk
+trade-offs associated with a decision \citep{desai2021broadening}, with
+sufficient data to capture heterogeneity \citep{rekkas2023standardized}.
+Estimating causal effects from this data is challenging however,
+as the intervention is far from being given at random, and,
+as a result, treated and untreated patients cannot be easily compared. Without
+dedicated efforts, machine-learning models simply pick up these difference and
+are not usable for decision making. Rather dedicated statistical
+techniques are needed to emulate a ``target trial'' from \emph{observational} data
+-- without controlled interventions.
+
+EHRs and claims are two prominent sources of real-life healthcare data with different time resolutions.
+EHRs are particularly suited to guide clinical decisions, as they are
+rich in high-resolution and time-varying features, including vital signs,
+laboratory tests, medication dosages, etc. Claims, on the other
+hand, inform best on medico-economic questions or
+chronic conditions as they cover in-patient and
+out-patient care during extended time periods.
+%
+But there are many pitfalls to sound and valid
+causal inferences \citep{hernan2019second, schneeweiss2021conducting}.
+%
+Data with temporal dependencies, as EHRs and claims, are particularly
+tricky, as it is easy to induce time-related biases
+\citep{suissa2008immortal,wang2023emulation}.
+
+% Position of our paper
+Here we summarize the main considerations to derive valid decision-making
+evidence from EHRs and claims data.
+%
+Many guidelines on causal inference from observational data have been
+written in various
+fields such as epidemiology \citep{hernan2020causal, schneeweiss2021conducting,
+  zeng2022uncovering}, statistics \citep{belloni2014high,
+  chernozhukov2018double}, machine learning \citep{shalit2016tutorial,
+  sharma2018tutorial,moraffah2021causal} or econometrics \citep{imbens2009recent}.
+Time-varying features of EHR data, however, raise particular challenges that call
+for an adapted framework.
+%
+We focus on single interventions: only one prescription during the study period,
+e.g., a patient either receives mechanical ventilation or not during admission to an
+intensive care unit compared to, e.g. blood transfusion which may be given repeatedly.
+%
+Section \ref{sec:causal_tuto:framework} details our proposed step-by-step
+analytic framework on EHR data. Section \ref{sec:causal_tuto:application}
+instantiates the framework by emulating a trial on the effect of albumin on
+sepsis using the Medical Information Mart for Intensive Care database (MIMIC-IV)
+database \citep{johnson2020mimic}. Section \ref{subsec:causal_tuto:discussion}
+discusses our results and its implications on sound decision making. These
+sections focus on being accessible, appendices and online Python
+code\footnote{\url{https://github.com/soda-inria/causal_ehr_mimic/}} expand more
+technical details, keeping a didactic flavor.
+
 
 
 \section{Step-by-step framework for robust decision making from EHR data}%
 \label{sec:causal_tuto:framework}%
 
-\subsection{Robust study design to avoid biases: Framing the question}%
+
+% motivating example
+\paragraph{The need for a causal framework, even with machine learning}\label{causal_tuto:motivating_example}
+
+Data analysis without causal framing risks building shortcuts. As an example of
+such failure, we trained a predictive model for 28-day mortality in patients
+with sepsis within the ICU. We fit the model using clinical measures available
+during the first 24 hours after admission. To simulate using this model to decide
+whether or not to administrate resuscitation fluids, we evaluate its performance
+on unseen patients first on the same measures as the ones used in training, and then using only the measures available before this treatment, as would be done in a decision making context. The
+performance drops markedly: from 0.80 with all the measures available during the first 24 hours after admission to 0.75 using only the measures available before the treatment (unit: Area Under the Curve of the Receiving Operator Characteristic, ROC AUC).
+The model has captured shortcuts: good prediction based on the wrong features of the
+data, useless for decision making.
+On the opposite, a model trained on pre-treatment measures achieves 0.79 in
+the decision-making setting (further details
+in appendix \ref{apd:motivating_example}). This illustrates the importance of
+accounting for the putative interventions even for predictive models.
+
+Whether a data analysis uses machine learning or not, many pitfalls
+threaten its value for decision making. To avoid these traps,
+we outline in this section a simple step-by-step analytic framework,
+illustrated in Figure \ref{fig:inference_framework}. We first study the medical
+question as a target trial \citep{hernan2021methods}, the common
+evidence for decisions. This enables assessing the validity of the
+analysis before probing heterogeneity --predictions on sub-groups-- for
+individualized decision.
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=1.0\linewidth]{img/chapter_4/complete_inference_flow.pdf}
+  \caption{\textbf{Step-by-step analytic framework} -- The complete
+    inference pipeline confronts the analyst with
+    many choices, some guided by domain knowledge, others
+    by data insights. Making those choices explicit is necessary to ensure
+    robustness and reproducibility.}\label{fig:inference_framework}
+\end{figure}
+
+\subsection{Step 1: study design -- Frame the question to avoid biases}%
 \label{subsec:causal_tuto:framing}%
 
-PICOT
-Selection Bias
-Immortal time bias
+\begin{table}[b!]
+  \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      \multicolumn{1}{|c|}{\textbf{PICO component}} &
+      \multicolumn{1}{c|}{\textbf{Description}}     &
+      \multicolumn{1}{c|}{\textbf{Notation}}        &
+      \multicolumn{1}{c|}{\textbf{Example}}                                                            \\ \hline
+      \textbf{\textcolor{P}{Population}}            & What is the target
+      population of interest?                       & $X \sim \mathbb{P}(X)$,
+      the covariate distribution                    &
+      \makecell[l]{Patients with sepsis in the ICU}                                                    \\ \hline
+      \textbf{\textcolor{I}{Intervention}}          &
+      What is the treatment?                        &
+      \makecell[l]{$A \sim \mathbb{P}(A=1)=p_A$,                                                       \\ the probability to be treated} &
+      Combination of crystalloids and albumin                                                          \\ \hline
+      \textbf{\textcolor{C}{Control}}               & What is the clinically
+      relevant comparator?                          & $1-A \sim 1-p_A$                               &
+      Crystalloids only
+      \\ \hline
+      \textbf{\textcolor{O}{Outcome}}               & \makecell[l]{What are the
+      outcomes to compare?}                         & \makecell[l]{$Y(1), Y(0) \sim \mathbb{P}(Y(1),
+      Y(0))$,                                                                                          \\ the
+      potential outcomes distribution}              & 28-day mortality
+      \\ \hline
 
-\subsection{Is the dataset sufficient to inform on the intervention: identification}%
+      \textbf{\textcolor{T}{Time}}                  & \makecell[l]{Is the start
+        of follow-up aligned
+      \\with intervention assignment?} & \makecell[l]{N/A}
+                                                    & \makecell[l]{Intervention administered
+      \\ within the first
+      24 hours of admission}                                                                           \\ \hline
+    \end{tabular}%
+  }\\
+  \caption{PICO(T) components help to clearly define the
+    medical question of interest.}\label{table:picot}
+\end{table}
+
+
+\begin{figure}[b!]
+  \begin{minipage}{.2\linewidth}
+    \caption{\textbf{Study design} -- The first step of the analysis consists in identifying a valid
+      treatment effect question from patient healthcare trajectories and defining
+      a target trial emulating a RCT using the PICO(T) framework.}\label{fig:counterfactual_event_format}
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}{.78\linewidth}
+    \includegraphics[width=\linewidth]{img/chapter_4/counterfactual_event_format.pdf}
+  \end{minipage}%
+\end{figure}
+
+
+Grounding decisions on evidence needs well-framed questions, defined by
+their PICO components: Population, Intervention, Control, and Outcome
+\citep{richardson1995well}. To concord with a (hypothetical)
+target randomized clinical trial, an analysis must emulate all these components
+\citep{hernan_using_2016,wang2023emulation}, \emph{eg} via
+\emph{potential outcome} statistical framework \citep{hernan2020causal}
+--Table \ref{table:picot} and Figure \ref{fig:counterfactual_event_format}.
+EHRs and Claims need an additional time component: PICOT \citep{riva2012your}.
+
+
+Without dedicated care, defining those PICO(T) components from EHRs can
+pick up bias: non-causal associations between treatment and outcomes.
+We detail two common sources of bias in the
+Population and Time components: selection bias and immortal time bias, respectively.
+
+\paragraph{Selection Bias:} In EHRs, outcomes and treatments are often not
+directly available and need to be inferred from indirect events. These signals
+could be missing not-at random, sometimes correlated with the treatment
+allocation \citep{weiskopf2023healthcare}. For example, not all billing
+codes are equally well filled in, as billing is strongly associated with
+case-severity and cost.
+Consider comparing the effect on mortality of fluid resuscitation
+with albumin to that of crystalloids. As albumin is much more costly,
+patients who have received this treatment are much more likely to have
+a sepsis billing code, independent of the seriousness of their
+condition. On the contrary, for patients treated with crystalloids, only
+the most severe cases will have a billing code. Naively comparing patients on crystalloid treatment with
+less sick patients on albumin treatment would overestimate the effect of albumin.
+
+\paragraph{Immortal time bias:} Another common bias comes from timing:
+improper alignment of the inclusion defining event and the intervention time
+\citep{suissa2008immortal,hernan2016specifying,wang2022understanding}. Figure
+\ref{fig:immortal_time_bias} illustrates this
+Immortal time bias --related to survivor bias \citep{lee2020immortaltimebias}.
+It occurs when the follow-up period, i.e. cohort entry, starts before the
+intervention, e.g. prescription for a
+second-line treatment. In this case, the treated group will be
+biased towards patients still alive at the time of assignment and thus
+overestimating the effect size. Other common temporal biases are lead time bias
+\citep{Oke2021leadtimebias,fu2021timing}, right censorship
+\citep{hernan2016specifying}, and attrition bias
+\citep{Bankhead2017attritionbias}.
+
+
+Good practices include explicitly stating the cohort inclusion event
+\citep[Chapter~10:Defining Cohorts]{ohdsi2019book} and defining an appropriate
+grace period between starting time and the intervention assignment
+\citep{hernan2016specifying}. At this step, a population timeline can help (eg.
+Figure \ref{fig:cohort_timeline_albumin}).
+
+\begin{figure}[!h]
+  \begin{minipage}{.25\linewidth}
+    \caption{Poor experimental design can introduce Immortal time bias, which
+      leads to a treated group with falsely longer longevity
+      \citep{lee2020immortaltimebias}.}\label{fig:immortal_time_bias}
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}{.7\linewidth}
+    \includegraphics[width=\linewidth]{img/chapter_4/catalog_of_bias_immortal_time_bias.png}
+  \end{minipage}
+\end{figure}
+
+
+\subsection{Step 2: identification -- List necessary information to answer the causal question}%
 \label{subsec:causal_tuto:identification}%
-Causal graph Computing the causal effect of interest: Estimation Confounders
-extractions Confounders aggregation Causal estimators Nuisance estimators
+
+
+The identification step builds a causal model to answer the research question
+(Figure \ref{fig:causal_diagram_albumin}).
+%
+Indeed, the analysis must compensate for differences between treated and
+non-treated that are not due to the intervention
+(\cite[chapter~1]{pearl2018book}, \cite[chapter~1]{hernan2020causal}).
 
 \begin{background_box_left}
 
-
   \paragraph{Causal Assumptions}\label{background:causal_assumptions}
 
-  \md{Taken from "how to select": blend with literal explanations given in "causal tuto"}
-  We assume the following four assumptions, referred as strong ignorability and
-  necessary to assure identifiability of the causal estimands with observational
-  data \citep{rubin_causal_2005}:
+  Not every question can be answered from a given dataset: valid causal
+  inference requires assumptions. We assume the following
+  four assumptions, referred as strong ignorability and necessary to assure
+  identifiability of the causal estimands with observational data
+  \citep{rubin_causal_2005}:
   \begin{assumption}[Unconfoundedness]\label{assumption:ignorability}
     \begin{equation*}\label{eq:ignorability}
       \{Y(0), Y(1) \} \indep A | X
@@ -1956,26 +2228,226 @@ extractions Confounders aggregation Causal estimators Nuisance estimators
     the ``no covariate shift'' assumption \citep{jesson_identifying_2020}.
   \end{assumption}
 
+
+  \paragraph{Categorizing covariates}
+  %
+  Potential predictors --covariates-- should be categorized depending on their
+  causal relations with the intervention and the outcome (Figure
+  \ref{fig:causal_variables}): \emph{confounders} are common causes of the
+  intervention and the outcome; \emph{colliders} are caused by both the
+  intervention and the outcome; \emph{instrumental variables} are a cause of the
+  intervention but not the outcome, \emph{mediators} are caused by the
+  intervention and is a cause of the outcome. Finally, \emph{effect modifiers}
+  interact with the treatment, and thus
+  modulate the treatment effect in subpopulations \citep{attia2022proposal}.
+
 \end{background_box_left}
 
-\subsection{Assessing the robustness of the hypothesis: Vibration or sensitivity
-  analysis}%
+\md{Might take some work to put this figure in a colourbox.}
+\begin{figure}
+  \begin{minipage}[t]{0.18\linewidth}
+    \includegraphics[width=0.72\linewidth]{img/chapter_4/confounder.pdf}
+
+    \small\sffamily Confounder
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.18\linewidth}
+    \includegraphics[width=0.72\linewidth]{img/chapter_4/collider.pdf}
+
+    \small\sffamily Collider
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.18\linewidth}
+    \includegraphics[width=0.72\linewidth]{img/chapter_4/instrumental_variable.pdf}
+
+    \small\sffamily Instrumental variable
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.18\linewidth}
+    \includegraphics[width=.9\linewidth]{img/chapter_4/mediator.pdf}%
+
+    \small\sffamily Mediator
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.18\linewidth}
+    \includegraphics[width=\linewidth]{img/chapter_4/effect_modifier.pdf}%
+    \llap{%
+      \raisebox{.555\linewidth}{\colorbox{black!10}{\parbox{1.9\linewidth}{%
+            \sffamily\small\hspace*{-1.3ex}%
+            \begin{tabular}{r@{\hskip 1ex}lr@{\hskip 1ex}l}
+              A:  & Treatment                    & Y: & Outcome         \\
+              X:  & Confounder                   & C: & Collider        \\
+              IV: & Instrumental va\rlap{riable}                        \\
+              M:  & Mediator                     & E: & Effect modifier \\
+            \end{tabular}%
+            \vspace*{-.3ex}
+          }}\hspace*{.84\linewidth}%
+      }}
+
+    \small\sffamily Effect modifier \scriptsize\\\citep[Represented
+      following][]{attia2022proposal}
+  \end{minipage}
+  \caption{The five categories of causal variables needed for our
+    framework.}\label{fig:causal_variables}
+\end{figure}
+
+\begin{background_box_left}
+
+  To capture a valid causal effect, the analysis should only include confounders
+  and possible treatment-effect modifiers to study the resulting heterogeneity.
+  Regressing the outcome on instrumental and post-treatment variables (colliders
+  and mediators) will lead to biased causal estimates
+  \citep{vanderweele2019principles}. Drawing causal Directed Acyclic Graphs (DAGs)
+  \citep{greenland1999causal}, \emph{eg} with a webtool such as DAGitty
+  \citep{textor2011dagitty}, helps capturing the relevant variables from domain
+  expertise.
+
+  \paragraph{Estimand or effect measure}
+
+  The \emph{estimand} is the final statistical quantity estimated from the data.
+  %
+  Depending on the question, different estimands are better suited to contrast the
+  two potential outcomes E[Y(1)] and E[Y(0)] \citep{imbens_nonparametric_2004,
+    colnet2023risk}. For continuous outcomes, risk difference is a natural estimand,
+  while for binary outcomes (e.g. events)  the choice of estimand depends on the
+  scale of the study. Whereas the risk difference is very informative at the
+  population level, e.g. for medico-economic decision making, the risk ratio and
+  the hazard ratio are more informative to reason on sub-populations such as
+  individuals or sub-groups \citep{colnet2023risk}.
+
+\end{background_box_left}
+
+\subsection{Step 3: Estimation -- Compute the causal effect of interest}\label{subsec:causal_tuto:estimation}
+
+\paragraph{Confounder aggregation}
+
+Some confounders are captured via measures collected over multiple time points.
+These need to be aggregated at the patient level. Simple forms of aggregation
+include taking the first or last value before a time point, or an aggregate such
+as mean or median over time. More elaborate choices may rely on hourly
+aggregations of information such as vital signs. These provide more detailed
+information on the health evolution, thus reducing confounding bias between
+rapidly deteriorating and stable patients. However, it also increases the number
+of confounders, resulting in a larger covariate space, hence increasing the
+estimate's variance and endangering the positivity assumption. The choices
+should be guided by expert knowledge. If multiple choices appear reasonable, one
+should compare them in a vibration analysis (see Section
+\ref{sec:vibration_analysis}). Indeed, aggregation may impact results, as
+\cite{sofrygin2019targeted} show, revealing that some choices of averaging time
+scale lead to inconclusive links between HbA1c levels and survival in diabetes.
+
+Beyond measures and clinical codes, unstructured clinical text may capture
+confounding or prognostic information \citep{horng2017creating,jiang2023health}
+which can be added in the causal model \citep{zeng2022uncovering}.
+
+\paragraph{Causal estimators or statistical modeling}
+
+A given estimand can be estimated through different methods. One can model the
+outcome with regression models \citep[also known as
+  G-formula,][]{robins1986role} and use it as a predictive counterfactual model
+for all possible treatments for a given patient. Alternatively, one can model
+the propensity of being treated use it for matching or Inverse Propensity
+Weighting (IPW) \citep{austin2015moving}. Finally, doubly robust methods model
+both the outcome and the treatment, benefiting from the convergence of both
+models \citep{wager2020stats}. Various doubly robust models have emerged:
+Augmented Inverse Propensity Score (AIPW) \citep{robins1994estimation}, Double
+Robust Machine Learning \citep{chernozhukov2018double}, or Targeted Maximum
+Likelihood Estimation (TMLE) \citep{schuler2017targeted} to name a few (details
+in Appendix \ref{apd:causal_estimators}).
+
+\paragraph{Estimation models of outcome and treatment}
+
+The causal estimators use models of the outcome or the treatment --called
+nuisances as they are not the main inference targets in our causal effect
+estimation problem. Which statistical model is best suited is an additional
+choice and there is currently no clear best practice
+\citep{wendling2018comparing, dorie2019automated}. The trade-off lies between
+simple models risking misspecification of the nuisance parameters versus
+flexible models risking to overfit the data at small sample sizes. Stacking
+models of different complexity in a super-learner is a good solution to navigate
+the trade-off \citep{van2007super,doutreligne2023select}.
+
+\subsection{Step 4: Vibration analysis -- Assess the robustness of the hypotheses}
 \label{subsec:causal_tuto:vibration_analysis}%
 
-Sensitivity vs robustness
+Some choices in the pipeline may not be clear cut. Several options should then
+be explored, to derive conceptual error bars going beyond a single statistical
+model. This process is sometimes called robustness analysis
+\citep{neumayer2017robustness} or sensitivity analysis
+\citep{thabane2013tutorial, hernan2020causal,fda_statistical_2021}. However, in
+epidemiology, sensitivity analysis refers to quantifying the bias from
+unobserved confounders \citep{schneeweiss2006sensitivity}. Following
+\cite{patel2015assessment}, we use the term vibration analysis to describe the
+sensitivity of the results to all analytic choices.
+%
+The vibration analysis can identify analytic choices that deserve extra
+scrutiny. It complements a comparison to previous studies --ideally RCTs-- to
+establish the validity of the pipeline.
 
-\subsection{Heterogeneity of treatment}\label{subsec:causal_tuto:heterogeneity}
 
-Interest of HTE
-How to do HTE ? Final regression analysis.
 
-\section{Application on MIMIC-IV}\label{sec:causal_tuto:application}
+\subsection{Step 5: Treatment heterogeneity -- Compute treatment effects on subpopulations}%
+\label{subsec:causal_tuto:heterogeneity}%
 
-Emulated trial: Effect of albumin in combination with crystalloids compared to crystalloids alone on 28-day mortality in sepsis patients
-Choice of the trial
-Known effects
 
-\subsection{Framing the question}\label{subsec:causal_tuto:framing_mimic}
+Once the causal design and corresponding estimators are established, they can be
+used to explore the variation of treatment effects among subgroups. Measures of
+the heterogeneity of a treatment nourish decisions tailored to a patient's
+characteristics. A causally-grounded model, \emph{eg} using machine learning,
+can be used to predict the effect of the treatment from all the covariates
+--confounders and effect modifers-- for an individual: the \emph{Individual
+  Treatment Effect} \citep[ITE][]{lu2018estimating}. Studying heterogeneity only
+along specific covariates, or a given patient stratification, is related to the
+\emph{Conditional Average Treatment Effect} (CATE)
+\citep{robertson2021assessing}. Practically, CATEs can be estimated by
+regressing the individual predictions given by the causal estimator against the
+sources of heterogeneity (details in \ref{apd:cate_results}).
+
+
+\section{Application: evidence from MIMIC-IV on which resuscitation fluid to
+  use}%
+\label{sec:causal_tuto:application}%
+
+We now use the above framework to extract evidence-based decision
+rules for resuscitation.
+Ensuring optimal organ perfusion in patients with septic shock requires
+resuscitation by reestablishing circulatory volume with intravenous fluids.
+While crystalloids are readily available, inexpensive and safe, a large fraction
+of the administered volume is not retained in the vasculature. Colloids
+offer the theoretical benefit of retaining more volume in the circulation, but
+might be more costly and have adverse effects \citep{annane2013effects}. The
+scientific community long debated which fluid benefits patients most
+\citep{mandel2023treatment}.
+
+\paragraph{Emulated trial: Effect of albumin in combination with crystalloids
+  compared to crystalloids alone on 28-day mortality in patients with sepsis}\label{emulated_trial}
+
+We illustrate the impact of the different analytical steps to conclude
+on the effect of albumin in combination with crystalloids compared to
+crystalloids alone on 28-day mortality in patients with sepsis using MIMIC-IV
+\citep{johnson2020mimic}. This question is clinically relevant and
+multiple published RCTs
+can validate the average treatment effect.
+Appendix \ref{apd:target_trials} provides further examples of
+potential target trials.
+
+
+\paragraph{Evidence from the literature}
+
+Meta-analyses from multiple pivotal RCTs
+found no effect of adding albumin to crystalloids \citep{li2020resuscitation} on
+28-day and 90-day mortality. Further, an observational study in MIMIC-IV
+\citep{zhou2021early} found no significant benefit of albumin on 90-day
+mortality for severe sepsis patients. Given this previous evidence, we thus expect
+no average effect of albumin on mortality in sepsis patients. However,
+studies --RCT \citep{caironi2014albumin} and observational
+\citep{li2020resuscitation}-- have found that septic-shock
+patients do benefit from albumin.
+
+\subsection{Study design: effect of crystalloids on mortality in sepsis}%
+\label{subsec:causal_tuto:framing_mimic}%
+
+%%%%%%%%% TODO:continue from here (l. 654 in preprint)
 
 \subsection{Identification}
 Covariates and dag

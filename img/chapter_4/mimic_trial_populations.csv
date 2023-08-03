@@ -1,0 +1,42 @@
+trial id,criteria name,criteria description,mimic table,n patients,criteria status,implemented
+fludrocortisone\_combination,Septic shock,"septic shock defined by the sepsis-3 criteria, first stay, 
+over 18, not deceased during 24 hours of ICU",mimiciv\_derived.sepsis3,25595,,true
+fludrocortisone\_combination,Fludrocortisone,Fludrocortisone administred,"mimiciv\_hosp.emar, mimiciv\_hosp.pharmacy",675,,true
+fludrocortisone\_combination,Hydrocortisone,Hydrocortisone administred,"mimiciv\_hosp.emar, mimiciv\_hosp.pharmacy, mimiciv\_icu.chartevents",6470,,true
+fludrocortisone\_combination,Hydrocortisone and sepsis and norepinephrine,Hydrocortisone administred and sepsis,"mimiciv\_hosp.emar, mimiciv\_hosp.pharmacy, mimiciv\_derived.sepsis3, mimiciv\_icu.chartevents",1217,control,true
+fludrocortisone\_combination,Fludrocortisone and Hydrocortisone and and norepinephrine,Both cortisones administered and sepsis,"mimiciv\_hosp.pharmacy, mimiciv\_hosp.emar, mimiciv\_derived.sepsis3",63,intervention,true
+high\_flow\_oxygen\_therapy,eligble hypoxemia after extubation,"over 18, hypoxemia 4 h before planed extubation 
+(100 < PaO2/FiO2 ≤ 300 mmHg), 
+and either HFNC or NIV ","mimiciv\_derived.vitalsign, mimiciv\_derived.bg, mimiciv\_derived.ventilation",801,trial population,false
+high\_flow\_oxygen\_therapy,eligible hypoxemia and HFNC,,"mimiciv\_derived.vitalsign, mimiciv\_derived.bg, mimiciv\_derived.ventilation",358,intervention,false
+high\_flow\_oxygen\_therapy,eligible hypoxemia and NIV,,"mimiciv\_derived.vitalsign, mimiciv\_derived.bg, mimiciv\_derived.ventilation",443,control,false
+routine\_oxygen\_for\_mia,Myocardial infarction icd,"Defined with ICD9-10 codes, first stay, over 18, 
+not deceased during 24 hours of ICU","mimiciv\_hosp.icd\_diagnoses, mimiciv\_derived.icustay\_detail",1582,,true
+routine\_oxygen\_for\_mia,Acute heart failure for the first 24h,,,0,,false
+routine\_oxygen\_for\_mia,ventilated,"ventilated during first 12 hours with any type 
+of mechanism (SupplementalOx, InvasiveVent) ",mimiciv\_derived.ventilation,1374,,true
+routine\_oxygen\_for\_mia,hypoxemia at admission,"hypoxemia during first 2 hours defined as either :
+(PaO2/FiO2) < 300mmHg OR 
+SO2 < 90 OR 
+SpO2 < 90","mimiciv\_derived.vitalsign, mimiciv\_derived.bg",415,,true
+routine\_oxygen\_for\_mia,Myocardial infarction wo hypoxemia at admission,Myocardial infarction icd.difference (hypoxemia at admission),"mimiciv\_derived.vitalsign, mimiciv\_derived.bg, mimiciv\_derived.ventilation",1169,trial population,true
+routine\_oxygen\_for\_mia,Oxygen therapy for eligible patients,"Myocardial infarction wo hypoxemia at admission AND
+SupplementalOxygen OR NonInvasiveVent","mimiciv\_derived.vitalsign, mimiciv\_derived.bg, mimiciv\_derived.ventilation",663,intervention,true
+routine\_oxygen\_for\_mia,No oxygen therapy for eligible patients,"Myocardial infarction wo hypoxemia at admission AND
+no ventilation of any kind during first 12 hours","mimiciv\_derived.vitalsign, mimiciv\_derived.bg, mimiciv\_derived.ventilation",178,control,true
+prone\_positioning\_for\_ards,ARDS during first 12 hours,"ARDS during the first 12 hours defined as
+(PaO2/FiO2) < 300mmHg, first stay, over 18, 
+not deceased during 24 hours of ICU","mimiciv\_derived.icustay\_detail, mimiciv\_derived.bg",3728,trial population,true
+prone\_positioning\_for\_ards,Prone positioning and ARDS,Prone positioning and ARDS,mimiciv\_icu.chartevents,256,intervention,true
+prone\_positioning\_for\_ards,Supline positioning ,Supline position and no prone position log,mimiciv\_icu.chartevents,3450,control,true
+nmba\_for\_ards,ARDS during first 12 hours,"ARDS during the first 12 hours defined as
+(PaO2/FiO2) < 300mmHg, first stay, over 18, 
+not deceased during 24 hours of ICU","mimiciv\_derived.icustay\_detail, mimiciv\_derived.bg",3728,trial population,true
+nmba\_for\_ards,ARDS with NMBA during stay,"Neuromuscular blocking agent as cisatracurium injections
+ during the stay.",mimiciv\_icu.inputevent,391,intervention,true
+nmba\_for\_ards,ARDS without NBMA during stay,No NBMA during the stay,mimiciv\_icu.inputevent,3337,control,true
+albumin\_for\_sepsis,sepsis3 and crystalloids,"septic shock defined by the sepsis-3 criteria, first stay, 
+over 18, not deceased during 24 hours of ICU, having crystalloids",mimiciv\_icu.inputevent,7299,trial population,true
+albumin\_for\_sepsis,crystalloids only,"sepsis3 and crystalloids during 24h, no albumin",mimiciv\_icu.inputevent,6331,control,true
+albumin\_for\_sepsis,albumin combination,"sepsis3 and combination of crystalloids followed by 
+albumin during 24h",mimiciv\_icu.inputevent,969,intervention,true

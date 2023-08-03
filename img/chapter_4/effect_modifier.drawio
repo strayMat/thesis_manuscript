@@ -1,0 +1,34 @@
+<mxfile host="app.diagrams.net" modified="2023-07-26T11:43:57.755Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0" etag="7rClgjdPxXB-p1Wl4KE9" version="21.6.5" type="device">
+  <diagram name="Page-1" id="qIHnqL3YpAx4ovSOnNfN">
+    <mxGraphModel dx="794" dy="1589" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GG0Py4mNQ_er1eh0wpnd-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=3;" parent="1" source="GG0Py4mNQ_er1eh0wpnd-1" target="GG0Py4mNQ_er1eh0wpnd-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GG0Py4mNQ_er1eh0wpnd-1" value="A" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=40;" parent="1" vertex="1">
+          <mxGeometry x="370" y="220" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GG0Py4mNQ_er1eh0wpnd-2" value="Y" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=40;" parent="1" vertex="1">
+          <mxGeometry x="650" y="220" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GG0Py4mNQ_er1eh0wpnd-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;strokeWidth=3;startArrow=block;startFill=1;" parent="1" source="GG0Py4mNQ_er1eh0wpnd-4" target="GG0Py4mNQ_er1eh0wpnd-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="T6UDaJQYMA-T1K2HFE1I-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;endArrow=block;endFill=1;strokeWidth=3;" parent="1" source="GG0Py4mNQ_er1eh0wpnd-4" target="GG0Py4mNQ_er1eh0wpnd-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GG0Py4mNQ_er1eh0wpnd-4" value="&lt;font style=&quot;font-size: 28px;&quot;&gt;ExA&lt;br style=&quot;font-size: 28px;&quot;&gt;&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;fontStyle=1;fontSize=28;" parent="1" vertex="1">
+          <mxGeometry x="510" y="110" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="T6UDaJQYMA-T1K2HFE1I-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;endArrow=block;endFill=1;" parent="1" source="T6UDaJQYMA-T1K2HFE1I-1" target="GG0Py4mNQ_er1eh0wpnd-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="T6UDaJQYMA-T1K2HFE1I-1" value="E" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#b0e3e6;strokeColor=#0e8088;fontStyle=1;fontSize=40;" parent="1" vertex="1">
+          <mxGeometry x="510" y="-10" width="60" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
