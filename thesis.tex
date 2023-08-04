@@ -9,6 +9,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{titlesec} % change titles formatting
 \usepackage{tocloft} %% toc formatting
+\usepackage{minitoc}
+\setcounter{minitocdepth}{1}
+\renewcommand{\mtctitle}{Contents}
 %\usepackage[french]{babel} % deactivating french babel that yields an error
 %\usepackage{csquotes} % for csquotes not present in babel french
 \usepackage[absolute]{textpos} 
@@ -104,7 +107,7 @@
 \definecolor{dark_blue}{rgb}{0,.15,.5}
 % Less saturation in the green for citations
 \definecolor{dark_green}{rgb}{0.2,0.5,.3}
-%\definecolor{dark_green}{rgb}{0,0.5,.15}
+\definecolor{dark_green}{rgb}{0,0.5,.15}
 \definecolor{firebrick}{rgb}{0.75,0.125,0.125}
 \definecolor{indigo}{rgb}{0.3,0,0.5}
 % Color from http://paletton.com/#uid=30v0u0kllllaFw0g0qFqFg0w0aF
@@ -113,14 +116,14 @@
 \definecolor{lightgreen}{RGB}{138,255,138}
 \definecolor{lightblue}{RGB}{138,138,255}
 \definecolor{ared}{rgb}{.647,.129,.149}
-\colorlet{deep_color}{deep_blue}
-\colorlet{dark_color}{dark_blue}
+%\colorlet{deep_color}{deep_blue}
+%\colorlet{dark_color}{dark_blue}
 \definecolor{lightorange}{RGB}{255,212,138}
 \colorlet{background_info_color}{green!10!orange}
 
-\colorlet{chaptercolor}{deep_blue}
+%\colorlet{chaptercolor}{deep_blue}
  % strange need to upper case for section numbering
-\colorlet{CHAPTERCOLOR}{chaptercolor}
+%\colorlet{CHAPTERCOLOR}{chaptercolor}
 \colorlet{GRAY}{Gray}
 
 % bibliography
@@ -158,9 +161,9 @@
     }\noindent\keywordname\enspace\ignorespaces#1\par}}
 
 % 
-\newenvironment{chapterabstract}{%
+\newenvironment{chapterabstract}[1][Chapter's content]{%
   \par\nobreak\noindent
-  \textbf{\textit{Chapter's content}\hrulefill}\par\nobreak
+  \textbf{\textit{#1}\hrulefill}\par\nobreak
   \small
   \noindent\ignorespaces
 }{%
@@ -191,6 +194,15 @@
 % Section fonts
 % chapter color
 
+% renew section numbering
+% Redefine the format for section numbers in the Table of Contents
+\colorlet{chaptercolor}{Gray}
+\renewcommand{\thesection}{\fontnumber{\color{chaptercolor}\arabic{chapter}.}\arabic{section}}
+\renewcommand{\thesubsection}{\fontnumber{\color{chaptercolor}\arabic{chapter}.}\arabic{section}.\arabic{subsection}}
+
+% why no effect ? 
+\titleformat{\chapter}
+{\color{Gray}{chapter}}{\thechapter}{}{}
 
 \titleformat{\chapter}[display]
 {\normalfont\Huge\bfseries\color{ared}}
@@ -325,11 +337,6 @@
   \fancyfoot[R]{\small\sffamily M. Doutreligne} % Right footer
   \fancyfoot[L]{\small \thepage\,/\,\protect\pageref*{LastPage}} % Left footer
 }
-
-% renew section numbering
-% Redefine the format for section numbers in the Table of Contents
-\renewcommand{\thesection}{\fontnumber{\color{Gray}\arabic{chapter}.}\arabic{section}}
-\renewcommand{\thesubsection}{\fontnumber{\color{Gray}\arabic{chapter}.}\arabic{section}.\arabic{subsection}}
 
 % ------------------------------------------------------------------
 % The title page
@@ -494,11 +501,10 @@
 %%%%% ABSTRACT PAGE %%%%%%
 
 \title{Representations and inference from time-varying routine care data}
-\author{Matthieu Doutreligne}
-\maketitle%
+%\author{Matthieu Doutreligne}
+%\maketitle%
 
-\begin{abstract}
-
+\begin{chapterabstract}[Abstract]
   Real World Databases are increasingly accessible, exhaustive and with
   fine temporal details. Unlike traditional data used in clinical research, they
   describe the routine organization of care. These day-to-day records of
@@ -545,7 +551,14 @@
   % learning methods and routine care data to shed light on current public health
   % issues. I discuss new avenues to improve the development and the evaluation of
   % tailored interventions, public health policies or quality-of-care indicators.
-\end{abstract}
+\end{chapterabstract}
+\vfill
+
+\newpage
+\begin{chapterabstract}[Résumé en français]
+  Bonjour le monde
+\end{chapterabstract}
+\vfill
 
 \newpage
 \chapter*{Remerciements}
@@ -581,11 +594,14 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 \pagestyle{basic}%
 
 \newpage
+\dominitoc
 \tableofcontents
 
 \mainmatter
 
 \chapter{Introduction: Amazing opportunities of health data?}\label{chap:intro}
+
+\minitoc
 \section{How I came into this landscape}\label{sec:intro:landscape}
 
 Ideas and research exist in a given environment that influence their development. I will
@@ -1083,6 +1099,8 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 
 \clearpage
+\minitoc
+
 \section{Motivation and background: A changing world}\label{sec:cdw:motivation}
 
 \begin{background_box_left}
@@ -1756,6 +1774,8 @@ of patient care.
 
 
 \clearpage
+\minitoc
+
 \section{Predictive models in healthcare: Less fascination, more practical utility}\label{sec:predictive_models:motivation}
 
 \subsection{Why such interest in predictive models in healthcare}\label{subsec:predictive_models:importance}
@@ -1918,6 +1938,8 @@ Arguments for ease of deployment.
 \end{flushright}
 
 \clearpage
+\minitoc
+
 \section{Motivation : Healthcare is concerned with decision making, not mere
   prediction}%
 \label{sec:causal_tuto:motivation}%
@@ -2875,6 +2897,8 @@ specific individuals, such as patients undergoing sceptic shock.
 \end{flushright}
 
 \clearpage
+\minitoc
+
 \section{Motivation: causal predictive models cannot rely on the Machine Learning
   toolbox}\label{sec:causal_model_selection:motivation}
 
@@ -4198,6 +4222,8 @@ models.
 
 \chapter{Conclusion}\label{chapter:conclusion}
 
+\minitoc
+
 %Healthcare burden in modern world is access to healthcare, and chronic disease
 %ie. resource issues more than better products, our methodological toolbox to
 %distinguish between good and bad management is not adapted to the task since it
@@ -4245,15 +4271,14 @@ ontologies, ...).
 
 \clearpage
 \begin{appendices}
-
-  %\addappheadtotoc
+  \renewcommand{\thechapter}{\Alph{chapter}} % Redefine chapter numbering to letters
+  \renewcommand{\thesection}{\thechapter.\arabic{section}} % Include chapter letter in section numbering
+  \renewcommand{\thesubsection}{\thesection.\arabic{subsection}} % Include chapter letter in subsection numbering
   %\section{Statistical models}\label{apd:statistical_models}
 
   %\section{Causal Diagrams}\label{apd:causal_diagrams}
-  \chapter{Chapter 2}\label{apd:cdw}
+  \chapter{Chapter \ref{chapter:cdw}}\label{apd:cdw}
 
-
-  \section*{Supplementary information}
   %\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
   % Include only the SI item label in the paragraph heading. Use the
   % \nameref{label} command to cite SI items in the text.
@@ -4750,10 +4775,10 @@ ontologies, ...).
   studies informed on 10 portals of studies in progress (or completed if
   available) available in free access.
 
-  \chapter{Chapter 3}\label{apd:predictive_models}
+  \chapter{Chapter \ref{chapter:predictive_models}}\label{apd:predictive_models}
 
 
-  \chapter{Chapter 4}\label{apd:causal_tuto}
+  \chapter{Chapter \ref{chapter:causal_tuto}}\label{apd:causal_tuto}
 
   \section{Motivating example: Failure of predictive models to predict mortality
     from pretreatment variables}%
@@ -5570,7 +5595,7 @@ ontologies, ...).
     }\label{apd:fig:albumin_for_sepsis:cate_failure}
   \end{figure}
 
-  \chapter{Chapter 5}\label{apd:causal_model_selection}
+  \chapter{Chapter \ref{chapter:causal_model_selection}}\label{apd:causal_model_selection}
 
 
   \section{Variability of ATE estimation on ACIC 2016}%

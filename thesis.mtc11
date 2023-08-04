@@ -1,0 +1,25 @@
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {D.1}Variability of ATE estimation on ACIC 2016}{\reset@font\mtcSfont 111}{section.1.D.1}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {D.2}Proofs: Links between feasible and oracle risks}{\reset@font\mtcSfont 111}{section.1.D.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {D.2.1}Upper bound of $\tau \text {-risk}$ with $\mu \text {-risk}_{IPW}$}{\reset@font\mtcSSfont 111}{subsection.1.D.2.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {D.2.2}Reformulation of the $R\text {-risk}$ as reweighted $\tau \text {-risk}$}{\reset@font\mtcSSfont 112}{subsection.1.D.2.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {D.3}Measuring overlap}{\reset@font\mtcSfont 113}{section.1.D.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Motivation of the Normalized Total Variation}{\reset@font\mtcPfont 113}{paragraph*.178}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Measuring overlap without the oracle propensity scores:}{\reset@font\mtcPfont 114}{paragraph*.179}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Empirical arguments}{\reset@font\mtcPfont 114}{paragraph*.180}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Estimating NTV in practice}{\reset@font\mtcPfont 114}{paragraph*.181}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {D.4}Experiments}{\reset@font\mtcSfont 115}{section.1.D.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {D.4.1}Details on the data generation process}{\reset@font\mtcSSfont 115}{subsection.1.D.4.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {D.4.2}Model selection procedures}{\reset@font\mtcSSfont 118}{subsection.1.D.4.2}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Nuisances estimation}{\reset@font\mtcPfont 118}{paragraph*.186}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {D.4.3}Additional Results}{\reset@font\mtcSSfont 119}{subsection.1.D.4.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Definition of the Kendall's tau, $\kappa $}{\reset@font\mtcPfont 119}{paragraph*.188}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Values of relative $\kappa (\ell ,\tau \mathrm {{-risk}})$ compared to the mean over all metrics Kendall's as shown in the boxplots of Figure \ref {fig:relative_kendalls_all_datasets}}{\reset@font\mtcPfont 119}{paragraph*.189}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:fig:relative_kendalls_all_datasets_all_metrics} - Results measured in relative Kendall's for feasible and semi-oracle risks}{\reset@font\mtcPfont 119}{paragraph*.191}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:fig:all_datasets_tau_risk_ranking_agreement} - Results measured in absolute Kendall's}{\reset@font\mtcPfont 120}{paragraph*.193}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:all_datasets_normalized_bias_tau_risk_to_best_method} - Results measured as distance to the oracle tau-risk}{\reset@font\mtcPfont 120}{paragraph*.195}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:fig:procedures_comparison_all_metrics} - Stacked models for the nuisances is more efficient}{\reset@font\mtcPfont 120}{paragraph*.197}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:fig:all_datasets_overlap_effect} Low population overlap hinders model selection for all metrics}{\reset@font\mtcPfont 120}{paragraph*.199}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:fig:nuisances_comparison} - Stacked models for the nuisances is more efficient}{\reset@font\mtcPfont 125}{paragraph*.201}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Figure \ref {apd:fig:nuisances_comparison_twins} - Flexible models are performant in recovering nuisances even in linear setups}{\reset@font\mtcPfont 125}{paragraph*.203}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Selecting different seeds and parameters is crucial to draw conclucions}{\reset@font\mtcPfont 125}{paragraph*.205}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {D.5}Heterogeneity in practices for data split}{\reset@font\mtcSfont 127}{section.1.D.5}}

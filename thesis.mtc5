@@ -1,0 +1,47 @@
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}1}Motivation: causal predictive models cannot rely on the Machine Learning toolbox}{\reset@font\mtcSfont 44}{section.5.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}1.1}Extending prediction to prescription needs causality}{\reset@font\mtcSSfont 44}{subsection.5.1.1}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Progress in machine learning brings predictive models to new health data}{\reset@font\mtcPfont 44}{paragraph*.110}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal-inference bridges to predictive modeling via the rich statistical literature on \emph {outcome models},}{\reset@font\mtcPfont 44}{paragraph*.111}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Explosion of outcome modeling or machine learning methods.}{\reset@font\mtcPfont 45}{paragraph*.112}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Objectives and structure of the chapter}{\reset@font\mtcPfont 46}{paragraph*.114}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}1.2}Illustration: the best predictor may not estimate best causal effects}{\reset@font\mtcSSfont 46}{subsection.5.1.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}1.3}Prior work: model selection for outcome modeling (g-computation)}{\reset@font\mtcSSfont 47}{subsection.5.1.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Simulation studies of causal model selection}{\reset@font\mtcPfont 47}{paragraph*.116}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Theoretical studies of causal model selection}{\reset@font\mtcPfont 47}{paragraph*.117}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Statistical guarantees on causal estimation procedures}{\reset@font\mtcPfont 48}{paragraph*.118}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}2}Formal setting: causal inference and model selection}{\reset@font\mtcSfont 48}{section.5.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}2.1}The Neyman-Rubin Potential Outcomes framework}{\reset@font\mtcSSfont 48}{subsection.5.2.1}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Settings}{\reset@font\mtcPfont 48}{paragraph*.119}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal assumptions}{\reset@font\mtcPfont 48}{paragraph*.120}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Estimating treatment effects with outcome models}{\reset@font\mtcPfont 48}{paragraph*.121}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Robinson decomposition}{\reset@font\mtcPfont 49}{paragraph*.122}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}2.2}Model-selection risks, oracle and feasible}{\reset@font\mtcSSfont 49}{subsection.5.2.2}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal model selection}{\reset@font\mtcPfont 49}{paragraph*.125}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode The $\tau \text {-risk}$: an oracle error risk}{\reset@font\mtcPfont 50}{paragraph*.126}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Feasible error risks}{\reset@font\mtcPfont 50}{paragraph*.127}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}2.3}Estimation and model selection procedure}{\reset@font\mtcSSfont 51}{subsection.5.2.3}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}3}Theory: Links between feasible and oracle risks}{\reset@font\mtcSfont 52}{section.5.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}3.1}Upper bound of $\tau \text {-risk}$ with $\mu \text {-risk}_{IPW}$}{\reset@font\mtcSSfont 52}{subsection.5.3.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}3.2}Reformulation of the $R\text {-risk}$ as reweighted $\tau \text {-risk}$}{\reset@font\mtcSSfont 52}{subsection.5.3.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}3.3}Interesting special cases}{\reset@font\mtcSSfont 53}{subsection.5.3.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Randomization special case}{\reset@font\mtcPfont 53}{paragraph*.129}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Oracle Bayes predictor}{\reset@font\mtcPfont 53}{paragraph*.130}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}4}Empirical Study}{\reset@font\mtcSfont 53}{section.5.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}4.1}Caussim: Extensive simulation settings}{\reset@font\mtcSSfont 54}{subsection.5.4.1}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Data Generation}{\reset@font\mtcPfont 54}{paragraph*.131}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Family of candidate estimators}{\reset@font\mtcPfont 54}{paragraph*.133}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}4.2}Semi-simulated datasets}{\reset@font\mtcSSfont 55}{subsection.5.4.2}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Datasets}{\reset@font\mtcPfont 55}{paragraph*.134}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Family of candidate estimators}{\reset@font\mtcPfont 56}{paragraph*.135}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Nuisance estimators}{\reset@font\mtcPfont 56}{paragraph*.136}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}4.3}Measuring overlap between treated and non treated}{\reset@font\mtcSSfont 56}{subsection.5.4.3}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}4.4}Results: factors driving good model selection}{\reset@font\mtcSSfont 56}{subsection.5.4.4}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode The $R\text {-risk}$ is the best metric}{\reset@font\mtcPfont 56}{paragraph*.138}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Model selection is harder for low population overlap}{\reset@font\mtcPfont 57}{paragraph*.139}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Nuisances can be estimated on the same data as outcome models}{\reset@font\mtcPfont 58}{paragraph*.141}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Stacked models are good overall estimators of nuisances}{\reset@font\mtcPfont 58}{paragraph*.143}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Use 90\% of the data to estimate outcome models, 10\% to select them}{\reset@font\mtcPfont 59}{paragraph*.145}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}5.}5}Discussion and conclusion}{\reset@font\mtcSfont 59}{section.5.5}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Nuisance models: more gain than pain}{\reset@font\mtcPfont 60}{paragraph*.147}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Extension to binary outcomes}{\reset@font\mtcPfont 60}{paragraph*.148}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode More $R\text {-risk}$ to select models driving decisions}{\reset@font\mtcPfont 60}{paragraph*.149}}

@@ -1,0 +1,40 @@
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}1}Motivation : Healthcare is concerned with decision making, not mere prediction}{\reset@font\mtcSfont 28}{section.4.1}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Medicine increasingly relies on data,}{\reset@font\mtcPfont 28}{paragraph*.73}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal thinking}{\reset@font\mtcPfont 28}{paragraph*.74}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Different time resolutions}{\reset@font\mtcPfont 29}{paragraph*.75}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Objectives and structure of the chapter}{\reset@font\mtcPfont 29}{paragraph*.76}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}2}Step-by-step framework for robust decision making from EHR data}{\reset@font\mtcSfont 29}{section.4.2}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode The need for a causal framework, even with machine learning}{\reset@font\mtcPfont 29}{paragraph*.77}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}2.1}Step 1: study design -- Frame the question to avoid biases}{\reset@font\mtcSSfont 30}{subsection.4.2.1}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode PICO(T) format}{\reset@font\mtcPfont 30}{paragraph*.81}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Selection Bias:}{\reset@font\mtcPfont 31}{paragraph*.82}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Immortal time bias:}{\reset@font\mtcPfont 31}{paragraph*.83}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}2.2}Step 2: identification -- List necessary information to answer the causal question}{\reset@font\mtcSSfont 31}{subsection.4.2.2}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal Assumptions}{\reset@font\mtcPfont 31}{paragraph*.85}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Categorizing covariates}{\reset@font\mtcPfont 33}{paragraph*.86}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Estimand or effect measure}{\reset@font\mtcPfont 33}{paragraph*.88}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}2.3}Step 3: Estimation -- Compute the causal effect of interest}{\reset@font\mtcSSfont 33}{subsection.4.2.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Confounder aggregation}{\reset@font\mtcPfont 33}{paragraph*.89}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal estimators or statistical modeling}{\reset@font\mtcPfont 34}{paragraph*.90}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Estimation models of outcome and treatment}{\reset@font\mtcPfont 34}{paragraph*.91}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}2.4}Step 4: Vibration analysis -- Assess the robustness of the hypotheses}{\reset@font\mtcSSfont 34}{subsection.4.2.4}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}2.5}Step 5: Treatment heterogeneity -- Compute treatment effects on subpopulations}{\reset@font\mtcSSfont 34}{subsection.4.2.5}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}3}Application: evidence from MIMIC-IV on which resuscitation fluid to use}{\reset@font\mtcSfont 35}{section.4.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Emulated trial: Effect of albumin in combination with crystalloids compared to crystalloids alone on 28-day mortality in patients with sepsis}{\reset@font\mtcPfont 35}{paragraph*.92}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Evidence from the literature}{\reset@font\mtcPfont 35}{paragraph*.93}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}3.1}Study design: effect of crystalloids on mortality in sepsis}{\reset@font\mtcSSfont 35}{subsection.4.3.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}3.2}Identification: listing confounders}{\reset@font\mtcSSfont 36}{subsection.4.3.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}3.3}Estimation}{\reset@font\mtcSSfont 36}{subsection.4.3.3}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Confounder aggregation:}{\reset@font\mtcPfont 36}{paragraph*.97}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Causal estimators:}{\reset@font\mtcPfont 37}{paragraph*.98}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Outcome and treatment estimators:}{\reset@font\mtcPfont 37}{paragraph*.99}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}3.4}Vibration analysis: Understanding variance or sources of systematic errors in our study}{\reset@font\mtcSSfont 37}{subsection.4.3.4}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Varying estimation choices: Confounders aggregation, causal and nuisance estimators}{\reset@font\mtcPfont 37}{paragraph*.101}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Study design -- Illustration of immortal time bias:}{\reset@font\mtcPfont 38}{paragraph*.102}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}3.5}Treatment heterogeneity: Which treatment for a given sub-population?}{\reset@font\mtcSSfont 38}{subsection.4.3.5}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {\fontnumber {\color {chaptercolor}4.}4}Discussion and conclusion}{\reset@font\mtcSfont 39}{section.4.4}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode A didactic causal framework for decision-making from EHR}{\reset@font\mtcPfont 39}{paragraph*.105}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode A well-framed target trial can be validated}{\reset@font\mtcPfont 39}{paragraph*.106}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Decision-making from EHRs}{\reset@font\mtcPfont 40}{paragraph*.107}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode EHRs and RCTs, complementary sources of evidence}{\reset@font\mtcPfont 40}{paragraph*.108}}
+{\reset@font\mtcPfont\mtc@string\contentsline{paragraph}{\noexpand \leavevmode Conclusion}{\reset@font\mtcPfont 40}{paragraph*.109}}
