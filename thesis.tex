@@ -480,7 +480,7 @@
     \textbf{Gaël Varoquaux}                      & Directeur de thèse       \\
     Directeur de recherches, Institut National de Recherche en Informatique et
     en Automatique                               &                          \\
-    \textbf{Claire Morgand}                      & Co-encadrante             \\
+    \textbf{Claire Morgand}                      & Co-encadrante            \\
     Dr., Agence Régionale de Santé Ile-de-France &                          \\
     \textbf{Pierre-Alain Jachiet}                & Tuteur en administration \\
     Dr., Haute Autorité de Santé
@@ -1033,7 +1033,6 @@ help practitioners during consultation \citep{lee2023benefits}.
 \section{Overview and contributions}\label{sec:intro:contributions}
 
 
-
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}\label{chapter:cdw}
 
 
@@ -1049,24 +1048,25 @@ help practitioners during consultation \citep{lee2023benefits}.
     conventions d'équivalence : les ambiguïtés de la sociologie quantitative}
 \end{citationbox}
 
+\vspace{2cm}
 
 \begin{chapterabstract}\label{sec:cdw:abstract}%
   Despite increasing collection of routine care data, reusing it does not come
   free of charges. Attention must be paid to the entire life cycle of the data
-  to create robust knowledge and develop innovation. Building upon the first
-  overview of CDWs in France, we document key aspects of the collection and
-  organization of routine care data into homogeneous databases: governance,
-  transparency, types of data, data reuse main objectives, technical tools,
-  documentation and data quality control processes. The landscape of CDWs in
-  France dates from 2011 and accelerated in the late 2020, showing a progressive
-  but still incomplete homogenization. National and European projects are
-  emerging, supporting local initiatives in standardization, methodological work
-  and tooling. From this sample of CDWs, we draw general recommendations aimed
-  at consolidating the potential of routine care data to improve healthcare.
-  Particular attention must be paid to the sustainability of the warehouse teams
-  and to the multi-level governance. The transparency of the data transformation
-  tools and studies must improve to allow successful multi-centric data reuses
-  as well as innovations for the patient.
+  to create robust knowledge and develop innovation. In this chapter, we build
+  upon the first overview of CDWs in France to document key aspects of the
+  collection and organization of routine care data into homogeneous databases:
+  governance, transparency, types of data, data reuse main objectives, technical
+  tools, documentation and data quality control processes. The landscape of CDWs
+  in France dates from 2011 and accelerated in the late 2020, showing a
+  progressive but still incomplete homogenization. National and European
+  projects are emerging, supporting local initiatives in standardization,
+  methodological work and tooling. From this sample of CDWs, we draw general
+  recommendations aimed at consolidating the potential of routine care data to
+  improve healthcare. Particular attention must be paid to the sustainability of
+  the warehouse teams and to the multi-level governance. The transparency of the
+  data transformation tools and studies must improve to allow successful
+  multi-centric data reuses as well as innovations for the patient.
 \end{chapterabstract}
 
 
@@ -1185,9 +1185,9 @@ euros call for projects to set up and strengthen a network of hospital Clinical
 Data Warehouses (CDWs) coordinated with the national platform, the Health Data
 Hub by 2025.
 
-\paragraph{Poor understanding of CDW scope} Despite these examples, there is
-still a lack of undestanding of the precise scope of CDWs: How are they created
-? What data do they process ? How common are they ? What studies do they run ?
+\paragraph{Poor understanding of CDW scope} Despite these few examples, the
+precise scope of CDWs is still poorly undestood: How are they created ? What
+data do they process ? How common are they ? What studies do they run ?
 Acknowledging the key importance of better structuring healthcare data, we
 create the first overview of CDWs in France. We build upon this landscape, to
 draw general recommendations aiming at consolidating the potential of routine
@@ -1883,8 +1883,8 @@ Arguments for ease of deployment.
 \end{citationbox}
 
 \begin{chapterabstract}\label{sec:causal_tuto:abstract}%
-  While chapter 3 focused on predictive models for patient outcomes, this
-  chapter explores the causal framework to yield clinically valuable models. It
+  While Chapter 3 focused on predictive models for patient outcomes, this
+  chapter explores the causal framework to build clinically valuable models. It
   shows that predictions --even accurate as with machine learning, may not
   suffice to provide optimal healthcare for every patient. Indeed, prediction
   can be driven by shortcuts in the data, such as racial biases. Causal thinking
@@ -2703,8 +2703,8 @@ it unreliable for decision making.
 %
 EHR data come with particular challenges: information may be available
 indirectly, \emph{e.g.} via billing codes, the time-wise dimension requires
-aggregations (\autoref{subsec:causal_tuto:estimation}). These challenges can create
-subtle causal biases (\autoref{subsec:causal_tuto:framing}).
+aggregations (Sub-section \ref{subsec:causal_tuto:estimation}). These challenges can create
+subtle causal biases (Subsection \ref{subsec:causal_tuto:framing}).
 %
 To ensure that our framework addresses all aspects of EHR analysis and to
 expose it in a didactic way, we detailed a complete analysis of a publicly-available EHR dataset,
@@ -2764,7 +2764,7 @@ than a typical clinical study.
 % Loop to limitations by saying that learning on EHR cannot inform on
 % trade-offs that have never been explored in the data
 
-But EHRs cannot inform on trade-offs that have not been explored in the
+\paragraph{EHRs and RCTs, complementary sources of evidence} But EHRs cannot inform on trade-offs that have not been explored in the
 data. No matter how sophisticated, causal inference cannot conclude if
 there is no data to support an apple-to-apple comparison between treated
 and non-treated individuals. For example, treatment allocation is known
@@ -2811,12 +2811,12 @@ resuscitate sepsis patients, it shows that this addition is not
 beneficial in general, but that it does improve survival on
 specific individuals, such as patients undergoing sceptic shock.
 
-\md{might be a bit abrupt transition}
-To select estimators, we used statistical insights and vibration analysis
-without looking at their predictive performances. On the contrary, machine
-learning rely solely on out-of-bag performances for these choices. In the next
-chapter, we will investigate why this technique does not work when selecting predictive
-models for causality, and which corrections can be applied.
+%% Not necessary and a bit artificial: Better to let the transistion between chapters into abstracts.
+% To select estimators, we used statistical insights and vibration analysis
+% without looking at their predictive performances. On the contrary, machine
+% learning rely solely on out-of-bag performances for these choices. In the next
+% chapter, we will investigate why this technique does not work when selecting predictive
+% models for causality, and which corrections can be applied.
 
 
 %%%%%%%%%%%%%%%%%%%%%%% CHAPTER 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2838,10 +2838,11 @@ models for causality, and which corrections can be applied.
   demonstrated that causal thinking was necessary to avoid introducing biases in
   the study design or during confounders selection.
   % Even with causal framework, there are too many models to choose from
-  But, even with a robust causal framework, the practitioner is left to choose among
-  the plethora of predictive models available for health data (some detailed in
-  \ref{subsec:predictive_models:importance}). In a given situation, which of these
-  models yield the most valid causal estimates?
+  But, even with a robust causal framework such as in Chapter 4, the
+  practitioner is left to choose among the plethora of predictive models
+  available for health data (some detailed in
+  \ref{subsec:predictive_models:importance}). In a given situation, which of
+  these models yield the most valid causal estimates?
   % scope of the paper 
   Here, we highlight that classic machine-learning model selection does not pick
   the best models for causal inference. Indeed, causal model selection should
