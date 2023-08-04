@@ -1056,16 +1056,17 @@ help practitioners during consultation \citep{lee2023benefits}.
   as well as innovations for the patient.
 \end{chapterabstract}
 
+
 \vfill
-\begin{footnotesize}
-  \textit{This chapter has been published in Plos Digital Health as:\\ %
-    Matthieu Doutreligne, Adeline Degremont, Pierre-Alain Jachiet, Antoine Lamer,
-    \& Xavier Tannier. (2023). Good practices for clinical data warehouse
-    implementation: A case study in France. PLOS Digital Health, 2(7),
-    e0000298.\\%
-    As the first author I formulated the research question, designed the study,
-    led the interviews and wrote the manuscript.}
-\end{footnotesize}
+\begin{flushright}
+  \begin{minipage}{15cm}
+    {\small{This chapter corresponds to the article entitled \textit{Good practices for clinical data warehouse
+          implementation: A case study in France}
+        \underline{published} to \textit{PLOS Digital Health},}}\\
+    {\small\hfill{} co-authored with Adeline \textsc{Degremont}, Pierre-Alain
+    \textsc{Jachiet}, Antoine \textsc{Lamer} and Xavier \textsc{Tannier}.}
+  \end{minipage}
+\end{flushright}
 
 
 \clearpage
@@ -1860,32 +1861,38 @@ Arguments for ease of deployment.
 
 \begin{chapterabstract}\label{sec:causal_tuto:abstract}%
   While chapter 3 focused on predictive models for patient outcomes, this
-  chapter explores the causal framework Accurate predictions, as with machine learning, may not suffice to
-  provide optimal healthcare for every patient. Indeed, prediction can be driven
-  by shortcuts in the data, such as racial biases. Causal thinking is needed for
-  data-driven decisions. Here, we give an introduction to the key elements,
-  focusing on routinely-collected data, electronic health records (EHRs) and
-  claims data. Using such data to assess the value of an intervention requires
-  care: temporal dependencies and existing practices easily confound the causal
-  effect. We present a step-by-step framework to help build \emph{valid}
-  decision making from real-life patient records by emulating a randomized trial
-  before individualizing decisions, \emph{eg} with machine learning. Our
-  framework highlights the most important pitfalls and considerations in
-  analysing EHRs or claims data to draw causal conclusions. We illustrate the
-  various choices in studying the effect of albumin on sepsis mortality in the
-  Medical Information Mart for Intensive Care database (MIMIC-IV). We study the
-  impact of various choices at every step, from feature extraction to
-  causal-estimator selection. In a tutorial spirit, the code and the data are
-  openly available.
+  chapter explores the causal framework to yield clinically valuable models. It
+  shows that predictions --even accurate as with machine learning, may not
+  suffice to provide optimal healthcare for every patient. Indeed, prediction
+  can be driven by shortcuts in the data, such as racial biases. Causal thinking
+  is needed for data-driven decisions. Here, we give an introduction to the key
+  elements, focusing on routinely-collected data, electronic health records
+  (EHRs) and claims data. Using such data to assess the value of an intervention
+  requires care: temporal dependencies and existing practices easily confound
+  the causal effect. We present a step-by-step framework to help build
+  \emph{valid} decision making from real-life patient records by emulating a
+  randomized trial before individualizing decisions, \emph{eg} with machine
+  learning. Our framework highlights the most important pitfalls and
+  considerations in analysing EHRs or claims data to draw causal conclusions. We
+  illustrate the various choices in studying the effect of albumin on sepsis
+  mortality in the Medical Information Mart for Intensive Care database
+  (MIMIC-IV). We study the impact of various choices at every step, from feature
+  extraction to causal-estimator selection. In a tutorial spirit, the code and
+  the data are openly available.
 \end{chapterabstract}
 
 \vfill
-This chapter has been submitted to \textit{npj Digital Medicine} as:\\
-\textit{Matthieu Doutreligne, Tristan Struja, Judith Abecassis, Claire Morgand, Gaël
-  Varoquaux, \& Leo Anthony Celi. (2023). Step-by-step causal analysis of Electronic Health Records to ground
-  decision making.} \\
-As the first author I designed the study, performed the experiments and wrote
-the manuscript.
+\begin{flushright}
+  \begin{minipage}{15cm}
+    {\small{This chapter corresponds to the article entitled \textit{Step-by-step
+          causal analysis of Electronic Health Records to ground decision making}
+        \underline{submitted} to \textit{npj Digital Medicine},}}\\
+
+    {\small\hfill{} co-authored with Tristan \textsc{Struja}, Judith
+    \textsc{Abecassis}, Claire \textsc{Morgand}, Leo Anthony \textsc{Celi} and
+    Gaël \textsc{Varoquaux}.}
+  \end{minipage}
+\end{flushright}
 
 \clearpage
 \section{Motivation : Healthcare is concerned with decision making, not mere
@@ -2782,12 +2789,12 @@ beneficial in general, but that it does improve survival on
 specific individuals, such as patients undergoing sceptic shock.
 
 \md{might be a bit abrupt transition}
-To select estimators, we used statistical insights and vibration analysis 
+To select estimators, we used statistical insights and vibration analysis
 without looking at their predictive performances. On the contrary, machine
 learning rely solely on out-of-bag performances for these choices. In the next
 chapter, we will investigate why this technique does not work when selecting predictive
 models for causality, and which corrections can be applied.
- 
+
 
 %%%%%%%%%%%%%%%%%%%%%%% CHAPTER 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{How to select predictive models for causal inference?}\label{chapter:causal_model_selection}
@@ -2832,13 +2839,16 @@ models for causality, and which corrections can be applied.
 
 \vfill
 
-\begin{footnotesize}
-  This chapter has been submitted to \textit{Artificial Intelligence in Medicine} as:
-  \\ \textit{Matthieu Doutreligne, Gaël Varoquaux. How to select predictive models for
-    decision making or causal inference?. 2023. ⟨hal-03946902v3⟩. \\
-    As the first author I formulated the research question, designed the study, did the proves
-    of the theoretical part, performed the experiments and wrote the manuscript.}
-\end{footnotesize}
+\begin{flushright}
+  \begin{minipage}{15cm}
+    {\small{This chapter corresponds to the article entitled \textit{How to select
+          predictive models for decision making or causal inference?}
+        \underline{submitted} to \textit{Artificial
+          Intelligence in Medicine},}}\\
+
+    {\small\hfill{} co-authored with Gaël \textsc{Varoquaux}.}
+  \end{minipage}
+\end{flushright}
 
 \clearpage
 \section{Motivation: causal predictive models cannot rely on the Machine Learning
