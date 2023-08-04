@@ -454,33 +454,33 @@
   \flushleft
 
   \scriptsize
-  \begin{tabular}{|p{7cm}l}
+  \begin{tabular}{|p{9cm}l}
     \arrayrulecolor{Prune}
-    {\footnotesize \textbf{Composition du jury}} \\
-                        &                        \\
-    \textbf{Prénom Nom} & Président/e            \\
-    Titre, Affiliation  &                        \\
-    \textbf{Prénom Nom} & Rapportrice            \\
-    Titre, Affiliation  &                        \\
-    \textbf{Prénom Nom} & Rapporteur             \\
-    Titre, Affiliation  &                        \\
-    \textbf{Prénom Nom} & Examinatrice           \\
-    Titre, Affiliation  &                        \\
-    \textbf{Prénom Nom} & Examinateur            \\
-    Titre, Affiliation  &                        \\
-    \textbf{Prénom Nom} & Examinateur            \\
-    Titre, Affiliationt &                        \\
+    {\footnotesize \textbf{Composition du jury}}                                                                    \\
+                                                                                                     &              \\
+    \textbf{Pierre Zweigenbaum}                                                                      & Président    \\
+    Directeur de Recherche, Laboratoire Interdisciplinaire des sciences du numérique de Paris Saclay &              \\
+    \textbf{Florence Tubach}                                                                         & Rapportrice  \\
+    Professeur des Universités - Praticien Hospitalier, Sorbonne Université                          &              \\
+    \textbf{Peter Szolovits}                                                                         & Rapporteur   \\
+    Professor, Massachusetts Institute of Technology                                                 &              \\
+    \textbf{Marzyeh Ghasseimi}                                                                       & Examinatrice \\
+    Assistant Professor, Massachusetts Institute of Technology                                       &              \\
+    \textbf{Etienne Audureau}                                                                        & Examinateur  \\
+    Professeur, Paris Est Créteil                                                                    &              \\
+    \textbf{Emmanuel Chazard}                                                                        & Examinateur  \\
+    Professeur des Universités - Praticien Hospitalier, Université de Lille                          &              \\
   \end{tabular}
 
   \medskip
-  \begin{tabular}{|p{7cm}l}
+  \begin{tabular}{|p{9cm}l}
     \arrayrulecolor{Prune}
     {\footnotesize \textbf{Direction de la thèse}}                          \\
                                                  &                          \\
     \textbf{Gaël Varoquaux}                      & Directeur de thèse       \\
     Directeur de recherches, Institut National de Recherche en Informatique et
     en Automatique                               &                          \\
-    \textbf{Claire Morgand}                      & Coencadrante             \\
+    \textbf{Claire Morgand}                      & Co-encadrante             \\
     Dr., Agence Régionale de Santé Ile-de-France &                          \\
     \textbf{Pierre-Alain Jachiet}                & Tuteur en administration \\
     Dr., Haute Autorité de Santé
@@ -550,9 +550,10 @@
 \newpage
 \chapter*{Remerciements}
 
-
+% Encadrants
+% Inria
 % HAS
-J'aimerais également remercier tous les membres de la mission Data de la HAS. :
+J'aimerais également remercier tous les membres de la mission Data de la HAS :
 Timothée pour ses PR magnifiques, Pavel pour Despacito et les discussions NLP,
 Morgane pour les poules, Adeline pour ses conseils \sout{psys} rigoureux,
 Catherine pour les cafés du lundi matin, Christine pour sa bonne humeur, et
@@ -575,6 +576,7 @@ of the MIT Critical Datathon. I had so much pleasure to participate to the event
 the Physionet team for their encouragements and supports. Merci Brice d'avoir
 été ma caution Europe, culture et pickles pendant ce voyage. Merci Clara de
 m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
+% Amis et famille
 
 \pagestyle{basic}%
 
@@ -772,7 +774,13 @@ Specialized registry and cohorts
 
 Billing system, eg. PMSI.
 
-Advantages (space and time coverage, scale, structure), disadvantages (not clinic, no exam results, few measures, heterogeneity of collection)
+Advantages (space and time coverage, scale, structure), disadvantages (not
+clinic, no exam results, few measures, heterogeneity of collection)
+
+optimization of the billing process: \citep{juven2013codage}
+
+
+
 
 \paragraph{Clinical data: EHRs and Hospital Information System}\label{def:ehr_his}
 
@@ -1030,12 +1038,17 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 
 \begin{citationbox}
-  L'espace général du savoir n'est plus celui des identités et des différences,
-  [...] celui d'une caractérisation universelle, d'une taxinomia générale [...],
-  mais un espace fait d'organisations, c'est-à-dire de rapports internes entre
-  des éléments dont l'ensemble assure une fonction.
-  \par\hfill -- Michel Foucault
+  Souvent, entre [la construction des données et leur traitement ou leur
+      interprétation], se dresse la "banque de données", qui fonctionne comme un
+  sas de passage de l'une à l'autre. Or le monde de la "construction" est
+  lui-même tendu entre deux façons de rendre compte de ses pratiques : la
+  mesure, issue du langage des sciences de la nature, le codage conventionnel,
+  inspiré, selon les cas, du droit, des sciences politiques, ou des sciences
+  cognitives.%
+  \par\hfill -- Alain Desrosière, \textit{Entre réalisme métrologique et
+    conventions d'équivalence : les ambiguïtés de la sociologie quantitative}
 \end{citationbox}
+
 
 \begin{chapterabstract}\label{sec:cdw:abstract}%
   Despite increasing collection of routine care data, reusing it does not come
@@ -1862,8 +1875,11 @@ Arguments for ease of deployment.
   Electronic Health Records}\label{chapter:causal_tuto}
 
 \begin{citationbox}
-  Nature marks each growth ... according to its curative benefit.
-  \par\hfill -- Paracelsus
+  My philosophy about the field of academic statistics is that we have a
+  responsibility to provide the many people working in applications outside of
+  academia with useful, reliable, and accurate analysis tools.%
+
+  \par\hfill -- Leo Breiman, \textit{Statistical Modeling: The Two Cultures}
 \end{citationbox}
 
 \begin{chapterabstract}\label{sec:causal_tuto:abstract}%
