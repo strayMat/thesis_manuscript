@@ -1067,28 +1067,30 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 \paragraph{Modern healtcare issues}
 
-The Coming revolution In Medecine is desribed in the 70's as \citep{rutstein1967coming}:
-\textit{1) modern medicine's skyrocketing costs; 2) the chaos of an information
-  explosion involving both paperwork pro- liferation and large amounts of new
-  knowledge that no single physician could hope to digest; 3) a geographic
-  maldistribution of MD's; 4) increasing demands on the physician's time as
-  increasing numbers of individuals began to demand quality medical care.} Fifty
-years later, the same preoccupations are destabilizing healthcare systems in
-rich countries: costs, lack of trained physicians, geographic disparities, ever
-increasing new knowledge.
+The \emph{Coming revolution In Medecine} is described in the late 60's as
+\citep{rutstein1967coming}: \textit{1) modern medicine's skyrocketing costs; 2)
+the chaos of an information explosion involving both paperwork proliferation and
+large amounts of new knowledge that no single physician could hope to digest; 3)
+a geographic maldistribution of M[edical] D[octors]s; 4) increasing demands on
+the physician's time as increasing numbers of individuals began to demand
+quality medical care.} Fifty years later, the same preoccupations are
+destabilizing healthcare systems in rich countries: costs, vast amount of new
+knowledge, geographic disparities and lack of trained physicians.
 
-In the 2000s, the AIM themes were listed as \textit{knowledge representation and
-  ontology development, terminology and semantic modeling of domains, decision
-  support and reasoning under uncertainty, model-based image processing}
-\citep{patel2009coming}.
+% In the 2000s, the AIM themes were listed as \textit{knowledge representation and
+%   ontology development, terminology and semantic modeling of domains, decision
+%   support and reasoning under uncertainty, model-based image processing}
+% \citep{patel2009coming}.
 
-Edward H. Shortliffe insisted on the shift from individual patient specific
-decision-support to guideline-based decision support, a movement that also took
-place in clinical medecine. In the same paper, Mario Stefanelli insists on the
-importance of Knowledge Management which goal \textit{is to improve
-  organizational performance by enabling individuals to capture, share and apply
-  their collective knowledge to make optimal "decisions in real time"}.
-
+Collection and analysis of new types of data is at the croassroads of
+epidemiology, clinical medicine, and artificial intelligence. Could it help to
+mitigate these --not so new-- challenges ?
+% Edward H. Shortliffe insisted on the shift from individual patient specific
+% decision-support to guideline-based decision support, a movement that also took
+% place in clinical medecine. In the same paper, Mario Stefanelli insists on the
+% importance of Knowledge Management which goal \textit{is to improve
+%   organizational performance by enabling individuals to capture, share and apply
+%   their collective knowledge to make optimal "decisions in real time"}.
 % When listing the four future needs of the AIM community, Szolovitz first
 % mentioned data collection, then improved design for workflow, better reassuring
 % techniques for data privacy and lastly better modeling techniques. Workflow
@@ -1097,10 +1099,6 @@ importance of Knowledge Management which goal \textit{is to improve
 % monitoring systems.
 
 \paragraph{Prediction, causation or decision-making?}
-
-\md{Place here the pubmed per year graph. What relevant questions ? What relevenat methodological tools?}
-
-We reproduced the graph from \citep[Chapter 1]{steyerberg2009applications}.
 
 Modeling was always judged necessary and it is only recently that pattern
 recognitions was pursued as an objective per-se in AIM.
@@ -1119,8 +1117,28 @@ the distinction between algorithms requiring heavy human assumptions and
 flexible models. But the goal of these algorithms is to serves as
 \textit{decision-making}, not as predictive models.
 
+To illustrate this tension between prediction and causation, I reproduced the
+graph from \citep[Chapter 1]{steyerberg2009applications} in Figure
+\ref{fig:intro:pubmed_query}. Originally focused only at the proportion of
+Pubmed papers mentionning predictive modeling, I constrat the exponential
+increase of such articles with the concurrent drop in the use of causality terms
+on Pubmed. 
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{img/chapter_1/pubmed_query.pdf}
+  \caption{Proportion of articles by year in Pubmed returned by queries on
+   causality (orange) or predictive modeling (blue). The scale differs greatly
+   but the symmetry of the trends is disturbing.}%
+  \label{fig:intro:pubmed_query}
+\end{figure}
+
+% objective
 First, influenced by the growing successes of machine learning in predictive
-task, this thesis questions what models and concepts are useful for healthcare.
+modeling, this thesis questions what models and concepts are useful for
+healthcare. What predictive models are useful ? Is prediction enough ? How these
+increase in predictive power can serve the true objective of healtcare:
+delivering appropriate treatment to each and every patient to improve her
+health.
 
 \subsection{Contributions}\label{subsec:intro:contributions}
 
