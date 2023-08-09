@@ -765,6 +765,8 @@ the new data economy. TODO cite
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
+\begin{background_box_left}
+
 \subsection{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
 
 Healthcare data is increasingly collected in electronic form.
@@ -860,6 +862,8 @@ reinforcement learning in the Machine Learning community (bareinboim2015bandits)
 where intervention probabilities are known \citep{bareinboim2015bandits}.
 Decision making processes rely to the correct estimations of these
 conditional probabilities, hence the link between this work and precision medicine.
+
+\end{background_box_left}
 
 \subsection{Focus of this thesis: real world data, observational}\label{subsec:intro:focus_data}
 
@@ -1069,11 +1073,11 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 The \emph{Coming revolution In Medecine} is described in the late 60's as
 \citep{rutstein1967coming}: \textit{1) modern medicine's skyrocketing costs; 2)
-the chaos of an information explosion involving both paperwork proliferation and
-large amounts of new knowledge that no single physician could hope to digest; 3)
-a geographic maldistribution of M[edical] D[octors]s; 4) increasing demands on
-the physician's time as increasing numbers of individuals began to demand
-quality medical care.} Fifty years later, the same preoccupations are
+  the chaos of an information explosion involving both paperwork proliferation and
+  large amounts of new knowledge that no single physician could hope to digest; 3)
+  a geographic maldistribution of M[edical] D[octors]s; 4) increasing demands on
+  the physician's time as increasing numbers of individuals began to demand
+  quality medical care.} Fifty years later, the same preoccupations are
 destabilizing healthcare systems in rich countries: costs, vast amount of new
 knowledge, geographic disparities and lack of trained physicians.
 
@@ -1112,25 +1116,25 @@ In \cite{patel2009coming} \textit{tend to discover relatively simple
 techniques that can \textit{formulate and test hypotheses about how the human
   organism “works” in health and illness}.
 
-More recently, \cite{beam2018big} devises a Machine-learning spectrum, making
+More recently, \cite{beam2018big} devise a Machine-learning spectrum, making
 the distinction between algorithms requiring heavy human assumptions and
 flexible models. But the goal of these algorithms is to serves as
 \textit{decision-making}, not as predictive models.
+
+\begin{figure}[h!]
+  \includegraphics[width=0.8\textwidth]{img/chapter_1/pubmed_query.pdf}
+  \caption{Proportion of articles by year in Pubmed returned by queries on
+    causality (orange) or predictive modeling (blue). The scale differs greatly
+    but the symmetry of the trends is disturbing.}%
+  \label{fig:intro:pubmed_query}
+\end{figure}
 
 To illustrate this tension between prediction and causation, I reproduced the
 graph from \citep[Chapter 1]{steyerberg2009applications} in Figure
 \ref{fig:intro:pubmed_query}. Originally focused only at the proportion of
 Pubmed papers mentionning predictive modeling, I constrat the exponential
 increase of such articles with the concurrent drop in the use of causality terms
-on Pubmed. 
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{img/chapter_1/pubmed_query.pdf}
-  \caption{Proportion of articles by year in Pubmed returned by queries on
-   causality (orange) or predictive modeling (blue). The scale differs greatly
-   but the symmetry of the trends is disturbing.}%
-  \label{fig:intro:pubmed_query}
-\end{figure}
+on Pubmed.
 
 % objective
 First, influenced by the growing successes of machine learning in predictive
@@ -3641,8 +3645,6 @@ useful for numerical stability
 \end{figure}
 %\end{minipage}
 
-
-
 \section{Theory: Links between feasible and oracle risks}\label{sec:theory}
 
 We now relate two feasible risks, $\mu \text{-risk}_{IPW}$ and the
@@ -5263,7 +5265,7 @@ ontologies, ...).
     as the R-learner \citep{nie2021quasi}. It is based on the R-decomposition,
     \citep{robinson1988root}, and the modeling of the conditional mean outcome,
     $m(x)=\mathbb E[Y|X=x]$ and the propensity score, $e(x)=\mathbb E[A=1|X=x]$:
-    \begin{equation}\label{eq:r_decomposition}
+    \begin{equation}\label{eq:r_decomposition_dml}
       y_{i}-m\left(x_{i}\right)=\left(a_{i}-e\left(x_{i}\right)\right) \tau\left(x_{i}\right)+\varepsilon_{i} \quad \text{with} \; \varepsilon_{i}=y_{i}-\varepsilon\left[4_{i} \mid x_{i}, a_{i}\right]
     \end{equation}
     Note that we can impose that the conditional treatment effect $\tau(x)$ only
