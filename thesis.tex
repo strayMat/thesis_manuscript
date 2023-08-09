@@ -634,7 +634,7 @@ techniques left me wonder in which other areas those techniques could be
 successfully applied.
 % Problem
 On the other hand, being a civil servant, part of the National Institute
-(Institut National de la Statistique EE), I was also interested in the use of
+(Institut National de la Statistique et des Etudes Economiques), I was also interested in the use of
 data for public policy. Economics and econometrics taught during this formation
 left very few . Does flexible machine learning techniques, or even pre-training
 methods could help inform public policies ?
@@ -718,7 +718,7 @@ Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
 rule-based artificial intelligence expert systems described \textit{medical
   practice, and biomedical research, [as] inherently information-management tasks}
 \citep{patel2009coming}. However, the incentives to collect and analyze data
-variy among the different healthcare actors.
+vary among the different healthcare actors.
 % The first works on Artificial Intelligence in Medicine (AIM) dates back to the
 % early 70s and was focused on diagnostic, computer-aided decision making and
 % automated consultations \citep{shortliffe1976computer}.  
@@ -726,8 +726,8 @@ variy among the different healthcare actors.
 \paragraph{Automate part of the healthcare workflow}
 
 The automation of tedious tasks is part of the agenda of AIM. The goal is to
-give more time to the physicians by accellerating and faciliting parts of their
-work that require poor analatical capacities. Old example of such automation is
+give more time to the physicians by accelerating and facilitating parts of their
+work that require poor analytical capacities. Old example of such automation is
 the computer reading of electrocardiograms. A recent example is the assistance
 of Large Language Model such as GPT-4 for medical note taking
 \citep{lee2023benefits}.
@@ -767,101 +767,101 @@ the new data economy. TODO cite
 
 \begin{background_box_left}
 
-\subsection{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
+  \subsection{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
 
-Healthcare data is increasingly collected in electronic form.
-\citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
-These new sources of Real World Data (RWD) \citep{fda_real-world_2021} bear
-great promises to improve the quality of care. On the one hand, the use of this
-data translates into direct benefits --primary uses-- for the patient by serving
-as the cornerstone of the developing personalized medicine
-\citep{mann_artificial_2022,ziegler_high_2022}. They also bring indirect
-benefits --secondary uses-- by accelerating and improving knowledge production:
-on pathologies \citep{campbell_characterizing_2022}, on the conditions of use of
-health products and technologies \citep{safran_toward_2007,tuppin_value_2017}, on
-the measures of their safety \citep{wisniewski_development_2003}, efficacy or
-usefulness in everyday practice \citep{richesson_electronic_2013}. They can also
-be used to assess the organizational impact of health products and technologies
-\citep{has_guide_2020,has_real-world_2021}.
-
-
-\md{Insist on the gradient and distinction between research data and opportunistic data
-  collection.}
-
-\paragraph{Traditional research data collections}
-
-Hand made data collection for one research question with a specific protocol,
-Specialized registry and cohorts
+  Healthcare data is increasingly collected in electronic form.
+  \citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
+  These new sources of Real World Data (RWD) \citep{fda_real-world_2021} bear
+  great promises to improve the quality of care. On the one hand, the use of this
+  data translates into direct benefits --primary uses-- for the patient by serving
+  as the cornerstone of the developing personalized medicine
+  \citep{mann_artificial_2022,ziegler_high_2022}. They also bring indirect
+  benefits --secondary uses-- by accelerating and improving knowledge production:
+  on pathologies \citep{campbell_characterizing_2022}, on the conditions of use of
+  health products and technologies \citep{safran_toward_2007,tuppin_value_2017}, on
+  the measures of their safety \citep{wisniewski_development_2003}, efficacy or
+  usefulness in everyday practice \citep{richesson_electronic_2013}. They can also
+  be used to assess the organizational impact of health products and technologies
+  \citep{has_guide_2020,has_real-world_2021}.
 
 
-\paragraph{Billing data: claims}
+  \md{Insist on the gradient and distinction between research data and opportunistic data
+    collection.}
 
-Billing system, eg. PMSI.
+  \paragraph{Traditional research data collections}
 
-Advantages (space and time coverage, scale, structure), disadvantages (not
-clinic, no exam results, few measures, heterogeneity of collection)
-
-optimization of the billing process: \citep{juven2013codage}
-
+  Hand made data collection for one research question with a specific protocol,
+  Specialized registry and cohorts
 
 
+  \paragraph{Billing data: claims}
 
-\paragraph{Clinical data: EHRs and Hospital Information System}\label{def:ehr_his}
+  Billing system, eg. PMSI.
 
-The computerization of paper-based patient records led hospitals to adopt
-Electronic Health Record (EHR) solutions beginning in the 1990s. These are de-
-defined as the longitudinal collection of health data in an electronic
-information system (IS) \citep{gunter2005emergence}. Used routinely by
-clinicians, EHRs enable them to record and interrogate clinically relevant
-information for patient care mainly through notes. EHRs can be specific to an
-institution, or shared between several actors \citep{hoerbst2010electronic}.
-This central system is accompanied by other business applications, such as
-patient administrative management, computerized prescribing, biology software,
-reanimation software, and imaging software. Together, these softwares make up
-the Hospital Information System (HIS). Depending on the degree of maturity of
-the HIS, the various data sources communicate more or less well with each other.
+  Advantages (space and time coverage, scale, structure), disadvantages (not
+  clinic, no exam results, few measures, heterogeneity of collection)
 
-% advantages of EHRs
-\md{Advantages of EHR}
-% interest for AIM 
-In the 90s, the AIM community acknowledged the need to rely on integrated
-systems such as the recently developed EHRs \citep{patel2009coming}.
-\cite{patel2009coming} and \cite{butte2006creation} grounded the importance of
-Electronic Health Record as a precious collection of natural experiments to
-complete by phenotypes the understanding of genotype-environment interactions.
-
-\subsection{Interventional data vs observational
-  data}\label{subsec:intro:interventional_vs_observational}
+  optimization of the billing process: \citep{juven2013codage}
 
 
-Interventional data contains interaction with the patients / environment where
-the intervention probabilities are known. Eg. RCT : fixed probability for any
-patient (statistical unit): first RCT, RCTs as the basis of Evidence Based
-Medicine in the late 80s.
 
-\textit{In an experiment, the reason for the exposure assignment is solely to
-  suit the objectives of the study; if people receive their exposure assignment
-  based on considerations other than the study protocol, it is not a true
-  experiment} \citep{rothman2012epidemiology}
 
-Pbs of external validity raised in economics (Deaton, cf intro de la revue de
-Bénédicte). Focus is such problems is probably greater in economics because
-situations are not well controlled at all: very far from labs settings. Clinical
-situation is closer to lab (clinical epidemiology != social epidemiology). What
-about medico-economics ? I do not address this question in the present thesis,
-but it is a clear motivation.
+  \paragraph{Clinical data: EHRs and Hospital Information System}\label{def:ehr_his}
 
-%
-Observational data cannot intervene in any way with the patients. It should rely
-on observation alone to estimate intervention probability.
+  The computerization of paper-based patient records led hospitals to adopt
+  Electronic Health Record (EHR) solutions beginning in the 1990s. These are de-
+  defined as the longitudinal collection of health data in an electronic
+  information system (IS) \citep{gunter2005emergence}. Used routinely by
+  clinicians, EHRs enable them to record and interrogate clinically relevant
+  information for patient care mainly through notes. EHRs can be specific to an
+  institution, or shared between several actors \citep{hoerbst2010electronic}.
+  This central system is accompanied by other business applications, such as
+  patient administrative management, computerized prescribing, biology software,
+  reanimation software, and imaging software. Together, these softwares make up
+  the Hospital Information System (HIS). Depending on the degree of maturity of
+  the HIS, the various data sources communicate more or less well with each other.
 
-% Interventional vs Observational: A gradient as well 
-Conditional probabilities are interventional as well: conditionally randomized
-experiments in epidemiology \citep{hernan2020causal}. This concept is known as
-reinforcement learning in the Machine Learning community (bareinboim2015bandits)
-where intervention probabilities are known \citep{bareinboim2015bandits}.
-Decision making processes rely to the correct estimations of these
-conditional probabilities, hence the link between this work and precision medicine.
+  % advantages of EHRs
+  \md{Advantages of EHR}
+  % interest for AIM 
+  In the 90s, the AIM community acknowledged the need to rely on integrated
+  systems such as the recently developed EHRs \citep{patel2009coming}.
+  \cite{patel2009coming} and \cite{butte2006creation} grounded the importance of
+  Electronic Health Record as a precious collection of natural experiments to
+  complete by phenotypes the understanding of genotype-environment interactions.
+
+  \subsection{Interventional data vs observational
+    data}\label{subsec:intro:interventional_vs_observational}
+
+
+  Interventional data contains interaction with the patients / environment where
+  the intervention probabilities are known. Eg. RCT : fixed probability for any
+  patient (statistical unit): first RCT, RCTs as the basis of Evidence Based
+  Medicine in the late 80s.
+
+  \textit{In an experiment, the reason for the exposure assignment is solely to
+    suit the objectives of the study; if people receive their exposure assignment
+    based on considerations other than the study protocol, it is not a true
+    experiment} \citep{rothman2012epidemiology}
+
+  Pbs of external validity raised in economics (Deaton, cf intro de la revue de
+  Bénédicte). Focus is such problems is probably greater in economics because
+  situations are not well controlled at all: very far from labs settings. Clinical
+  situation is closer to lab (clinical epidemiology != social epidemiology). What
+  about medico-economics ? I do not address this question in the present thesis,
+  but it is a clear motivation.
+
+  %
+  Observational data cannot intervene in any way with the patients. It should rely
+  on observation alone to estimate intervention probability.
+
+  % Interventional vs Observational: A gradient as well 
+  Conditional probabilities are interventional as well: conditionally randomized
+  experiments in epidemiology \citep{hernan2020causal}. This concept is known as
+  reinforcement learning in the Machine Learning community (bareinboim2015bandits)
+  where intervention probabilities are known \citep{bareinboim2015bandits}.
+  Decision making processes rely to the correct estimations of these
+  conditional probabilities, hence the link between this work and precision medicine.
 
 \end{background_box_left}
 
@@ -894,7 +894,7 @@ nature works. AIM adopts a more pragmatic approach, trying to understand what
 deployed healthcare system is improving outcomes or not, without trying to
 uncover the full causal mechanism leading to the observed results.
 
-\citep{rothman2012epidemiology}: \textit{In many epidemiologic applications, it is the choice among effect
+\citep{rothman2012epidemiology}: \textit{In many epidemiological applications, it is the choice among effect
   measures that dictates the type of model the investigator ought to use.}
 
 \begin{background_box_left}
@@ -907,7 +907,7 @@ uncover the full causal mechanism leading to the observed results.
   boosting, neural networks or Support Vector Machines.
 
 
-  Tseeking algorithm efficiency and out-of sample predictive accuracy.
+  seeking algorithm efficiency and out-of sample predictive accuracy.
 
 
   \paragraph{Rashomon effect: multiple models can equally well model a given dataset}
@@ -944,7 +944,7 @@ uncover the full causal mechanism leading to the observed results.
 
 \end{background_box_left}
 
-% this is where I clearlly state what are my questions ? 
+% this is where I clearly state what are my questions ? 
 \subsection{One choice of perspective: Recent statistical
   learning}\label{subsec:intro:recent_statistical_learning}
 % 
@@ -977,7 +977,7 @@ help practitioners during consultation \citep{lee2023benefits}.
   \citep{rothman2012epidemiology}.
 
   Causes are mainly presented as binary variables absent or present in \citep{}.
-  Their strengh is only defined at a population level, making them relative to a
+  Their strength is only defined at a population level, making them relative to a
   given population \citep[chapter~3]{rothman2012epidemiology}. This point of
   view is rather aligned with statistical modeling related to variable
   significance, not with model performances.
@@ -1000,7 +1000,7 @@ help practitioners during consultation \citep{lee2023benefits}.
     of persons.}
 
   In a foundational article on EHR, the use-case of heart failure prediction is
-  motivated by agressive interventions \citep{wu2010prediction}: \textit{heart
+  motivated by aggressive interventions \citep{wu2010prediction}: \textit{heart
     failure could potentially lead to improved outcomes through aggressive
     intervention, such as treatment with angiotensin converting enzyme
     (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs).}. It is almost
@@ -1067,11 +1067,12 @@ help practitioners during consultation \citep{lee2023benefits}.
 \section{Overview and contributions}\label{sec:intro:contributions}
 
 % stating my questions
-\subsection{What are we intersted in ?}\label{subsec:intro:questions}
+\subsection{Is increasing predictive power at the service of modern medicine?}%
+\label{subsec:intro:questions}%
 
-\paragraph{Modern healtcare issues}
+\paragraph{Modern healthcare issues}
 
-The \emph{Coming revolution In Medecine} is described in the late 60's as
+The \emph{Coming revolution In Medicine} is described in the late 60's as
 \citep{rutstein1967coming}: \textit{1) modern medicine's skyrocketing costs; 2)
   the chaos of an information explosion involving both paperwork proliferation and
   large amounts of new knowledge that no single physician could hope to digest; 3)
@@ -1086,12 +1087,12 @@ knowledge, geographic disparities and lack of trained physicians.
 %   support and reasoning under uncertainty, model-based image processing}
 % \citep{patel2009coming}.
 
-Collection and analysis of new types of data is at the croassroads of
+Collection and analysis of new types of data are at the crossroads of
 epidemiology, clinical medicine, and artificial intelligence. Could it help to
 mitigate these --not so new-- challenges ?
 % Edward H. Shortliffe insisted on the shift from individual patient specific
 % decision-support to guideline-based decision support, a movement that also took
-% place in clinical medecine. In the same paper, Mario Stefanelli insists on the
+% place in clinical medicine. In the same paper, Mario Stefanelli insists on the
 % importance of Knowledge Management which goal \textit{is to improve
 %   organizational performance by enabling individuals to capture, share and apply
 %   their collective knowledge to make optimal "decisions in real time"}.
@@ -1104,6 +1105,7 @@ mitigate these --not so new-- challenges ?
 
 \paragraph{Prediction, causation or decision-making?}
 
+\md{need rework}
 Modeling was always judged necessary and it is only recently that pattern
 recognitions was pursued as an objective per-se in AIM.
 In \citep{patel2009coming} Michael Berthold discusses the inappropriateness of the
@@ -1132,7 +1134,7 @@ flexible models. But the goal of these algorithms is to serves as
 To illustrate this tension between prediction and causation, I reproduced the
 graph from \citep[Chapter 1]{steyerberg2009applications} in Figure
 \ref{fig:intro:pubmed_query}. Originally focused only at the proportion of
-Pubmed papers mentionning predictive modeling, I constrat the exponential
+Pubmed papers mentioning predictive modeling, I contrast the exponential
 increase of such articles with the concurrent drop in the use of causality terms
 on Pubmed.
 
@@ -1140,7 +1142,7 @@ on Pubmed.
 First, influenced by the growing successes of machine learning in predictive
 modeling, this thesis questions what models and concepts are useful for
 healthcare. What predictive models are useful ? Is prediction enough ? How these
-increase in predictive power can serve the true objective of healtcare:
+increase in predictive power can serve the true objective of healthcare:
 delivering appropriate treatment to each and every patient to improve her
 health.
 
@@ -1290,7 +1292,7 @@ flow from the various sources that make up the HIS.
 
 
 \paragraph{Multiplication of CDW in France} For about ten years, several
-hospitals developped CDWs from electronic medical records
+hospitals developed CDWs from electronic medical records
 \citep{cuggia_roogle_2011,jannot_georges_2017,garcelon_finding_2017,wack_installation_2017,daniel_initializing_2018,malafaye_mise_2018,artemova_predimed_2019,lelong_building_2019,conan_les_2021,
   lamer_development_2022}. This work has accelerated recently, with the growing
 development of dedicated infrastructures at the regional and national levels.
@@ -1301,7 +1303,7 @@ Data Warehouses (CDWs) coordinated with the national platform, the Health Data
 Hub by 2025.
 
 \paragraph{Poor understanding of CDW scope} Despite these few examples, the
-precise scope of CDWs is still poorly undestood: How are they created ? What
+precise scope of CDWs is still poorly understood: How are they created ? What
 data do they process ? How common are they ? What studies do they run ?
 Acknowledging the key importance of better structuring healthcare data, we
 create the first overview of CDWs in France. We build upon this landscape, to
@@ -1838,7 +1840,7 @@ of cooperation and mutualization.
 the integrated data, in order to qualify the uses to be developed today from the
 CDWs. More broadly, open-source documentation of data flows and transformations
 performed for quality enhancement would require more incentives to unleash the
-potential for innovation for all health data reusers.
+potential for innovation for all health data users.
 
 \paragraph{Expanding the scope of the data beyond the purely hospital domain}
 in a systematic way should be considered. Many risk factors and patient
@@ -3857,7 +3859,7 @@ adding Gaussian noise yielding a dataset as plotted in Figure \ref{fig:simulatio
 uniformly random overlap parameters. Details in
 \ref{apd:experiments:generation}.
 
-\captionsetup[sub]{font=large,labelfont={bf,sf}}%
+\captionsetup[sub]{font=large, labelfont={bf,sf}}%
 
 \begin{figure}[b!]
   \begin{minipage}{0.3\textwidth}
@@ -3941,7 +3943,7 @@ literature, semi-simulated data adding a known synthetic causal effect to real -
     from the Linked Births and Infant Deaths Database (LBIDD)
     \citep{macdorman_infant_1998} with $D=177$ covariates, treatment and
     outcome models are simulated with complex models to reflect
-    different scenarii. The data do not provide the true propensity
+    different scenarios. The data do not provide the true propensity
     scores, so we evaluate only feasible metrics, which do not require this
     nuisance parameter. We used all 432 datasets\footnote{Using the scaling part of the data, from
       \href{https://github.com/IBM-HRL-MLHLS/IBM-Causal-Inference-Benchmarking-Framework}{github.com/IBM-HRL-MLHLS/IBM-Causal-Inference-Benchmarking-Framework}} of size $N=5\,000$.
