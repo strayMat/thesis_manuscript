@@ -605,90 +605,92 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 \minitoc
 \section{How I came into this landscape}\label{sec:intro:landscape}
 
-Ideas and research exist in a given environment that influence their development. I will
-present how my progression among these opportunities shaped the worked developed
-in this thesis.
-
-\subsection{Context: From a modern statistical formation to epidemiology}\label{subsec:intro:context}
+My thesis work has been strongly shaped by the current machine learning
+landscape and my first working experiences. Both have created the circumstances
+that led me to work on inference on Electronic Health Records(EHRs).
 
 \paragraph{Learning statistics during the Natural Language Processing revolution}
 
-\md{Too technical for the intro: make shorter}
-Machine learning techniques, a subfield of artificial intelligence, became
-increasingly good as solving complex tasks where previous pattern recognition
-techniques were struggling. In the 2010's, machine learning techniques were
-developed by learning auxiliary tasks --such as general image classification--
-on vast amount of data. \cite{halevy2009unreasonable} proposed to take
-advantages of regularities present in large piles of data to automatically
-design interesting features for large application domains. This paradigm
---called pre-training-- has been very successful in applied domains such as
-image processing \citep{krizhevsky2012imagenet}, then Natural Language
-Processing \citep{devlin2018bert} and structural biology
-\citep{jumper2021highly}.
-
-% context (I think, it is sufficient to give the idea on my priors)
-I was trained in statistics and machine learning from 2014 to 2018, precisely
-between this the image and text revolutions in Artificial Intelligence. Despite textbooks largely focused
-on flexible pattern recognition techniques, the fascination for pre-training
-techniques left me wonder in which other areas those techniques could be
-successfully applied.
-% Problem
-On the other hand, being a civil servant, part of the National Institute
-(Institut National de la Statistique et des Etudes Economiques), I was also interested in the use of
-data for public policy. Economics and econometrics taught during this formation
-left very few . Does flexible machine learning techniques, or even pre-training
-methods could help inform public policies ?
-% 
+% context 
+In the 2010's, machine learning techniques were developed by learning auxiliary
+tasks --such as general image classification-- on vast amount of data.
+\cite{halevy2009unreasonable} proposed to take advantages of regularities
+present in large piles of data to automatically design interesting features for
+large application domains. This paradigm --called pre-training-- has been very
+successful in applied domains such as image processing
+\citep{krizhevsky2012imagenet}, then Natural Language Processing (NLP)
+\citep{devlin2018bert} and structural biology \citep{jumper2021highly}.
 
 %
+I was trained in statistics and machine learning from 2014 to 2018, precisely
+between the image and text revolutions in Artificial Intelligence. Despite
+textbooks largely focused on flexible pattern recognition techniques, the
+fascination for deep learning left me wonder --as many other students at this
+time-- in which other areas those techniques could be successfully applied.
 
-\paragraph{APHP: Removing identification elements from clinical notes}
+% Problem
+On the other hand, being a civil servant, part of the National Institute
+(Institut National de la Statistique et des Etudes Economiques), I was also
+interested in the use of data for public policy. However, economics and
+econometrics taught during this formation were hardly mentioning algorithm
+progress since the early 2000s. Does flexible machine learning techniques, or
+even pre-training methods could help inform public policies?
+
+\paragraph{AP-HP: Removing identification elements from clinical notes}
 
 % opportunity
-Continuous improvements in natural language processing led to the intuition that
-the information contained in clinical texts could soon be mined appropriately to
-serve medical research.
+Continuous improvements in NLP led to the intuition that information contained
+in clinical texts could soon be mined appropriately to serve medical research or
+improve care.
 % problem
 However, letting researchers outside the medical staff access very detailed
 elements of patient cares embedded in clinical notes raised new privacy
 concerns.
 % solution
 The Paris Hospitals (AP-HP) decided to remove all identification elements from
-the clinical notes of their patients. This process is called pseudonymization
-and I helped merge rule-based pseudonymization systems with a state-of-the-art
-approach relying on neural networks \citep{dernoncourt2017identification,
+the clinical notes of their patients --a processed called pseudonymization. I
+helped merging previous rule-based systems with a state-of-the-art approach
+relying on neural networks \citep{dernoncourt2017identification,
   paris2019desidentification}.
 % apport
-This first contact
 
 \paragraph{Billing claims: An underused huge pile of data}
+%
+The concept of big data made its way into the French ministry department of
+statistics, which extracted billions of national claims from the aging national
+health platform into a dedicated server. Ironically, the service was in the
+atypical situation described by David Cox in \cite{breiman2001statistical}:
+With \textit{Data looking for a question [...] and rais[ing] puzzles}.
+%
+My first job was to help improve and accelerate analytics on this
+new platform. Building upon the work of \cite{bacry2020scalpel3}, I learned that
+distributed computing and good collaborative documentation
+\citep{documentation_snds} dramatically improve the quality and the
+rapidity of descriptive analytics on big healthcare data bases.
+%
+Inspired by the NLP techniques, I applied them to the sequences of claim events.
+I created distributed representations of medical concepts replicating
+\cite{beam2019clinical} (reported in Figure \ref{fig:tsne_plots:snds}). Despite
+raising some interest around me for the intuitive relationships captured by
+these low dimensional representations, I faced the question of the utility of
+these results. Pressing questions at this time were not concerned with knowledge
+representations. Public services wanted to understand the heterogeneities in
+healthcare consumptions: what is an appropriate care and how to measure it from
+the data \citep{cma_policy_appropriateness_2015}? This question was motivated by the growing necessity to adapt
+healthcare funding to a resource constraint system. 
 
-French ministry department of statistics had billions of claims extracted in a
-dedicated server. But the amount of data made the job impossible.
 
-I learned that distributed computing (aka appropriate tools), summary statistics
-and good documentation.
+% First questions: how useful are such wealth of data ? Is unsupervised learning
+% useful ? Is prediction a useful goal ? I was exactly in the atypical situation
+% mentioned by Cox in his answer to Breiman's foundational paper on Machine
+% Learning \citep{breiman2001statistical} : \textit{Data looking for a question are
+%   not unknown and raise puzzles but are, I believe, atypical in most contexts.}
 
-I began to wonder what were the appropriate methodological tools to extract
-relevant information from this data. Hammer that sees a nail : Can I use language
-modeling techniques to mine this data ?
-
-First questions: how useful are such wealth of data ? Is unsupervised learning
-useful ? Is prediction a useful goal ? I was exactly in the atypical situation
-mentioned by Cox in his answer to Breiman's foundational paper on Machine
-Learning \citep{breiman2001statistical} : \textit{Data looking for a question are
-  not unknown and raise puzzles but are, I believe, atypical in most contexts.}
-
-Ironically, at the end of the day, I
-replicated unsupervised learning results from \citep{beam2019clinical} but would
-not know how to use it. I moved towards more interpretable dictionary learning
-with control groups analyses to study polymedication.
-
-% Not sure it is useful
-Covid-19: National healthcare monitoring during the epidemics. Integrated data
-pipeline are very useful during crisis for monitoring: If you do not see all the
-data creating process, standard pipelines, standard tests and documentation : it
-is inherently a group effort.
+% % Not sure it is useful
+% Covid-19: National healthcare monitoring during the epidemics. Integrated data
+% pipeline are very useful during crisis for monitoring: If you do not see all the
+% data creating process, standard pipelines, standard tests and documentation : it
+% is inherently a group effort.
 
 \subsection{Wrap-up: Increasing data collection and computing power}\label{subsec:intro:wrapup}
 
@@ -711,6 +713,12 @@ A recent work on the classification of data and models (AI) in clinical medicine
 suggests three main usages: AI in clinical practice, clinical research on AI/ML
 device and applications and AI/ML used to conduct clinical research
 \citep{haug2023artificial}.
+
+
+Machine learning techniques, a subfield of artificial intelligence, became
+increasingly good as solving complex tasks where previous pattern recognition
+techniques were struggling.
+
 
 \subsection{What pressing needs to use health data}
 
@@ -883,19 +891,35 @@ Rise of digitalization and computing power suggesting new research methods
 \section{Two cultures of statistics for health}\label{sec:intro:two_cultures}
 
 In 2001, \cite{breiman2001statistical} clearly distinguished two statistical
-cultures: a predominant community at the time focused on models, another one
-relying on predictive accuracy.
+cultures: a predominant community at the time focused on models, and an emerging
+trend that rely only on predictive accuracy.%
 
-Epidemiology and biostatistics tend to be closer to the first model-based culture
-whereas artificial intelligence in medicine embraced the second one. This
-cultural differences might be explained by different objectives. Clinical
-Epidemiology seeks to uncover nature mechanisms from data, to understand how
-nature works. AIM adopts a more pragmatic approach, trying to understand what
-deployed healthcare system is improving outcomes or not, without trying to
-uncover the full causal mechanism leading to the observed results.
+Epidemiology and biostatistics favor the model-based culture as one can judge
+from textbooks \citep{rothman2012epidemiology}: \textit{In many epidemiological
+  applications, it is the choice among effect measures that dictates the type of
+  model the investigator ought to use.} Because, clinical epidemiology seeks to
+uncover nature mechanisms from data, it favors linear models that make explicit
+simple links between variables.
 
-\citep{rothman2012epidemiology}: \textit{In many epidemiological applications, it is the choice among effect
-  measures that dictates the type of model the investigator ought to use.}
+%However these models are often based on strong assumptions that are debated in practice.
+%For example, the assumption that parameters in linear models are interpretable \citep{lipton2018mythos}.
+
+On the contrary artificial intelligence in medicine has a more nuanced approach
+to models. One of the main goal of AIM is \textit{to provide expert medical
+  consultation to general practitioners or paramedical personnel in communities
+  where such consultation is normally unavailable}. This practical goal balances
+between good predictive performances --low error rates-- and adoption by
+practitioners. The latter built upon trust, an aspect of interpretability that
+increases when estimator error cases are the same as human errors
+\citep{lipton2018mythos}.
+
+% AIM adopts a more pragmatic approach, trying to understand what deployed
+% healthcare system is improving outcomes or not, without trying to uncover the
+% full causal mechanism leading to the observed results.
+
+
+
+
 
 \begin{background_box_left}
 
@@ -904,8 +928,9 @@ uncover the full causal mechanism leading to the observed results.
   Departing from carefully designing functional forms for statistical models,
   new techniques emerged in the late 90s to automatically learn patterns in the
   growing body of complex data. Among them, one can cite random forests,
-  boosting, neural networks or Support Vector Machines.
-
+  boosting, neural networks or Support Vector Machines. Appendix
+  \ref{apd:intro:ml_algorithms} details the principles of random forest and
+  boosting since we are heavily using them in this thesis.
 
   seeking algorithm efficiency and out-of sample predictive accuracy.
 
@@ -1135,7 +1160,7 @@ flexible models. But the goal of these algorithms is to serves as
 Figure \ref{fig:intro:pubmed_query} illustrate this tension between prediction
 and causation. It represents the proportion of articles per year in Pubmed
 mentioning predictive modeling as in \cite[Chapter
-1]{steyerberg2009applications} and contrast this exponential upward trend with
+  1]{steyerberg2009applications} and contrast this exponential upward trend with
 the downward trend in causality.
 
 % objective
