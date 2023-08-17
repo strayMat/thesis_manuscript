@@ -606,42 +606,46 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 \section{How I came into this landscape}\label{sec:intro:landscape}
 
 My thesis work has been strongly shaped by the current machine learning
-landscape and my first working experiences. Both have created the circumstances
-that led me to work on inference on Electronic Health Records(EHRs).
+landscape and my first experiences with healthcare data. An overview of these
+circumstances should be helpful to understand why I became interested in
+inference from Electronic Health Records(EHRs).
 
-\paragraph{Learning statistics during the Natural Language Processing revolution}
+\subsection{Learning statistics during the Natural Language Processing revolution}
 
 % context 
-In the 2010's, machine learning techniques were developed by learning auxiliary
-tasks --such as general image classification-- on vast amount of data.
-\cite{halevy2009unreasonable} proposed to take advantages of regularities
-present in large piles of data to automatically design interesting features for
-large application domains. This paradigm --called pre-training-- has been very
-successful in applied domains such as image processing
-\citep{krizhevsky2012imagenet}, then Natural Language Processing (NLP)
-\citep{devlin2018bert} and structural biology \citep{jumper2021highly}.
+In the 2010's, \cite{halevy2009unreasonable} proposed to take advantages of
+regularities present in large piles of data to automatically design features
+relevant for multiple application tasks. As an example, a model trying to
+predict an image label from raw pixels learns internal representations of
+natural images such as feet, faces, or hands. These intermediary representations
+can be reused --transferred-- to applicative tasks with different objectives
+such as predicting the severity of a traumatism from a photo. This paradigm
+--called pre-training-- has been very successful in applied domains such as
+image processing \citep{krizhevsky2012imagenet}, then Natural Language
+Processing (NLP) \citep{devlin2018bert} and structural biology
+\citep{jumper2021highly}.
 
-%
+% education
 I was trained in statistics and machine learning from 2014 to 2018, precisely
 between the image and text revolutions in Artificial Intelligence. Despite
-textbooks largely focused on flexible pattern recognition techniques, the
-fascination for deep learning left me wonder --as many other students at this
-time-- in which other areas those techniques could be successfully applied.
+textbooks largely focused on previous flexible pattern recognition techniques,
+the fascination for deep learning left me wonder --as many other students at
+this time-- in which other areas those techniques could be successfully applied.
 
-% Problem
-On the other hand, being a civil servant, part of the National Institute
-(Institut National de la Statistique et des Etudes Economiques), I was also
-interested in the use of data for public policy. However, economics and
-econometrics taught during this formation were hardly mentioning algorithm
-progress since the early 2000s. Does flexible machine learning techniques, or
-even pre-training methods could help inform public policies?
+% public policy
+On the other hand, being a civil servant, part of the French National Institute of
+Statistics (Institut National de la Statistique et des Etudes Economiques), I
+was also interested in the use of data for public policy. However, economics and
+econometrics taught during this formation were hardly mentioning the algorithm
+progresses of the 2000s. Does flexible machine learning techniques, or even
+pre-training methods could help inform public policies?
 
-\paragraph{AP-HP: Burgeoning analysis of EHRs need new competences}
+\subsection{Paris hospitals, a large scale repository of clinical notes}
 
 % opportunity
-Continuous improvements in NLP led to the intuition that information contained
-in clinical texts could soon be mined appropriately to serve medical research or
-improve care.
+In 2017, the emerging healthcare data warehouse of the Paris Hospitals (AP-HP),
+acknowledging the continuous improvement of NLP, ambitioned to leverage its vast
+repository of clinical notes for research.
 % problem
 However, letting researchers outside the medical staff access very detailed
 elements of patient cares embedded in clinical notes raised new privacy
@@ -653,32 +657,40 @@ helped merging previous rule-based systems with a state-of-the-art approach
 relying on neural networks \citep{dernoncourt2017identification,
   paris2019desidentification}.
 % apport
+I realized that routine care data was not a familiar material for medical
+research. Anchored in an engineering team and NLP researchers, I linked this
+fact to the novel complexity and scale of the data collection process, both
+requiring innovating tools. It is only when arriving at the Health Authority of
+Health that I realized the difference of nature between experimental and
+observational data (detailed in Subsection
+\ref{subsec:intro:interventional_vs_observational}).
 
 \paragraph{Piles of billing claims: new data for public health?}
 %
-The concept of big data made its way into the French ministry department of
-statistics, which extracted billions of national claims from the aging national
-health platform into a dedicated server. Ironically, the service was in the
-atypical situation described by David Cox in \cite{breiman2001statistical}:
-With \textit{Data looking for a question [...] and rais[ing] puzzles}.
+The concept of big data made its way into the direction of statistics of the
+French ministry of health. Short before my arrival in 2018, they extracted billions of
+national claims from the aging national health platform into a dedicated server.
 %
-My first job was to help improve and accelerate analytics on this
-new platform. Building upon the work of \cite{bacry2020scalpel3}, I learned that
-distributed computing and good collaborative documentation
-\citep{documentation_snds} dramatically improve the quality and the
-rapidity of descriptive analytics on big healthcare data bases.
+My first job was to help improve and accelerate analytics on this new platform.
+Building upon the work of \cite{bacry2020scalpel3}, I learned that distributed
+computing and good collaborative documentation \citep{documentation_snds}
+dramatically improve the quality and the rapidity of descriptive analytics on
+big healthcare data bases. However, describing sequences of cares remained
+challenging due to the high number of different medical events used in this
+data.
 %
-Inspired by the NLP techniques, I applied them to the sequences of claim events.
-I created distributed representations of medical concepts replicating
-\cite{beam2019clinical} (reported in Figure \ref{fig:tsne_plots:snds}). Despite
-raising some interest around me for the intuitive relationships captured by
-these low dimensional representations, I faced the question of the utility of
-these results. Pressing questions at this time were not concerned with knowledge
-representations. Public services wanted to understand the heterogeneities in
-healthcare consumptions: what is an appropriate care and how to measure it from
-the data \citep{cma_policy_appropriateness_2015}? This question was motivated by the growing necessity to adapt
-healthcare funding to a resource constraint system.
-
+Sequences of claim events can be viewed as a sequence of tokens, just as natural
+sentences. Inspired by NLP techniques, I created distributed representations of
+medical concepts replicating \cite{beam2019clinical} (reported in Figure
+\ref{fig:tsne_plots:snds}). Comparing the relationships between events captured
+by these low dimensional to known associations was striking. But I was
+frustrated with my inability to find a downstream utility of such
+representations. Public health policy is not concerned with knowledge
+representation or predictive accuracy. Public services wanted to understand the
+heterogeneities in healthcare consumptions: what is an appropriate care and how
+to measure it from the data \citep{cma_policy_appropriateness_2015}? This
+question was motivated by the growing necessity to adapt healthcare funding to a
+resource constraint system.
 
 % First questions: how useful are such wealth of data ? Is unsupervised learning
 % useful ? Is prediction a useful goal ? I was exactly in the atypical situation
@@ -692,7 +704,8 @@ healthcare funding to a resource constraint system.
 % data creating process, standard pipelines, standard tests and documentation : it
 % is inherently a group effort.
 
-\subsection{Wrap-up: Increasing data collection and computing power}\label{subsec:intro:wrapup}
+\paragraph{\textit{Data looking for a question [...] and rais[ing] puzzles}, D. Cox}%
+\label{subsec:intro:wrapup}%
 
 \paragraph{Data is collected at massive scale in healthcare} centralized
 into dedicated databases for analysis: eg. APHP clinical notes, French.
@@ -775,7 +788,7 @@ the new data economy. TODO cite
 
 \begin{background_box_left}
 
-  \subsection{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
+  \paragraph{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
 
   Healthcare data is increasingly collected in electronic form.
   \citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
