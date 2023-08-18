@@ -665,11 +665,11 @@ Health that I realized the difference of nature between experimental and
 observational data (detailed in Subsection
 \ref{subsec:intro:interventional_vs_observational}).
 
-\paragraph{Piles of billing claims: new data for public health?}
+\subsection{Billing claims: new data for public health?}
 %
-The concept of big data made its way into the direction of statistics of the
-French ministry of health. Short before my arrival in 2018, they extracted billions of
-national claims from the aging national health platform into a dedicated server.
+In 2018, the direction of statistics of the French ministry of health extracted
+billions of national claims from the aging national health platform into a
+dedicated server.
 %
 My first job was to help improve and accelerate analytics on this new platform.
 Building upon the work of \cite{bacry2020scalpel3}, I learned that distributed
@@ -682,14 +682,14 @@ data.
 Sequences of claim events can be viewed as a sequence of tokens, just as natural
 sentences. Inspired by NLP techniques, I created distributed representations of
 medical concepts replicating \cite{beam2019clinical} (reported in Figure
-\ref{fig:tsne_plots:snds}). Comparing the relationships between events captured
-by these low dimensional to known associations was striking. But I was
+\ref{fig:tsne_plots:snds}). The relationships between events captured by these
+low dimensional were strikingly close to known associations. But I was
 frustrated with my inability to find a downstream utility of such
 representations. Public health policy is not concerned with knowledge
-representation or predictive accuracy. Public services wanted to understand the
-heterogeneities in healthcare consumptions: what is an appropriate care and how
-to measure it from the data \citep{cma_policy_appropriateness_2015}? This
-question was motivated by the growing necessity to adapt healthcare funding to a
+representation or even predictive accuracy. Public services seek to understand
+the heterogeneities in healthcare consumptions: what is an appropriate care and
+how to measure it from the data \citep{cma_policy_appropriateness_2015}? This
+question is motivated by the growing necessity to adapt healthcare funding to a
 resource constraint system.
 
 % First questions: how useful are such wealth of data ? Is unsupervised learning
@@ -704,85 +704,19 @@ resource constraint system.
 % data creating process, standard pipelines, standard tests and documentation : it
 % is inherently a group effort.
 
-\paragraph{\textit{Data looking for a question [...] and rais[ing] puzzles}, D. Cox}%
+\subsection{\textit{Data looking for a question [...] and rais[ing] puzzles}}%
 \label{subsec:intro:wrapup}%
 
-\paragraph{Data is collected at massive scale in healthcare} centralized
-into dedicated databases for analysis: eg. APHP clinical notes, French.
-
-It is acknowledged that we entered since at least 2022 years in an era where we
-frenetically store data without having a dedicated question in mind. The vague
-concept of big data describes this new attitude towards data collection. I would
-propose another view on the current situation: data collected in huge quantity
-is part of the reality, but it does not preclude to assemble data suited for an
-appropriate question. In medical informatics, this is called computational
-phenotyping.
-
-\paragraph{Models are scaling up}
-A whole generation of quantitative researchers has been trained with flexible
-data-hungry models. The unreasonable effectiveness of data \citep{halevy2009unreasonable}.
-
-A recent work on the classification of data and models (AI) in clinical medicine
-suggests three main usages: AI in clinical practice, clinical research on AI/ML
-device and applications and AI/ML used to conduct clinical research
-\citep{haug2023artificial}.
-
-
-Machine learning techniques, a subfield of artificial intelligence, became
-increasingly good as solving complex tasks where previous pattern recognition
-techniques were struggling.
-
-
-\subsection{What pressing needs to use health data}
-
-Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
-rule-based artificial intelligence expert systems described \textit{medical
-  practice, and biomedical research, [as] inherently information-management tasks}
-\citep{patel2009coming}. However, the incentives to collect and analyze data
-vary among the different healthcare actors.
-% The first works on Artificial Intelligence in Medicine (AIM) dates back to the
-% early 70s and was focused on diagnostic, computer-aided decision making and
-% automated consultations \citep{shortliffe1976computer}.  
-
-\paragraph{Automate part of the healthcare workflow}
-
-The automation of tedious tasks is part of the agenda of AIM. The goal is to
-give more time to the physicians by accelerating and facilitating parts of their
-work that require poor analytical capacities. Old example of such automation is
-the computer reading of electrocardiograms. A recent example is the assistance
-of Large Language Model such as GPT-4 for medical note taking
-\citep{lee2023benefits}.
-
-\paragraph{Research}
-
-Drug development, evidence based medicine, biomarkers, epidemiology ie.
-understanding of the mechanisms of disease \textit{the study of the distribution
-  and determinants of disease frequency} \citep{macmahon1970epidemiology}
-
-\paragraph{Public policies: monitoring and evaluation}
-
-Guidelines, quality of care, public health
-
-This greater mobilization of data is one of the responses put forward by the
-Committee on Learning Healthcare System to cope with the worrying rise in
-complexity and costs of the American healthcare system \citep{mcginnis2013best}. It is
-made possible by better computing resources, increased information transmission
-capabilities and greater patient empowerment.
-
-More recently, health agencies in many countries have conducted extensive work
-to better support the generation and use of real-life data
-\citep{has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022,fda_real-world_2021}.
-Study programs have been launched by regulatory agencies: the DARWIN EU program
-by the European Medicines Agency and the Real World Evidence Program by the Food
-and Drug Administration \citep{fda_real_2018}.
-
-% I am not totally naive
-\paragraph{Industries}
-
-Industries also have a strong interest in gathering and analyzing data. For
-market access, they need to carefully describe what population is reached by
-their product. Tailored recommendations of healthcare products are also part of
-the new data economy. TODO cite
+These first experiences highlight a tension between a new scientific framework
+--machine learning \citep{breiman2001statistical} described in
+\ref{sec:intro:two_cultures}--, massive routine data collections in healthcare
+--claims or EHRs detailed in \ref{sec:intro:data}-- and pressing analytical
+questions in public health detailed in \ref{sec:intro:causality}. The successes
+of machine learning in leveraging large amount of weakly labelled data in NLP or
+natural image processing does not imply that it will be successful in other data
+heavy domains. However, this claim has been made by many authors in the last
+decade.
+% Here promises of machine learning in healthcare ?
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
@@ -823,7 +757,6 @@ the new data economy. TODO cite
   clinic, no exam results, few measures, heterogeneity of collection)
 
   optimization of the billing process: \citep{juven2013codage}
-
 
 
 
@@ -886,20 +819,6 @@ the new data economy. TODO cite
 
 \end{background_box_left}
 
-\subsection{Focus of this thesis: real world data, observational}\label{subsec:intro:focus_data}
-
-Inconvenient of interventional data : Increasing costs of RCTs,
-
-Today's public health issues are closely linked to routine care, not ideal care:
-resource constraint, chronic disease. Not so new as it was already major issues
-mentioned in the late 60s \citep{rutstein1967coming}: \textit{1) modern
-  medicine's skyrocketing costs; 2) the chaos of an information explosion
-  involving both paperwork proliferation and large amounts of new knowledge that
-  no single physician could hope to digest; 3) a geographic maldistribution of
-  MD's; 4) increasing demands on the physician's time as increasing numbers of
-  individuals began to demand quality medical care.}
-
-Rise of digitalization and computing power suggesting new research methods
 
 \section{Two cultures of statistics for health}\label{sec:intro:two_cultures}
 
@@ -929,9 +848,6 @@ increases when estimator error cases are the same as human errors
 % AIM adopts a more pragmatic approach, trying to understand what deployed
 % healthcare system is improving outcomes or not, without trying to uncover the
 % full causal mechanism leading to the observed results.
-
-
-
 
 
 \begin{background_box_left}
@@ -982,30 +898,65 @@ increases when estimator error cases are the same as human errors
 
 \end{background_box_left}
 
-% this is where I clearly state what are my questions ? 
-\subsection{One choice of perspective: Recent statistical
-  learning}\label{subsec:intro:recent_statistical_learning}
-% 
-\paragraph{This perspective reflects more naturally my progression:} Learning
-statistics in the age of deep learning pushes towards adopting a view on
-statistics that consider mechanisms as generally unknown, and predictive
-accuracy as the hallmark of validity \citep{breiman2001statistical}.
-% 
-% ML in healthcare 
-\paragraph{Recent discourse and successes are heavily influenced by this line of
-  though:} Machines read medical images faster and more efficiently than most
-practitioners \citep{zhou2021review}. Structured data from Electronic Health
-Records \citep{rajkomar2018scalable} or administrative databases
-\citep{beaulieu2021machine} outperform rule-based clinical scores in
-predicting patient's readmission, in-hospital mortality or future
-comorbidities \citep{li2020behrt}. Recently, large language models (LLMs)
-leveraged clinical notes from several hospitals for length of stay prediction
-\citep{jiang2023health}. Hope is high that LLMs models will soon be able to
-help practitioners during consultation \citep{lee2023benefits}.
 
+\section{Which questions matter in healthcare?}\label{sec:intro:causality}
 
-% this is background info. 
-\section{Notions of causality}\label{sec:intro:causality}
+\subsection{What pressing needs to use health data}
+
+Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
+rule-based artificial intelligence expert systems described \textit{medical
+  practice, and biomedical research, [as] inherently information-management tasks}
+\citep{patel2009coming}. However, the incentives to collect and analyze data
+vary among the different healthcare actors.
+% The first works on Artificial Intelligence in Medicine (AIM) dates back to the
+% early 70s and was focused on diagnostic, computer-aided decision making and
+% automated consultations \citep{shortliffe1976computer}.  
+
+\paragraph{Automate part of the healthcare workflow}
+
+The automation of tedious tasks is part of the agenda of AIM. The goal is to
+give more time to the physicians by accelerating and facilitating parts of their
+work that require poor analytical capacities. Old example of such automation is
+the computer reading of electrocardiograms. A recent example is the assistance
+of Large Language Model such as GPT-4 for medical note taking
+\citep{lee2023benefits}.
+
+\paragraph{Research}
+
+Drug development, evidence based medicine, biomarkers, epidemiology ie.
+understanding of the mechanisms of disease \textit{the study of the distribution
+  and determinants of disease frequency} \citep{macmahon1970epidemiology}
+
+\paragraph{Public policies: monitoring and evaluation}
+
+Guidelines, quality of care, public health
+
+This greater mobilization of data is one of the responses put forward by the
+Committee on Learning Healthcare System to cope with the worrying rise in
+complexity and costs of the American healthcare system \citep{mcginnis2013best}. It is
+made possible by better computing resources, increased information transmission
+capabilities and greater patient empowerment.
+
+More recently, health agencies in many countries have conducted extensive work
+to better support the generation and use of real-life data
+\citep{has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022,fda_real-world_2021}.
+Study programs have been launched by regulatory agencies: the DARWIN EU program
+by the European Medicines Agency and the Real World Evidence Program by the Food
+and Drug Administration \citep{fda_real_2018}.
+
+% I am not totally naive
+\paragraph{Industries}
+
+Industries also have a strong interest in gathering and analyzing data. For
+market access, they need to carefully describe what population is reached by
+their product. Tailored recommendations of healthcare products are also part of
+the new data economy. TODO cite
+
+A recent work on the classification of data and models (AI) in clinical medicine
+suggests three main usages: AI in clinical practice, clinical research on AI/ML
+device and applications and AI/ML used to conduct clinical research
+\citep{haug2023artificial}.
+
 
 \begin{background_box_left}
 
@@ -1104,10 +1055,35 @@ help practitioners during consultation \citep{lee2023benefits}.
 
 \section{Overview and contributions}\label{sec:intro:contributions}
 
+% Focus of the thesis
+\subsection{One choice of perspective: Recent statistical
+  learning for observational routine care data}\label{subsec:intro:focus_data}
+
+% 
+\paragraph{This perspective reflects more naturally my progression:} Learning
+statistics in the age of deep learning pushes towards adopting a view on
+statistics that consider mechanisms as generally unknown, and predictive
+accuracy as the hallmark of validity \citep{breiman2001statistical}.
+% 
+% ML in healthcare 
+\paragraph{Recent discourse and successes are heavily influenced by this line of
+  though:} Machines read medical images faster and more efficiently than most
+practitioners \citep{zhou2021review}. Structured data from Electronic Health
+Records \citep{rajkomar2018scalable} or administrative databases
+\citep{beaulieu2021machine} outperform rule-based clinical scores in
+predicting patient's readmission, in-hospital mortality or future
+comorbidities \citep{li2020behrt}. Recently, large language models (LLMs)
+leveraged clinical notes from several hospitals for length of stay prediction
+\citep{jiang2023health}. Hope is high that LLMs models will soon be able to
+help practitioners during consultation \citep{lee2023benefits}.
+
+
 % stating my questions
-\subsection{Is increasing predictive power at the service of modern medicine?}%
+\subsection{Are flexible statistical models a valid tool to answer today's
+  questions in healthcare?}%
 \label{subsec:intro:questions}%
 
+% justification on why the data it is adapted to the questions (mentioned earlier)
 \paragraph{Modern healthcare issues}
 
 The \emph{Coming revolution In Medicine} is described in the late 60's as
@@ -1141,6 +1117,22 @@ mitigate these --not so new-- challenges ?
 % due to omission rather than commission, suggesting the need for continuous
 % monitoring systems.
 
+Inconvenient of interventional data : Increasing costs of RCTs,
+
+Today's public health issues are closely linked to routine care, not ideal care:
+resource constraint, chronic disease. Not so new as it was already major issues
+mentioned in the late 60s \citep{rutstein1967coming}: \textit{1) modern
+  medicine's skyrocketing costs; 2) the chaos of an information explosion
+  involving both paperwork proliferation and large amounts of new knowledge that
+  no single physician could hope to digest; 3) a geographic maldistribution of
+  MD's; 4) increasing demands on the physician's time as increasing numbers of
+  individuals began to demand quality medical care.}
+
+Rise of digitalization and computing power suggesting new research methods
+
+% justification on why the data it is adapted to the questions (mentioned earlier)
+
+% maybe move to what questions are asked in healthcare ?
 \paragraph{Prediction, causation or decision-making?}
 
 \md{need rework}
@@ -1179,12 +1171,15 @@ the downward trend in causality.
 % objective
 First, influenced by the growing successes of machine learning in predictive
 modeling, this thesis questions what models and concepts are useful for
-healthcare. What predictive models are useful ? Is prediction enough ? How these
+healthcare. Which predictive models are useful ? Is prediction enough ? How these
 increase in predictive power can serve the true objective of healthcare:
 delivering appropriate treatment to each and every patient to improve her
-health.
+health \citep{cma_policy_appropriateness_2015}.
 
 \subsection{Contributions}\label{subsec:intro:contributions}
+
+Chapter \ref{chapter:cdw}.%
+
 
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}\label{chapter:cdw}
 
@@ -5652,9 +5647,9 @@ ontologies, ...).
   $\tilde{A} = A - e(X)$ with the heterogeneity features $X_{CATE}$. Noting the
   final CATE model $\theta$, Double ML solves:
 
-  $$\argmin_{\theta} \mathbb E_n \big[(\tilde{Y} - \tau (X_CATE) \cdot \tilde{A})^2\big ]$$
+  $$\argmin_{\theta} \mathbb E_n \big[(\tilde{Y} - \theta(X_{CATE}) \cdot \tilde{A})^2\big ]$$
 
-  Where $\tilde{Y} = Y - \hat m(X)$ and $\tilde{A} = A - \hat e(X)$
+  Where $\tilde{Y} = Y - \hat \mu(X, A)$ and $\tilde{A} = A - \hat e(X)$
 
   To avoid the over-fitting of this last regression model, we split the dataset of
   the main analysis into a train set (size=0.8) where the causal estimator and the final
