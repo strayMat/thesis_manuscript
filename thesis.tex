@@ -621,7 +621,7 @@ natural images such as feet, faces, or hands. These intermediary representations
 can be reused --transferred-- to applicative tasks with different objectives
 such as predicting the severity of a traumatism from a photo. This paradigm
 --called pre-training-- has been very successful in applied domains such as
-image processing \citep{krizhevsky2012imagenet}, then Natural Language
+computer vision \citep{krizhevsky2012imagenet}, then Natural Language
 Processing (NLP) \citep{devlin2018bert} and structural biology
 \citep{jumper2021highly}.
 
@@ -662,7 +662,7 @@ research. Anchored in an engineering team and NLP researchers, I linked this
 fact to the novel complexity and scale of the data collection process, both
 requiring innovating tools. It is only when arriving at the Health Authority of
 Health that I realized the difference of nature between experimental and
-observational data (detailed in Subsection
+observational data (presented in Subsection
 \ref{subsec:intro:interventional_vs_observational}).
 
 \subsection{Billing claims: new data for public health?}
@@ -672,7 +672,7 @@ billions of national claims from the aging national health platform into a
 dedicated server.
 %
 My first job was to help improve and accelerate analytics on this new platform.
-Building upon the work of \cite{bacry2020scalpel3}, I learned that distributed
+Building upon the work of \cite{bacry2020scalpel3}, I learned that parallel
 computing and good collaborative documentation \citep{documentation_snds}
 dramatically improve the quality and the rapidity of descriptive analytics on
 big healthcare data bases. However, describing sequences of cares remained
@@ -690,7 +690,7 @@ representation or even predictive accuracy. Public services seek to understand
 the heterogeneities in healthcare consumptions: what is an appropriate care and
 how to measure it from the data \citep{cma_policy_appropriateness_2015}? This
 question is motivated by the growing necessity to adapt healthcare funding to a
-resource constraint system.
+resource constraint system \citep{mcginnis2013best,aubert_2019}.
 
 % First questions: how useful are such wealth of data ? Is unsupervised learning
 % useful ? Is prediction a useful goal ? I was exactly in the atypical situation
@@ -704,25 +704,25 @@ resource constraint system.
 % data creating process, standard pipelines, standard tests and documentation : it
 % is inherently a group effort.
 
-\subsection{\textit{Data looking for a question [...] and rais[ing] puzzles}}%
+\md{Find a better title for this part ?}
+\subsection{\textit{Data looking for a question [...] and rais[ing] puzzles}, David Cox}%
 \label{subsec:intro:wrapup}%
 
+% overview of concepts
 These first experiences illustrate a tension between massive routine care data
-collections --claims or EHRs detailed in Section \ref{sec:intro:data}, a new
-scientific framework --machine learning \citep{breiman2001statistical} described
+collections --claims or EHRs presented in Section \ref{sec:intro:data}, a new
+statistical framework --machine learning \citep{breiman2001statistical} described
 in Section \ref{sec:intro:two_cultures}, and pressing analytical questions in
 public health detailed in Section \ref{sec:intro:causality}.%
 
-The successes of machine learning in leveraging large amount of weakly labelled
-data in NLP or natural image processing does not imply that it will be
-successful in other data heavy domains. However, this claim has been made by
-many authors in the last decade with a poor practical implementation in a
-context of steady increase in healthcare costs \citep{mcginnis2013best,
-  data_oecd_health_spending}.
-
-\md{Might add a citation for poor implementation of ML in healthcare}
-
-% Here promises of machine learning in healthcare ?
+% Promises of machine learning in healthcare
+The successes of machine learning in leveraging large amount of poor quality and
+weakly labelled data in NLP or computer vision have deeply impressed other
+scientific fields. Because \textit{medical practice, and biomedical research,
+[are] inherently information-management tasks} \citep{patel2009coming},
+researchers foresaw a huge potential for improving healthcare in applying
+machine learning to novel data collection
+\citep{topol2019high,rajkomar2019machine}.
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
@@ -731,19 +731,19 @@ context of steady increase in healthcare costs \citep{mcginnis2013best,
   \paragraph{Traditional research data collections}
 
   % Evidence based medicine and RCTs
-  The gold standard for generating new evidence in medicine are Random Control
+  The gold standard for generating new evidence in healthcare are Random Control
   Trials (RCTs). Based on the randomization of patients to a treatment or
-  control group, the data collection is designed for a precise research question
-  --an experiment. Modern trial methodology is at the core of the \emph{evidence
-    based medicine}, that supersede RCTs over natural experiments or expert
-  opinions in a hierarchy of evidence \citep{guyatt1995users}. Their methodology
-  has been shaped the large-scale International Studies of Infarct Survival
-  (ISIS) trials \citep{isis_randomised_1986}. Two other research data
-  collections are cohorts --any designated group of individuals followed or
-  traced over a period of time \citep{porta2014dictionary}-- and registry
-  --covering exhaustively a well defined clinical population. All these types of
-  data are costly to collect and most of the time cover small samples of
-  carefully selected patients.
+  control group, the data collection is designed for one experiment, addressing
+  one precise research question. RCTs at the core of the \emph{evidence based
+  medicine}, that supersede randomized experiments over natural --non
+  randomized-- experiments or expert opinions in a hierarchy of evidence
+  \citep{guyatt1995users}. Their methodology has been shaped the large-scale
+  International Studies of Infarct Survival (ISIS) trials
+  \citep{isis_randomised_1986}. Two other research data collections are cohorts
+  --any designated group of individuals followed or traced over a period of time
+  \citep{porta2014dictionary}-- and registry --covering exhaustively a well
+  defined clinical population. All these types of data are costly to collect and
+  most of the time cover small samples of carefully selected patients.
 
   % Historically, the first RCT dates back to 1747 when
   % James Lind (\cite{dunn_james_1997}), used the idea to identify the treatment
@@ -768,44 +768,54 @@ context of steady increase in healthcare costs \citep{mcginnis2013best,
   \paragraph{More data collected routinely: Real World Data}\label{subsec:intro:real_world_data}
 
   % definition of routine care data
-  Healthcare data is increasingly collected in electronic form from information
+  Healthcare data is increasingly collected in from electronic information
   system used in routine care
   \citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
-  Two major sources of Real World Data (RWD) \citep{fda_real-world_2021} are
+  Two major sources of these Real World Data (RWD) \citep{fda_real-world_2021} are
   claims and EHRs.
 
-  \paragraph{Billing data: claims}
+  \paragraph{Billing data: claims}\label{def:claims}
 
   Healthcare insurance systems collect massive amount of data, such as the
   coding of diagnoses and procedures for hospitals reimbursements, or patient
   prescriptions in city care. They usually have a good temporal and geographic
   coverage of the population --especially in countries with universal healthcare
   insurance. However, they fall short of clinical features, exam results, social
-  background or reason for seeking care. Finally, billing optimization processes
+  background or reason for seeking care \citep{ziegler2022high}. Finally, billing optimization processes
   endanger the validity of billing variables by over-representing
   well-reimbursed cares over \citep{juven2013codage}.
 
   \paragraph{Clinical data: EHRs and Hospital Information System}\label{def:ehr_his}
 
-  The computerization of paper-based patient records led hospitals to adopt
-  Electronic Health Record (EHR) solutions beginning in the 1990s. These are de-
-  defined as the longitudinal collection of health data in an electronic
-  information system (IS) \citep{gunter2005emergence}. Used routinely by
-  clinicians, EHRs enable them to record and interrogate clinically relevant
-  information for patient care mainly through notes. EHRs can be specific to an
-  institution, or shared between several actors \citep{hoerbst2010electronic}.
-  This central system is accompanied by other business applications, such as
-  patient administrative management, computerized prescribing, biology software,
-  reanimation software, and imaging software. Together, these softwares make up
-  the Hospital Information System (HIS). Depending on the degree of maturity of
-  the HIS, the various data sources communicate more or less well with each other.
+  The computerization of paper-based patient records led hospitals to adopt EHR
+  solutions beginning in the 1990s. These are defined as the longitudinal
+  collection of health data in an electronic information system (IS)
+  \citep{gunter2005emergence}. Used routinely by clinicians, EHRs enable them to
+  record and interrogate clinically relevant information for patient care mainly
+  through notes. EHRs can be specific to an institution, or shared between
+  several actors \citep{hoerbst2010electronic}. This central system is
+  accompanied by other business applications, such as patient administrative
+  management, computerized prescribing, biology software, reanimation software,
+  and imaging software. Together, these softwares make up the Hospital
+  Information System (HIS). Depending on the degree of maturity of the HIS, the
+  various data sources communicate more or less well with each other.
 
-  % interest for AIM 
-  % In the 90s, the AIM community acknowledged the need to rely on integrated
-  % systems such as the recently developed EHRs \citep{patel2009coming}.
-  % \cite{patel2009coming} and \cite{butte2006creation} grounded the importance of
-  % Electronic Health Record as a precious collection of natural experiments to
-  % complete by phenotypes the understanding of genotype-environment interactions.
+  % interest for AIM and generation of evidence ?
+  As early as 1990, the Artificial Intelligence in Medicine (AIM) community
+  emphasized the importance of EHR \citep{shortliffe1993adolescence}. These
+  systems are a precious collection of natural experiments, allowing to complete
+  the understanding of genotype-environment interactions with phenotypes
+  \citep{butte2006creation,patel2009coming}. Since then, the wide dissemination
+  of EHR and the increasing richness of their content are fuelling new research
+  avenues for AIM \citep{yu2018artificial}, clinical research
+  \citep{cowie2017electronic} and epidemiological studies
+  \citep{casey2016using,gianfrancesco2021narrative}. In this thesis, we focus on Electronic
+  Health Records even if some of our results could be relevant for insurance
+  claims as well.
+
+  % maybe footshoting myself here. However, \cite{bartlett2019feasibility}
+  %showed that only 15\% of recent clinical trials could be replicated with EHR,
+  %highlighting their limited scope.
 
   \subsection{Interventional data vs observational
     data}\label{subsec:intro:interventional_vs_observational}
@@ -941,10 +951,7 @@ the organizational impact of health products and technologies
 \citep{has_guide_2020,has_real-world_2021}.
 
 
-% Shortliffe, the inventer of MYCINE \citep{shortliffe1974mycin}, the first
-% rule-based artificial intelligence expert systems described \textit{medical
-%   practice, and biomedical research, [as] inherently information-management tasks}
-% \citep{patel2009coming}. However, the incentives to collect and analyze data
+%However, the incentives to collect and analyze data
 % vary among the different healthcare actors.
 % The first works on Artificial Intelligence in Medicine (AIM) dates back to the
 % early 70s and was focused on diagnostic, computer-aided decision making and
@@ -1133,6 +1140,9 @@ The \emph{Coming revolution In Medicine} is described in the late 60's as
   quality medical care.} Fifty years later, the same preoccupations are
 destabilizing healthcare systems in rich countries: costs, vast amount of new
 knowledge, geographic disparities and lack of trained physicians.
+
+Context of steady increase in healthcare costs \citep{mcginnis2013best,
+  data_oecd_health_spending}.
 
 % In the 2000s, the AIM themes were listed as \textit{knowledge representation and
 %   ontology development, terminology and semantic modeling of domains, decision
