@@ -1,4 +1,5 @@
 # unwanted latex outputs
+github_token
 *.aux
 *.fdb_latexmk
 *.log
