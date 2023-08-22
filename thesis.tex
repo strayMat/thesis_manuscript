@@ -846,14 +846,14 @@ benefit from innovative methods.
   the patient characteristics. This enforces the comparability between treated
   patients and control patients --not receiving the treatment. Therefore, once
   this randomization has been repeated over many patients, \emph{on average},
-  the difference in outcomes can only be attributed to the treatment. 
+  the difference in outcomes can only be attributed to the treatment.
 
   % the distinction
   \cite{rothman2012epidemiology} distinguishes RCTs from observational data as
   follows: \textit{In an experiment, the reason for the exposure assignment is
-  solely to suit the objectives of the study; if people receive their exposure
-  assignment based on considerations other than the study protocol, it is not a
-  true experiment.} Epidemiological textbooks clearly  since randomization
+    solely to suit the objectives of the study; if people receive their exposure
+    assignment based on considerations other than the study protocol, it is not a
+    true experiment.} Epidemiological textbooks clearly  since randomization
   yields excellent internal validity \citep{campbell1957factors}: the estimated
   treatment effect is close to the true treatment effect if we could repeat the
   experience indefinitely on the same population --the estimate is
@@ -862,39 +862,53 @@ benefit from innovative methods.
   treatment and the outcome. This contributed to its success for clinical
   evidence generation.
 
-  \md{Why observational data does not have randomization?}
+  In observational data, interventions are far from random. Interventions are
+  generally given in priority to patient requiring care (as exemplified in
+  Figure \ref{fig:toy_example}). Therefore treated and control populations
+  differ in ways that prevents the attribution of outcome difference to the sole
+  treatment. Such differences call for dedicated adjustments presented in
+  Section \ref{subsec:causal_tuto:estimation}. 
 
+  \paragraph{External validity: when RCTs insufficiently inform practices}
   % threat to external validity
-  \paragraph{External validity: when RCTs do not inform}
-
-  Interventional data is hard to collect: patients must be voluntary, without
-  comorbidities. These factors endanger the external validity of
-  interventional data \citep{feinstein1997problems,concato2000randomized,rothwell2005external}: The findings of a study may
-  not apply to real world situations since the population and experimental
-  conditions differ too much from usual practices.
-
+  Interventional data are hard to collect: patients must be voluntary, without
+  comorbidities, adhering to the treatment. These factors contribute to
+  idealized populations recruited in RCTs, endangering the \emph{external
+  validity} of interventional studies
+  \citep{feinstein1997problems,concato2000randomized,rothwell2005external}: The
+  findings of a study may not generalize to other populations. As a practical
+  consequence, RCTs may not apply to real world situations since their
+  populations and experimental conditions differ too much from usual practices.
+  For example, only 6\% of asthmatics would have been eligible for their own
+  treatment RCTs \citep{travers2007external}. An advantage of observational data
+  over RCTs is their description of usual care practices, opening a window on
+  care effectiveness \citep{cochrane1972effectiveness}: How well does a
+  treatment work in practice, outside the ideal circumstances of the
+  experimentation ? 
+  
+  % link with economics
   External validity have been raised in economics earlier than in epidemiology
   \citep{deaton2020randomization}. The focus in such problems is probably
   greater in economics because situations are not well controlled:
   economic agents act outside of the laboratory. On the contrary, clinical
   situation is closer to laboratory settings. This difference in data sources and
   methodology is visible in the divide between clinical and social epidemiology
-  \citep{}. What about medico-economics ? I do not address this question in the
-  present thesis, but it is a clear motivation.\md{need a citation here}
+  \citep{zielhuis2001social}. What about medico-economics ? I do not address this question in the
+  present thesis, but it is a clear motivation.
 
   % Link with personalized medicine
   \paragraph{Heterogeneity of treatment: the link with personalized medicine.}
-  
+
   The previous paragraph discussed average treatment effect. However,
-  heterogeneity of treatment among population subgroups is of great concern in
+  heterogeneity of treatment among subgroups is of great concern in
   epidemiology and healthcare \citep{hernan2020causal} and key for personalized
   medicine --also coined as precision medicine. Originally anchored into
   genomics, this concept tries to take individual variability into account for
   tailored treatment recommendations \citep{schork2015personalized,
-  topol2019high}. In sequential decision making problems, heterogeneity of
-  treatment effect is close to subfields of the Machine Learning community such
+    topol2019high}. In sequential decision making problems, heterogeneity of
+  treatment effect is close to subfields of machine learning such
   as operational research \citep{schaefer2004modeling} or reinforcement learning
-  \citep{bareinboim2015bandits}. These fields are focusing on sequential
+  \citep{bareinboim2015bandits}. These fields are focused on sequential
   decision making processes with a large action-state space, rather than one-off
   treatment as in this thesis. To robustly estimate the probabilities involved
   in the large dimensional state-action space, those work often require a
@@ -904,8 +918,8 @@ benefit from innovative methods.
   Bridges with healthcare and personalized medicine include application in
   optimizing antiretroviral therapy in HIV \citep{guez2008adaptive} or
   management of sepsis in the Intense Care Unit \citep{komorowski2018artificial}
-  but large wide adoption. 
-  
+  but lack wide adoption \citep{senn2018statistical}.
+
 \end{background_box_left}
 
 
