@@ -865,6 +865,8 @@ benefit from innovative methods.
   treatment. Such differences call for dedicated adjustments presented in
   Section \ref{subsec:causal_tuto:estimation}.
 
+  \md{Develop a toy example of confounded variable here without a prediction model}
+
   \paragraph{External validity: when RCTs insufficiently inform practices}
   % threat to external validity
   Interventional data are hard to collect: patients must be voluntary, without
@@ -1001,6 +1003,23 @@ increases when estimator error cases are the same as human errors
 
 \end{background_box_left}
 
+
+% Focus of the thesis
+\subsection{One choice of perspective: Recent statistical learning for EHRs}%
+\label{subsec:intro:focus_data}%
+
+In this thesis, we focus on Electronic Health Records even if some of our
+results could be relevant for insurance claims as well.
+
+% 
+\paragraph{This perspective reflects more naturally my progression:} Learning
+statistics in the age of deep learning pushes towards adopting a view on
+statistics that consider mechanisms as generally unknown, and predictive
+accuracy as the hallmark of validity \citep{breiman2001statistical}.
+
+Are flexible statistical models a valid tool to answer today's questions in healthcare?
+
+
 \section{What are the important questions in public health?}%
 \label{sec:intro:causality}%
 
@@ -1024,7 +1043,7 @@ clearly the scope of questions that motivate my work. As discussed in Section
 formation and public health concerns.
 
 %primary use
-\paragraph{Primary use of health data focus on patient care.}
+\paragraph{Primary uses of health data focus on patient care.}
 
 EHRs are primarily used to record patients' health state and care
 \citep{safran_toward_2007,eu_primary_2022}. This information might be shared
@@ -1039,8 +1058,7 @@ fragmented between numerous healthcare professionals.
 % device and applications and AI/ML used to conduct clinical research
 % \citep{haug2023artificial}.
 
-
-\paragraph{From the automation of the care workflow to personalized medicine}
+\paragraph{From the automation of the care workflow to personalized medicine.}
 
 % AI in healthcare 
 The automation of tedious tasks in healthcare is part of the original agenda of
@@ -1072,74 +1090,81 @@ well-understood tasks to seek care tailored to each individual, even if the
 mechanisms of action are poorly understood.
 \citep{mann_artificial_2022,ziegler2022high}.
 
-\paragraph{Building new knowledge}
+\paragraph{New data for better knowledge acquisition?}
+
 %Better understand what and why think works
 RWD data also bring indirect benefits --secondary uses-- by accelerating and
 improving knowledge production: on pathologies
 \citep{campbell_characterizing_2022}, on the conditions of use of health
 products and technologies \citep{safran_toward_2007,tuppin_value_2017}, on the
-measures of their safety \citep{wisniewski_development_2003}, efficacy or
-usefulness in everyday practice \citep{richesson_electronic_2013}. They can also
-be used to assess the organizational impact of health products and technologies
-\citep{has_guide_2020,has_real-world_2021}.
-
-This data use is closer to the main goal of epidemiology which is \textit{the
-  study of the distribution and determinants of disease frequency} \citep{macmahon1970epidemiology}.
+measures of their safety \citep{wisniewski_development_2003}. They can also be
+used to assess the organizational impact of health products and technologies
+\citep{has_guide_2020,has_real-world_2021}. These descriptive usages are closer
+to the main goal of epidemiology which is \textit{to study of the distribution
+  and determinants of disease frequency} \citep{macmahon1970epidemiology}.
 
 % Monitoring and evaluation: public policy and industry, two faces of the same coin
-Guidelines, quality of care, public health
-
-This greater mobilization of data is one of the responses put forward by the
-Committee on Learning Healthcare System to cope with the worrying rise in
-complexity and costs of the American healthcare system \citep{mcginnis2013best}. It is
-made possible by better computing resources, increased information transmission
-capabilities and greater patient empowerment.
-
-More recently, health agencies in many countries have conducted extensive work
-to better support the generation and use of real-life data
+Health Technology Assessment (HTA) agencies in many countries have conducted
+extensive work to better support the generation and use of real-life data
 \citep{has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022,fda_real-world_2021}.
 Study programs have been launched by regulatory agencies: the DARWIN EU program
 by the European Medicines Agency and the Real World Evidence Program by the Food
-and Drug Administration \citep{fda_real_2018}.
-
-
-% I am not totally naive
-Recent surges in data collection encourage deviation from the standard
-interventional design by relaxing some of the methodological constraint of RCTs.
-However, HTA agencies witness a deteroration of evidences for new drugs and
-strongly advocate against observational studies for replacing new drugs
-evaluation \citep{wieseler2023replacing,vanier2023rapid}.
-
-Industries also have a strong interest in gathering and analyzing data. For
-market access, they need to carefully describe what population is reached by
-their product. Tailored recommendations of healthcare products are also part of
-the new data economy. TODO cite
-
+and Drug Administration \citep{fda_real_2018}. However, recent surges in data
+collection also encouraged deviation from the standard interventional design by
+relaxing some of the methodological constraint of RCTs. HTA agencies witnessed a
+deterioration of evidences for new drugs and strongly advocate against
+observational studies for replacing new drugs evaluation
+\citep{wieseler2023replacing,vanier2023rapid}. This debate crystallizes tensions
+between the pharmaceutical industry and regulators since drug prices are
+mainly driven by drug efficacy (assessed in trials).
+%
+There is still active debates to better understand what is the place of these
+data to develop new evidence on the effectiveness of interventions
+\citep{richesson_electronic_2013} \md{develop: schneeweiss and the replicate
+  program}.
+% % too much
+% Industries also have a strong interest in gathering and analyzing data. For
+% market access, they need to carefully describe what population is reached by
+% their product.
 
 \paragraph{Public health issues: old and new}
 
-The \emph{Coming revolution In Medicine} is described in the late 60's as
-\citep{rutstein1967coming}: \textit{1) modern medicine's skyrocketing costs; 2)
+The \emph{Coming revolution In Medicine} is described by
+\cite{rutstein1967coming} as:\textit{1) modern medicine's skyrocketing costs; 2)
   the chaos of an information explosion involving both paperwork proliferation and
   large amounts of new knowledge that no single physician could hope to digest; 3)
   a geographic maldistribution of M[edical] D[octors]s; 4) increasing demands on
   the physician's time as increasing numbers of individuals began to demand
   quality medical care.} Fifty years later, the same preoccupations are
-destabilizing healthcare systems in rich countries: costs, vast amount of new
-knowledge, geographic disparities and lack of trained physicians.
+destabilizing healthcare systems in rich countries: increasing costs
+\citep{data_oecd_health_spending}, vast amount of new knowledge, geographic
+disparities and lack of trained physicians.
 
-Context of steady increase in healthcare costs \citep{mcginnis2013best,
-  data_oecd_health_spending}.
+In this context, public health authorities are asked to better understand what
+cares are the most effective. With constrained medical resources, efforts should
+be focused on the most effective interventions and prevent unnecessary cares.
+However, measuring the appropriateness of a care is a delicate question
+\citep{cma_policy_appropriateness_2015}. Scientific associations issue medical
+guidelines built upon the scientific literature to recommend ideal care
+trajectories. Relying on a hierarchy of evidence \citep{guyatt1995users}, these
+recommendations are strongly relying on RCTs \citep{}. In the United States, the
+Committee on Learning Healthcare System suggested to better use routine data to
+adapt evidence to real practice \citep{mcginnis2013best}. \md{develop this part}
+
+In line with this roadmap, this thesis explores the possibilities offered by
+EHRs for evaluating the effectiveness of clinical guidelines.
 
 % Initial motivation: public health guideline, confront them with EHR data ? Do we need predictive models and
 % which one ?
 \md{Here or latter ?  I want to explain that causation is at the hear of this
   thesis, but that we did came here because of the public health question}
 
+Motivated by the guidelines
 
 \begin{background_box_left}
 
-  \subsection{Causality is at the heart of both epidemiology and medicine}\label{subsec:intro:causation_epidemio}
+  \subsection{Prediction or causation?}%
+  \label{subsec:intro:causation_epidemio}%
 
   Opening an epidemiological book, confounding is the very first explained concept
   \citep{rothman2012epidemiology}.
@@ -1159,6 +1184,7 @@ Context of steady increase in healthcare costs \citep{mcginnis2013best,
   epidemiology, focused on specific cases and not as the core of epidemiological
   science.
 
+  % even AIM is rooted in causality 
   Even the early Framingham study concludes that risk reduction is more important
   than identifying the strength of specific risk factors since this quantity is
   subject to slight changes in the risk model \citep{brand1976multivariate}:
@@ -1177,6 +1203,42 @@ Context of steady increase in healthcare costs \citep{mcginnis2013best,
   diagnosis: \textit{If we do a diagnostic test, we may detect an underlying
     disease. But some diseases are not treatable, or the natural course might be
     very similar to what is achieved with treatment.}
+
+  Modeling was always judged necessary and it is only recently that pattern
+  recognitions was pursued as an objective per-se in AIM.
+  In \citep{patel2009coming} Michael Berthold discusses the inappropriateness of the
+  unsupervised and supervised approaches that focus on finding pre-defined
+  patterns with strong inductive biases for well-defined tasks.
+
+  In \cite{patel2009coming} \textit{tend to discover relatively simple
+    relationships in data and have not yet demonstrated the ability to discover
+    complex causal chains of relationships }. The importance is to develop modeling
+  techniques that can \textit{formulate and test hypotheses about how the human
+    organism “works” in health and illness}.
+
+  More recently, \cite{beam2018big} devise a Machine-learning spectrum, making
+  the distinction between algorithms requiring heavy human assumptions and
+  flexible models. But the goal of these algorithms is to serves as
+  \textit{decision-making}, not as predictive models.
+
+\end{background_box_left}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/chapter_1/pubmed_query.pdf}
+  \caption{Proportion of articles by year in Pubmed returned by queries on
+    causality (orange) or predictive modeling (blue). The scale differs greatly
+    but the symmetry of the trends is disturbing.}%
+  \label{fig:intro:pubmed_query}
+\end{figure}
+
+\begin{background_box_left}
+
+  Figure \ref{fig:intro:pubmed_query} illustrate this tension between prediction
+  and causation. It represents the proportion of articles per year in Pubmed
+  mentioning predictive modeling as in \cite[Chapter
+    1]{steyerberg2009applications} and contrast this exponential upward trend with
+  the downward trend in causality.
 
 
   \paragraph{The machine learning stance -- Observational data can have different causal interpretations}%
@@ -1230,40 +1292,14 @@ Context of steady increase in healthcare costs \citep{mcginnis2013best,
 
   - Send back to appendix the Difference in Means  (in randomized experiments)
 
-
 \end{background_box_left}
 
 \section{Contributions}\label{sec:intro:contributions}
-
-% Focus of the thesis
-\subsection{One choice of perspective: Recent statistical learning for EHRs}%
-\label{subsec:intro:focus_data}%
-
-In this thesis, we focus on Electronic Health Records even if some of our
-results could be relevant for insurance claims as well.
-
-% 
-\paragraph{This perspective reflects more naturally my progression:} Learning
-statistics in the age of deep learning pushes towards adopting a view on
-statistics that consider mechanisms as generally unknown, and predictive
-accuracy as the hallmark of validity \citep{breiman2001statistical}.
-
-
-% stating my questions
-\subsection{Are flexible statistical models a valid tool to answer today's
-  questions in healthcare?}%
-\label{subsec:intro:questions}%
-
-% justification on why the data it is adapted to the questions (mentioned earlier)
 
 % In the 2000s, the AIM themes were listed as \textit{knowledge representation and
 %   ontology development, terminology and semantic modeling of domains, decision
 %   support and reasoning under uncertainty, model-based image processing}
 % \citep{patel2009coming}.
-
-Collection and analysis of new types of data are at the crossroads of
-epidemiology, clinical medicine, and artificial intelligence. Could it help to
-mitigate these --not so new-- challenges ?
 % Edward H. Shortliffe insisted on the shift from individual patient specific
 % decision-support to guideline-based decision support, a movement that also took
 % place in clinical medicine. In the same paper, Mario Stefanelli insists on the
@@ -1277,67 +1313,17 @@ mitigate these --not so new-- challenges ?
 % due to omission rather than commission, suggesting the need for continuous
 % monitoring systems.
 
-Inconvenient of interventional data : Increasing costs of RCTs,
-
-Today's public health issues are closely linked to routine care, not ideal care:
-resource constraint, chronic disease. Not so new as it was already major issues
-mentioned in the late 60s \citep{rutstein1967coming}: \textit{1) modern
-  medicine's skyrocketing costs; 2) the chaos of an information explosion
-  involving both paperwork proliferation and large amounts of new knowledge that
-  no single physician could hope to digest; 3) a geographic maldistribution of
-  MD's; 4) increasing demands on the physician's time as increasing numbers of
-  individuals began to demand quality medical care.}
-
-Rise of digitalization and computing power suggesting new research methods
-
-% justification on why the data it is adapted to the questions (mentioned earlier)
-
-% maybe move to what questions are asked in healthcare ?
-\paragraph{Prediction, causation or decision-making?}
-
-\md{need rework}
-Modeling was always judged necessary and it is only recently that pattern
-recognitions was pursued as an objective per-se in AIM.
-In \citep{patel2009coming} Michael Berthold discusses the inappropriateness of the
-unsupervised and supervised approaches that focus on finding pre-defined
-patterns with strong inductive biases for well-defined tasks.
-
-In \cite{patel2009coming} \textit{tend to discover relatively simple
-  relationships in data and have not yet demonstrated the ability to discover
-  complex causal chains of relationships }. The importance is to develop modeling
-techniques that can \textit{formulate and test hypotheses about how the human
-  organism “works” in health and illness}.
-
-More recently, \cite{beam2018big} devise a Machine-learning spectrum, making
-the distinction between algorithms requiring heavy human assumptions and
-flexible models. But the goal of these algorithms is to serves as
-\textit{decision-making}, not as predictive models.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.8\textwidth]{img/chapter_1/pubmed_query.pdf}
-  \caption{Proportion of articles by year in Pubmed returned by queries on
-    causality (orange) or predictive modeling (blue). The scale differs greatly
-    but the symmetry of the trends is disturbing.}%
-  \label{fig:intro:pubmed_query}
-\end{figure}
-
-Figure \ref{fig:intro:pubmed_query} illustrate this tension between prediction
-and causation. It represents the proportion of articles per year in Pubmed
-mentioning predictive modeling as in \cite[Chapter
-  1]{steyerberg2009applications} and contrast this exponential upward trend with
-the downward trend in causality.
-
 % objective
-First, influenced by the growing successes of machine learning in predictive
-modeling, this thesis questions what models and concepts are useful for
-healthcare. Which predictive models are useful ? Is prediction enough ? How these
+First influenced by the growing successes of machine learning in predictive
+modeling, this thesis seeks to understand what models and framework might help
+evaluating the effectiveness of clinical guidelines using Electronic Health
+Records. Which predictive models are useful ? Is prediction enough ? How these
 increase in predictive power can serve the true objective of healthcare:
-delivering appropriate treatment to each and every patient to improve her
-health \citep{cma_policy_appropriateness_2015}.
+delivering appropriate treatment to each and every patient to improve her health
+\citep{cma_policy_appropriateness_2015}?
 
 The contributions of each chapter, which are summarized below, have led to three
-articles and a work in progress as first- authors:
+articles as first-authors and one work in progress:
 
 \begin{itemize}
   \item Chapter \ref{chapter:cdw} published in \emph{PLOS Digital Health},
@@ -1357,6 +1343,7 @@ algorithms.
 This work is a specific application separated from the thesis main questions.
 Therefore it is not detailed in this manuscript.
 
+\md{summary of chapters: abstract?}
 
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}%
 \label{chapter:cdw}%
@@ -4570,6 +4557,12 @@ hugely difficult transfer of models or administrative barriers to access data
 efficient techniques that make the best of medium-sized data or rely on sharable
 sources of knowledge (aggregated statistics, federated learning approaches,
 ontologies, ...).
+
+Ultimately, I am convinced that resource constraints and the ever-increasing
+demand on healthcare links care effectiveness to equity. Some patients will
+always be less treated than others: public health should seek for random
+repartition of these mistreated patients conditionally on patient conditions.
+
 
 \clearpage
 %sloppy
