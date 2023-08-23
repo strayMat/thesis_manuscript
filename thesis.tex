@@ -1096,9 +1096,20 @@ models and interpreting their inner part as causal.
   \paragraph{Pre-training: from learning patterns to learning representations}
   % what is it
   As of 2012, the success of deep neural networks in computer vision
-  \citep{krizhevsky2012imagenet}, sparkled interest for representation
-  learning.
-  \md{complete here taking inspiration from Gael slideware or alexis thesis}.
+  \citep{krizhevsky2012imagenet}, sparkled interest for representation learning.
+  Grounded in information theory, representations are low dimensional features
+  of the raw data that capture \emph{useful information}. A good representation
+  should keep information on the output $y$ and loose non-useful information in
+  the input $x$, making it robust to noise: I refer to
+  \cite{achille2018emergence} for a detailed formalization. This definition of
+  usefulness highlights the need to find pretext tasks to supervise the learning
+  of representations. For example, in computer vision, the pretext task is to
+  labels coarse classes of images (eg. dog, cat, container, ...). In NLP, the
+  pretext task is to predict randomly masked world in a text. These tasks should
+  be weakly-supervised in the sense that they do not require human annotation.
+  The learned representations are then used as input to a supervised task such
+  as classification or regression, which is hopefully not too different from the
+  pretext task. \md{refine this part.}
 
   % Why am I not doing this
   This thesis was originally motivated by studying deep representations for
