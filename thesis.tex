@@ -105,7 +105,7 @@
 \definecolor{purple_error}{rgb}{99,0,60}
 \definecolor{red_error}{rgb}{.647,.129,.149}
 
-\definecolor{Prune}{RGB}{99,0,60}
+\definecolor{Prune}{RGB}{151, 104, 209}
 \definecolor{light_grey}{rgb}{0.3,.3,.3}
 \definecolor{deep_blue}{rgb}{0,.2,.5}
 \definecolor{dark_blue}{rgb}{0,.15,.5}
@@ -1010,7 +1010,7 @@ models and interpreting their inner part as causal.
   algorithms emerged in the late 90s to automatically learn patterns in the
   growing body of complex data. Among them, one can cite random forests,
   gradient boosting, neural networks or support vector machines. Appendix
-  \ref{apd:intro:ml_algorithms} details the principles of random forest and
+  \ref{apd:intro:statistical_models} details the principles of random forest and
   gradient boosting since we are using them in different chapters of this
   thesis.
 
@@ -1034,7 +1034,7 @@ models and interpreting their inner part as causal.
   proximity between the predicted value $\hat{y} = f(x)$ and the true value
   $y$. Usually, for continuous outcomes, the squared loss is used. Finally,
   when choosing among a family of functions $f \in \mathcal{F}$, the best possible function $f^{\star}$
- minimizes the expected loss $\mathcal{E}(f^{\star})$:
+  minimizes the expected loss $\mathcal{E}(f^{\star})$:
 
   $$f^{\star} = \argmin_{f \in \mathcal{F}} \mathbb{E} \big [ (\hat{y} - y)^2 \big]$$
 
@@ -1094,7 +1094,30 @@ models and interpreting their inner part as causal.
 \begin{background_box_left}
 
   \paragraph{Pre-training: from learning patterns to learning representations}
+  % what is it
+  As of 2012, the success of deep neural networks in computer vision
+  \citep{krizhevsky2012imagenet}, sparkled interest for representation
+  learning.
+  \md{complete here taking inspiration from Gael slideware or alexis thesis}.
 
+  % Why am I not doing this
+  This thesis was originally motivated by studying deep representations for
+  patient trajectories and their ability to transfer between healthcare
+  databases. However, I progressively realized that the choice of a
+  representation loops back to the choice of a model, and hence of the measure
+  of performances for relevant downstream tasks. For other domains such as NLP,
+  consensus tasks such as text classification have been found to evaluate the
+  relevance of representation techniques. Aggregated in benchmarks such as GLUE
+  \citep{wang2018glue}, these tasks fueled model developments for years.
+  Recently, \cite{raji2021ai} pointed out the risk of misalignment between
+  machine learning benchmarks and research claims about a task or real world
+  objectives --what they call construct validity. This concerns is much greater
+  for RWDs since interests in using these data are fragmented--as developed in
+  the next section. Moreover, healthcare interest in pure predictive problems is
+  unclear --see Section \ref{sec:causal_tuto:motivation}. Finally, the
+  circulation of data or representations in healthcare are almost non-existent
+  for confidentiality purposes. These specific features of RWD all into question
+  the appropriateness of constructing universal representations in healthcare.
   % Focus on variable selection: root in hand collected variables in carefully
   % designed subpopulation ?
 
@@ -3033,7 +3056,7 @@ implementations.
 
 To model the outcome and treatment, we used two common but different estimators:
 random forests and ridge logistic regression implemented with scikit-learn
-\citep{pedregosa2011scikit}. We chose the hyperparameters with a random search
+\citep{pedregosa_scikitlearn_2011}. We chose the hyperparameters with a random search
 procedure (detailed in Appendix \ref{apd:hyper_parameter_search}). While
 logistic regression handles predictors in a linear fashion, random forests
 should have the benefit of modeling non-linear relations as well.
@@ -4709,7 +4732,13 @@ repartition of these mistreated patients conditionally on patient conditions.
   \renewcommand{\thechapter}{\Alph{chapter}} % Redefine chapter numbering to letters
   \renewcommand{\thesection}{\thechapter.\arabic{section}} % Include chapter letter in section numbering
   \renewcommand{\thesubsection}{\thesection.\arabic{subsection}} % Include chapter letter in subsection numbering
-  %\section{Statistical models}\label{apd:statistical_models}
+
+  \chapter{Chapter \ref{chapter:intro}}\label{apd:intro}
+
+  \section{Statistical models}\label{apd:intro:statistical_models}
+  \subsection{Random Forests}\label{apd:intro:random_forests}
+
+  \subsection{Random Forests}\label{apd:intro:boosting}
 
   %\section{Causal Diagrams}\label{apd:causal_diagrams}
   \chapter{Chapter \ref{chapter:cdw}}\label{apd:cdw}
