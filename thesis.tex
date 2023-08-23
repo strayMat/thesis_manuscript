@@ -839,15 +839,41 @@ benefit from innovative methods.
   \textcolor{blue}{the administration of a drug for treated patients} compared to
   \textcolor{orange}{no administration for control patients}. In observational data, interventions
   are far from random but focused on patients requiring care. In observational
-  data --illustrated in Figure \ref{intro:fig:observational}, the drug would be given to patients with
+  data --illustrated in Figure \ref{intro:fig:observational_vs_interventional}a), the drug would be given to patients with
   more comorbidities which could be assessed with the Charlson score
   \citep{charlson_new_1987} shown on the x axis.  Therefore treated and control
   populations differ in ways that prevents the attribution of outcome difference
   to the sole treatment. Such differences call for dedicated adjustments
   presented in Section \ref{subsec:causal_tuto:estimation}.
 
+\end{background_box_left}
+
+\begin{figure}[h!]
+  \begin{minipage}{0.32\textwidth}
+    \caption{a) In routine care,
+      treatments allocation is not random: priority is often given to patients
+      that will benefit the most from the intervention.\\%
+      b) In interventional studies,
+      randomization ensures the comparability of treated and controls on average.
+      \label{intro:fig:observational_vs_interventional}
+    }
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.65\textwidth}
+    {\sffamily\footnotesize\scalebox{0.9}{a) Observational data}}
+    \vfill%
+    \includegraphics[width=1\linewidth]{img/chapter_1/sample.pdf}%
+    \vfill%
+    {\sffamily\footnotesize\scalebox{0.9}{b) Interventional data}}
+    \vfill%
+    \includegraphics[width=1\linewidth]{img/chapter_1/sample_rct.pdf}%
+  \end{minipage}
+\end{figure}
+
+\begin{background_box_left}
+
   % interventional  
-  For interventional data --shown in Figure \ref{intro:fig:interventional}, the
+  For interventional data --shown in Figure \ref{intro:fig:observational_vs_interventional}b), the
   randomization process forces the probability of receiving the treatment for
   every patient --often to 50\%. It is independent from patient characteristics
   such as the Charlson score. This enforces the comparability between treated
@@ -868,28 +894,6 @@ benefit from innovative methods.
   the RCT methodology are easily met \citep{colnet2020causal} and involve the
   measurements of only two variables: the treatment and the outcome. This
   simplicity contributed to its success for clinical evidence generation.
-  
-\end{background_box_left}
-
-\begin{figure}[h!]
-  \begin{subfigure}[b]{0.5\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{img/chapter_1/sample.pdf}%
-  \end{subfigure}%
-  \caption{}\label{intro:fig:observational}
-  \begin{subfigure}[b]{0.5\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{img/chapter_1/sample_rct.pdf}%
-    \caption{}\label{intro:fig:interventional}
-  \end{subfigure}%
-  \caption{\ref{intro:fig:observational})In routine care, treatments allocation
-    is not random: priority is often given to patients that will benefit the
-    most from the intervention. \ref{intro:fig:interventional}) In
-    interventional studies, randomization ensures the comparability of treated
-    and controls on average.}\label{intro:fig:observational_vs_interventional}
-\end{figure}
-
-\begin{background_box_left}
 
   \paragraph{External validity: when RCTs insufficiently inform practices}
   % threat to external validity
@@ -913,7 +917,7 @@ benefit from innovative methods.
   \citep{deaton2020randomization}. The focus in such problems is probably
   greater in economics because situations are not well controlled:
   economic agents act outside of the laboratory. On the contrary, clinical
-  situation is closer to laboratory settings. This difference in data sources and
+  situations are closer to laboratory settings. This difference in data sources and
   methodology is visible in the divide between clinical and social epidemiology
   \citep{zielhuis2001social}. What about medico-economics ? I do not address this question in the
   present thesis, but it is a clear motivation.
@@ -1005,20 +1009,20 @@ models and interpreting their inner part as causal.
   \ref{apd:intro:ml_algorithms} details the principles of random forest and
   boosting since we are using them in the different chapters of the thesis.
 
+  \paragraph{Supervised Learning}
 
-  seeking algorithm efficiency and out-of sample predictive accuracy.
+  Statistical learning theory \citep{vapnik1999nature} is the framework behind
+  machine learning. It has been introduced in the 1960s and popularized in the
+  1990s with the developments of flexible pattern recognition models.
 
-  % ref to appendix to describe ML algorithms: at least ridge, random forest,
-  % boosting.
 
   \paragraph{Model selection: how to choose bewteen multiple potentially good models?}
 
   The need for hyper-parameters selection,
 
-  Cross-validation \citep{stone1974cross} and a textbook figure. 
+  Cross-validation \citep{stone1974cross} and a textbook figure.
 
-  %\paragraph{Pre-training}
-
+  \paragraph{Pre-training: from learning patterns to learning representations}
 
   Focus on variable selection: root in hand collected variables in carefully
   designed subpopulation ?
@@ -1039,26 +1043,43 @@ models and interpreting their inner part as causal.
 \subsection{One choice of perspective: Recent statistical learning for EHRs}%
 \label{subsec:intro:focus_data}%
 
+% EHR is highly dimensional (at least with temporality and high cardinality of categorical features)
 In this thesis, we focus on Electronic Health Records even if some of our
-results could be relevant for insurance claims as well.
-
+results could be relevant for insurance claims as well. The complexity of using
+EHRs in statistical frameworks stems from their interest to address complex
+questions in public health: they register almost all aspect of the hospital care
+trajectories. Therefore, the dimensionality of this data is very high. This is
+true for the different modalities of the EHRs: diagnoses and procedures are part
+of medical terminologies with ten of thousands of codes. Unstructured text data
+is by nature high dimensional. Finally, the temporal dimension of EHRs poses a
+challenge for statistical models, usually assuming a static vector of features
+for each statistical unit.
+% This perspective reflects the modern tendency to go to more elaborated models
+% and richer data.
+For such high dimensional data where the number of (selected) features could
+easily reach the hundreds, linear models are not strictly more interpretable
+than deep neural network \citep{lipton2018mythos}. Therefore, it is tempting to
+turn towards machine learning techniques to leverage the full potential of EHRs.
+One can hope that sufficient amount of data would allow flexible algorithm to
+detect regularities in the data and learn from them
+\citep{halevy2009unreasonable}.
 % 
-\paragraph{This perspective reflects more naturally my progression:} Learning
-statistics in the age of deep learning pushes towards adopting a view on
-statistics that consider mechanisms as generally unknown, and predictive
-accuracy as the hallmark of validity \citep{breiman2001statistical}.
+% \paragraph{This perspective reflects more naturally my progression:} Learning
+% statistics in the age of deep learning pushes towards adopting a view on
+% statistics that consider mechanisms as generally unknown, and predictive
+% accuracy as the hallmark of validity \citep{breiman2001statistical}.
+Are flexible statistical models a valid tool to answer today's questions in
+healthcare? If we are concerned in identifying which levers to pull to improve
+healthcare, we might not need to specify in our statistical models all
+mechanisms involved in the care process and its interaction with the complex EHR
+measurement system.
 
-Are flexible statistical models a valid tool to answer today's questions in healthcare?
-Artificial intelligence in medicine has a more nuanced approach to models. One
-of the main goal of AIM is \textit{to provide expert medical consultation to
-  general practitioners or paramedical personnel in communities where such
-  consultation is normally unavailable}. This practical goal balances between good
-predictive performances --low error rates-- and adoption by practitioners. The
-latter built upon trust, an aspect of interpretability that increases when
-estimator error cases are the same as human errors \citep{lipton2018mythos}.
+% A practical stance balances
+% between good predictive performances --low error rates-- and adoption by
+% practitioners. The latter built upon trust, an aspect of interpretability that
+% increases when estimator error cases are the same as human errors
+% \citep{lipton2018mythos}.
 
-For high dimensional data such as EHRs, linear models are not strictly more
-interpretable than deep neural network \citep{lipton2018mythos}.
 
 \section{What are the important questions in public health?}%
 \label{sec:intro:causality}%
@@ -2085,6 +2106,12 @@ of patient care.
 %%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
+
+\begin{citationbox}
+  What must one know a priori about an unknown functional dependency in order to
+  estimate it on the basis of observations?
+  \par\hfill -- Vladimir Vapnik, \textit{The nature of Statistical Learning Theory (2000)}
+\end{citationbox}
 
 \begin{chapterabstract}\label{sec:predictive_models:abstract}%
 
