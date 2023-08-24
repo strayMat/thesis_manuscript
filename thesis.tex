@@ -1334,7 +1334,12 @@ practice \citep{mcginnis2013best}.
 \md{develop this part}
 
 In line with this roadmap, this thesis explores the possibilities offered by
-EHRs for evaluating the effectiveness of clinical guidelines.
+EHRs for evaluating the effectiveness of medical guidelines. Formally, a
+guideline can be expressed as an action (or a series of actions) to take given a
+patient risk profile. This pair is really important and closely related to the
+practice of medicine: the practitioner see and listen to a patient, then take
+appropriate actions given its profile. A public health recommendation tries to
+guide this link between patient characteristics and intervention.
 
 \begin{background_box_left}
 
@@ -1342,12 +1347,13 @@ EHRs for evaluating the effectiveness of clinical guidelines.
   \label{subsec:intro:prediction_causation}%
 
   % Can I use plain prediction for this question?
-  Following the objective of studying guidelines, I began by using my usual
-  tools of supervised learning. In this , I followed the growing interest in
-  predictive models in healthcare reflected by the proportion of publications
-  per year in Pubmed shown in Figure \ref{fig:intro:pubmed_query}. However, when
-  looking into details the prognosis literature I was surprised to find that
-  prediction is rarely an objective per-se in healthcare.
+  Is the statistical framework an interesting entry point to answer these
+  questions? Like many others, I noticed the growing interest in predictive
+  models in healthcare.  This trend is reflected by the exponential increase in
+  the proportion of publications per year in Pubmed  shown in Figure
+  \ref{fig:intro:pubmed_query}. However, when reading into details the prognosis
+  literature I was surprised to find that prediction is rarely an objective
+  per-se.
 
   % Epidemiological books, confounding is the very first explained concept
   % \citep{rothman2012epidemiology}.
@@ -1365,27 +1371,29 @@ EHRs for evaluating the effectiveness of clinical guidelines.
   subject to slight changes in the risk model \citep{brand1976multivariate}:
   \textit{It further suggests that the strength of a particular risk factor may
     not be as important from the point of view of intervention as the ability to
-    safely and conveniently achieve even a moderate risk reduction in a large number
-    of persons.} In a foundational article on EHR, heart failure prediction is motivated by
-  aggressive interventions \citep{wu2010prediction}: \textit{heart failure could
-    potentially lead to improved outcomes through aggressive intervention, such as
-    treatment with angiotensin converting enzyme (ACE)-inhibitors or Angiotensin
-    II receptor blockers (ARBs).}. More recently, \cite{beam2018big} devise a
-  machine learning spectrum, making the distinction between algorithms requiring
-  heavy human assumptions and flexible models. But the goal of these algorithms
-  is almost always to serve \textit{decision-making}, not prediction. It is
-  clearly described by \cite{steyerberg2009applications} for diagnosis:
-  \textit{If we do a diagnostic test, we may detect an underlying disease. But
-    some diseases are not treatable, or the natural course might be very similar
-    to what is achieved with treatment.} Modeling has always been judged necessary
-  but it is only recently that pattern recognitions is pursued as an objective
-  per-se. \cite{patel2009coming} discussed the inappropriateness of the
-  unsupervised and supervised approaches: They \textit{tend to discover
-    relatively simple relationships in data and have not yet demonstrated the
-    ability to discover complex causal chains of relationships.} This make them
-  misaligned with scientific and practical objectives which are to
-  \textit{formulate and test hypotheses about how the human organism “works” in
-    health and illness}.
+    safely and conveniently achieve even a moderate risk reduction in a large
+    number of persons.} In a foundational article on EHR, heart failure prediction
+  is motivated by aggressive interventions \citep{wu2010prediction}:
+  \textit{heart failure could potentially lead to improved outcomes through
+    aggressive intervention, such as treatment with angiotensin converting enzyme
+    (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs).}. More recently,
+  \cite{beam2018big} devise a machine learning spectrum, making the distinction
+  between algorithms requiring heavy human assumptions and flexible models. But
+  the goal of these algorithms is almost always to serve
+  \textit{decision-making}, not prediction. It is clearly described by
+  \cite{steyerberg2009applications} for diagnosis: \textit{If we do a diagnostic
+    test, we may detect an underlying disease. But some diseases are not
+    treatable, or the natural course might be very similar to what is achieved
+    with treatment.} Modeling has always been judged necessary but it is only
+  recently that pattern recognitions is pursued as an objective per-se,
+  associated with a tremendous disinterest for causality as shown in Figure
+  \ref{fig:intro:pubmed_query}. \cite{patel2009coming} discussed the
+  inappropriateness of the unsupervised and supervised approaches: They
+  \textit{tend to discover relatively simple relationships in data and have not
+    yet demonstrated the ability to discover complex causal chains of
+    relationships.} This make them misaligned with scientific and practical
+  objectives which are to \textit{formulate and test hypotheses about how the
+    human organism “works” in health and illness}.
 
 \end{background_box_left}
 
@@ -1407,7 +1415,7 @@ EHRs for evaluating the effectiveness of clinical guidelines.
   % the downward trend in causality.
 
 
-  \paragraph{Causality: at the crossroads of scientific methodology}%
+  \paragraph{The central concept of causality}%
   \label{subsec:intro:causation}%
 
   The auxiliary role of prediction in healthcare calls for improving statistical
@@ -1418,7 +1426,7 @@ EHRs for evaluating the effectiveness of clinical guidelines.
 
   % causality in ML
   Causality departs from classical statistics by stressing the importance of
-  intervention: the strong correlation between an outcome and a feature is no
+  interventions: the strong correlation between an outcome and a feature is no
   evidence of a causal link between them. This central point has been depicted
   as the ladder of causation \citep{pearl2018book}: For a given set of
   observations, multiple consistent causal models exist, only one of which
@@ -1445,24 +1453,24 @@ EHRs for evaluating the effectiveness of clinical guidelines.
   \paragraph{A robust statistical framework: Neyman-rubin}%
   \label{subsec:intro:causal_framework}%
 
-  Here, I introduce briefly the statistical framework for causality. I will
+  I introduce the framework of the Potential Outcomes, which enables statistical
+  reasoning on causal treatment effects \citep{imbens_causal_2015}. I will
   progressively introduce supplementary concepts as needed in Chapters
   \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
 
-  \citep{imbens_causal_2015} enables statistical reasoning on
-  causal treatment effects: Given an outcome $Y \in \mathbb R$ (eg. mortality risk
-  or hospitalization length), function of a binary treatment $A \in \mathcal{A} =
-    \{0, 1\}$ (eg.~a medical procedure, a drug administration), and baseline
-  covariates $X \in \mathcal{X} \subset \mathbb{R}^d$, we observe the factual
-  distribution, $O = (Y(A), X, A) \sim \mathcal D = \mathbb P(y, x, a)$. However,
-  we want to model the existence of potential observations (unobserved ie.
-  counterfactual) that correspond to a different treatment. Thus we want
-  quantities on the counterfactual distribution $O^{*} = (Y(1), Y(0), X, A) \sim
-    \mathcal D^{*} = \mathbb P(y(1), y(0), x, a)$.
+  Given an outcome $Y \in \mathbb R$ (eg. mortality risk or hospitalization
+  length), function of a binary treatment $A \in \mathcal{A} = \{0, 1\}$ (eg.~a
+  medical procedure, a drug administration), and baseline covariates $X \in
+    \mathcal{X} \subset \mathbb{R}^d$, we observe the factual distribution, $O =
+    (Y(A), X, A) \sim \mathcal D = \mathbb P(y, x, a)$. However, we want to model
+  the existence of potential observations (unobserved ie. counterfactual) that
+  correspond to a different treatment. Thus we want quantities on the
+  counterfactual distribution $O^{*} = (Y(1), Y(0), X, A) \sim \mathcal D^{*} =
+    \mathbb P(y(1), y(0), x, a)$.
 
   Popular quantities of interest --estimands-- are: at the population level, the
   Average Treatment Effect
-  \begin{flalign*}
+  \begin{flalign*}\label{def:ate}
     \text{ATE} &  &
     \tau \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal D^*}[Y(1) - Y(0)];
                &  &
@@ -1474,6 +1482,14 @@ EHRs for evaluating the effectiveness of clinical guidelines.
     \tau (x) \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal{D}^\star}[Y(1) - Y(0) | X=x].
                 &  &
   \end{flalign*}
+
+  We might be tempted to equate the mean of a potential outcome to the mean of
+  the observed outcome conditionally on the treatment. However, in general:
+  $\mathbb E[Y(a)] \neq \mathbb E [Y|A=a]$. This is because the right hand side
+  reads as \emph{the expected value of Y given A =a}, thus we restrict the
+  outcome to the individuals that actually received the treatment. If this group
+  has different outcome than the other group, the equality does not hold as
+  illustrated by Figure \ref{intro:fig:observational_vs_interventional}.
 
   The statistical assumptions required to estimate these quantities from
   observational data are presented in Section
@@ -2739,7 +2755,7 @@ non-treated that are not due to the intervention
   referred as strong ignorability and necessary to assure identifiability of the
   causal estimands with observational data \citep{rubin_causal_2005}. See
   \cite{naimi2023defining} for a concise introduction for epidemiologists:
-  
+
   \begin{assumption}[Unconfoundedness]\label{assumption:ignorability}
     \begin{equation*}\label{eq:ignorability}
       \{Y(0), Y(1) \} \indep A | X
@@ -4788,12 +4804,12 @@ repartition of these mistreated patients conditionally on patient conditions.
   \renewcommand{\thesection}{\thechapter.\arabic{section}} % Include chapter letter in section numbering
   \renewcommand{\thesubsection}{\thesection.\arabic{subsection}} % Include chapter letter in subsection numbering
 
-  \chapter{Chapter \ref{chapter:intro}}\label{apd:intro}
+  \chapter{Chapter \ref{chap:intro}}\label{apd:intro}
 
   \section{Statistical models}\label{apd:intro:statistical_models}
   \subsection{Random Forests}\label{apd:intro:random_forests}
 
-  \subsection{Random Forests}\label{apd:intro:boosting}
+  \subsection{Gradient Boosting}\label{apd:intro:boosting}
 
   %\section{Causal Diagrams}\label{apd:causal_diagrams}
   \chapter{Chapter \ref{chapter:cdw}}\label{apd:cdw}
@@ -5600,9 +5616,32 @@ repartition of these mistreated patients conditionally on patient conditions.
 
     \subsection{Causal estimators: When to use which method ?}\label{apd:causal_estimators}
 
+    \paragraph{Difference in Mean, \citep{splawa1990application}}: This is the most intuitive method to
+    estimate the ATE. It processes by comparing the mean of the outcome between both populations:
+
+    \begin{equation}
+      \hat \tau_{DM} = \frac{1}{n_1} \sum_{A_i=1} Y_i(1) - \frac{1}{n_0} \sum_{A_i=0} Y_i(0)
+    \end{equation}
+
+    In the case of randomization, we have an independence between the treatment
+    and the potential outcomes: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep
+      A_{i}$. We can thus show that this estimator is unbiased, ie.
+    $\mathbb{E}[\hat \tau_{DM}] = \tau$:
+
+    \begin{align*}
+      \mathbb{E}\left[Y \mid A =1\right] & = \mathbb{E}\left[YA \mid  A=1\right]         &  & \text{Binary nature of $A$}                                       \\
+                                         & = \mathbb{E}\left[Y^{(1)}A^2 \mid  A=1\right] &  & \text{Consistency $Y_i = A_i \, Y_i^{(1)} + (1-A_i)\, Y_i^{(0)}$} \\
+                                         & = \mathbb{E}\left[Y^{(1)} \mid  A=1\right]    &  & \text{Binary nature of $A$}                                       \\
+                                         & = \mathbb{E}\left[ Y^{(1)}\right]             &  & \text{Randomization,}
+    \end{align*}
+    The same calcuation with $A=0$ give the result. Note that this result does
+    not apply to observational data, where we only have conditional
+    randomization: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep A_{i} | X_i$.
+    Thus, we should rely on more elaborated estimation strategies if the data is
+    observational.
 
     \paragraph{G-formula} also called conditional mean regression
-    \citep{wendling2018comparing}, g-computation \citep{robins1986role}, or
+    \citep{wendling2018comparing}, g-computation \citep{robins_role_1986}, or
     Q-model \citep{snowden2011implementation}. This approach is directly modeling
     the outcome, also referred to as the response surface: $\mu_{(a)}(x)
       =\mathbb{E}\left(Y \mid A=a, \mathbf{X}=x\right)$
@@ -5610,7 +5649,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     Using an outcome estimator to learn a model for the response surface $\hat
       \mu$ (eg. a linear model), the ATE estimator is an average over the n samples:
     \begin{equation}
-      \hat{\tau}_G(f) = \frac{1}{n} \sum_{i=1}^n \hat \mu(x_i, 1) - \hat \mu(x_i, 0) = \frac{1}{n} \sum_{i=1}^n \hat \mu_{(1)}(x_i) - \hat \mu_{(0)}(x_i)
+      \hat{\tau}_G(\hat \mu) = \frac{1}{n} \sum_{i=1}^n \hat \mu(x_i, 1) - \hat \mu(x_i, 0) = \frac{1}{n} \sum_{i=1}^n \hat \mu_{(1)}(x_i) - \hat \mu_{(0)}(x_i)
     \end{equation}
 
     This estimator is unbiased if the model of the conditional response surface
@@ -5618,6 +5657,22 @@ repartition of these mistreated patients conditionally on patient conditions.
       \mu_a(X) + \epsilon_a$ with $\mathbb E[\epsilon|X] = 0$. The main drawback is
     the extrapolation of the learned outcome estimator from samples with similar
     covariates X but different intervention A.
+
+    \begin{proof}[Unbiasdeness of the G-formula, \citep{robins_role_1986}]
+      Suppose, we have access to the oracle mean response surfaces $\mu_{(a)}$,
+      then the finite sample estimator is $\hat{\tau}_G(\mu) = \frac{1}{n}
+        \sum_{i=1}^n  \mu_{(1)}(x_i) -  \mu_{(0)}(x_i)$
+      \begin{align*}
+        \tau(x) & =\mathbb{E}\left[Y(1)-Y(0) \mid X=x\right]                                                   &  & \text{Definition of CATE}                      \\
+                & =\mathbb{E}\left[Y(1) \mid X=x, A=1\right]-\mathbb{E}\left[Y(0) \mid X=x, A=0\right]         &  & \text{Ignorability, eq. \ref{eq:ignorability}} \\
+                & =\mathbb{E}\left[A Y(1) \mid X=x, A=1\right]-\mathbb{E}\left[(1-A) Y(0) \mid X=x, A=0\right] &  & \text{Binary nature of A}                      \\
+                & =\mathbb{E}[Y \mid X=x, A=1]-\mathbb{E}[Y \mid X=x, A=0]                                     &  & \text{Consistency, eq. \ref{eq:consistancy}}   \\
+                & =\mathbb{E}[\hat{\tau}_G(\mu)]                                                               &  &
+      \end{align*}
+    \end{proof}
+
+    Note that without further parametric assumption on the conditional response
+    surface $\mu_{(a)}$, the asymptotic properties of this estimator are unknown.
 
     \paragraph{Propensity Score Matching (PSM)} To avoid confounding bias, the
     ignorability assumption \ref{assumption:ignorability}) requires to contrast
@@ -5656,6 +5711,39 @@ repartition of these mistreated patients conditionally on patient conditions.
     where poor overlap between treated and control is common, one can clip extreme
     weights to limit estimation instability.
 
+    \begin{proof}[Unbiasdeness of IPW, \citep{rosenbaum_central_1983}]
+      As an intermediary result, we need to show that the propensity score e is a balancing score, ie. if
+      ignorability (\ref{eq:ignorability}) holds then $\{Y(1), Y(0)\} \indep A | e(X)$.
+      Thus, need to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = \mathbb P[A=1 \mid e(X)]$
+      First remark that $\mathbb P [A=1 \mid e(X)] = e(X)$:
+      \begin{align*}
+        \mathbb P [A=1 \mid e(X)] & = \mathbb E \big[ \mathbb P [A=1 \mid X, e(X)] \mid e(X) \big ] &  & \text{Law of total expectation}              \\
+                                  & = \mathbb E \big[ \mathbb P [A=1 \mid X] \mid e(X) \big ]       &  & \text{X contains all information of e(X)}    \\
+                                  & = \mathbb E \big[ e(X) \mid e(X) \big ]                         &  & \text{by definition of the propensity score} \\
+                                  & = e(X)                                                          &  & \text{e(X) contains all information of e(X)}
+      \end{align*}
+      Thus, we only have to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = e(X)$:
+      \begin{align*}
+        \mathbb P[A=1 \mid Y(1), Y(0), e(X)] & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X, e(X)] \mid  Y(1), Y(0), e(X) \big] &  & \text{Law of total expectation}                            \\
+                                             & = \mathbb E \big[\mathbb P[A=1 \mid X] \mid  Y(1), Y(0), e(X) \big]                   &  & \text{ignorability and X contains all information of e(X)} \\
+                                             & = \mathbb E \big[ e(X) \mid \mid  Y(1), Y(0), e(X) \big ]                             &  & \text{by definition of the propensity score}               \\
+                                             & = e(X) \text{e(X) contains all information of e(X)}
+      \end{align*}
+
+      Suppose that we have access to the oracle propensity score $e$, then the
+      finite sample estimator is $\hat{\tau}_{IPW}(e)=\frac{1}{n} \sum_{i=1}^{n}
+        \frac{A_{i} Y_{i}}{e\left(X_{i}\right)}-\frac{(1-A_{i})
+        Y_{i}}{1-e\left(X_{i}\right)}$.
+
+      \begin{align*}
+        \mathbb E \big[\frac{A Y}{e(X)}] & =\mathbb E \big[\frac{A^2 Y(1)}{e(X)}\big]                                                  &  & \text{Consistency, eq. \ref{eq:consistancy}}   \\
+                                         & =\mathbb E \big[\frac{A^2 Y(1)}{e(X)}\big]                                                  &  & \text{Binary nature of A}                      \\
+                                         & =\mathbb E \big[\mathbb E \big[\frac{A Y(1)}{e(X)}|e(X)\big]\big]                           &  & \text{Law of total expectation}                \\
+                                         & =\mathbb E \big[\mathbb E \big[\frac{A}{e(X)}|e(X)\big] \mathbb E \big[Y(1)|e(X)\big] \big] &  & \text{Ignorability and e is a balancing score} \\
+                                         & =\mathbb E[Y(1)]                                                                            &  & \text{since} e(X)=\mathbb P[A=1|X]
+      \end{align*}
+      Doing the same calculation for $A=0$ gives the result.
+    \end{proof}
 
     \paragraph{Doubly Robust Learning, DRL} also called Augmented Inverse
     Probability Weighting (AIPW) \citep{robins1994estimation}.
