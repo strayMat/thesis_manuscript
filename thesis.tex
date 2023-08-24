@@ -102,7 +102,7 @@
 \colorlet{T}{Gray}
 
 \definecolor{green_error}{rgb}{0.2,0.5,.3}
-\definecolor{purple_error}{rgb}{99,0,60}
+\definecolor{purple_error}{rgb}{151, 104, 209}
 \definecolor{red_error}{rgb}{.647,.129,.149}
 
 \definecolor{Prune}{RGB}{151, 104, 209}
@@ -413,7 +413,7 @@
   %**  CHANGER L'IMAGE PAR DÉFAUT **
   %*****************************************************
   \vspace{-10mm} % à ajuster en fonction de la hauteur du logo
-  \flushright \includegraphics[scale=1]{img/logo2.png}
+  %\flushright \includegraphics[scale=1]{img/logo2.png}
 
 
 
@@ -422,7 +422,7 @@
   %******************** TITRE **************************
   %*****************************************************
   \flushright
-  \vspace{10mm} % à régler éventuellement
+  \vspace{25mm} % à régler éventuellement, avec le bandeau logo2, c'était 10mm
   \color{Prune}
   \fontfamily{cmss}\fontseries{m}\fontsize{22}{26}\selectfont
   Représentations et
@@ -1206,15 +1206,15 @@ measurement system.
 \subsection{The promises of RWD: what pressing needs to use health data}
 
 Recent surge in the collection of RWD are drawing increasing attention from many
-actors. Optimism on the promises of healthcare data are shared by
-epidemiologists \citep{mooney2015epidemiology,hernan2016using}, AIM researchers
-\citep{schwartz1987artificial, yu2018artificial}, clinical medicine
-\citep{schwalbe2020artificial,dzau2023anticipating}, industry
-\citep{pfizer2019rwd,iqvia2023rwd} and government bodies
-\citep{mcginnis2013best,fda_real_2018,ema2023rwd}. New journals such as the
-\emph{NEJM AI}\footnote{\url{https://ai.nejm.org/}} \citep{beam_2023} at the
-intersection between algorithmic advances and clinical practices demonstrates
-the sustained interest in leveraging RWD for improving healthcare.
+actors. Optimism on the promises of healthcare data is shared by epidemiologists
+\citep{mooney2015epidemiology,hernan2016using}, AIM researchers
+\citep{schwartz1987artificial, yu2018artificial}, clinical researchers
+\citep{schwalbe2020artificial,dzau2023anticipating}, the industry
+\citep{pfizer2019rwd,iqvia2023rwd} and the government bodies
+\citep{mcginnis2013best,fda_real_2018,ema2023rwd}. New scientific journals such
+as the \emph{NEJM AI}\footnote{\url{https://ai.nejm.org/}} \citep{beam_2023} at
+the intersection between algorithmic advances and clinical practices
+demonstrates the sustained interest in leveraging RWD for improving healthcare.
 
 Drawing a full picture of these expectations would be over-ambitious and
 partial. But I think it is relevant to disentangle them in order to delimitate
@@ -5634,7 +5634,7 @@ repartition of these mistreated patients conditionally on patient conditions.
                                          & = \mathbb{E}\left[Y^{(1)} \mid  A=1\right]    &  & \text{Binary nature of $A$}                                       \\
                                          & = \mathbb{E}\left[ Y^{(1)}\right]             &  & \text{Randomization,}
     \end{align*}
-    The same calcuation with $A=0$ give the result. Note that this result does
+    The same calculation with $A=0$ give the result. Note that this result does
     not apply to observational data, where we only have conditional
     randomization: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep A_{i} | X_i$.
     Thus, we should rely on more elaborated estimation strategies if the data is
@@ -5658,7 +5658,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     the extrapolation of the learned outcome estimator from samples with similar
     covariates X but different intervention A.
 
-    \begin{proof}[Unbiasdeness of the G-formula, \citep{robins_role_1986}]
+    \begin{proof}[Unbiasdness of the G-formula, \citep{robins_role_1986}]
       Suppose, we have access to the oracle mean response surfaces $\mu_{(a)}$,
       then the finite sample estimator is $\hat{\tau}_G(\mu) = \frac{1}{n}
         \sum_{i=1}^n  \mu_{(1)}(x_i) -  \mu_{(0)}(x_i)$
@@ -5711,7 +5711,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     where poor overlap between treated and control is common, one can clip extreme
     weights to limit estimation instability.
 
-    \begin{proof}[Unbiasdeness of IPW, \citep{rosenbaum_central_1983}]
+    \begin{proof}[Unbiasdness of IPW, \citep{rosenbaum_central_1983}]
       As an intermediary result, we need to show that the propensity score e is a balancing score, ie. if
       ignorability (\ref{eq:ignorability}) holds then $\{Y(1), Y(0)\} \indep A | e(X)$.
       Thus, need to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = \mathbb P[A=1 \mid e(X)]$
