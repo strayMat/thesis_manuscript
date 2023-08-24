@@ -1420,25 +1420,36 @@ EHRs for evaluating the effectiveness of clinical guidelines.
   Causality departs from classical statistics by stressing the importance of
   intervention: the strong correlation between an outcome and a feature is no
   evidence of a causal link between them. This central point has been depicted
-  as the ladder of causation \citep{pearl2018book}: For a given statistical
-  model, we can find multiple consistent causal models, only one of which
-  correctly reflects the reality. 
-  % find a good medical example (otherwise look into Peter jonas's book or \cite[chapter~36]{murphy2022probabilistic}).
+  as the ladder of causation \citep{pearl2018book}: For a given set of
+  observations, multiple consistent causal models exist, only one of which
+  correctly reflects the reality. For concreteness, I transcribe the didactic
+  example from \cite{murphy2022probabilistic_chapter36}: \textit{Consider three
+    possible explanations for the association between ice cream and drowning.
+    Perhaps eating ice cream does cause people to drown—due to stomach cramps or
+    similar. Or, perhaps, drownings increase demand for ice cream—the survivors
+    eat huge quantities of ice cream to handle their grief. Or, the association
+    may be due (at least in part) to a common cause: warm weather makes people
+    more likely to eat ice cream and more likely to go swimming (and, hence, to
+    drown). Under all three scenarios, we can observe exactly the same data, but
+    the implications for an ice cream ban are very different. Hence, answering
+    questions about what will happen under an intervention requires us to
+    incorporate some causal knowledge of the world—e.g., which of these scenarios
+    is plausible?}\md{Find better than this ice cream example?}
+
   % Connexion with important questions in healthcare: 
   Causality also has connections with other important issues in healthcare such
-  as fairness \citep{plecko2022causal} or dataset shift --representativity of a
+  as fairness \citep{plecko2022causal} or dataset shift --linked to representativity of a
   dataset \citep{subbaswamy2020development}. We did not explore these aspects,
   but they motivate part of the work in Chapter \ref{chapter:causal_tuto}.
+
+  \paragraph{A robust statistical framework: Neyman-rubin}%
+  \label{subsec:intro:causal_framework}%
 
   Here, I introduce briefly the statistical framework for causality. I will
   progressively introduce supplementary concepts as needed in Chapters
   \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
 
-  \paragraph{A robust statistical framework: Neyman-rubin}%
-  \label{subsec:intro:causal_framework}%
-
-  \paragraph{The Neyman-Rubin Potential Outcomes framework}\label{par:intro:causal_framework:neyman_rubin}
-  \citep{naimi2023defining,imbens_causal_2015} enables statistical reasoning on
+  \citep{imbens_causal_2015} enables statistical reasoning on
   causal treatment effects: Given an outcome $Y \in \mathbb R$ (eg. mortality risk
   or hospitalization length), function of a binary treatment $A \in \mathcal{A} =
     \{0, 1\}$ (eg.~a medical procedure, a drug administration), and baseline
@@ -1449,14 +1460,14 @@ EHRs for evaluating the effectiveness of clinical guidelines.
   quantities on the counterfactual distribution $O^{*} = (Y(1), Y(0), X, A) \sim
     \mathcal D^{*} = \mathbb P(y(1), y(0), x, a)$.
 
-  Popular quantities of interest (estimands) are:
-  at the population level, the
+  Popular quantities of interest --estimands-- are: at the population level, the
   Average Treatment Effect
   \begin{flalign*}
     \text{ATE} &  &
     \tau \myeq \; \mathbb{E}_{Y(1),Y(0) \sim \mathcal D^*}[Y(1) - Y(0)];
                &  &
   \end{flalign*}
+  %
   at the individual level, to model heterogeneity, the Conditional Average Treatment Effect
   \begin{flalign*}
     \text{CATE} &  &
@@ -1464,9 +1475,10 @@ EHRs for evaluating the effectiveness of clinical guidelines.
                 &  &
   \end{flalign*}
 
-  \paragraph{Randomized Control Trials, the gold standard for evidence based medicine}
-
-  - Send back to appendix the Difference in Means  (in randomized experiments)
+  The statistical assumptions required to estimate these quantities from
+  observational data are presented in Section
+  \ref{subsec:causal_tuto:identification}. The common methods used for the
+  estimations are detailed in Appendix \ref{apd:causal_estimators}.
 
 \end{background_box_left}
 
@@ -1492,11 +1504,11 @@ EHRs for evaluating the effectiveness of clinical guidelines.
 % objective
 First influenced by the growing successes of machine learning in predictive
 modeling, this thesis seeks to understand what models and framework might help
-evaluating the effectiveness of clinical guidelines using Electronic Health
-Records. Which predictive models are useful ? Is prediction enough ? How these
-increase in predictive power can serve the true objective of healthcare:
-delivering appropriate treatment to each and every patient to improve her health
-\citep{cma_policy_appropriateness_2015}?
+evaluating the effectiveness of clinical guidelines using the time varying and
+high dimensional Electronic Health Records. Which predictive models are useful ?
+Why prediction is not enough ? How flexible models can serve the true
+objective of healthcare: delivering appropriate treatment to each and every
+patient to improve her health \citep{cma_policy_appropriateness_2015}?
 
 The contributions of each chapter, which are summarized below, have led to three
 articles as first-authors and one work in progress:
@@ -1519,7 +1531,21 @@ algorithms.
 This work is a specific application separated from the thesis main questions.
 Therefore it is not detailed in this manuscript.
 
-\md{summary of chapters: abstract?}
+\md{Justify the chapters and link them}
+\paragraph{Chapter \ref{chapter:cdw}: Potential and challenges of Clinical Data
+  Warehouse, a case study in France}
+
+
+\paragraph{Chapter \ref{chapter:predictive_models}: Exploring a complexity
+  gradient in representation and predictive algorithms for EHRs}
+
+
+\paragraph{Chapter \ref{chapter:causal_tuto}: Prediction is not all we need:
+  Causal thinking for decision making on EHRs}
+
+
+\paragraph{Chapter \ref{chapter:causal_model_selection}: How to select
+  predictive models for causal inference?}
 
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}%
 \label{chapter:cdw}%
@@ -2709,10 +2735,11 @@ non-treated that are not due to the intervention
   \paragraph{Causal Assumptions}\label{background:causal_assumptions}
 
   Not every question can be answered from a given dataset: valid causal
-  inference requires assumptions. We assume the following
-  four assumptions, referred as strong ignorability and necessary to assure
-  identifiability of the causal estimands with observational data
-  \citep{rubin_causal_2005}:
+  inference requires assumptions. We assume the following four assumptions,
+  referred as strong ignorability and necessary to assure identifiability of the
+  causal estimands with observational data \citep{rubin_causal_2005}. See
+  \cite{naimi2023defining} for a concise introduction for epidemiologists:
+  
   \begin{assumption}[Unconfoundedness]\label{assumption:ignorability}
     \begin{equation*}\label{eq:ignorability}
       \{Y(0), Y(1) \} \indep A | X
