@@ -779,7 +779,7 @@ benefit from innovative methods.
   \citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
   This new kind of data, not primarily collected for research has been
   designated as Real World Data (RWD) \citep{fda_real-world_2021,has_real-world_2021,kent_nice_2022}. Two major
-  sources of RWDs are insurance claims and EHRs.
+  sources of RWD are insurance claims and EHRs.
 
   \subsection{Two major routine care data collection}\label{subsec:intro:routine_data}
   \paragraph{Insurance claims: good population coverage, low granularity}%
@@ -899,7 +899,7 @@ benefit from innovative methods.
   measurements of only two variables: the treatment and the outcome. This
   simplicity contributed to its success for clinical evidence generation.
 
-  \paragraph{External validity: when RCTs insufficiently inform practices}
+  \paragraph{External validity: when RCTs insufficiently inform practices}\label{def:external_validity}
   % threat to external validity
   Interventional data are hard to collect: patients must be voluntary, without
   comorbidities, adhering to the treatment. These requirements contribute to
@@ -986,8 +986,8 @@ should describe \emph{real} mechanisms.
 Despite judging model choice as \textit{crucial to fruitful application}
 \citep{cox2006principles}, this tedious task is left to experts, that should have an
 appropriate theoretical model of the problem \citep{cox2001statistical}. This
-habit is prone to circular reasoning where a model is chosen only to justify a
-pre-specified theory. Crowdsourcing studies asking the same question to
+habit is prone to circular reasoning where a model is chosen only to justify an
+established theory. Crowdsourcing studies asking the same question to
 different teams of experts showed that the choice of model and features is far
 from consensual and yield substantially different quantitative and qualitative
 results. \cite{botvinik2020variability} attributed this dispersion to different
@@ -1006,7 +1006,7 @@ models and interpreting their inner part as causal.
 
   \subsection{The machine learning framework}\label{subsec:intro:machine_learning}
 
-  Departing from carefully designing functional forms for statistical models,
+  Departing from carefully designed functional forms of statistical models,
   algorithms emerged in the late 90s to automatically learn patterns in the
   growing body of complex data. Among them, one can cite random forests,
   gradient boosting, neural networks or support vector machines. Appendix
@@ -1019,11 +1019,9 @@ models and interpreting their inner part as causal.
   Statistical learning \citep{vapnik1999nature} is the theoretical framework
   underpinning machine learning. It has been introduced in the 1960s and
   popularized in the 1990s with the developments of flexible pattern recognition
-  models.
-
-  It is concerned with empirical risk minimization: Finding good approximation
+  models. It is concerned with empirical risk minimization: Finding good approximation
   of the features-outcome association. I recall the formal definition of the
-  regression problem here and I refer to \cite{hastie2009elements} for the
+  supervised regression problem and I refer to \cite{hastie2009elements} for the
   classification problem.
 
   Given n pairs of (features,
@@ -1036,25 +1034,32 @@ models and interpreting their inner part as causal.
   when choosing among a family of functions $f \in \mathcal{F}$, the best possible function $f^{\star}$
   minimizes the expected loss $\mathcal{E}(f^{\star})$:
 
-  $$f^{\star} = \argmin_{f \in \mathcal{F}} \mathbb{E} \big [ (\hat{y} - y)^2 \big]$$
+  \begin{equation}
+    f^{\star} = \argmin_{f \in \mathcal{F}} \mathbb{E} \big [ (\hat{y} - y)^2 \big]
+  \end{equation}
 
   In finite sample regimes, the expectation is not accessible since we only have
   access to a finite number of data pairs ${(x_i, y_i)}_{i=1..n}$. So in
   practice, we aim to minimize the empirical loss $\mathcal{E}(f^{\star})$::
-  $$\hat f = \argmin_{f \in \mathcal{F}} \sum_{i=1}^{n} \big [ (\hat{y}_{i} - y_{i})^2 \big]$$
+  \begin{equation}
+    \hat f = \argmin_{f \in \mathcal{F}} \sum_{i=1}^{n} \big [ (\hat{y}_{i} - y_{i})^2 \big]
+  \end{equation}
 
   In most interesting problems, there is some randomness involved in the $(x,y)$
   association, either due to inherent randomness or to the lack of important
-  information in x. This is modeled by assuming it independent of the features
+  information in $x$. This is modeled by assuming it independent of the features
   and with mean zero: $y = g(x) + e$, with $\mathbb E[e]=0$. The best possible estimator
   is thus $g$, yielding the Bayes error \textcolor{green_error}{$\mathcal{E}(g) =
       \mathbb{E} \big [ (g(x) + e - g(x))^2 \big]=\mathbb{E}[e^2]$}. This error
   cannot be avoided.
 
-  Finally, the generalization error of the estimator $\hat f$ can be decomposed as :
-  $$\mathcal{E}(\hat f) = \textcolor{green_error}{\mathcal{E}(g)} +
+  Finally, the generalization error of the estimator $\hat f$ can be decomposed as:
+  \begin{equation}
+    \mathcal{E}(\hat f) = \textcolor{green_error}{\mathcal{E}(g)} +
     \textcolor{purple_error}{(\mathcal{E}(f^{\star}) - \mathcal{E}(g))} +
-    \textcolor{red_error}{(\mathcal{E}(\hat{f}) - \mathcal{E}(f^{\star}))}$$
+    \textcolor{red_error}{(\mathcal{E}(\hat{f}) - \mathcal{E}(f^{\star}))}
+  \end{equation}
+
 
   The \textcolor{purple_error}{second term} is the approximation error: the difference between the best
   estimator in the family of estimator considered and the Bayes estimator. It
@@ -1071,7 +1076,7 @@ models and interpreting their inner part as causal.
 
   Choosing the best model among a family of potential estimators is done by
   comparing their performances on an unseen test dataset. If we were to evaluate a model on the same data
-  that it has been trained on, we would favor systematically flexible models
+  that it has been trained on, we would systematically favor flexible models
   that adapt better to the sampled training data. To avoid this process called
   \emph{overfitting}, the analyst should separate the data on which an estimator
   is fitted --the training set-- from the data used to chose the estimators
@@ -1115,20 +1120,21 @@ models and interpreting their inner part as causal.
   This thesis was originally motivated by studying deep representations for
   patient trajectories and their ability to transfer between healthcare
   databases. However, I progressively realized that the choice of a
-  representation loops back to the choice of a model, and hence of the measure
+  representation loops back to the choice of a model, and hence to the measure
   of performances for relevant downstream tasks. For other domains such as NLP,
-  consensus tasks such as text classification have been found to evaluate the
-  relevance of representation techniques. Aggregated in benchmarks such as GLUE
-  \citep{wang2018glue}, these tasks fueled model developments for years.
-  Recently, \cite{raji2021ai} pointed out the risk of misalignment between
-  machine learning benchmarks and research claims about a task or real world
-  objectives --what they call construct validity. This concerns is much greater
-  for RWDs since interests in using these data are fragmented--as developed in
-  the next section. Moreover, healthcare interest in pure predictive problems is
-  unclear --see Section \ref{sec:causal_tuto:motivation}. Finally, the
-  circulation of data or representations in healthcare are almost non-existent
-  for confidentiality purposes. These specific features of RWD all into question
-  the appropriateness of constructing universal representations in healthcare.
+  consensual downstream tasks such as text classification have been established
+  to evaluate the performances of representations. Aggregated in
+  benchmarks such as GLUE \citep{wang2018glue}, these tasks fueled model
+  developments for years. Recently, \cite{raji2021ai} pointed out the risk of
+  misalignment between machine learning benchmarks and research claims about a
+  task or real world objectives --what they call construct validity. This
+  concerns is much greater for RWD since interests in using these data are
+  fragmented--as developed in the next section. Moreover, healthcare interest in
+  pure predictive problems is unclear --see Section
+  \ref{sec:causal_tuto:motivation}. Finally, the circulation of data or
+  representations in healthcare are almost non-existent for confidentiality
+  purposes. These specific features of RWD all into question the appropriateness
+  of constructing universal representations in healthcare.
   % Focus on variable selection: root in hand collected variables in carefully
   % designed subpopulation ?
 
@@ -1158,7 +1164,7 @@ true for the different modalities of the EHRs: diagnoses and procedures are part
 of medical terminologies with ten of thousands of codes. Unstructured text data
 is by nature high dimensional. Finally, the temporal dimension of EHRs poses a
 challenge for statistical models, usually assuming a static vector of features
-for each statistical unit.
+for each unit.
 % This perspective reflects the modern tendency to go to more elaborated models
 % and richer data.
 For such high dimensional data where the number of (selected) features could
@@ -1252,9 +1258,9 @@ notes from several hospitals for length of stay prediction
 \citep{jiang2023health}. Hope is high that LLMs models will soon be able to help
 practitioners during consultation \citep{lee2023benefits}. The trend towards
 personalized medicine is gradually moving away from the automation of
-well-understood tasks to seek care tailored to each individual, even if the
+well-understood tasks to tailored care for individual, even if the
 mechanisms of action are poorly understood.
-\citep{mann_artificial_2022,ziegler2022high}.
+\citep{schork2015personalized, topol2019high}.
 
 \paragraph{New data for better knowledge acquisition?}
 
@@ -1266,7 +1272,7 @@ products and technologies \citep{safran_toward_2007,tuppin_value_2017}, on the
 measures of their safety \citep{wisniewski_development_2003}. They can also be
 used to assess the organizational impact of health products and technologies
 \citep{has_guide_2020,has_real-world_2021}. These descriptive usages are closer
-to the main goal of epidemiology which is \textit{to study of the distribution
+to the main goal of epidemiology: \textit{the study of the distribution
   and determinants of disease frequency} \citep{macmahon1970epidemiology}.
 
 % Monitoring and evaluation: public policy and industry, two faces of the same coin
@@ -1285,9 +1291,9 @@ between the pharmaceutical industry and regulators since drug prices are
 mainly driven by drug efficacy (assessed in trials).
 %
 There is still active debates to better understand what is the place of these
-data to develop new evidence on the effectiveness of interventions
-\citep{richesson_electronic_2013} \md{develop: schneeweiss and the replicate
-  program}.
+data to develop new evidence on the effectiveness --see
+\ref{def:external_validity} of interventions \citep{richesson_electronic_2013}
+\md{develop: schneeweiss and the replicate program}.
 % % too much
 % Industries also have a strong interest in gathering and analyzing data. For
 % market access, they need to carefully describe what population is reached by
@@ -1310,12 +1316,14 @@ In this context, public health authorities are asked to better understand what
 cares are the most effective. With constrained medical resources, efforts should
 be focused on the most effective interventions and prevent unnecessary cares.
 However, measuring the appropriateness of a care is a delicate question
-\citep{cma_policy_appropriateness_2015}. Scientific associations issue medical
-guidelines built upon the scientific literature to recommend ideal care
-trajectories. Relying on a hierarchy of evidence \citep{guyatt1995users}, these
-recommendations are strongly relying on RCTs \citep{}. In the United States, the
-Committee on Learning Healthcare System suggested to better use routine data to
-adapt evidence to real practice \citep{mcginnis2013best}. \md{develop this part}
+\citep{cma_policy_appropriateness_2015}. Scientific associations and regulators
+issue medical guidelines built upon the scientific literature to recommend ideal
+care trajectories. Relying on a hierarchy of evidence \citep{guyatt1995users},
+these recommendations are strongly relying on RCTs, raising doubts on
+their external validity. In the United States, the Committee on Learning
+Healthcare System suggested to better use routine data to adapt evidence to real
+practice \citep{mcginnis2013best}.
+\md{develop this part}
 
 In line with this roadmap, this thesis explores the possibilities offered by
 EHRs for evaluating the effectiveness of clinical guidelines.
@@ -1324,6 +1332,7 @@ EHRs for evaluating the effectiveness of clinical guidelines.
 
   \subsection{Prediction or causation?}%
   \label{subsec:intro:causation_epidemio}%
+
 
   Opening an epidemiological book, confounding is the very first explained concept
   \citep{rothman2012epidemiology}.
