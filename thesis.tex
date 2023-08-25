@@ -619,10 +619,10 @@ inference from Electronic Health Records(EHRs).
 % context 
 In the 2010's, \cite{halevy2009unreasonable} proposed to take advantages of
 regularities present in large piles of data to automatically design features
-relevant for multiple application tasks. As an example, a model trying to
-predict an image label from raw pixels progressively learns internal
-representations of natural images such as feet, faces, or hands when fitted on
-massive collections of images. These intermediary representations can be reused
+relevant for multiple application tasks. Consider a model trained to classify
+images from a massive collection of labelled pictures. During training, it
+progressively learns internal representations of natural images such as feet,
+faces, or hands. These intermediary representations can be reused
 --transferred-- to applicative tasks with different objectives such as
 predicting the severity of a traumatism from a photo. This paradigm --called
 pre-training-- has been very successful in applied domains such as computer
@@ -631,7 +631,7 @@ vision \citep{krizhevsky2012imagenet}, then Natural Language Processing (NLP)
 
 % education
 I was trained in statistics and machine learning from 2014 to 2018, precisely
-between the image and text revolutions in Artificial Intelligence. Despite
+between the image and text revolutions in artificial intelligence. Despite
 textbooks largely focused on previous flexible pattern recognition techniques,
 the fascination for deep learning made me wonder --like many other students at
 this time-- in what other fields these techniques could be successfully applied.
@@ -640,7 +640,7 @@ this time-- in what other fields these techniques could be successfully applied.
 On the other hand, being a civil servant, part of the French National Institute of
 Statistics (Institut National de la Statistique et des Etudes Economiques), I
 was also interested in the use of data for public policy. However, economics and
-econometrics taught during this formation were hardly mentioning the algorithm
+econometrics taught during my formation were hardly mentioning the algorithm
 progresses of the 2000s. Does flexible machine learning techniques, or even
 pre-training methods could help inform public policies?
 
@@ -695,7 +695,7 @@ representation or even predictive accuracy. Public services seek to understand
 the heterogeneities in healthcare consumptions: what is an appropriate care and
 how to measure it from the data \citep{cma_policy_appropriateness_2015}? This
 question is motivated by the growing necessity to adapt healthcare funding to a
-resource constraint system \citep{mcginnis2013best,aubert_2019}.
+resource-constrained system \citep{mcginnis2013best,aubert_2019}.
 
 % First questions: how useful are such wealth of data ? Is unsupervised learning
 % useful ? Is prediction a useful goal ? I was exactly in the atypical situation
@@ -717,8 +717,8 @@ The successes of machine learning in leveraging large amount of poor quality and
 weakly labelled data in NLP or computer vision have deeply impressed other
 scientific fields. Because \textit{medical practice, and biomedical research,
   [are] inherently information-management tasks} \citep{patel2009coming},
-researchers foresaw a big potential for improving healthcare in applying
-machine learning to novel data collection
+many researchers foresaw a big potential for improving healthcare in applying
+machine learning to novel data collections
 \citep{topol2019high,rajkomar2019machine}.
 
 % overview of concepts
@@ -726,11 +726,11 @@ These first experiences illustrate a tension between massive routine care data
 collections --claims or EHRs presented in Section \ref{sec:intro:data}, a new
 statistical framework --machine learning \citep{breiman2001statistical} described
 in Section \ref{sec:intro:two_cultures}, and pressing analytical questions in
-public health detailed in Section \ref{sec:intro:causality}.%
+public health --detailed in Section \ref{sec:intro:causality}.%
 
 In the following sections, I will review the new data collection mechanisms,
 highlight the different stance taken by machine learning over traditional
-statistics and precise critical questions in public health that would most
+statistics and precise critical questions in public health that could
 benefit from innovative methods.
 
 \section{The data: Electronic Health Records}\label{sec:intro:data}
