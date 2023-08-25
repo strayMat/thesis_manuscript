@@ -241,59 +241,17 @@
 }
 
 @article{athey_generalized_2019,
-  title        = {Generalized random forests},
-  volume       = {47},
-  abstract     = {We propose generalized random forests, a method for
-                  nonparametric statistical estimation based on random
-                  forests (Breiman [Mach. Learn. 45 (2001) 5–32]) that can
-                  be used to fit any quantity of interest identified as the
-                  solution to a set of local moment equations. Following the
-                  literature on local maximum likelihood estimation, our
-                  method considers a weighted set of nearby training
-                  examples; however, instead of using classical kernel
-                  weighting functions that are prone to a strong curse of
-                  dimensionality, we use an adaptive weighting function
-                  derived from a forest designed to express heterogeneity in
-                  the specified quantity of interest. We propose a flexible,
-                  computationally efficient algorithm for growing generalized
-                  random forests, develop a large sample theory for our
-                  method showing that our estimates are consistent and
-                  asymptotically Gaussian and provide an estimator for their
-                  asymptotic variance that enables valid confidence
-                  intervals. We use our approach to develop new methods for
-                  three statistical tasks: nonparametric quantile regression,
-                  conditional average partial effect estimation and
-                  heterogeneous treatment effect estimation via instrumental
-                  variables. A software implementation, grf for R and C++, is
-                  available from {CRAN}.},
-  pages        = {1148--1178},
-  number       = {2},
-  journal      = {Annals of Statistics},
-  shortjournal = {Ann. Statist.},
-  author       = {Athey, Susan and Tibshirani, Julie and Wager, Stefan},
-  date         = {2019-04}
+  title   = {Generalized random forests},
+  volume  = {47},
+  pages   = {1148--1178},
+  number  = {2},
+  journal = {Annals of Statistics},
+  author  = {Athey, Susan and Tibshirani, Julie and Wager, Stefan},
+  date    = {2019-04}
 }
 
 @article{athey_policy_2021,
   title     = {Policy Learning with Observational Data},
-  abstract  = {In many areas, practitioners seek to use observational
-               data to learn a treatment assignment policy that satisﬁes
-               application-speciﬁc constraints, such as budget,
-               fairness, simplicity, or other functional form constraints.
-               For example, policies may be restricted to take the form of
-               decision trees based on a limited set of easily observable
-               individual characteristics. We propose a new approach to
-               this problem motivated by the theory of semiparametrically
-               eﬃcient estimation. Our method can be used to optimize
-               either binary treatments or inﬁnitesimal nudges to
-               continuous treatments, and can leverage observational data
-               where causal eﬀects are identiﬁed using a variety of
-               strategies, including selection on observables and
-               instrumental variables. Given a doubly robust estimator of
-               the causal eﬀect of assigning everyone to treatment, we
-               develop an algorithm for choosing whom to treat, and
-               establish strong guarantees for the asymptotic utilitarian
-               regret of the resulting policy.},
   author    = {Athey, Susan and Wager, Stefan},
   journal   = {Econometrica},
   volume    = {89},
@@ -821,6 +779,24 @@
   year       = {2019}
 }
 
+@article{breiman2001random,
+  title     = {Random forests},
+  author    = {Breiman, Leo},
+  journal   = {Machine learning},
+  volume    = {45},
+  pages     = {5--32},
+  year      = {2001},
+  publisher = {Springer}
+}
+
+@article{friedman2001greedy,
+  title={Greedy function approximation: a gradient boosting machine},
+  author={Friedman, Jerome H},
+  journal={Annals of statistics},
+  pages={1189--1232},
+  year={2001},
+  publisher={JSTOR}
+}
 @article{breiman2001statistical,
   title     = {Statistical modeling: The two cultures (with comments and
                a rejoinder by the author)},

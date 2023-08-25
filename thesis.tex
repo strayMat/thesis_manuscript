@@ -3429,8 +3429,6 @@ specific individuals, such as patients undergoing sceptic shock.
 
 \subsection{Extending prediction to prescription needs causality}\label{subsec:causal_model_selection:extending_prediction}
 
-\md{watchout that I did not say the same thing as in chapter 4 or introduction}
-
 \paragraph{Progress in machine learning brings predictive models to new health
   data} \citep{beam2018big,rajkomar2019machine}, with the promise of precision
 medicine. Automated analysis of medical images is increasingly accurate,
@@ -4807,9 +4805,61 @@ repartition of these mistreated patients conditionally on patient conditions.
   \chapter{Chapter \ref{chap:intro}}\label{apd:intro}
 
   \section{Statistical models}\label{apd:intro:statistical_models}
+
+  We recall briefly how trees, random forests and boosting work. For more
+  details, see \citep{hastie2009elements}.
+
+  \subsection{Trees}\label{apd:intro:trees}
+
+  Decision trees are a class of models that recursively split the feature space
+  into a set of rectangles --called nodes, and assign a constant value to each
+  rectangle. They can be use both for classification or regression. If used for
+  regression, a new split from one region into two subregions is chosen as
+  follows. Among all variable and split possibility, choose the split that
+  minimizes the error --typically the squared error-- between the average of the
+  outcomes over the two newly regions and the individual outcomes. If used for
+  classification, splits are chosen by minimizing some impurity measure of the
+  class probabilities over the two new created nodes instead of the squared
+  error. A typical impurity measure is the Gini index $\sum_{k=1}^K \hat p_{mk}
+    (1-\hat p_{mk})$ where $\hat p_{mk}$ is the empirical probability of class k
+  in node m. The complexity of a tree is determined by its maximal depth --ie,
+  the maximum number of splits before reaching a terminal node --called a leaf.
+
+  Figure \ref{fig:tree_regression} shows the example of two regression trees of
+  depth 2 and 5 on toy example.
+
+  \begin{figure}
+    \centering
+    \includegraphics{img/chapter_1/sphx_glr_plot_tree_regression_001.png}
+    \caption{Illustration of two regression tress of depth 2 and 5.\\Original
+      figure from \url{https://scikit-learn.org/stable/modules/tree.html}.}%
+    \label{fig:tree_regression}
+  \end{figure}
+
+  Trees have the advantages to have small biases and to be grown rapidly from
+  both categorical or continuous variables. However, they suffer from
+  instability and thus have high variance: Small changes in the data can yield
+  to very different series of split.
+
   \subsection{Random Forests}\label{apd:intro:random_forests}
 
+  Random forests \citep{breiman2001random} have been proposed to overcome the
+  instability of trees. A random forest averages the results of B trees grown
+  identically, thus not affecting the bias of the whole estimator. The variance
+  reduction is performed by forcing the trees to be different from each other.
+  This is achieved by introducing randomness in the tree growing procedure. At
+  each split, only a random subset of features are selected. On average, the
+  errors of each individual tree cancel each other, thus reducing the high
+  variance of each individual tree without a high increase in bias.
+
   \subsection{Gradient Boosting}\label{apd:intro:boosting}
+
+  Gradient boosting \citep{friedman2001greedy} is a method that iteratively sums
+  weak learners --typically trees-- to each other. Each new weak learner
+  improves over the errors of the previous averaged estimators. The final
+  estimator has the same form than a random forest, but require substantially
+  less trees.
+
 
   %\section{Causal Diagrams}\label{apd:causal_diagrams}
   \chapter{Chapter \ref{chapter:cdw}}\label{apd:cdw}
@@ -5724,10 +5774,12 @@ repartition of these mistreated patients conditionally on patient conditions.
       \end{align*}
       Thus, we only have to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = e(X)$:
       \begin{align*}
-        \mathbb P[A=1 \mid Y(1), Y(0), e(X)] & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X, e(X)] \mid  Y(1), Y(0), e(X) \big] &  & \text{Law of total expectation}                            \\
-                                             & = \mathbb E \big[\mathbb P[A=1 \mid X] \mid  Y(1), Y(0), e(X) \big]                   &  & \text{ignorability and X contains all information of e(X)} \\
-                                             & = \mathbb E \big[ e(X) \mid \mid  Y(1), Y(0), e(X) \big ]                             &  & \text{by definition of the propensity score}               \\
-                                             & = e(X) \text{e(X) contains all information of e(X)}
+         & \mathbb P[A=1 \mid Y(1), Y(0), e(X)]                                                  &  &                                              \\
+         & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X, e(X)] \mid  Y(1), Y(0), e(X) \big] &  & \text{Law of total expectation}              \\
+         & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X] \mid  Y(1), Y(0), e(X) \big]       &  & \text{X contains all information of e(X)}    \\
+         & = \mathbb E \big[\mathbb P[A=1 \mid X] \mid  Y(1), Y(0), e(X) \big]                   &  & \text{ignorability}                          \\
+         & = \mathbb E \big[ e(X) \mid  Y(1), Y(0), e(X) \big ]                                  &  & \text{by definition of the propensity score} \\
+         & = e(X)                                                                                &  & \text{e(X) contains all information of e(X)}
       \end{align*}
 
       Suppose that we have access to the oracle propensity score $e$, then the
