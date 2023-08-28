@@ -64,6 +64,17 @@
 \usepackage[right]{lineno}
 \usepackage[nopatch=eqnum]{microtype}
 \usepackage{lscape} % landscape pages
+% colors: important to import before tikz
+\usepackage[dvipsnames]{xcolor} 
+%highlighting
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{tikzmark}
+\usetikzlibrary{calc}
+\newcommand{\highlight}[2]{\colorbox{#1!17}{$\displaystyle #2$}}
+\renewcommand{\highlight}[2]{\colorbox{#1!17}{#2}}
+
 % Define some commands for table
 \newcolumntype{+}{!{\vrule width 2pt}}
 % create \thickcline for thick horizontal lines of variable length
@@ -94,16 +105,15 @@
 %\usepackage[ruled, linesnumbered, fillcomment]{algorithm2e}
 
 % color commands
-\usepackage[dvipsnames]{xcolor} % colors
 \colorlet{P}{ForestGreen}
 \colorlet{I}{MidnightBlue}
 \colorlet{C}{YellowOrange}
 \colorlet{O}{DarkOrchid}
 \colorlet{T}{Gray}
 
-\definecolor{green_error}{rgb}{0.2,0.5,.3}
-\definecolor{purple_error}{rgb}{151, 104, 209}
-\definecolor{red_error}{rgb}{.647,.129,.149}
+\colorlet{bayes_error}{purple}
+\colorlet{approximation_error}{Orchid}
+\colorlet{estimation_error}{SeaGreen}
 
 \definecolor{Prune}{RGB}{151, 104, 209}
 \definecolor{light_grey}{rgb}{0.3,.3,.3}
@@ -612,7 +622,7 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 My thesis work has been strongly shaped by the current machine learning
 landscape and my first experiences with healthcare data. An overview of these
 circumstances should be helpful to understand why I became interested in
-inference from Electronic Health Records(EHRs).
+inference from Electronic Health Records (EHRs).
 
 \subsection{Learning statistics during the Natural Language Processing revolution}
 
@@ -638,7 +648,7 @@ this time-- in what other fields these techniques could be successfully applied.
 
 % public policy
 On the other hand, being a civil servant, part of the French National Institute of
-Statistics (Institut National de la Statistique et des Etudes Economiques), I
+Statistics and Economics (Institut National de la Statistique et des Etudes Economiques), I
 was also interested in the use of data for public policy. However, economics and
 econometrics taught during my formation were hardly mentioning the algorithm
 progresses of the 2000s. Does flexible machine learning techniques, or even
@@ -663,7 +673,7 @@ relying on neural networks \citep{dernoncourt2017identification,
 
 % apport
 I realized that routine care data was not a familiar material for medical
-research. Anchored in an engineering team and NLP researchers, I linked this
+research. Influenced by a circle of engineers and NLP researchers, I linked this
 fact to the novel complexity and scale of the data collection process, both
 requiring innovating tools. It is only when arriving at the Health Authority of
 Health that I realized the difference of nature between experimental and
@@ -685,17 +695,18 @@ challenging due to the high number of different medical events used in this
 data.%
 
 Sequences of claim events can be viewed as a sequence of tokens, just as natural
-sentences. Inspired by NLP techniques, I created distributed representations of
-medical concepts replicating \cite{beam2019clinical} (reported in Figure
-\ref{fig:tsne_plots:snds}). The relationships between events captured by these
-low dimensional were strikingly close to known associations. But I was
-frustrated with my inability to find a downstream utility of such
-representations. Public health policy is not concerned with knowledge
-representation or even predictive accuracy. Public services seek to understand
-the heterogeneities in healthcare consumptions: what is an appropriate care and
-how to measure it from the data \citep{cma_policy_appropriateness_2015}? This
-question is motivated by the growing necessity to adapt healthcare funding to a
-resource-constrained system \citep{mcginnis2013best,aubert_2019}.
+sentences. Inspired by NLP techniques, I created low dimensional representations
+--embeddings-- of medical concepts replicating \cite{beam2019clinical} (see an
+overview of these representations in Figure \ref{fig:tsne_plots:snds}). The
+relationships between events captured by these embeddings were strikingly
+close to known associations. But I was frustrated with my inability to find a
+downstream utility of such representations. Public health policy is not
+concerned with knowledge representation or even predictive accuracy. Public
+services seek to understand the heterogeneities in healthcare consumptions: what
+is an appropriate care and how to measure it from the data
+\citep{cma_policy_appropriateness_2015}? This question is motivated by the
+growing necessity to adapt healthcare funding to a resource-constrained system
+\citep{mcginnis2013best,aubert_2019}.
 
 % First questions: how useful are such wealth of data ? Is unsupervised learning
 % useful ? Is prediction a useful goal ? I was exactly in the atypical situation
@@ -745,16 +756,17 @@ benefit from innovative methods.
   The gold standard for generating new evidence in healthcare are Random Control
   Trials (RCTs). Based on the randomization of patients to a treatment or
   control group, the data collection is designed for one experiment, addressing
-  one precise research question. RCTs are at the core of the \emph{evidence
-    based medicine}, that supersede randomized experiments over natural
-  --uncontrolled-- experiments or expert opinions in a hierarchy of evidence
-  \citep{guyatt1995users}. Their methodology has been shaped by the large-scale
-  International Studies of Infarct Survival (ISIS) trials
-  \citep{isis1_randomised_1986}. Two other research data collections are cohorts
-  --any designated group of individuals followed or traced over a period of time
-  \citep{porta2014dictionary}-- and registry --covering exhaustively a well
-  defined clinical population. All these types of data are costly to collect and
-  most of the time cover small samples of carefully selected patients.
+  one precise research question. RCTs are at the heart of \emph{evidence-based
+  medicine}, which promotes a hierarchy of evidence in which randomized
+  experiments are superior to natural --uncontrolled-- experiments or expert
+  opinion \citep{guyatt1995users}. The modern trial methodology has been shaped
+  by the large-scale International Studies of Infarct Survival (ISIS)
+  experiments \citep{isis1_randomised_1986}. Two other common research data
+  collections are cohorts --any designated group of individuals followed or
+  traced over a period of time \citep{porta2014dictionary}-- and registry
+  --covering exhaustively a well defined clinical population. All these types of
+  data are costly to collect and most of the time cover small samples of
+  carefully selected patients.
 
   % Historically, the first RCT dates back to 1747 when
   % James Lind (\cite{dunn_james_1997}), used the idea to identify the treatment
@@ -1017,68 +1029,21 @@ models and interpreting their inner part as causal.
   Departing from carefully designed functional forms of statistical models,
   algorithms emerged in the late 90s to automatically learn patterns in the
   growing body of complex data. Among them, one can cite random forests,
-  gradient boosting, neural networks or support vector machines. Appendix
-  \ref{apd:intro:statistical_models} details the principles of random forest and
-  gradient boosting since we are using them in different chapters of this
-  thesis.
+  gradient boosting, neural networks or support vector machines.
 
   \paragraph{Supervised learning}
 
   Statistical learning \citep{vapnik1999nature} is the theoretical framework
   underpinning machine learning. It has been introduced in the 1960s and
   popularized in the 1990s with the developments of flexible pattern recognition
-  models. It is concerned with empirical risk minimization: Finding good approximation
-  of the features-outcome association. I recall the formal definition of the
-  supervised regression problem and I refer to \cite{hastie2009elements} for the
-  classification problem.
-
-  Given n pairs of (features,
-  outcome) noted $(x, y) \in \mathcal X \times \mathcal{Y}$ identically and
-  independently distributed (i.i.d) , the goal is to find a function $f:
-    \mathcal{X} \rightarrow \mathcal{Y}$ that approximates the true value of $y$
-  ie. $f(x) \approx y$. One need to define a loss function $\ell$ that define
-  proximity between the predicted value $\hat{y} = f(x)$ and the true value
-  $y$. Usually, for continuous outcomes, the squared loss is used. Finally,
-  when choosing among a family of functions $f \in \mathcal{F}$, the best possible function $f^{\star}$
-  minimizes the expected loss $\mathcal{E}(f^{\star})$:
-
-  \begin{equation}
-    f^{\star} = \argmin_{f \in \mathcal{F}} \mathbb{E} \big [ (\hat{y} - y)^2 \big]
-  \end{equation}
-
-  In finite sample regimes, the expectation is not accessible since we only have
-  access to a finite number of data pairs ${(x_i, y_i)}_{i=1..n}$. So in
-  practice, we aim to minimize the empirical loss $\mathcal{E}(f^{\star})$::
-  \begin{equation}
-    \hat f = \argmin_{f \in \mathcal{F}} \sum_{i=1}^{n} \big [ (\hat{y}_{i} - y_{i})^2 \big]
-  \end{equation}
-
-  In most interesting problems, there is some randomness involved in the $(x,y)$
-  association, either due to inherent randomness or to the lack of important
-  information in $x$. This is modeled by assuming it independent of the features
-  and with mean zero: $y = g(x) + e$, with $\mathbb E[e]=0$. The best possible estimator
-  is thus $g$, yielding the Bayes error \textcolor{green_error}{$\mathcal{E}(g) =
-      \mathbb{E} \big [ (g(x) + e - g(x))^2 \big]=\mathbb{E}[e^2]$}. This error
-  cannot be avoided.
-
-  Finally, the generalization error of the estimator $\hat f$ can be decomposed as:
-  \begin{equation}
-    \mathcal{E}(\hat f) = \textcolor{green_error}{\mathcal{E}(g)} +
-    \textcolor{purple_error}{(\mathcal{E}(f^{\star}) - \mathcal{E}(g))} +
-    \textcolor{red_error}{(\mathcal{E}(\hat{f}) - \mathcal{E}(f^{\star}))}
-  \end{equation}
+  models. It is concerned with empirical risk minimization: Finding good
+  approximation of the features-outcome association. Appendix
+  \ref{apd:intro:statistical_learning} recalls the formal definition of the
+  supervised regression problem. Appendix \ref{apd:intro:statistical_models}
+  details the principles of random forest and gradient boosting since we are
+  using them in different chapters of this thesis.
 
 
-  The \textcolor{purple_error}{second term} is the approximation error: the difference between the best
-  estimator in the family of estimator considered and the Bayes estimator. It
-  decreases for larger $\mathcal{F}$.
-
-  The \textcolor{red_error}{third term} is the estimation error related to the
-  sampling noise of the data. It decreases with raising n --if we have a lot of
-  data points. It increases for larger $\mathcal{F}$. This decomposition
-  highlights the choice of a practitioner for applying regression: she must
-  choose a function class $\mathcal{F}$ flexible enough to avoid underfitting
-  the data but restrictive enough to avoid a high estimation error.
 
   \paragraph{Model selection: how to choose between multiple promising models?}
 
@@ -1317,8 +1282,9 @@ The \emph{Coming revolution In Medicine} is described by
   the physician's time as increasing numbers of individuals began to demand
   quality medical care.} Fifty years later, the same preoccupations are
 destabilizing healthcare systems in rich countries: increasing costs
-\citep{data_oecd_health_spending}, vast amount of new knowledge, geographic
-disparities and lack of trained physicians.
+\citep{data_oecd_health_spending}, knowledge producted too rapidly for a single
+human \citep{mcginnis2013best}, geographic disparities and lack of trained
+physicians \citep{anguis2021quelle,aamc2021}.
 
 In this context, public health authorities are asked to better understand what
 cares are the most effective. With constrained medical resources, efforts should
@@ -4806,6 +4772,60 @@ repartition of these mistreated patients conditionally on patient conditions.
   \renewcommand{\thesubsection}{\thesection.\arabic{subsection}} % Include chapter letter in subsection numbering
 
   \chapter{Chapter \ref{chap:intro}}\label{apd:intro}
+
+  \section{Statistical learning theory}\label{apd:intro_statistical_learning}
+
+  I recall here the formal definition of the regression problem in statistical
+  learning and I refer to \cite{hastie2009elements} for the classification
+  problem.
+
+  Given n pairs of (features,
+  outcome) noted $(x, y) \in \mathcal X \times \mathcal{Y}$ identically and
+  independently distributed (i.i.d) , the goal is to find a function $f:
+    \mathcal{X} \rightarrow \mathcal{Y}$ that approximates the true value of $y$
+  ie. $f(x) \approx y$. One need to define a loss function $\ell$ that define
+  proximity between the predicted value $\hat{y} = f(x)$ and the true value
+  $y$. Usually, for continuous outcomes, the squared loss is used. Finally,
+  when choosing among a family of functions $f \in \mathcal{F}$, the best possible function $f^{\star}$
+  minimizes the expected loss $\mathcal{E}(f^{\star})$:
+
+  \begin{equation}
+    f^{\star} = \argmin_{f \in \mathcal{F}} \mathbb{E} \big [ (\hat{y} - y)^2 \big]
+  \end{equation}
+
+  In finite sample regimes, the expectation is not accessible since we only have
+  access to a finite number of data pairs ${(x_i, y_i)}_{i=1..n}$. So in
+  practice, we aim to minimize the empirical loss $\mathcal{E}(f^{\star})$::
+  \begin{equation}
+    \hat f = \argmin_{f \in \mathcal{F}} \sum_{i=1}^{n} \big [ (\hat{y}_{i} - y_{i})^2 \big]
+  \end{equation}
+
+  In most interesting problems, there is some randomness involved in the $(x,y)$
+  association, either due to inherent randomness or to the lack of important
+  information in $x$. This is modeled by assuming it independent of the features
+  and with mean zero: $y = g(x) + e$, with $\mathbb E[e]=0$. The best possible estimator
+  is thus $g$, yielding the Bayes error \highlight{bayes_error}{\color{black} $\mathcal{E}(g) =
+      \mathbb{E} \big [ (g(x) + e - g(x))^2 \big]=\mathbb{E}[e^2]$}. This error
+  cannot be avoided.
+
+  Finally, the generalization error of the estimator $\hat f$ can be decomposed as:
+  \begin{equation}
+    \mathcal{E}(\hat f) = \highlight{bayes_error}{\color{black} $\mathcal{E}(g)$} +
+    \highlight{approximation_error}{$(\mathcal{E}(f^{\star}) - \mathcal{E}(g))$} +
+    \highlight{estimation_error}{$(\mathcal{E}(\hat{f}) - \mathcal{E}(f^{\star}))$}
+  \end{equation}
+
+
+  The \highlight{approximation_error}{second term} is the approximation error: the difference between the best
+  estimator in the family of estimator considered and the Bayes estimator. It
+  decreases for larger $\mathcal{F}$.
+
+  The \highlight{estimation_error}{third term} is the estimation error related to the
+  sampling noise of the data. It decreases with raising n --if we have a lot of
+  data points. It increases for larger $\mathcal{F}$. This decomposition
+  highlights the choice of a practitioner for applying regression: she must
+  choose a function class $\mathcal{F}$ flexible enough to avoid underfitting
+  the data but restrictive enough to avoid a high estimation error.
 
   \section{Statistical models}\label{apd:intro:statistical_models}
 
