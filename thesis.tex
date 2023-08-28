@@ -141,7 +141,7 @@
 \colorlet{GRAY}{Gray}
 
 % bibliography
-\usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber]{biblatex}
+\usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber,uniquename=false,uniquelist=false]{biblatex}
 % separators for bib
 \DeclareDelimFormat{finalnamedelim}{\addsemicolon\space}
 \DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space}
@@ -1065,7 +1065,7 @@ models and interpreting their inner part as causal.
   Note, that despite being valid for model selection --choosing the best model,
   cross-validation yields biased estimates to evaluate a given model
   \citep{wager2020cross}. Nested cross-validation has been proposed as a simple
-  way to perform this final model evaluation \citep{varoquaux2017assessingq}.
+  way to perform this final model evaluation \citep{varoquaux2017assessing}.
 
 \end{background_box_left}
 
@@ -1085,19 +1085,20 @@ models and interpreting their inner part as causal.
   % what is it
   As of 2012, the success of deep neural networks in computer vision
   \citep{krizhevsky2012imagenet}, sparkled interest for representation learning.
-  Grounded in information theory, representations are low dimensional features
-  of the raw data that capture \emph{useful information}. A good representation
-  should keep information on the output $y$ and loose non-useful information in
-  the input $x$, making it robust to noise: I refer to
+  Grounded in information theory, this subfield of machine learning is concerned
+  in automatically building low dimensional features from raw data that capture
+  \emph{useful information} \citep{bengio2013representation}. A good
+  representation should keep information on the output $y$ and loose non-useful
+  information in the input $x$, making it robust to noise: I refer to
   \cite{achille2018emergence} for a detailed formalization. This definition of
   usefulness highlights the need to find pretext tasks to supervise the learning
   of representations. For example, in computer vision, the pretext task is to
-  labels coarse classes of images (eg. dog, cat, container, ...). In NLP, the
+  label coarse classes of images (eg. dog, cat, container, ...). In NLP, the
   pretext task is to predict randomly masked world in a text. These tasks should
-  be weakly-supervised in the sense that they do not require human annotation.
-  The learned representations are then used as input to a supervised task such
-  as classification or regression, which is hopefully not too different from the
-  pretext task. \md{refine this part.}
+  be weakly-supervised in the sense that they do not require human annotations.
+  The learned representations are then used as input to a supervised task, which
+  should be close enough from the pretext task to leverage information retained
+  during pre-training.
 
   % Why am I not doing this
   This thesis was originally motivated by studying deep representations for
@@ -1106,18 +1107,18 @@ models and interpreting their inner part as causal.
   representation loops back to the choice of a model, and hence to the measure
   of performances for relevant downstream tasks. For other domains such as NLP,
   consensual downstream tasks such as text classification have been established
-  to evaluate the performances of representations. Aggregated in
-  benchmarks such as GLUE \citep{wang2018glue}, these tasks fueled model
-  developments for years. Recently, \cite{raji2021ai} pointed out the risk of
-  misalignment between machine learning benchmarks and research claims about a
-  task or real world objectives --what they call construct validity. This
-  concerns is much greater for RWD since interests in using these data are
-  fragmented--as developed in the next section. Moreover, healthcare interest in
-  pure predictive problems is unclear --see Section
-  \ref{sec:causal_tuto:motivation}. Finally, the circulation of data or
-  representations in healthcare are almost non-existent for confidentiality
-  purposes. These specific features of RWD all into question the appropriateness
-  of constructing universal representations in healthcare.
+  to evaluate the performances of representations. Aggregated in benchmarks such
+  as GLUE \citep{wang2018glue}, these tasks fueled model developments for years.
+  Recently, \cite{raji2021ai} pointed out the risk of misalignment between
+  machine learning benchmarks and research claims about a task or real world
+  objectives --what they call construct validity. This criticism is also pertinent
+  for RWD since interests in using these data are fragmented --as developed in
+  the next section. Moreover, healthcare interest in pure predictive problems is
+  unclear --see Section \ref{sec:causal_tuto:motivation}. Finally, the
+  circulation of data or representations in healthcare are almost non-existent
+  for confidentiality purposes. These specific features of RWD call into
+  question the appropriateness of constructing universal representations in
+  healthcare.
   % Focus on variable selection: root in hand collected variables in carefully
   % designed subpopulation ?
 
@@ -1138,25 +1139,21 @@ models and interpreting their inner part as causal.
 \label{subsec:intro:focus_data}%
 
 % EHR is highly dimensional (at least with temporality and high cardinality of categorical features)
-In this thesis, we focus on EHRs, even if some of our
-results could be relevant for insurance claims as well. The complexity of using
-EHRs in statistical frameworks stems from their interest to address complex
-questions in public health: they register almost all aspect of the hospital care
-trajectories. Therefore, the dimensionality of this data is very high. This is
-true for the different modalities of the EHRs: diagnoses and procedures are part
-of medical terminologies with ten of thousands of codes. Unstructured text data
-is by nature high dimensional. Finally, the temporal dimension of EHRs poses a
-challenge for statistical models, usually assuming a static vector of features
-for each unit.
+In this thesis, we focus on EHRs, even if some of our results could be relevant
+for insurance claims as well. The complexity of using EHRs in statistical
+frameworks is linked with their potential to address complex questions in public
+health: they register almost all aspect of the hospital care trajectories.
+Therefore, the dimensionality of EHRs data is high: diagnoses, laboratory
+measurements and procedures are logged with medical terminologies having ten of
+thousands of codes; unstructured text data is by nature high dimensional.
+Finally, the temporal dimension of EHRs poses a challenge for statistical
+models, usually assuming a static vector of features for each unit.
 % This perspective reflects the modern tendency to go to more elaborated models
 % and richer data.
 For such high dimensional data where the number of (selected) features could
 easily reach the hundreds, linear models are not strictly more interpretable
 than deep neural network \citep{lipton2018mythos}. Therefore, it is tempting to
 turn towards machine learning techniques to leverage the full potential of EHRs.
-One can hope that sufficient amount of data would allow flexible algorithm to
-detect regularities in the data and learn from them
-\citep{halevy2009unreasonable}.
 % 
 % \paragraph{This perspective reflects more naturally my progression:} Learning
 % statistics in the age of deep learning pushes towards adopting a view on
@@ -1166,7 +1163,9 @@ Are flexible statistical models a valid tool to answer today's questions in
 healthcare? If we are concerned in identifying which levers to pull to improve
 healthcare, we might not need to specify in our statistical models all
 mechanisms involved in the care process and its interaction with the complex EHR
-measurement system.
+measurement system. One can hope that sufficient amount of data would allow flexible algorithm to
+detect useful regularities in the data and learn from them
+\citep{halevy2009unreasonable}.
 
 % A practical stance balances
 % between good predictive performances --low error rates-- and adoption by
@@ -1180,16 +1179,16 @@ measurement system.
 
 \subsection{The promises of RWD: what pressing needs to use health data}
 
-Recent surge in the collection of RWD are drawing increasing attention from many
-actors. Optimism on the promises of healthcare data is shared by epidemiologists
-\citep{mooney2015epidemiology,hernan2016using}, AIM researchers
+The recent increase in RWD collection is attracting the attention of many
+players. The optimism on the promises of healthcare data is shared by
+epidemiologists \citep{mooney2015epidemiology,hernan2016using}, AIM researchers
 \citep{schwartz1987artificial, yu2018artificial}, clinical researchers
 \citep{schwalbe2020artificial,dzau2023anticipating}, the industry
-\citep{pfizer2019rwd,iqvia2023rwd} and the government bodies
+\citep{pfizer2019rwd,iqvia2023rwd} and government bodies
 \citep{mcginnis2013best,fda_real_2018,ema2023rwd}. New scientific journals such
 as the \emph{NEJM AI}\footnote{\url{https://ai.nejm.org/}} \citep{beam_2023} at
 the intersection between algorithmic advances and clinical practices
-demonstrates the sustained interest in leveraging RWD for improving healthcare.
+demonstrate the sustained interest in leveraging RWD for improving healthcare.
 
 Drawing a full picture of these expectations would be over-ambitious and
 partial. But I think it is relevant to disentangle them in order to delimitate
