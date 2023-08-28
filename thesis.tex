@@ -952,7 +952,7 @@ benefit from innovative methods.
   medicine paradigm --also coined as precision medicine. Originally anchored into
   genomics, this concept tries to take individual variability into account for
   tailored treatment recommendations \citep{schork2015personalized,
-  topol2019high}.
+    topol2019high}.
 
   % RL  
   In sequential decision making problems, heterogeneity of
@@ -979,12 +979,12 @@ benefit from innovative methods.
 predominant community at the time focused on models, and an emerging trend that
 rely only on predictive accuracy. The latter is now called machine learning.
 
-\subsection{Model-based statistics: oracle experts}%
+\subsection{Model-based statistics: oracle domain experts}%
 \label{subsec:intro:biostatistics_framework}
 
 % focus of biostats and epidemiology on models
-Biostatistics puts a strong emphasis on model specification and interprets their
-parameters as valid nature constructs \citep{cox2001statistical}. Maybe because
+Biostatistics puts a strong emphasis on model specification, often interpreting
+model parameters as valid nature constructs \citep{cox2001statistical}. Maybe because
 epidemiology seek to estimate causes and effects, it also favors the model-based
 culture as one can judge from textbooks \citep{rothman2012epidemiology}:
 \textit{In many epidemiological applications, it is the choice among effect
@@ -992,8 +992,8 @@ culture as one can judge from textbooks \citep{rothman2012epidemiology}:
 medical journals, Cox model for survival data and logistic regression for binary
 outcomes have been the standard for publication. %
 % why simple models ? because they are simpple
-Jumpig from explicit relations between variables in linear models to claims over
-the data is tempting. But interpretability of the model parameters is a strong
+It is tempting to link explicit relations between variables in linear models to
+claims over the data. But interpretability of the model parameters is a strong
 assumption \citep{lipton2018mythos}, which relies on the well-specification of
 the model: The underlying variables and their relations built into the models
 should describe \emph{real} mechanisms.
@@ -1017,7 +1017,7 @@ from consensual and yield substantially different quantitative and qualitative
 results. \cite{botvinik2020variability} attributed this dispersion to different
 modeling choice in a crowdsourced analysis of brain imaging data by 70 teams.
 \cite{schweinsberg2021same} showed that theoretical constructs --how the
-variables are built from data-- also contribute to the heterogeneity of results.
+model input variables are defined from raw data-- also contribute to the heterogeneity of results.
 All of these studies followed the model-based culture, assuming specific linear
 models and interpreting their inner part as causal.
 
@@ -1028,9 +1028,9 @@ models and interpreting their inner part as causal.
 
 \begin{background_box_left}
 
-  \subsection{The machine learning framework}\label{subsec:intro:machine_learning}
+  \subsection{Machine learning: black-box predictive ability?}\label{subsec:intro:machine_learning}
 
-  Departing from carefully designed functional forms of statistical models,
+  Departing from carefully designed functional forms for statistical models,
   algorithms emerged in the late 90s to automatically learn patterns in the
   growing body of complex data. Among them, one can cite random forests,
   gradient boosting, neural networks or support vector machines.
@@ -1045,25 +1045,31 @@ models and interpreting their inner part as causal.
   \ref{apd:intro:statistical_learning} recalls the formal definition of the
   supervised regression problem. Appendix \ref{apd:intro:statistical_models}
   details the principles of random forest and gradient boosting since we are
-  using them in different chapters of this thesis.
+  using these two algorithms in different chapters of this thesis.
 
-
-
-  \paragraph{Model selection: how to choose between multiple promising models?}
+  \paragraph{Model selection: how to choose between multiple promising models}
 
   Choosing the best model among a family of potential estimators is done by
-  comparing their performances on an unseen test dataset. If we were to evaluate a model on the same data
-  that it has been trained on, we would systematically favor flexible models
-  that adapt better to the sampled training data. To avoid this process called
-  \emph{overfitting}, the analyst should separate the data on which an estimator
-  is fitted --the training set-- from the data used to chose the estimators
-  --the test set. To avoid data loss, cross-validation \citep{stone1974cross}
-  proceeds in multiple rounds of training and testing on the same data as
-  illustrated in Figure \ref{fig:intro:cross_validation}.
+  comparing their performances on an unseen test dataset. If we were to evaluate
+  a model on the same data that it has been trained on, we would systematically
+  favor flexible models that adapt better to the sampled training data. To avoid
+  this process called \emph{overfitting}, the analyst should separate the data
+  on which an estimator is fitted --the training set-- from the data used to
+  chose the estimators --the test set. To avoid data loss, cross-validation
+  \citep{stone1974cross} proceeds in multiple rounds of training and testing on
+  the same data as illustrated in Figure \ref{fig:intro:cross_validation}. The
+  data is divided in K folds --typically 5 to 10--. Then, each fold is part of
+  the training set K-1 time and is used once as test set. Algorithms are then
+  selected on the average performances over the K test sets.
+
+  Note, that despite being valid for model selection --choosing the best model,
+  cross-validation yields biased estimates to evaluate a given model
+  \citep{wager2020cross}. Nested cross-validation has been proposed as a simple
+  way to perform this final model evaluation \citep{varoquaux2017assessingq}.
 
 \end{background_box_left}
 
-\begin{figure}
+\begin{figure}[!b]
   \centering
   \includegraphics[width=0.8\linewidth]{img/chapter_1/cross_validation.png}
   \caption{Cross-validation: the data is split into training and testing sets.
@@ -4777,7 +4783,7 @@ repartition of these mistreated patients conditionally on patient conditions.
 
   \chapter{Chapter \ref{chap:intro}}\label{apd:intro}
 
-  \section{Statistical learning theory}\label{apd:intro_statistical_learning}
+  \section{Statistical learning theory}\label{apd:intro:statistical_learning}
 
   I recall here the formal definition of the regression problem in statistical
   learning and I refer to \cite{hastie2009elements} for the classification
