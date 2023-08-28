@@ -1199,7 +1199,7 @@ formation and public health concerns.
 %primary use
 \paragraph{Primary uses of health data focus on patient care.}
 
-EHRs are primarily used to record patients' health state and care
+EHRs are primarily used to record patients' health state and cares
 \citep{safran_toward_2007,eu_primary_2022}. This information might be shared
 within the healthcare team, but always with the goal to cary for the patient
 whose data is collected. Direct benefits to the patients are provided thanks to
@@ -1229,7 +1229,7 @@ poor analytical capacities.
 % automated consultations \citep{shortliffe1976computer}.  
 
 Recent discourse and successes are heavily influenced by this line of though,
-with the aim to automate ever more specialized parts of care: Machines read
+with the aim to automate ever more specialized parts of care. Machines read
 medical images faster and more efficiently than most practitioners
 \citep{zhou2021review}. Structured data from Electronic Health Records
 \citep{rajkomar2018scalable} or administrative databases
@@ -1240,9 +1240,8 @@ notes from several hospitals for length of stay prediction
 \citep{jiang2023health}. Hope is high that LLMs models will soon be able to help
 practitioners during consultation \citep{lee2023benefits}. The trend towards
 personalized medicine is gradually moving away from the automation of
-well-understood tasks to tailored care for individual, even if the
-mechanisms of action are poorly understood.
-\citep{schork2015personalized, topol2019high}.
+well-understood tasks to tailored individual care, where mechanisms are less
+understood \citep{schork2015personalized, topol2019high}.
 
 \paragraph{New data for better knowledge acquisition?}
 
@@ -1260,7 +1259,7 @@ to the main goal of epidemiology: \textit{the study of the distribution
 % Monitoring and evaluation: public policy and industry, two faces of the same coin
 Health Technology Assessment (HTA) agencies in many countries have conducted
 extensive work to better support the generation and use of real-life data
-\citep{has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022,fda_real-world_2021}.
+\citep{fda_real-world_2021,has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022}.
 Study programs have been launched by regulatory agencies: the DARWIN EU program
 by the European Medicines Agency and the Real World Evidence Program by the Food
 and Drug Administration \citep{fda_real_2018}. However, recent surges in data
@@ -1273,9 +1272,9 @@ between the pharmaceutical industry and regulators since drug prices are
 mainly driven by drug efficacy (assessed in trials).
 %
 There is still active debates to better understand what is the place of these
-data to develop new evidence on the effectiveness --see
-\ref{def:external_validity} of interventions \citep{richesson_electronic_2013}
-\md{develop: schneeweiss and the replicate program}.
+data to develop new evidence on the effectiveness of interventions --see
+\ref{def:external_validity} \citep{richesson_electronic_2013,wang2023emulation}.
+%\md{develop: schneeweiss and the replicate program}.
 % % too much
 % Industries also have a strong interest in gathering and analyzing data. For
 % market access, they need to carefully describe what population is reached by
@@ -1291,9 +1290,9 @@ The \emph{Coming revolution In Medicine} is described by
   the physician's time as increasing numbers of individuals began to demand
   quality medical care.} Fifty years later, the same preoccupations are
 destabilizing healthcare systems in rich countries: increasing costs
-\citep{data_oecd_health_spending}, knowledge producted too rapidly for a single
-human \citep{mcginnis2013best}, geographic disparities and lack of trained
-physicians \citep{anguis2021quelle,aamc2021}.
+\citep{data_oecd_health_spending}, knowledge produced too quickly to be
+assimilable by a single person \citep{mcginnis2013best}, geographic disparities
+and lack of trained physicians \citep{anguis2021quelle,aamc2021}.
 
 In this context, public health authorities are asked to better understand what
 cares are the most effective. With constrained medical resources, efforts should
@@ -1311,12 +1310,12 @@ Committee on Learning Healthcare System suggested to better use routine data to
 adapt evidence to real practice and accelerate its diffusion
 \citep{mcginnis2013best}.
 
-In line with this roadmap, this thesis explores the possibilities offered by
-EHRs for evaluating the effectiveness of medical guidelines. Formally, a
+In line with this roadmap, this thesis is motivated by the opportunities offered by
+EHRs to evaluate the effectiveness of medical guidelines. Formally, a
 guideline can be expressed as an action (or a series of actions) to take given a
-patient risk profile. This pair is really important and closely related to the
-practice of medicine: the practitioner see and listen to a patient, then take
-appropriate actions given its profile. A public health recommendation tries to
+patient risk profile. The action/characteristic reflects the
+practice of  physicians: they see and listen to a patient, then take
+appropriate actions given its profile. A medical recommendation tries to
 guide this link between patient characteristics and intervention.
 
 \begin{background_box_left}
@@ -1325,13 +1324,12 @@ guide this link between patient characteristics and intervention.
   \label{subsec:intro:prediction_causation}%
 
   % Can I use plain prediction for this question?
-  Is the statistical framework an interesting entry point to answer these
-  questions? Like many others, I noticed the growing interest in predictive
-  models in healthcare.  This trend is reflected by the exponential increase in
-  the proportion of publications per year in Pubmed  shown in Figure
-  \ref{fig:intro:pubmed_query}. However, when reading into details the prognosis
-  literature I was surprised to find that prediction is rarely an objective
-  per-se.
+  Is statistical learning a useful tool to answer these questions? There is a
+  growing interest in predictive models in healthcare. This trend is reflected
+  by the exponential increase in the proportion of publications per year in
+  Pubmed  shown in Figure \ref{fig:intro:pubmed_query}. However, when reading
+  into details the prognosis literature I was surprised to find that prediction
+  is rarely an objective per-se.
 
   % Epidemiological books, confounding is the very first explained concept
   % \citep{rothman2012epidemiology}.
@@ -1354,7 +1352,7 @@ guide this link between patient characteristics and intervention.
   is motivated by aggressive interventions \citep{wu2010prediction}:
   \textit{heart failure could potentially lead to improved outcomes through
     aggressive intervention, such as treatment with angiotensin converting enzyme
-    (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs).}. More recently,
+    (ACE)-inhibitors or Angiotensin II receptor blockers (ARBs)}. More recently,
   \cite{beam2018big} devise a machine learning spectrum, making the distinction
   between algorithms requiring heavy human assumptions and flexible models. But
   the goal of these algorithms is almost always to serve
@@ -1364,7 +1362,7 @@ guide this link between patient characteristics and intervention.
     treatable, or the natural course might be very similar to what is achieved
     with treatment.} Modeling has always been judged necessary but it is only
   recently that pattern recognitions is pursued as an objective per-se,
-  associated with a tremendous disinterest for causality as shown in Figure
+  associated with an exponential disinterest for causality as shown in Figure
   \ref{fig:intro:pubmed_query}. \cite{patel2009coming} discussed the
   inappropriateness of the unsupervised and supervised approaches: They
   \textit{tend to discover relatively simple relationships in data and have not
@@ -1372,6 +1370,10 @@ guide this link between patient characteristics and intervention.
     relationships.} This make them misaligned with scientific and practical
   objectives which are to \textit{formulate and test hypotheses about how the
     human organism “works” in health and illness}.
+
+    The auxiliary role of prediction in healthcare calls for replacing or
+  complementing statistical learning with another methodological tool. 
+  
 
 \end{background_box_left}
 
@@ -1395,11 +1397,10 @@ guide this link between patient characteristics and intervention.
 
   \paragraph{The central concept of causality}%
   \label{subsec:intro:causation}%
-
-  The auxiliary role of prediction in healthcare calls for improving statistical
-  learning with an other methodical tool. Causality is an central concept in
-  epidemiology \citep{hill1965environment,hernan2020causal} and have been
-  developed formally in statistics \citep{rubin1974estimating}, econometrics
+  
+  Causality is an central concept in epidemiology
+  \citep{hill1965environment,hernan2020causal} and have been developed formally
+  in statistics \citep{rubin1974estimating}, econometrics
   \citep{imbens2009recent} and machine learning \citep{pearl2018book}.
 
   % causality in ML
@@ -1424,14 +1425,14 @@ guide this link between patient characteristics and intervention.
 
   % Connexion with important questions in healthcare: 
   Causality also has connections with other important issues in healthcare such
-  as fairness \citep{plecko2022causal} or dataset shift --linked to representativity of a
+  as fairness \citep{plecko2022causal} or dataset shift, linked to the representativity of a
   dataset \citep{subbaswamy2020development}. We did not explore these aspects,
   but they motivate part of the work in Chapter \ref{chapter:causal_tuto}.
 
   \paragraph{A robust statistical framework: Neyman-rubin}%
   \label{subsec:intro:causal_framework}%
 
-  I introduce the framework of the Potential Outcomes, which enables statistical
+  I recall the framework of the potential outcomes, which enables statistical
   reasoning on causal treatment effects \citep{imbens_causal_2015}. I will
   progressively introduce supplementary concepts as needed in Chapters
   \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
@@ -1466,8 +1467,8 @@ guide this link between patient characteristics and intervention.
   $\mathbb E[Y(a)] \neq \mathbb E [Y|A=a]$. This is because the right hand side
   reads as \emph{the expected value of Y given A =a}, thus we restrict the
   outcome to the individuals that actually received the treatment. If this group
-  has different outcome than the other group, the equality does not hold as
-  illustrated by Figure \ref{intro:fig:observational_vs_interventional}.
+  has different outcomes than the other group, the equality does not hold as
+  illustrated in Figure \ref{intro:fig:observational_vs_interventional}.
 
   The statistical assumptions required to estimate these quantities from
   observational data are presented in Section
@@ -1499,7 +1500,7 @@ guide this link between patient characteristics and intervention.
 First influenced by the growing successes of machine learning in predictive
 modeling, this thesis seeks to understand what models and framework might help
 evaluating the effectiveness of clinical guidelines using the time varying and
-high dimensional Electronic Health Records. Which predictive models are useful ?
+high dimensional Electronic Health Records. What predictive models are useful ?
 Why prediction is not enough ? How flexible models can serve the true
 objective of healthcare: delivering appropriate treatment to each and every
 patient to improve her health \citep{cma_policy_appropriateness_2015}?
