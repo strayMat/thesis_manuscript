@@ -757,7 +757,7 @@ benefit from innovative methods.
   Trials (RCTs). Based on the randomization of patients to a treatment or
   control group, the data collection is designed for one experiment, addressing
   one precise research question. RCTs are at the heart of \emph{evidence-based
-  medicine}, which promotes a hierarchy of evidence in which randomized
+    medicine}, which promotes a hierarchy of evidence in which randomized
   experiments are superior to natural --uncontrolled-- experiments or expert
   opinion \citep{guyatt1995users}. The modern trial methodology has been shaped
   by the large-scale International Studies of Infarct Survival (ISIS)
@@ -786,11 +786,12 @@ benefit from innovative methods.
   \label{subsec:intro:real_world_data}
 
   % definition of routine care data
-  Healthcare data is increasingly collected from electronic information system
+  Healthcare data is increasingly collected from electronic information systems
   used in routine care
   \citep{jha_use_2009,sheikh_adoption_2014,kim_rate_2017,esdar_diffusion_2019,kanakubo_comparing_2019,liang_adoption_2021,apathy_decade_2021}.
-  This new kind of data, not primarily collected for research has been
-  designated as Real World Data (RWD) \citep{fda_real-world_2021,has_real-world_2021,kent_nice_2022}. Two major
+  The term Real World Data (RWD) has been coined to define these new kind of
+  data, not primarily collected for research
+  \citep{fda_real-world_2021,has_real-world_2021,kent_nice_2022}. Two major
   sources of RWD are insurance claims and EHRs.
 
   \subsection{Two major routine care data collection}\label{subsec:intro:routine_data}
@@ -830,16 +831,16 @@ benefit from innovative methods.
   systems are a precious collection of natural experiments, allowing to complete
   the understanding of genotype-environment interactions with phenotypes
   \citep{butte2006creation,patel2009coming}. Interest in EHR studies developed
-  during the early 2000s highlighting their increasing reach data modalities.
-  EHR also provide a viable alternative to costly traditional data collections
+  during the early 2000s highlighting their increasing rich data modalities.
+  EHRs also provide a potential alternative to costly traditional data collections
   with decreasing financial supports. \cite{casey2016using} estimated the
   average cost per participant in traditional studies of cardio-vascular disease
-  risk factors between 2,700\$ and 17,700\$ compared to 0.11\$ for a recent EHR.
+  risk factors between US\$2,700 and US\$17,700 compared to US\$0.11 for a recent EHR.
   Today's interest of EHR for research has been acknowledged in AIM
   \citep{yu2018artificial}, clinical research \citep{cowie2017electronic} and
   epidemiological studies \citep{casey2016using,gianfrancesco2021narrative}.
   Opportunities and challenges of EHRs are further discussed and illustrated
-  with an overview of the French system in Chapter \ref{chapter:cdw}.
+  with an overview of the French situation in Chapter \ref{chapter:cdw}.
 
   % maybe footshoting myself here. However, \cite{bartlett2019feasibility}
   %showed that only 15\% of recent clinical trials could be replicated with EHR,
@@ -853,13 +854,15 @@ benefit from innovative methods.
   for RCTs and RWD is the mechanism of treatments allocation. Consider the toy
   example of assessing if the probability of death is influenced by
   \textcolor{I}{the administration of a drug for treated patients} compared to
-  \textcolor{C}{no administration for control patients}. In observational data, interventions
-  are far from random but focused on patients requiring care. In observational
-  data --illustrated in Figure \ref{intro:fig:observational_vs_interventional}a), the drug would be given to patients with
-  more comorbidities which could be assessed with the Charlson score
-  \citep{charlson_new_1987} shown on the x axis.  Therefore treated and control
-  populations differ in ways that prevents the attribution of outcome difference
-  to the sole treatment. Such differences call for dedicated adjustments
+  \textcolor{C}{no administration for control patients}. In observational data,
+  interventions are far from random but focused on patients requiring care. In
+  observational data --illustrated in Figure
+  \ref{intro:fig:observational_vs_interventional}a), the drug would be given to
+  patients with more comorbidities --assessed for illustration purposes by the
+  Charlson score \citep{charlson_new_1987} shown on the x axis. Treated and
+  control populations depart from each other in such way that it is doubtful
+  whether the difference in results can be attributed to the treatment alone.
+  Such population discrepancies call for dedicated estimation methodologies
   presented in Section \ref{subsec:causal_tuto:estimation}.
 
 \end{background_box_left}
@@ -889,13 +892,14 @@ benefit from innovative methods.
 \begin{background_box_left}
 
   % interventional  
-  For interventional data --shown in Figure \ref{intro:fig:observational_vs_interventional}b), the
-  randomization process forces the probability of receiving the treatment for
-  every patient --often to 50\%. It is independent from patient characteristics
-  such as the Charlson score. This enforces the comparability between treated
-  patients and control patients. Therefore, once this randomization has been
-  repeated over many patients, \emph{on average}, the difference in outcomes can
-  only be attributed to the treatment.
+  For interventional data --shown in Figure
+  \ref{intro:fig:observational_vs_interventional}b), the randomization forces
+  the probability of receiving the treatment for every patient --often to 50\%.
+  Importantly, it is independent from patient characteristics such as the
+  Charlson score. This favors the comparability between treated patients and
+  control patients: Once this randomization has been repeated over many
+  patients, \emph{on average}, the difference in outcomes can only be attributed
+  to the treatment.
 
   % the distinction
   \cite{rothman2012epidemiology} distinguishes RCTs from observational data as
@@ -904,10 +908,10 @@ benefit from innovative methods.
     assignment based on considerations other than the study protocol, it is not a
     true experiment.} Epidemiological textbooks highlight the experimental setup
   since randomization yields excellent \emph{internal validity}
-  \citep{campbell1957factors}: The estimated treatment effect is close to the
+  \citep{campbell1957factors}: The estimated average treatment effect is close to the
   true treatment effect if we could repeat the experience indefinitely on the
-  same population --the estimate is \emph{unbiased}. Statistical assumptions for
-  the RCT methodology are easily met \citep{colnet2020causal} and involve the
+  same population --the average estimate is \emph{unbiased}. Statistical assumptions for
+  the RCT methodology are easily met \citep[Section 3.1.1]{colnet2020causal} and involve the
   measurements of only two variables: the treatment and the outcome. This
   simplicity contributed to its success for clinical evidence generation.
 
@@ -919,7 +923,7 @@ benefit from innovative methods.
     validity} of interventional studies
   \citep{feinstein1997problems,concato2000randomized,rothwell2005external}: The
   findings of a study may not generalize to other populations. As a practical
-  consequence, RCTs may not apply to real world situations since their
+  consequence, RCTs may not apply to real world situations since included
   populations and experimental conditions differ too much from usual practices.
   For example, only 6\% of asthmatics would have been eligible for their own
   treatment RCTs \citep{travers2007external}. An advantage of observational data
@@ -943,12 +947,12 @@ benefit from innovative methods.
 
   % HTE and precision medicine
   The previous paragraph discussed average treatment effect. However,
-  heterogeneity of treatment among subgroups is of great concern in
-  healthcare \citep{hernan2020causal} and key for personalized
-  medicine --also coined as precision medicine. Originally anchored into
+  heterogeneity of treatment among subgroups is also an object of interest in
+  healthcare \citep{hernan2020causal}. It is at the heart of the personalized
+  medicine paradigm --also coined as precision medicine. Originally anchored into
   genomics, this concept tries to take individual variability into account for
   tailored treatment recommendations \citep{schork2015personalized,
-    topol2019high}.
+  topol2019high}.
 
   % RL  
   In sequential decision making problems, heterogeneity of
