@@ -2260,13 +2260,16 @@ of patient care.
 \end{citationbox}
 
 \begin{chapterabstract}\label{sec:predictive_models:abstract}%
-  Electronic Health Records contain time-varying features with high cardinality.
-  Current state-of-the-art predictive models build on increasingly elaborated
-  pipelines --based on transformers-- to handle the complexity of these data.
-  Acknowledging the complexity to deploy, transfer and adapt these models on
-  local care environments, we explore a complexity-benefit tradeoff by comparing
-  them to simple aggregation of events. We use three clinical tasks involving
-  time-varying structured Electronic Health Records (EHRs) and increasingly
+  As chapter \ref{chapter:cdw} shows, Electronic Health Records (EHRs) contain
+  multiple categories of data that sparkle interest in the development of
+  predictive prognosis. Text and image data put apart, these data elements can
+  be represented as timed events with high cardinality encoded in medical codes.
+  Current state-of-the-art predictive models for EHRs build on increasingly
+  elaborated pipelines --based on the transformer architecture-- to handle the
+  complexity of these data. Acknowledging the difficulty to deploy, transfer and
+  adapt these models on local care environments, we explore a complexity-benefit
+  tradeoff by comparing them to simple aggregation of events. We use three
+  predictive tasks involving time-varying structured EHRs and increasingly
   clinically relevant problems. We show that these benchmarking tasks display
   heterogeneous predictive difficulties. We introduce a simple aggregation of
   static embeddings --transferred from national claims and publicly available--,
@@ -2287,8 +2290,8 @@ of patient care.
         the Simpa2023 day on patient similarity.}}\\
 
     {\small\hfill{} work done with Jean-Baptiste \textsc{Julla}, Julie
-    \textsc{Adjerad}, Theo \textsc{Jolivet}, Louis \textsc{Potier} and Gaël
-    \textsc{Varoquaux}.}
+    \textsc{Adjerad}, Theo \textsc{Jolivet}, Judith \textsc{Abecassis},, Louis
+    \textsc{Potier} and Gaël \textsc{Varoquaux}.}
   \end{minipage}
 \end{flushright}
 
@@ -5910,11 +5913,15 @@ repartition of these mistreated patients conditionally on patient conditions.
 
   \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/}.
 
-  The guests table concerns the individuals interviewed, the interview dates, the
-  positions and the membership of a specific team. The warehouse table collects
-  information about the CDW. The table of studies is the referencing of the
-  studies informed on 10 portals of studies in progress (or completed if
-  available) available in free access.
+  \begin{itemize}
+    \item The guests table concerns the individuals interviewed, the interview dates, the
+          positions and the membership of a specific team: \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/-/blob/master/data/cycle_eds/cycle_eds_intervenants.csv}
+    \item  The warehouse table collects information about the CDW: \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/-/blob/master/data/cycle_eds/cycle_eds_entrepots.csv}
+    \item The study table references the in-progress study titles and objectives from 10 public declarative portals in progress: \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/-/blob/master/data/cycle_eds/cycle_eds_etudes.csv}
+  \end{itemize}
+
+
+
 
   \chapter{Chapter \ref{chapter:predictive_models}}\label{apd:predictive_models}
 
