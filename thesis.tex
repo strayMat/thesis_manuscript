@@ -1534,63 +1534,63 @@ Therefore it is not detailed in this manuscript.
 
 \paragraph{Chapter \ref{chapter:cdw}: Potential and challenges of Clinical Data
   Warehouse, a case study in France} This chapter draws the first overview of
-  the Clinical Data Warehouses (CDWs) in France. These technical and
-  organizational infrastructures are emerging in the hospitals to collect and
-  analyze the data produced in Electronic Health Records. This work is an
-  attempt to better characterize the reality of data reuses in university
-  hospitals. It documents key aspects of the collection and organization of
-  routine care data into homogeneous databases: governance, transparency, types
-  of data, data reuse main objectives, technical tools, documentation and data
-  quality control processes. 
-  
-  We show that the emerging landscape of CDWs in France is highly heterogeneous
-  and mostly focused on research or piloting. We highlight the necessity to
-  create or perpetuate multidisciplinary warehouse teams capable of operating
-  the CDW and supporting the various projects. The multi-level collaborations
-  allow to mutualize resources and skills at the regional or national levels. We
-  report poor data documentation and unequal adoption of internationally
-  recognized common data models. Finally, we encourage to expand the scope of
-  data beyond the hospital to better include city care. The qualitative aspect
-  of this chapter contrasts with the general mathematical context of the thesis.
+the Clinical Data Warehouses (CDWs) in France. These technical and
+organizational infrastructures are emerging in the hospitals to collect and
+analyze the data produced in Electronic Health Records. This work is an
+attempt to better characterize the reality of data reuses in university
+hospitals. It documents key aspects of the collection and organization of
+routine care data into homogeneous databases: governance, transparency, types
+of data, data reuse main objectives, technical tools, documentation and data
+quality control processes.
+
+We show that the emerging landscape of CDWs in France is highly heterogeneous
+and mostly focused on research or piloting. We highlight the necessity to
+create or perpetuate multidisciplinary warehouse teams capable of operating
+the CDW and supporting the various projects. The multi-level collaborations
+allow to mutualize resources and skills at the regional or national levels. We
+report poor data documentation and unequal adoption of internationally
+recognized common data models. Finally, we encourage to expand the scope of
+data beyond the hospital to better include city care. The qualitative aspect
+of this chapter contrasts with the general mathematical context of the thesis.
 
 \paragraph{Chapter \ref{chapter:predictive_models}: Exploring a complexity
   gradient in representation and predictive algorithms for EHRs} Acknowledging
-  the growing interest in predictive algorithms for EHR data, this chapter
-  introduces two simple feature construction methods taking raw medical events
-  as input features. It benchmarks four predictive pipelines of increasing
-  complexity on three predictive tasks: length of stay interpolation, next visit
-  prognosis and cardiovascular adverse events prediction. It focuses on medium
-  sized datasets where the population at risk (after inclusion and exclusion
-  rules) ranges from 10,000 to 20,000 samples. In these setups, this work
-  explores the complexity-performance tradeoff from simple baseline models to
-  recent transformer-based neural networks. 
-  
-  We show that for these medium sample-size settings, simple baseline outperform
-  transformer-based models both in predictive accuracy and computing resource
-  efficiency. We note a strong influence of case prevalences on the predictive
-  performances, indicating increasing problem difficulties for rare clinical
-  targets.
+the growing interest in predictive algorithms for EHR data, this chapter
+introduces two simple feature construction methods taking raw medical events
+as input features. It benchmarks four predictive pipelines of increasing
+complexity on three predictive tasks: length of stay interpolation, next visit
+prognosis and cardiovascular adverse events prediction. It focuses on medium
+sized datasets where the population at risk (after inclusion and exclusion
+rules) ranges from 10,000 to 20,000 samples. In these setups, this work
+explores the complexity-performance tradeoff from simple baseline models to
+recent transformer-based neural networks.
+
+We show that for these medium sample-size settings, simple baseline outperform
+transformer-based models both in predictive accuracy and computing resource
+efficiency. We note a strong influence of case prevalences on the predictive
+performances, indicating increasing problem difficulties for rare clinical
+targets.
 
 \paragraph{Chapter \ref{chapter:causal_tuto}: Prediction is not all we need:
   Causal thinking for decision making on EHRs} This chapter explores the causal
-  framework to build clinically valuable models. It shows that predictions
-  --even accurate as with machine learning, may not suffice to provide optimal
-  healthcare for every patient. Anchored in causal thinking, it details key
-  elements necessary to robustly estimate treatment effect from time-varying EHR
-  data. We present a step-by-step framework to help build valid decision making
-  from real-life patient records by emulating a randomized trial before
-  individualizing decisions, eg with machine learning. We illustrate the various
-  choices in studying the effect of albumin on sepsis mortality in the Medical
-  Information Mart for Intensive Care database (MIMIC-IV). We study the impact
-  of various choices at every step, from feature extraction to causal-estimator
-  selection. In a tutorial spirit, the code and the data are openly available.
+framework to build clinically valuable models. It shows that predictions
+--even accurate as with machine learning, may not suffice to provide optimal
+healthcare for every patient. Anchored in causal thinking, it details key
+elements necessary to robustly estimate treatment effect from time-varying EHR
+data. We present a step-by-step framework to help build valid decision making
+from real-life patient records by emulating a randomized trial before
+individualizing decisions, eg with machine learning. We illustrate the various
+choices in studying the effect of albumin on sepsis mortality in the Medical
+Information Mart for Intensive Care database (MIMIC-IV). We study the impact
+of various choices at every step, from feature extraction to causal-estimator
+selection. In a tutorial spirit, the code and the data are openly available.
 
-  We find that subtle bias such as immortal time bias can change the conclusion
-  of a study. However, we show that these errors can be captured by following a
-  careful trial emulation design and by comparing different modeling hypotheses
-  in a vibration analyses. We validate our estimation of average treatment
-  effect with RCT gold-standards and inspect heterogeneous treatment effect in
-  subpopulations.
+We find that subtle bias such as immortal time bias can change the conclusion
+of a study. However, we show that these errors can be captured by following a
+careful trial emulation design and by comparing different modeling hypotheses
+in a vibration analyses. We validate our estimation of average treatment
+effect with RCT gold-standards and inspect heterogeneous treatment effect in
+subpopulations.
 
 \paragraph{Chapter \ref{chapter:causal_model_selection}: How to select
   predictive models for causal inference?}
@@ -3949,8 +3949,8 @@ specific individuals, such as patients undergoing sceptic shock.
   % Even with causal framework, there are too many models to choose from
   But, even with a robust causal framework such as in Chapter 4, the
   practitioner is left to choose among the plethora of predictive models
-  available for health data (some detailed in
-  \ref{subsec:predictive_models:importance}). In a given situation, which of
+  available for health data (some detailed in Appendix
+  \ref{apd:review_models}). In a given situation, which of
   these models yield the most valid causal estimates?
   % scope of the paper 
   Here, we highlight that classic machine-learning model selection does not pick
@@ -4008,7 +4008,7 @@ Given a model predicting a health outcome, precision medicine would like it to
 guide decisions: will an individual benefit from an intervention such as
 surgery \citep{fontana2019can}? Contrasting predictions with and without the
 treatment gives an answer, but statistical validity requires causal inference
-\citep{snowden_implementation_2011,blakely2020reflection}.
+\citep{snowden2011implementation,blakely2020reflection}.
 
 % - Causal inference is difficult
 % - Beyond the dream of assessing effectiveness and safety in real-word
@@ -4028,7 +4028,7 @@ treatment gives an answer, but statistical validity requires causal inference
 % estimates => need for guideline on causal model selection.
 
 \paragraph{Causal-inference bridges to predictive modeling via the rich statistical literature on \emph{outcome
-    models},} or G-computation, G-formula \citep{robins_role_1986}, Q-model \citep{snowden_implementation_2011}, conditional
+    models},} or G-computation, G-formula \citep{robins_role_1986}, Q-model \citep{snowden2011implementation}, conditional
 mean regression \citep{wendling_comparing_2018}. A central challenge of inference of treatment effects is that of
 confounding: spurious associations between treatment allocation and baseline health, \emph{eg} only prescribing a drug
 to mild cases \citep{hernan_causal_2020,vanderweele2019principles}. Controlled allocation of treatment, as in randomized
@@ -4049,7 +4049,7 @@ image analysis \citep{shen2017deep,monshi2020deep}.
 Even outcome-modeling methods specifically designed for causal
 inference are numerous: Bayesian Additive Regression Trees
 \citep{hill_bayesian_2011}, Targeted Maximum Likelihood Estimation
-\citep{laan_targeted_2011,schuler_targeted_2017}, causal boosting
+\citep{laan_targeted_2011,schuler2017targeted}, causal boosting
 \citep{powers_methods_2018}, causal multivariate adaptive regression
 splines \citep{powers_methods_2018}, random forests
 \citep{wager_estimation_2018, athey_generalized_2019},
@@ -4280,7 +4280,7 @@ the original problem of causal model selection.
 Much work in causal inference has focused on procedures that
 guarantee asymptotically consistent estimators, such as Targeted
 Machine Learning
-Estimation (TMLE) \citep{laan_targeted_2011,schuler_targeted_2017} or
+Estimation (TMLE) \citep{laan_targeted_2011,schuler2017targeted} or
 Double Machine Learning \citep{chernozhukov_double_2018}. Here also, theories require asymptotic regimes and
 models to be \textit{well-specified}.
 
@@ -4337,7 +4337,7 @@ counterfactual nearest neighbors, which has been shown ineffective
   g-formula identification \citep{robins_new_1986}. For the rest of the
   paper, the expectations will always be taken on the factual observed
   distribution $\mathcal{D}$. This identification leads to outcome based estimators (ie.
-  g-computation estimators \citep{snowden_implementation_2011}), targeting the
+  g-computation estimators \citep{snowden2011implementation}), targeting the
   ATE $\tau$ with outcome modeling:
   \begin{eqnarray}
     \tau =& \mathbb E_{Y \sim \mathcal{D^{\star}}}[Y(1) - Y(0)|X=x]
@@ -4975,7 +4975,7 @@ in $\{0.01, 0.1, 1\}$, and maximum number of leaf nodes in $\{25, 27, 30, 32,
 \paragraph{Nuisance estimators}
 
 Drawing inspiration from the TMLE literature that uses combination of flexible
-machine learning methods \citep{schuler_targeted_2017}, we use as models
+machine learning methods \citep{schuler2017targeted}, we use as models
 for the nuisances $\check e$ (respectively $\check m$) a form of meta-learner: a
 stacked estimator of ridge and boosting classifiers (respectively
 regressions). We select hyper-parameters with randomized search on a validation set
