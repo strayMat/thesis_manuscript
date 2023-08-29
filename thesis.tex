@@ -484,12 +484,12 @@
     \arrayrulecolor{Prune}
     {\footnotesize \textbf{Composition du jury}}                                                                    \\
                                                                                                      &              \\
-    \textbf{Pierre Zweigenbaum}                                                                      & Président    \\
-    Directeur de Recherche, Laboratoire Interdisciplinaire des sciences du numérique de Paris Saclay &              \\
     \textbf{Florence Tubach}                                                                         & Rapportrice  \\
     Professeur des Universités - Praticien Hospitalier, Sorbonne Université                          &              \\
     \textbf{Peter Szolovits}                                                                         & Rapporteur   \\
     Professor, Massachusetts Institute of Technology                                                 &              \\
+    \textbf{Pierre Zweigenbaum}                                                                      & Examinateur  \\
+    Directeur de Recherche, Laboratoire Interdisciplinaire des sciences du numérique de Paris Saclay &              \\
     \textbf{Emmanuel Chazard}                                                                        & Examinateur  \\
     Professeur des Universités - Praticien Hospitalier, Université de Lille                          &              \\
     \textbf{Marzyeh Ghasseimi}                                                                       & Examinatrice \\
@@ -524,18 +524,19 @@
 %\maketitle%
 
 \begin{chapterabstract}[Abstract]
-  Real World Databases are increasingly accessible, exhaustive and with
-  fine temporal details. Unlike traditional data used in clinical research, they
-  describe the routine organization of care. These day-to-day records of
-  patients care enable new research questions, notably concerning the efficiency
-  of interventions after market access, the heterogeneity of their benefits in
-  under-served populations or the development of personalized medicine. On the
-  other hand, the complexity and large-scale nature of these databases pose a
-  number of challenges for effectively answering these questions. To remedy
-  these problems, econometricians and epidemiologists have recently proposed
-  the use of flexible models combining causal inference with high-dimensional
-  machine learning.
+  Real World Databases are increasingly accessible, exhaustive and with fine
+  temporal details. Unlike traditional data used in clinical research, they
+  capture the routine organization of care. These day-to-day records of patients
+  care open the door to new research questions, notably concerning the
+  efficiency of interventions after market access, the heterogeneity of their
+  benefits in under-served populations or the development of personalized
+  medicine. On the other hand, the complexity and large-scale nature of these
+  databases pose a number of challenges for effectively answering these
+  questions. To remedy these problems, econometricians and epidemiologists have
+  recently proposed the use of flexible models combining causal inference with
+  high-dimensional machine learning.
 
+  \gv{poser une question générale et être plus court sur chaque chapitre.}
   Chapter 1 uses a national case study of the 32 French regional and
   university hospitals to highlight key aspects of modern Clinical Data
   Warehouses (CDWs), the cornerstone infrastructure of precision medicine. From
@@ -787,7 +788,7 @@ benefit from innovative methods.
   % atenolol on N=16,000 patients.
 
 
-  \paragraph{More data collected routinely: Real World Data}%
+  \paragraph{More data collected routinely -- Real World Data}%
   \label{subsec:intro:real_world_data}
 
   % definition of routine care data
@@ -800,7 +801,7 @@ benefit from innovative methods.
   sources of RWD are insurance claims and EHRs.
 
   \subsection{Two major routine care data collection}\label{subsec:intro:routine_data}
-  \paragraph{Insurance claims: good population coverage, low granularity}%
+  \paragraph{Insurance claims -- Good population coverage, low granularity}%
   \label{def:claims}%
 
   Healthcare insurance systems collect massive amount of data, such as the
@@ -812,7 +813,7 @@ benefit from innovative methods.
   billing optimization processes endanger the validity of billing variables by
   over-representing well-reimbursed cares \citep{juven2013codage}.
 
-  \paragraph{Clinical data: EHRs and Hospital Information System}\label{def:ehr_his}
+  \paragraph{Clinical data -- EHRs and Hospital Information System}\label{def:ehr_his}
 
   EHRs are defined as the longitudinal collection of health data in an
   electronic information system (IS) \citep{gunter2005emergence}. As of 1990,
@@ -855,13 +856,12 @@ benefit from innovative methods.
   \label{subsec:intro:interventional_vs_observational}%
 
   % pb with observational
-  \paragraph{A fundamental difference} between traditional data collection used
-  for RCTs and RWD is the mechanism of treatments allocation. Consider the toy
-  example of assessing if the probability of death is influenced by
-  \textcolor{I}{the administration of a drug for treated patients} compared to
-  \textcolor{C}{no administration for control patients}. In observational data,
-  interventions are far from random but focused on patients requiring care. In
-  observational data --illustrated in Figure
+  \paragraph{Treatment allocation is a fundamental difference between RCTs and RWD}
+  Consider the toy example of assessing if the probability of death is
+  influenced by \textcolor{I}{the administration of a drug for treated patients}
+  compared to \textcolor{C}{no administration for control patients}. In
+  observational data, interventions are far from random but focused on patients
+  requiring care. In observational data --illustrated in Figure
   \ref{intro:fig:observational_vs_interventional}a), the drug would be given to
   patients with more comorbidities --assessed for illustration purposes by the
   Charlson score \citep{charlson_new_1987} shown on the x axis. Treated and
@@ -920,7 +920,8 @@ benefit from innovative methods.
   measurements of only two variables: the treatment and the outcome. This
   simplicity contributed to its success for clinical evidence generation.
 
-  \paragraph{External validity: when RCTs insufficiently inform practices}\label{def:external_validity}
+  \paragraph{External validity -- When RCTs insufficiently inform practices}%
+  \label{def:external_validity}%
   % threat to external validity
   Interventional data are hard to collect: patients must be voluntary, without
   comorbidities, adhering to the treatment. These requirements contribute to
@@ -948,7 +949,7 @@ benefit from innovative methods.
   present thesis, but it is a clear motivation.
 
   % Link with personalized medicine
-  \paragraph{Heterogeneity of treatment: the link with personalized medicine.}
+  \paragraph{Heterogeneity of treatment -- The link with personalized medicine}
 
   % HTE and precision medicine
   The previous paragraph discussed average treatment effect. However,
@@ -1052,7 +1053,7 @@ models and interpreting their inner part as causal.
   details the principles of random forest and gradient boosting since we are
   using these two algorithms in different chapters of this thesis.
 
-  \paragraph{Model selection: how to choose between multiple promising models}
+  \paragraph{Model selection -- How to choose between multiple promising models}
 
   Choosing the best model among a family of potential estimators is done by
   comparing their performances on an unseen test dataset. If we were to evaluate
@@ -1086,7 +1087,7 @@ models and interpreting their inner part as causal.
 
 \begin{background_box_left}
 
-  \paragraph{Pre-training: from learning patterns to learning representations}
+  \paragraph{Pre-training -- From learning patterns to learning representations}
   % what is it
   As of 2012, the success of deep neural networks in computer vision
   \citep{krizhevsky2012imagenet}, sparkled interest for representation learning.
@@ -1202,7 +1203,7 @@ clearly the scope of questions that motivate my work. As discussed in Section
 formation and public health concerns.
 
 %primary use
-\paragraph{Primary uses of health data focus on patient care.}
+\paragraph{Primary uses of health data focus on patient care}
 
 EHRs are primarily used to record patients' health state and cares
 \citep{safran_toward_2007,eu_primary_2022}. This information might be shared
@@ -1217,7 +1218,7 @@ fragmented between numerous healthcare professionals.
 % device and applications and AI/ML used to conduct clinical research
 % \citep{haug2023artificial}.
 
-\paragraph{From the automation of the care workflow to personalized medicine.}
+\paragraph{From the automation of the care workflow to personalized medicine}
 
 % AI in healthcare 
 The automation of tedious tasks in healthcare is part of the original agenda of
@@ -1285,7 +1286,7 @@ data to develop new evidence on the effectiveness of interventions --see
 % market access, they need to carefully describe what population is reached by
 % their product.
 
-\paragraph{Public health questions: old and new}
+\paragraph{Public health questions -- Old and new}
 
 The \emph{Coming revolution In Medicine} is described by
 \cite{rutstein1967coming} as:\textit{1) modern medicine's skyrocketing costs; 2)
@@ -1434,7 +1435,7 @@ guide this link between patient characteristics and intervention.
   dataset \citep{subbaswamy2020development}. We did not explore these aspects,
   but they motivate part of the work in Chapter \ref{chapter:causal_tuto}.
 
-  \paragraph{A robust statistical framework: Neyman-rubin}%
+  \paragraph{A robust statistical framework -- Neyman-rubin}%
   \label{subsec:intro:causal_framework}%
 
   I recall the framework of the potential outcomes, which enables statistical
@@ -1584,7 +1585,7 @@ individualizing decisions, eg with machine learning. We illustrate the various
 choices in studying the effect of albumin on sepsis mortality in the Medical
 Information Mart for Intensive Care database (MIMIC-IV). We study the impact
 of various choices at every step, from feature extraction to causal-estimator
-selection. 
+selection.
 
 We find that subtle bias such as immortal time bias can change the conclusion
 of a study. However, we show that these errors can be captured by following a
@@ -1595,28 +1596,28 @@ subpopulations. In a tutorial spirit, the code and the data are openly available
 
 \paragraph{Chapter \ref{chapter:causal_model_selection}: How to select
   predictive models for causal inference?} This chapter built on the variability
-  of results presented in chapter \ref{chapter:causal_tuto}. Can we explain why
-  some models yield better treatment effect estimation than others ? Statistical
-  learning theory establishes how to select models for prediction. This chapter
-  establishes that classic machine-learning model selection does not pick the
-  best models for causal inference. We review more elaborated risks developed in
-  the causal inference literature. These risks rely on the estimation of
-  nuisances that allow for the identification of the causal effect. However,
-  these causal risk has not been empirically evaluated in a wide variety of
-  finite sample settings. Drawing from an extensive empirical study, this
-  chapter study the performances of five causal risk to select an outcome model
-  for treatment effect estimation. 
+of results presented in chapter \ref{chapter:causal_tuto}. Can we explain why
+some models yield better treatment effect estimation than others ? Statistical
+learning theory establishes how to select models for prediction. This chapter
+establishes that classic machine-learning model selection does not pick the
+best models for causal inference. We review more elaborated risks developed in
+the causal inference literature. These risks rely on the estimation of
+nuisances that allow for the identification of the causal effect. However,
+these causal risk has not been empirically evaluated in a wide variety of
+finite sample settings. Drawing from an extensive empirical study, this
+chapter study the performances of five causal risk to select an outcome model
+for treatment effect estimation.
 
-  Our results highlight that estimators for causal inference should be selected,
-  validated, and tuned using different procedures and error measures than those
-  classically used to assess prediction. Rather, selecting the best outcome
-  model according to the R-risk leads to more valid causal estimates. Despite
-  relying on the estimation of two nuisances, this risk outperform others risks.
-  We also show theoretically that the R-risk is a reweighted version of the
-  oracle unobserved risk between predicted and potential outcomes. This property
-  lead to accurate estimation of treatment heterogeneity when treated and
-  untreated population differ little, as in RCTs. To facilitate better model
-  selection, we provide Python code implementing our procedure. 
+Our results highlight that estimators for causal inference should be selected,
+validated, and tuned using different procedures and error measures than those
+classically used to assess prediction. Rather, selecting the best outcome
+model according to the R-risk leads to more valid causal estimates. Despite
+relying on the estimation of two nuisances, this risk outperform others risks.
+We also show theoretically that the R-risk is a reweighted version of the
+oracle unobserved risk between predicted and potential outcomes. This property
+lead to accurate estimation of treatment heterogeneity when treated and
+untreated population differ little, as in RCTs. To facilitate better model
+selection, we provide Python code implementing our procedure.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -1734,7 +1735,8 @@ subpopulations. In a tutorial spirit, the code and the data are openly available
   Warehouses}%
 \label{subsec:cdw:cdw_definition}%
 
-\paragraph{Dedicated infrastructures, called Clinical Data Warehouse (CDW)} are
+\paragraph{Clinical Data Warehouse (CDW)}\label{def:cdw}
+Dedicated infrastructures are
 needed to pool data data from one or more medical information systems --whatever
 the organizational framework-- to homogeneous formats, for management, research
 or care reuses \citep{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
@@ -2041,7 +2043,7 @@ regional coverage and the choice of OMOP, are also well advanced in multi-centri
 research. At the same time, the \textit{Grand-Est} region is building a network
 of CDW based on the model of the \textit{Grand-Ouest} region, also using eHop.
 
-\paragraph{Data reuse: CDW are used for monitoring and management (16/21)}
+\paragraph{Data reuse -- CDW are used for monitoring and management (16/21)}
 
 
 The CDW have sometimes been initiated to improve and optimize billing coding
@@ -2057,7 +2059,7 @@ sometimes of interest for health monitoring (eg. during Covid-19) or
 pharmacovigilance (13/21).
 
 
-\paragraph{Data reuse: Strong interest for CDW in the context of care (13/21)}
+\paragraph{Data reuse -- Strong interest for CDW in the context of care (13/21)}
 
 Some CDWs develop specific applications that provide new functionalities
 compared to care software. Search engines can be used to query all the
@@ -2170,20 +2172,19 @@ prototyping phase, it does not seem adapted to the perennial and transversal
 nature of the tool. As a research infrastructure of growing importance, it must
 have the financial and organizational means to plan for the long term.
 
-\paragraph{The governance of the CDW has multiple layers:} local within the
-university hospital, interregional, and national/international. The first level
-allow to ensure the quality of data integration as well as the pertinence of
-data reuse by clinicians themselves. The interregional level is well adapted for
-resources mutualization and collaboration. Finally, the national and
-international levels assure coordination, encourage consensus for committing
-choices such as metadata or interoperability, and provide financial, technical
-and regulatory support.
+\paragraph{The governance of the CDW has three layers -- Within the university
+  hospital, interregional, and national/international} The first level allow to
+ensure the quality of data integration as well as the pertinence of data reuse
+by clinicians themselves. The interregional level is well adapted for resources
+mutualization and collaboration. Finally, the national and international levels
+assure coordination, encourage consensus for committing choices such as metadata
+or interoperability, and provide financial, technical and regulatory support.
 
 
 \subsection{Transparency: Keep the bar high}%
 \label{subsec:cdw:recommendations:transparency}%
 
-\paragraph{For better registration of observational studies:} Health Technology
+\paragraph{For better registration of observational studies} Health Technology
 Assessment agencies advocate for public registration of comparative
 observational study protocols before conducting the analysis
 \citep{berger2017good,fda_real-world_2021,has_real-world_2021}. They often refer
@@ -2198,8 +2199,8 @@ reporting systems in France. One source could be favored at the national level
 and the second one automatically fed from the reference source, by agreeing on
 common metadata.
 
-\paragraph{From a patient's perspective,} there is currently no way to know if
-their personal data is included for a specific project. Better patient
+\paragraph{The patient's perspective} There is currently no way to know if
+a specific patient personal data is included for a specific project. Better patient
 information about the reuse of their data is needed to build trust over the long
 term. A strict minimum is the establishment and update of the declarative
 portals of ongoing studies at each institution.
@@ -2291,7 +2292,7 @@ We have not covered the exhaustive health care landscape in France. CDW
 initiatives also exist in primary care, in smaller hospital groups and in
 private companies.
 
-\paragraph{The French CDW ecosystem is beginning to take shape,} benefiting from
+\paragraph{The French CDW ecosystem is beginning to take shape} It benefits from
 an acceleration thanks to national funding, the multiplication of industrial
 players specializing in health data and the beginning of a supra-national
 reflection on the European Health Data Space \citep{ehds_2022}. However, some
@@ -2299,29 +2300,28 @@ points require special attention to ensure that the potential of the CDW
 translates into patient benefits.
 
 \paragraph{The priority is the creation and perpetuation of multidisciplinary
-  warehouse teams} capable of operating the CDW and supporting the various
+  warehouse teams} This team should be capable of operating the CDW and supporting the various
 projects. A combination of public health, data engineering, data stewardship,
 statistics and IT competences is a prerequisite for the success of the CDW. The
 team should be the privileged point of contact for data exploitation issues and
 should collaborate closely with the existing hospital departments.
 
-\paragraph{The constitution of a multi-level collaboration network} is another
-priority. The local level is essential to structure the data and understand its
+\paragraph{The constitution of a multi-level collaboration network is another
+  priority} The local level is essential to structure the data and understand its
 possible uses. Interregional, national and international coordination would make
 it possible to create thematic working groups, in order to stimulate a dynamic
 of cooperation and mutualization.
 
-\paragraph{A common data model should be encouraged,} with precise metadata allowing to map
+\paragraph{A common data model should be encouraged} It should specify metadata allowing to map
 the integrated data, in order to qualify the uses to be developed today from the
 CDWs. More broadly, open-source documentation of data flows and transformations
 performed for quality enhancement would require more incentives to unleash the
 potential for innovation for all health data users.
 
 \paragraph{Expanding the scope of the data beyond the purely hospital domain}
-in a systematic way should be considered. Many risk factors and patient
-follow-up data are missing from the CDWs, but are crucial for understanding
-pathologies. Combining city data and hospital data would provide a complete view
-of patient care.
+Many risk factors and patient follow-up data are missing from the CDWs, but are
+crucial for understanding pathologies. Combining city data and hospital data
+would provide a complete view of patient care.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2642,7 +2642,7 @@ $\Phi_{local}$. Aggregation at the stay level is done using the same
 count matrices as for \ref{subsec:predictive_models:count_encoding} --eventually
 with decayed counts: $g_{emb-local}(X, (0, \delta))=[C_{0} \cdot \Phi_{local}, C_{\delta} \cdot \Phi_{local}]$.
 
-\paragraph{Transfer trained static embeddings:} Instead of retraining the
+\paragraph{Transfer trained static embeddings} Instead of retraining the
 embeddings on the train cohort, we rely on static embeddings $\Phi_{SNDS}$
 pre-computed on French national claims data from 3,112,565 patients
 \citep{doutrelignerepresentations}. The aggregation is performed similarly as
@@ -2690,7 +2690,7 @@ We experimented with gradient boosting trees, without observing significant perf
 \subsection{Three clinical and operational tasks}%
 \label{subsec:predictive_models:task_definitions}%
 
-\paragraph{Heathcare database: Paris hospital data warehouse}%
+\paragraph{Heathcare database -- Paris hospital data warehouse}%
 \label{sec:data_extraction}%
 
 We used data extracted from Greater Paris Hospitals (AP-HP) data
@@ -2818,7 +2818,7 @@ appendices for brier score and average precision results (AUPRC).
   trade-offs}\label{subsec:predictive_models:results}
 
 
-\paragraph{Long LOS interpolation: saturating a simple task already requires
+\paragraph{Long LOS interpolation -- Saturating a simple task already requires
   10,000 samples}%
 
 
@@ -2843,7 +2843,7 @@ because of the lack of samples.
 \end{figure}
 
 
-\paragraph{Prognosis prediction: static embeddings are not more sample efficient
+\paragraph{Prognosis prediction -- Static embeddings are not more sample efficient
   than count encoding}%
 
 Figure \ref{fig:prognosis_roc_auc} shows the ROC AUC performances of the
@@ -3001,7 +3001,7 @@ claim.
   All scientific work is incomplete - whether it be observational or
   experimental. All scientific work is liable to be upset or modified by
   advancing knowledge. That does not confer upon us a free- dom to ignore the
-  knowledge we already have, or to postponethe action that it appears to demand
+  knowledge we already have, or to postpone the action that it appears to demand
   at a given time.%
 
   \par\hfill --Austin Bradford Hill, \textit{The Environment and Disease: Association or Causation?}
@@ -3009,24 +3009,25 @@ claim.
 
 \begin{chapterabstract}\label{sec:causal_tuto:abstract}%
   While Chapter 3 focused on predictive models for patient outcomes, this
-  chapter explores the causal framework to build clinically valuable models. It
-  shows that predictions --even accurate as with machine learning, may not
-  suffice to provide optimal healthcare for every patient. Indeed, prediction
-  can be driven by shortcuts in the data, such as racial biases. Causal thinking
-  is needed for data-driven decisions. Here, we give an introduction to the key
-  elements, focusing on routinely-collected data, Electronic Health Records
-  (EHRs) and claims data. Using such data to assess the value of an intervention
-  requires care: temporal dependencies and existing practices easily confound
-  the causal effect. We present a step-by-step framework to help build
-  \emph{valid} decision making from real-life patient records by emulating a
-  randomized trial before individualizing decisions, \emph{eg} with machine
-  learning. Our framework highlights the most important pitfalls and
-  considerations in analyzing EHRs or claims data to draw causal conclusions. We
-  illustrate the various choices in studying the effect of albumin on sepsis
-  mortality in the Medical Information Mart for Intensive Care database
-  (MIMIC-IV). We study the impact of various choices at every step, from feature
-  extraction to causal-estimator selection. In a tutorial spirit, the code and
-  the data are openly available.
+  chapter details the importance of causality to build clinically-valuable
+  models and introduces a framework to facilitate such endeavor. It shows that
+  predictions --even accurate as with machine learning, may not suffice to
+  provide optimal healthcare for every patient. Indeed, prediction can be driven
+  by shortcuts in the data, such as racial biases. Causal thinking is needed for
+  data-driven decisions. Here, we give an introduction to the key elements,
+  focusing on routinely-collected data, Electronic Health Records (EHRs) and
+  claims data. Using such data to assess the value of an intervention requires
+  care: temporal dependencies and existing practices easily confound the causal
+  effect. We present a step-by-step framework to help build \emph{valid}
+  decision making from real-life patient records by emulating a randomized trial
+  before individualizing decisions, \emph{eg} with machine learning. Our
+  framework highlights the most important pitfalls and considerations in
+  analyzing EHRs or claims data to draw causal conclusions. We illustrate the
+  various choices in studying the effect of albumin on sepsis mortality in the
+  Medical Information Mart for Intensive Care database (MIMIC-IV). We study the
+  impact of various choices at every step, from feature extraction to
+  causal-estimator selection. In a tutorial spirit, the code and the data are
+  openly available.
 \end{chapterabstract}
 
 \vfill
@@ -3057,8 +3058,8 @@ claim.
 \label{subsec:causal_tuto:synthetic_materials}%
 
 
-\paragraph{Medicine increasingly relies on data,} with the promise of better
-clinical decision-making. Machine learning is central to this endeavor.
+\paragraph{Medicine increasingly relies on data with the promise of better
+  clinical decision-making} Machine learning is central to this endeavor.
 % Other formulation: "For such endeavor, machine learning is the darling
 % of data scientists."
 On medical images, it achieves human-level performance to
@@ -3085,12 +3086,12 @@ These shortcuts are at odds with healthcare's ultimate goal: appropriate care
 for optimal health outcome for each and every patient
 \citep{cma_policy_appropriateness_2015, ghassemi2020review}. Making the right decisions requires more than accurate predictions.
 
-\paragraph{Causal thinking} is a key ingredient to ground data-driven decision making \citep{prosperi2020causal}. Indeed, decision-making logic cannot rely purely on
-learning from the data, which itself results from a history of prior
+\paragraph{Causal thinking is a key ingredient to ground data-driven decision
+  making} \citep{prosperi2020causal} Indeed, decision-making logic cannot rely
+purely on learning from the data, which itself results from a history of prior
 decisions \citep{plecko2022causal}. Rather, reasoning about a putative
 intervention requires comparing the potential outcomes with and without the
-intervention, the difference between these being the causal
-effect.
+intervention, the difference between these being the causal effect.
 % TODO: reintroduce counterfactual predictions? Not sure, given that it
 % does not fit well with the rest of our manuscript
 In medicine, causal effects
@@ -3114,12 +3115,12 @@ are not usable for decision making. Rather dedicated statistical
 techniques are needed to emulate a ``target trial'' from \emph{observational} data
 -- without controlled interventions.
 
-\paragraph{Different time resolutions} EHRs and claims are two prominent sources of real-life healthcare data with different time resolutions.
-EHRs are particularly suited to guide clinical decisions, as they are
-rich in high-resolution and time-varying features, including vital signs,
-laboratory tests, medication dosages, etc. Claims, on the other
-hand, inform best on medico-economic questions or
-chronic conditions as they cover in-patient and
+\paragraph{Different time resolutions} EHRs and claims are two prominent sources
+of real-life healthcare data with different time resolutions. EHRs are
+particularly suited to guide clinical decisions, as they are rich in
+high-resolution and time-varying features, including vital signs, laboratory
+tests, medication dosages, etc. Claims, on the other hand, inform best on
+medico-economic questions or chronic conditions as they cover in-patient and
 out-patient care during extended time periods.
 %
 But there are many pitfalls to sound and valid
@@ -3268,7 +3269,7 @@ pick up bias: non-causal associations between treatment and outcomes.
 We detail two common sources of bias in the
 Population and Time components: selection bias and immortal time bias, respectively.
 
-\paragraph{Selection Bias:} In EHRs, outcomes and treatments are often not
+\paragraph{Selection Bias} In EHRs, outcomes and treatments are often not
 directly available and need to be inferred from indirect events. These signals
 could be missing not-at random, sometimes correlated with the treatment
 allocation \citep{weiskopf2023healthcare}. For example, not all billing
@@ -3282,7 +3283,7 @@ condition. On the contrary, for patients treated with crystalloids, only
 the most severe cases will have a billing code. Naively comparing patients on crystalloid treatment with
 less sick patients on albumin treatment would overestimate the effect of albumin.
 
-\paragraph{Immortal time bias:} Another common bias comes from timing:
+\paragraph{Immortal time bias} Another common bias comes from timing:
 improper alignment of the inclusion defining event and the intervention time
 \citep{suissa2008immortal,hernan2016specifying,wang2022understanding}. Figure
 \ref{fig:immortal_time_bias} illustrates this
@@ -3686,13 +3687,13 @@ summary statistics for treated and controls.
 
 \subsection{Estimation}\label{subsec:causal_tuto:estimation_mimic}
 
-\paragraph{Confounder aggregation:}
+\paragraph{Confounder aggregation}
 
 We tested multiple aggregations such as the last value before the start of the
 follow-up period, the first observed value, and both the first and last values as
 separated features.
 
-\paragraph{Causal estimators:}
+\paragraph{Causal estimators}
 
 We implemented multiple estimation strategies, including Inverse Propensity
 Weighting (IPW), outcome modeling (G-formula) with T-Learner, Augmented Inverse
@@ -3704,7 +3705,7 @@ Appendices \ref{apd:causal_estimators} and
 \ref{apd:packages} detail the estimators and the available Python
 implementations.
 
-\paragraph{Outcome and treatment estimators:}
+\paragraph{Outcome and treatment estimators}
 
 To model the outcome and treatment, we used two common but different estimators:
 random forests and ridge logistic regression implemented with scikit-learn
@@ -3731,7 +3732,7 @@ should have the benefit of modeling non-linear relations as well.
 \subsection{Vibration analysis: Understanding variance or sources of
   systematic errors in our study}\label{subsec:causal_tuto:vibration_mimic}
 
-\paragraph{Varying estimation choices: Confounders aggregation, causal and nuisance estimators}
+\paragraph{Varying estimation choices -- Confounders aggregation, causal and nuisance estimators}
 
 Figure \ref{fig:albumin_for_sepsis:results} shows varying confidence intervals
 (CI) depending on the method. Doubly-robust methods provide the narrowest CIs,
@@ -3750,7 +3751,7 @@ random forests for nuisance. Out of these, theory suggests to trust more
 double machine learning or doubly robust approaches.
 
 
-\paragraph{Study design -- Illustration of immortal time bias:}
+\paragraph{Study design -- Illustration of immortal time bias}
 
 To illustrate the risk of immortal-time bias, we varied the eligibility period
 by allowing patients to receive the treatment or the control in a shorter or
@@ -3814,15 +3815,15 @@ with patient with septic shock before fluid administration, consistent with the
 \section{Discussion and conclusion}\label{subsec:causal_tuto:discussion}
 
 
-\paragraph{A didactic causal framework for decision-making from EHR} Our analytic framework strives to streamline extracting valid decision-making
-rules from EHR data. Decision-making is tied to a choice: to treat or not
-to treat, for a given intervention. A major pitfall, source of numerous
-shortcuts of machine-learning systems, is to extract non-causal
-associations between the intervention and the outcome. Our framework is
-designed to avoid these pitfalls by starting with rigorous causal analysis, in the
-form of a target trial, to validate study design and analytic choices
-before more elaborate analysis, potentially using machine-learning for
-individual predictions.
+\paragraph{A didactic causal framework for decision-making from EHR} Our
+analytic framework strives to streamline extracting valid decision-making rules
+from EHR data. Decision-making is tied to a choice: to treat or not to treat,
+for a given intervention. A major pitfall, source of numerous shortcuts of
+machine-learning systems, is to extract non-causal associations between the
+intervention and the outcome. Our framework is designed to avoid these pitfalls
+by starting with rigorous causal analysis, in the form of a target trial, to
+validate study design and analytic choices before more elaborate analysis,
+potentially using machine-learning for individual predictions.
 %
 We argue that in the absence of a precise framing including treatment
 allocation, automated decision making is brittle. It is all too easy, for
@@ -4013,11 +4014,11 @@ specific individuals, such as patients undergoing sceptic shock.
 \subsection{Extending prediction to prescription needs causality}\label{subsec:causal_model_selection:extending_prediction}
 
 \paragraph{Progress in machine learning brings predictive models to new health
-  data} \citep{beam2018big,rajkomar2019machine}, with the promise of precision
-medicine. Automated analysis of medical images is increasingly accurate,
-\emph{eg} for brain images, \citep{khojaste2022deep,zhang2019radiological} or
-mammography \citep{yala2019deep,shen2019deep,nassif2022breast}. New prognostic
-models leverage routinely-collected patient records \citep{mooney2018bigdata}:
+  data} \citep{beam2018big,rajkomar2019machine} Automated analysis of medical
+images is increasingly accurate, \emph{eg} for brain images,
+\citep{khojaste2022deep,zhang2019radiological} or mammography
+\citep{yala2019deep,shen2019deep,nassif2022breast}. New prognostic models
+leverage routinely-collected patient records \citep{mooney2018bigdata}:
 predicting heart failure from claims \citep{desai2020comparison}, suicide
 attempts from questionnaires \citep{simon2018predicting}... Clinical notes
 contain much prognostic information but require text modeling
@@ -4048,23 +4049,32 @@ treatment gives an answer, but statistical validity requires causal inference
 % The plethora of approaches approaches give different causal-inference
 % estimates => need for guideline on causal model selection.
 
-\paragraph{Causal-inference bridges to predictive modeling via the rich statistical literature on \emph{outcome
-    models},} or G-computation, G-formula \citep{robins_role_1986}, Q-model \citep{snowden2011implementation}, conditional
-mean regression \citep{wendling_comparing_2018}. A central challenge of inference of treatment effects is that of
-confounding: spurious associations between treatment allocation and baseline health, \emph{eg} only prescribing a drug
-to mild cases \citep{hernan_causal_2020,vanderweele2019principles}. Controlled allocation of treatment, as in randomized
-controlled trials (RCTs), alleviate this concern. Yet most machine-learning models are trained on \emph{observational}
-data, close to real-word practice \citep{black1996we,hernan_methods_2021} but challenging for causal inference. Causal
-inference has been central to epidemiology, typically with methods that model treatment assignment
-\citep{austin2015moving,grose_use_2020}, based on propensity scores \citep{rosenbaum_central_1983}. Recent empirical
-results \citep{wendling_comparing_2018,dorie_automated_2019} show benefits of outcome modeling to estimate average
-treatment effects. Maybe a greater benefit is that these methods naturally go beyond average effects, estimating
-individualized or conditional average treatment effects (CATE), central to precision medicine.
+\paragraph{Causal-inference bridges to predictive modeling via the rich
+  statistical literature on \emph{outcome models}} This estimation approach is
+also known as G-computation, G-formula \citep{robins_role_1986}, Q-model
+\citep{snowden2011implementation}, conditional mean regression
+\citep{wendling_comparing_2018}. A central challenge of inference of
+treatment effects is that of confounding: spurious associations between
+treatment allocation and baseline health, \emph{eg} only prescribing a drug
+to mild cases \citep{hernan_causal_2020,vanderweele2019principles}.
+Controlled allocation of treatment, as in randomized controlled trials
+(RCTs), alleviate this concern. Yet most machine-learning models are trained
+on \emph{observational} data, close to real-word practice
+\citep{black1996we,hernan_methods_2021} but challenging for causal
+inference. Causal inference has been central to epidemiology, typically with
+methods that model treatment assignment
+\citep{austin2015moving,grose_use_2020}, based on propensity scores
+\citep{rosenbaum_central_1983}. Recent empirical results
+\citep{wendling_comparing_2018,dorie_automated_2019} show benefits of
+outcome modeling to estimate average treatment effects. Maybe a greater
+benefit is that these methods naturally go beyond average effects,
+estimating individualized or conditional average treatment effects (CATE),
+central to precision medicine.
 %
 For this purpose, such methods are also invaluable on randomized trials
 \citep{su2018random,lamont2018identification,hoogland2021tutorial}.
 
-\paragraph{Explosion of outcome modeling or machine learning methods.}
+\paragraph{Explosion of outcome modeling or machine learning methods}
 Many deep-learning methods have been developed for medical
 image analysis \citep{shen2017deep,monshi2020deep}.
 Even outcome-modeling methods specifically designed for causal
@@ -5092,8 +5102,7 @@ risk compared to the $\mu\text{-risk}$:
 and 0.05\% compared to 1\% on Twins.
 
 
-\paragraph{Model selection is harder for low population
-  overlap}
+\paragraph{Model selection is harder for low population overlap}
 
 Model selection for
 causal inference becomes more and more difficult with increasingly different
@@ -5241,7 +5250,7 @@ to assess prediction (estimating the so-called $\mu\text{-risk}$).
 Rather, selecting the best outcome model according to the $R\text{-risk}$
 (eq.\,\ref{def:r_risk}) leads to more valid causal estimates.
 
-\paragraph{Nuisance models: more gain than pain}
+\paragraph{Nuisance models -- More gain than pain}
 %
 Estimating the $R\text{-risk}$ requires a more complex procedure than
 standard cross-validation used \emph{e.g.}~in machine learning: it involves
@@ -7241,7 +7250,7 @@ repartition of these mistreated patients conditionally on patient conditions.
 
     \subsection{Causal estimators: When to use which method ?}\label{apd:causal_estimators}
 
-    \paragraph{Difference in Mean, \citep{splawa1990application}}: This is the most intuitive method to
+    \paragraph{Difference in Mean, \citep{splawa1990application}} This is the most intuitive method to
     estimate the ATE. It processes by comparing the mean of the outcome between both populations:
 
     \begin{equation}
@@ -7265,9 +7274,9 @@ repartition of these mistreated patients conditionally on patient conditions.
     Thus, we should rely on more elaborated estimation strategies if the data is
     observational.
 
-    \paragraph{G-formula} also called conditional mean regression
+    \paragraph{G-formula} This estimator is also called conditional mean regression
     \citep{wendling2018comparing}, g-computation \citep{robins_role_1986}, or
-    Q-model \citep{snowden2011implementation}. This approach is directly modeling
+    Q-model \citep{snowden2011implementation}. It is directly modeling
     the outcome, also referred to as the response surface: $\mu_{(a)}(x)
       =\mathbb{E}\left(Y \mid A=a, \mathbf{X}=x\right)$
 
@@ -7372,7 +7381,7 @@ repartition of these mistreated patients conditionally on patient conditions.
       Doing the same calculation for $A=0$ gives the result.
     \end{proof}
 
-    \paragraph{Doubly Robust Learning, DRL} also called Augmented Inverse
+    \paragraph{Doubly Robust Learning, DRL} It is also called Augmented Inverse
     Probability Weighting (AIPW) \citep{robins1994estimation}.
 
     The underlying idea of DRL is to combine the G-formula and IPW estimators to
@@ -7400,7 +7409,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     $\hat tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
     for $\Theta$ some class of model (eg. linear model).
 
-    \paragraph{Double Machine Learning} \citep{chernozhukov2018double} also known
+    \paragraph{Double Machine Learning} \citep{chernozhukov2018double} It is also known
     as the R-learner \citep{nie2021quasi}. It is based on the R-decomposition,
     \citep{robinson_rootnconsistent_1988}, and the modeling of the conditional mean outcome,
     $m(x)=\mathbb E[Y|X=x]$ and the propensity score, $e(x)=\mathbb E[A=1|X=x]$:
@@ -8045,7 +8054,7 @@ repartition of these mistreated patients conditionally on patient conditions.
   between treated and control populations covariate distributions : $TV(p_0(x),
     p_1(x))$.
 
-  \paragraph{Measuring overlap without the oracle propensity scores:} For ACIC
+  \paragraph{Measuring overlap without the oracle propensity scores} For ACIC
   2018, or for non-simulated data, the true propensity scores are not known. To
   measure overlap, we rely on flexible estimations of the Normalized Total
   Variation, using gradient boosting trees to approximate the propensity score.
@@ -8284,8 +8293,10 @@ repartition of these mistreated patients conditionally on patient conditions.
     \kappa=\frac{\text { (number of concordant pairs })-\text { (number of discordant pairs) }}{\text { (number of pairs) }}
   \end{equation}
 
-  \paragraph{Values of relative $\kappa(\ell,\tau\mathrm{{-risk}})$ compared to
-    the mean over all metrics Kendall's as shown in the boxplots of Figure \ref{fig:relative_kendalls_all_datasets}}
+  \paragraph{Values of relative $\kappa(\ell,\tau\mathrm{{-risk}})$}
+
+  Values of relative $\kappa(\ell,\tau\mathrm{{-risk}})$ compared to
+  the mean over all metrics Kendall's as shown in the boxplots of Figure \ref{fig:relative_kendalls_all_datasets}.
 
   \begin{table}
     \centering
@@ -8298,7 +8309,7 @@ repartition of these mistreated patients conditionally on patient conditions.
   \end{table}
 
 
-  \paragraph{Figure \ref{apd:fig:relative_kendalls_all_datasets_all_metrics} -
+  \paragraph{Figure \ref{apd:fig:relative_kendalls_all_datasets_all_metrics} --
     Results measured in relative Kendall's for feasible and semi-oracle risks}
 
   Because of extreme propensity scores in the denominator and bayes error residuals in the numerator, the semi-oracle
@@ -8316,7 +8327,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     }\label{apd:fig:relative_kendalls_all_datasets_all_metrics}
   \end{figure}
 
-  \paragraph{Figure \ref{apd:fig:all_datasets_tau_risk_ranking_agreement} -
+  \paragraph{Figure \ref{apd:fig:all_datasets_tau_risk_ranking_agreement} --
     Results measured in absolute Kendall's}
 
 
@@ -8370,7 +8381,7 @@ repartition of these mistreated patients conditionally on patient conditions.
 
 
   \paragraph{Figure \ref{apd:all_datasets_normalized_bias_tau_risk_to_best_method}
-    - Results measured as distance to the oracle tau-risk}
+    -- Results measured as distance to the oracle tau-risk}
 
   To see practical gain in term of $\tau\text{-risk}$, we plot the results as the
   normalized distance between the estimator selected by the oracle
@@ -8428,7 +8439,7 @@ repartition of these mistreated patients conditionally on patient conditions.
 
 
 
-  \paragraph{Figure \ref{apd:fig:procedures_comparison_all_metrics} - Stacked models for the nuisances is more efficient}
+  \paragraph{Figure \ref{apd:fig:procedures_comparison_all_metrics} -- Stacked models for the nuisances is more efficient}
   For each metrics the benefit of
   using a stacked model of linear and boosting estimators for nuisances compared
   to a linear model. The evaluation measure is Kendall's tau relative to the
@@ -8466,7 +8477,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     {apd:fig:procedures_comparison_all_metrics}
   \end{figure}
 
-  \paragraph{Figure \ref{apd:fig:all_datasets_overlap_effect} Low population
+  \paragraph{Figure \ref{apd:fig:all_datasets_overlap_effect} -- Low population
     overlap hinders model selection for all metrics}
 
 
@@ -8484,7 +8495,7 @@ repartition of these mistreated patients conditionally on patient conditions.
   \end{figure}
 
 
-  \paragraph{Figure \ref{apd:fig:nuisances_comparison} - Stacked models for the nuisances is more efficient}
+  \paragraph{Figure \ref{apd:fig:nuisances_comparison} -- Stacked models for the nuisances is more efficient}
   For each metrics the benefit of
   using a stacked model of linear and boosting estimators for nuisances compared
   to a linear model. The evaluation measure is Kendall's tau relative to the
@@ -8529,7 +8540,7 @@ repartition of these mistreated patients conditionally on patient conditions.
     {apd:fig:nuisances_comparison}
   \end{figure}
 
-  \paragraph{Figure \ref{apd:fig:nuisances_comparison_twins} - Flexible models are performant in recovering nuisances even
+  \paragraph{Figure \ref{apd:fig:nuisances_comparison_twins} -- Flexible models are performant in recovering nuisances even
     in linear setups}
 
   \begin{figure}
@@ -8542,8 +8553,8 @@ repartition of these mistreated patients conditionally on patient conditions.
   \end{figure}
 
 
-  \paragraph{Selecting different seeds and parameters is crucial to draw
-    conclucions}\label{{apd:results:seed_effect}}
+  \paragraph{Selecting different seeds and parameters is crucial to draw conclusions}%
+  \label{{apd:results:seed_effect}}%
 
   One strength of our study is the various number of different simulated and
   semi-simulated datasets. We are convinced that the usual practice of using only
@@ -8658,7 +8669,7 @@ repartition of these mistreated patients conditionally on patient conditions.
 
 \begin{mdframed}[linecolor=Prune,linewidth=1]
 
-  \textbf{Titre:} Titre de la thèse en français
+  \textbf{Titre:} Représentations et inférence à partir de données de santé temporelles collectées en routine
 
 
   \noindent \textbf{Mots clés:} Quelques mots-clé
@@ -8672,7 +8683,7 @@ repartition of these mistreated patients conditionally on patient conditions.
 
 \begin{mdframed}[linecolor=Prune,linewidth=1]
 
-  \textbf{Title:} Thesis title in English
+  \textbf{Title:} Representations and inference from time-varying routine care data
 
   \noindent \textbf{Keywords:} Some keywords
 
