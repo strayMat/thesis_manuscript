@@ -1531,7 +1531,7 @@ algorithms.
 This work is a specific application separated from the thesis main questions.
 Therefore it is not detailed in this manuscript.
 
-\md{Justify the chapters and link them}
+
 \paragraph{Chapter \ref{chapter:cdw}: Potential and challenges of Clinical Data
   Warehouse, a case study in France} This chapter draws the first overview of
   the Clinical Data Warehouses (CDWs) in France. These technical and
@@ -1568,16 +1568,37 @@ Therefore it is not detailed in this manuscript.
   We show that for these medium sample-size settings, simple baseline outperform
   transformer-based models both in predictive accuracy and computing resource
   efficiency. We note a strong influence of case prevalences on the predictive
-  performances, indicating unequal problem difficulties depending on the rarity
-  of the clinical target.
+  performances, indicating increasing problem difficulties for rare clinical
+  targets.
 
 \paragraph{Chapter \ref{chapter:causal_tuto}: Prediction is not all we need:
-  Causal thinking for decision making on EHRs} 
+  Causal thinking for decision making on EHRs} This chapter explores the causal
+  framework to build clinically valuable models. It shows that predictions
+  --even accurate as with machine learning, may not suffice to provide optimal
+  healthcare for every patient. Anchored in causal thinking, it details key
+  elements necessary to robustly estimate treatment effect from time-varying EHR
+  data. We present a step-by-step framework to help build valid decision making
+  from real-life patient records by emulating a randomized trial before
+  individualizing decisions, eg with machine learning. We illustrate the various
+  choices in studying the effect of albumin on sepsis mortality in the Medical
+  Information Mart for Intensive Care database (MIMIC-IV). We study the impact
+  of various choices at every step, from feature extraction to causal-estimator
+  selection. In a tutorial spirit, the code and the data are openly available.
 
+  We find that subtle bias such as immortal time bias can change the conclusion
+  of a study. However, we show that these errors can be captured by following a
+  careful trial emulation design and by comparing different modeling hypotheses
+  in a vibration analyses. We validate our estimation of average treatment
+  effect with RCT gold-standards and inspect heterogeneous treatment effect in
+  subpopulations.
 
 \paragraph{Chapter \ref{chapter:causal_model_selection}: How to select
   predictive models for causal inference?}
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \chapter{Potential and challenges of Clinical Data Warehouse, a case study in France}%
 \label{chapter:cdw}%
 
@@ -2282,8 +2303,7 @@ pathologies. Combining city data and hospital data would provide a complete view
 of patient care.
 
 
-%%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
 
 \begin{citationbox}
@@ -3898,7 +3918,7 @@ resuscitate sepsis patients, it shows that this addition is not
 beneficial in general, but that it does improve survival on
 specific individuals, such as patients undergoing sceptic shock.
 
-%% Not necessary and a bit artificial: Better to let the transistion between chapters into abstracts.
+%% Not necessary and a bit artificial: Better to let the transition between chapters into abstracts.
 % To select estimators, we used statistical insights and vibration analysis
 % without looking at their predictive performances. On the contrary, machine
 % learning rely solely on out-of-bag performances for these choices. In the next
@@ -3906,7 +3926,8 @@ specific individuals, such as patients undergoing sceptic shock.
 % models for causality, and which corrections can be applied.
 
 
-%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{How to select predictive models for causal inference?}%
 \label{chapter:causal_model_selection}%
 
