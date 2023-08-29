@@ -110,6 +110,9 @@
 \colorlet{C}{YellowOrange}
 \colorlet{O}{DarkOrchid}
 \colorlet{T}{Gray}
+\colorlet{M}{Periwinkle}
+\colorlet{S}{RedOrange}
+
 
 \colorlet{bayes_error}{purple}
 \colorlet{approximation_error}{Orchid}
@@ -614,7 +617,7 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 
 \mainmatter
 
-\chapter{Introduction: Amazing opportunities of health data?}\label{chap:intro}
+\chapter{Introduction: Amazing opportunities of health data?}\label{chapter:intro}
 
 \minitoc
 \section{How I came into this landscape}\label{sec:intro:landscape}
@@ -1174,7 +1177,7 @@ detect useful regularities in the data and learn from them
 % \citep{lipton2018mythos}.
 
 
-\section{What are the important questions in public health?}%
+\section{Important questions in public health}%
 \label{sec:intro:causality}%
 
 \subsection{The promises of RWD: what pressing needs to use health data}
@@ -1240,7 +1243,7 @@ notes from several hospitals for length of stay prediction
 \citep{jiang2023health}. Hope is high that LLMs models will soon be able to help
 practitioners during consultation \citep{lee2023benefits}. The trend towards
 personalized medicine is gradually moving away from the automation of
-well-understood tasks to tailored individual care, where mechanisms are less
+well-understood but tedious tasks to tailored individual care, where mechanisms are less
 understood \citep{schork2015personalized, topol2019high}.
 
 \paragraph{New data for better knowledge acquisition?}
@@ -1327,7 +1330,7 @@ guide this link between patient characteristics and intervention.
   Is statistical learning a useful tool to answer these questions? There is a
   growing interest in predictive models in healthcare. This trend is reflected
   by the exponential increase in the proportion of publications per year in
-  Pubmed  shown in Figure \ref{fig:intro:pubmed_query}. However, when reading
+  Pubmed shown in Figure \ref{fig:intro:pubmed_query}. However, when reading
   into details the prognosis literature I was surprised to find that prediction
   is rarely an objective per-se.
 
@@ -1371,9 +1374,9 @@ guide this link between patient characteristics and intervention.
   objectives which are to \textit{formulate and test hypotheses about how the
     human organism “works” in health and illness}.
 
-    The auxiliary role of prediction in healthcare calls for replacing or
-  complementing statistical learning with another methodological tool. 
-  
+  The auxiliary role of prediction in healthcare calls for replacing or
+  complementing statistical learning with another methodological tool.
+
 
 \end{background_box_left}
 
@@ -1397,7 +1400,7 @@ guide this link between patient characteristics and intervention.
 
   \paragraph{The central concept of causality}%
   \label{subsec:intro:causation}%
-  
+
   Causality is an central concept in epidemiology
   \citep{hill1965environment,hernan2020causal} and have been developed formally
   in statistics \citep{rubin1974estimating}, econometrics
@@ -2257,9 +2260,23 @@ of patient care.
 \end{citationbox}
 
 \begin{chapterabstract}\label{sec:predictive_models:abstract}%
-
-  The previous chapter demonstrate the strong interest within French CDWs in using to develop
-  accurate prediction models.
+  Electronic Health Records contain time-varying features with high cardinality.
+  Current state-of-the-art predictive models build on increasingly elaborated
+  pipelines --based on transformers-- to handle the complexity of these data.
+  Acknowledging the complexity to deploy, transfer and adapt these models on
+  local care environments, we explore a complexity-benefit tradeoff by comparing
+  them to simple aggregation of events. We use three clinical tasks involving
+  time-varying structured Electronic Health Records (EHRs) and increasingly
+  clinically relevant problems. We show that these benchmarking tasks display
+  heterogeneous predictive difficulties. We introduce a simple aggregation of
+  static embeddings --transferred from national claims and publicly available--,
+  showing that it outperforms transformer-based models on simple tasks with
+  medium sample sizes. We highlight the sample and computing resource efficiency
+  of these models. Finally, clinically relevant problems generally present a
+  strong class imbalance, which complicates models development and undermines
+  their performances. Further work is needed to understand if transformer-based
+  models perform well in these scenarios where the number of cases requires good
+  sample efficiency.
 \end{chapterabstract}
 
 
@@ -2279,121 +2296,627 @@ of patient care.
 \clearpage
 \minitoc
 
-\section{Predictive models in healthcare: Less fascination, more practical utility}\label{sec:predictive_models:motivation}
+\section{The modern quest for medical oracles}%
+\label{sec:predictive_models:motivation}%
 
-\subsection{Why such interest in predictive models in healthcare}\label{subsec:predictive_models:importance}
+%But why such interest in predictive pipelines for healthcare ? How these tasks
+%relate to th}%
+% \label{subsec:predictive_models:importance}%
+\gv{I wonder if this is the right way to angle our paper. It seems to me beside
+  the points that we are trying to make (but maybe I've just missing the
+  angle)}\md{The shift towards less relevant tasks is outside the scope indeed.
+  I focused rather on a range of tasks covering a more or less precise clinical
+  population. Our point is to benchmark the different models on these different
+  type of tasks.}
 
-\paragraph{Interest in the clinic}
+% promises
+Increasing availability of routine care data and progress in
+machine learning, have brought much hope in predictive modeling in healthcare.
+The richness of the data in EHRs and their integration in routine care make them
+a promising application area \citep{raghupathi2014big}.
 
-% better use of constrained medical resources
-\textit{Being able to predict key outcomes could, theoretically, make the use of
-  hospital palliative care resources more efficient and precise} \citep{topol2019high}
+Benchmarking these models is not easy due to the wide range of potential use
+cases.
+% However, there is a shift from clinically meaningful objectives towards abstract
+% outcomes in EHR predictive modeling literature.
+In biostatistics and clinical medicine, prognosis models have been motivated by
+\emph{risk stratification}: the Framingham risk score for coronary heart disease
+was an early attempt to characterize behavior changes that could lead to
+decreased risk \citep{brand1976multivariate}. Clinical \emph{risk scores} are
+either focused on the short term with alarm models
+\citep{tang2007global,rothman2013development,wong2021external} or on the long
+term with screening models. In parallel, artificial intelligence in medicine
+looks for prognosis model as part of larger \emph{decision-making} systems
+\citep{Szolovits1982artificial}. In complex healthcare organizations, accurate
+individual predictions help to use efficiently constrained medical resource by
+informing \emph{care planning} \citep{topol2019high}. Appendix
+\ref{apd:review_tasks} details these four type of predictive objectives for
+healthcare.
 
-The Framingham risk score, one of the earliest predictive model in medicine was
-designed to predict Coronary heart disease risk by fitting a cox model using
-seven features on 5300 patients: age, cholesterol, systolic blood pressure,
-hematocrit, ECG status, smoking at intake, and relative body weight
-\citep{brand1976multivariate}.
+Following the trend for evaluating current state-of-the-art models
+\citep{wornow2023shaky}, we focus on purely predictive models --risk scores or
+planning-- with three tasks ranging from general populations of patients to
+more specific clinical cases.
 
-\citep{harrell2001regression} mention diagnosis, prognosis, confounder adjustment
-and heterogeneous treatment effects (mainly for cost-effectiveness analyses) as
-the main uses of predictive models in healthcare. Ten years later,
-\citep{steyerberg2009applications} also mentions diagnosis, prognosis and therapy
-(He has a great figure from pubmed). I should do the same for 2023.
+\subsection{Predictive pipelines fueling medical predictions are increasingly
+  complex}%
+\label{subsec:predictive_models:complex_data}%
 
-Some are used in clinical practice every day : the Glasgow coma scale
-\citep{teasdale1974assessment}, the APACHE III score \citep{knaus1991apache}.
-But a very small part of the published models are used in practice
-\citep{wyatt1995commentary}. Reasons for this poor adoption are lack of
-evidences for credibility, generalizability or clinical effectiveness.
+This complexity stems from predictive models trying to model ever richer data
+sources.
 
-Prevention : \textit{Early detection and appropriate treatment of sepsis have
-  been associated with a significant mortality benefit in hospitalized patients}
-\citep{wong2021external}
+\paragraph{Original complexity of the data}
+\gv{Can you make this paragraph a bit shorter: it is not the center of
+  our contribution}
+\md{better?}
+% Big observational databases are complex but contain interesting information
+EHRs contain time varying variables with a high cardinality. Complex,
+time-consuming and costly work in medical and computer skills is required to
+clean and transform these sources into data tables suited for statistical
+analysis \citep{bacry2020scalpel3,hripcsak2015observational}. More specifically,
+data preprocessing usually requires to map non standard terminologies, create
+derived variables by aggregating measures over specific time periods. The
+choices of baseline covariates should be driven by medical experts which are
+often not familiar the complexity of the EHR. We propose to leverage models that
+takes raw data as input to avoid as much as possible these preprocessing steps.
 
-Alert systems \citep{yu2018artificial}.
+%  At the time of study, population
+%  inclusion criteria should be aligned with expert conception -- a task known as
+%  computational phenotyping \citep{richesson2013electronic,
+%  newton2013validation}. 
 
-Patient deterioration detection \citep{rothman2013development}: \textit{Rather than attempting to forecast a particular
-  adverse event, we argue that intervention during early deterioration can help prevent such an adverse event from
-  occurring}
+\paragraph{From simple hand-crafted linear models to elaborated weakly-supervised tranformers}
 
-\paragraph{Risk stratification}
+% increased complexity of models
+Predictions on EHRs originally used linear models on few carefully selected
+static variables for tens of thousand patients coming from a single center
+\citep{goldstein2017opportunities}. To overcome the high cardinality of EHRs
+medical vocabularies, a range of deep learning methods were developed
+\citep{shickel2017deep}. Time varying features were first modelled thanks to
+recurrent neural network \citep{lipton2016learning}, then with transformer based
+architectures \citep{li2020behrt}. Appendix \ref{apd:review_models} further
+details this evolution of predictive model complexity.
 
-risk stratify \citep{tang2007global}
+\subsection{Transfer learning: no silver bullet}%
+\label{subsec:predictive_models:low_prevalence}%
 
-\paragraph{Long term prevention}
+\gv{First tell us how we get the small number of datasets. Show us how starting
+  from a big data, we get to small data. Then, merge the two paragraph below in
+  a smaller, shorter one "Transfer learning: no silver bullet". Make it shorter,
+  because right now you are putting a lot of words on it, so you are drawing
+  attention to it, and you are going to prime the reader to ask you to compare
+  to it (actually, I wonder whether this should not be moved to the
+  discussion)}\md{Is it better ? I moved to the discussion the interrogation on
+  the performances of large transformer models and added the concrete example
+  for small number of cases.}
+
+% Low prevalence
+%\paragraph{Transferring to new tasks still requires a high number of cases }
+Well-defined clinical questions concern a very small number of cases --diseases
+are rare, often with less than 5\% of prevalence. For example, consider the
+prediction of cardiovascular complications --a rather common clinical
+condition--, we first extracted a cohort of 2,101,819 patients. After running
+all inclusion criteria --shown in Figure \ref{apd:fig:flowchart_t3}, we are left
+with only 4,360 cases among a population at risk of 165,930 patients. Currently,
+large models are trained on larger number of cases (see a review of number of
+cases for three major transformer based models in Appendix
+\ref{apd:foundation_model_nb_cases}). Due to the difficulty to access data
+linked to privacy rights, we should also compare this to problems with
+smaller samples.
+
+% Major dataset shifts
+%\paragraph{Transferring predictive pipelines from one data site to another is rarely effective} Due to dataset shifts
+%\citep{moreno-torres_unifying_2012,storkey_when_2013,finlayson2021clinician}.
+Major dataset shifts make it difficult to transfer predictive
+pipelines \citep{finlayson2021clinician}: heterogeneity in coding practices \citep{juven2013codage},
+socio-economic status \citep{gianfrancesco2018potential}, inconsistency of
+practices in different organizations \citep{agniel2018biases}.
+% The small number
+% of external evaluations of transformer based models is not sufficient to
+% conclude to their transfer capacities.
+% Model generalization might not be desirable
+It might not even be possible to generalize machine learning models in
+healthcare \citep{futoma2020myth}. Different population, information systems and
+healthcare practices may require tailored tools \citep{rose2018}. For example,
+\cite{wong2021external} evaluated externally a widely deployed sepsis prediction
+model showing poor transfer performance of 0.63 ROC AUC.
 
 
-\paragraph{Planning and piloting}
 
-Rejoin the logistic and administrative help from \cite{topol2019high}.
+\subsection{Current barriers to predictive models usefulness}%
+\label{subsec:predictive_models:useful}%
 
-The LOS task: planning the number of beds and members of staff required,
-identifying individual outliers and case mix correction for benchmarking \citep{verburg2017models}
+\paragraph{Credibility of external validity requires simple model deployments}
 
-\paragraph{Exploring french CDWs:} 23 \% of studies, just after population definitions).
+Some predictive risks are used in daily clinical practice: For example, the
+Glasgow Coma Scale \citep{teasdale1974assessment} or the APACHE III score
+\citep{knaus1991apache}. But only a small part of the published models are
+successfully deployed into clinical practice \citep{wyatt1995commentary,
+  kelly2019key}. Poor adoptions are due to lack of evidence for clinical
+credibility, accuracy, generality or clinical effectiveness. Improving the
+strength of this evidence requires to repeatedly test these systems on
+different prospective populations with intuitive metrics for physicians
+\citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
 
-\subsection{Data sources fueling predictive models are increasingly complex}\label{subsec:predictive_models:complex_data}
+\paragraph{Complex systems and privacy requirements hinders model deployments}
+The growing body of predictive models from EHR focus mainly on accuracy
+performances. They are rarely shared due to privacy requirements. They are tied
+to specific tasks hardcoded into the model architectures
+\citep{wornow2023shaky}. The increasing sample and architecture sizes require
+ever greater computing and technical resources -- as detailed in Appendix
+\ref{apd:computing_resources_review}. These factors lead to models being trained and
+evaluated on a small fraction of existing healthcare datasets, endangering
+external validity, integration into EHR and ultimately usefulness
+\citep{sharma2021,wornow2023shaky}.
 
-Why is EHR so complex ? How ? time, high cardinality, multi-modality
+There is a need to balance good predictive performances with better clinical
+integration, which is tightly linked with simple deployment.
 
-\paragraph{In the literature}: early article in \cite{wu2010prediction},
-literature review from 2017 \citep{goldstein2017opportunities}, literature
-review more focused on models and task from soda prez.
+\subsection{Objective and outline of the paper}%
+\label{subsec:predictive_models:contribution}%
 
-Within french CDW(link with previous chapter)
+\paragraph{Contributions}
+We study the performances of increasingly complex models on three operational
+and clinical tasks. We explore the performance trade-offs between small models
+that can be run on few samples and large models requiring more samples to become
+efficient. We propose a new model based on the transfer of static medical
+embeddings trained from large claims databases. In the technically and legally
+constrained environment of healthcare data, what predictive pipelines are the
+most efficient to yield good practical utility?
 
-\subsection{Low prevalence and local practice: Headaches for machine learning}\label{subsec:predictive_models:low_prevalence}
+\paragraph{Outline}
+Section \ref{sec:predictive_models:pipelines} details four predictive pipelines
+of increasing complexity. Subsection
+\ref{subsec:predictive_models:task_definitions} define three clinical tasks
+covering different benchmarking and clinical usefulness. Subsection
+\ref{subsec:predictive_models:evaluation_pipeline} details our evaluation
+pipeline. Finally subsection \ref{subsec:predictive_models:results} presents our
+results and section \ref{sec:predictive_models:conclusion} discusses their
+implications.
 
-For logistic models, a requirement is that the test set should have at least 10
-cases per feature with a positive event (eg. mortality)
-\citep{harrell1985regression,wyatt1995commentary}.
+\paragraph{Main findings}
 
-\subsection{What makes a healthcare predictive model useful?}\label{subsec:predictive_models:useful}
+With small to moderate sample sizes -up to 10,000 patients-, simple models have
+better performances than transformer models on general tasks such as length of
+stay or prognosis. Among the simpler model based on row counts or static
+embeddings, no featurization choice largely outperforms others in any single
+task but random forest estimators are always more performant than linear models.
+Static embeddings models are the most compute and memory efficient solution.
+Small target prevalence --linked to the number of cases-- is detrimental
+to the performances of prognosis models.
 
-What are the most impactful algorithms for predictive tasks from structured EHR
-? A wealth of methods, but a lack of insights on the advantages and
-inconvenience for specific problems and resources.
+%Benchmark tasks are simpler to instantiate but are hard to include into a
+%practical medical workflow. 
 
-We build upon the criteria for adoption from \cite{wyatt1995commentary}.
 
-More modern sources eg. \citep{subbaswamy2020development}.
+\section{From basic to complex: four increasingly sophisticated predictive pipelines}%
+\label{sec:predictive_models:pipelines}%
 
-\paragraph{We can share it easily: } Hence, people can use it AND contribute to
-external validity and continuous improvements.
+\subsection{A simple non destructive data format: sequence of events}%
+\label{subsec:predictive_models:event_format}%
+% Time-varying features with high cardinality is the specificity and is handled
+% by the event data format
+We adopt the common modeling of patient healthcare trajectory as a sequence of
+events \citep{beam2019clinical, bacry2020scalpel3, chazard2022book}. Each event
+is described by a triplet: a person identifier $i$, a datetime $t$ and a medical
+code $c$, $e = (i, t, c)$ as shown in Figure \ref{fig:ehr_prediction_timeline}.
+For each patient $i$, the complete trajectory is the ordered collection of its
+$T_i$ events $\{e_k\}_{k=1..T_i}$. This simple format integrates together a wide
+variety of time varying features without imposing data transformation or feature
+selection --often brittle to modelization choices. However, it calls for
+adequate aggregation methods to reduce the long event table into a patient-wise
+features table of shape $N \times d$ matrix for $d$  that can be passed over to
+statistical estimators.
+% Naive pivot along the concept column yields high dimensional and sparse
+% matrices poorly suited to small sample populations, often encountered in
+% healthcare application use cases.
+Here, we explore four different choices of aggregation of increasing
+complexity, followed by common statistical estimators. We call these aggregation
+methods \emph{featurizers} and note them $g(\cdot, \lambda_g)$, where
+$\lambda_g$ are the parameters of the featurizers.
 
-\paragraph{Performances} linked to accuracy, but questions on how to measure it.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/chapter_3/ehr_trajectory_predictive.pdf}
+  \caption{Event time representation of EHRs data for predictive tasks. Events
+    are observed between the inclusion and start of followup dates. Target is
+    considered only between the start of followup and the horizon to avoid right
+    censoring. The event types are distinguished by their color: billing
+    diagnoses in blue, billing procedures in red and drug administrations in
+    green.}\label{fig:ehr_prediction_timeline}
+\end{figure}
 
-\paragraph{Insertion in the care workflow}
+\subsection{Demographic features: $g_{demo}$}\label{subsec:predictive_models:demographic}
 
-Arguments for ease of deployment.
+A simple featurization choice --pervasive before machine learning techniques--
+considers only a few demographic features available in the patient record: age,
+gender, admission origin, discharge destination, admission date.
 
-\section{From basic to complex: four increasingly sophisticated predictive pipelines}\label{sec:predictive_models:pipelines}
+\subsection{Count encoding of event features: $g_{count}$}\label{subsec:predictive_models:count_encoding}
 
-\subsection{Demographic features}\label{subsec:predictive_models:demographic}
+We process the raw events by computing a sparse count matrix $C$ of shape
+$(n_{patients}, n_{vocabulary})$ where each row collapses the patient history by
+counting the number of times a concept is present in the patient history. To
+better take into account the temporal dimension, we also computed a decayed
+count of the events in the patient history, noted $C_{\delta}$. For an event
+triplet $(i, t, c)$, we compute the time delta between the event and the followup
+time.
+$$\Delta t = |t-T_0|$$
+Then, we decay the count matrix with an exponential of half life $\delta$.
+$$C_{\delta}[i, c] += e^{-\frac{\Delta t}{\delta}}$$% 
+Finally, we obtain the patient features by concatenating each
+delayed count matrix; eg. with decay 0 and decay $\delta$.
+$$g_{count}(X, (0, \delta))= [C_{0}, C_{\delta}]$$% 
+Several decays can be selected and concatenated together. The decays are
+considered hyperparameters which are selected by cross-validation. Appendix
+\ref{apd:pipelines:count_encoding} details this feature processing procedure.
 
-\subsection{Count encoding with event features}\label{subsec:predictive_models:count_encoding}
+\subsection{Static embeddings of event features: $g_{emb-local}$ or $g_{emb-SNDS}$}
 
-\subsection{Static Embeddings of event features}
+The SVD-PPMI algorithm (introduced by \cite{beam2018big}, detailed in Appendix
+\ref{apd:pipelines:static_embeddings}) performs a dimension reduction on the
+cooccurrence matrix between each medical concepts. Building upon this algorithm,
+we propose two sequence representation techniques. These embeddings are static
+by opposition to transformer-based embeddings that adapts to the context.
 
-\subsection{Transformer based}\label{subsec:predictive_models:transformer}
+\paragraph{Static embeddings locally trained: $g_{emb-local}$} We apply the
+SVD-PPMI algorithm to the training cohort yielding static embeddings
+$\Phi_{local}$. Aggregation at the stay level is done using the same
+count matrices as for \ref{subsec:predictive_models:count_encoding} --eventually
+with decayed counts: $g_{emb-local}(X, (0, \delta))=[C_{0} \cdot \Phi_{local}, C_{\delta} \cdot \Phi_{local}]$.
+
+\paragraph{Transfer trained static embeddings:} Instead of retraining the
+embeddings on the train cohort, we rely on static embeddings $\Phi_{SNDS}$
+pre-computed on French national claims data from 3,112,565 patients
+\citep{doutrelignerepresentations}. The aggregation is performed similarly as
+for count encoding and local embeddings: $g_{emb-SNDS}((X, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
+  \Phi_{SNDS}]$.
+
+\subsection{Transformer based: $g_{cbert}$}%
+\label{subsec:predictive_models:transformer}%
+
+Relying on the transformer architecture \citep{vaswani2017attention}, recent
+trajectory modeling algorithms showed promising results for various EHR
+prediction tasks \citep{li2020behrt, rasmy2021med,pang2021cehr}. We benchmarked CEHR-BERT
+\citep{pang2021cehr}, one of these recent transformer-based models particularly
+adapted to our data format.
+
+% pretraining and finetuning
+Transformer models are trained in two steps: a) First, pre-train the model on an
+auxiliary task using a large database. In our case, this task is a Masked Language
+Model (MLM): the network tries to predict the medical concept of randomly masked
+events in the sequences. The CEHR-BERT implementation also tries to predict the
+type of the next visit. b) Then fine-tune the model on the task of interest. We
+use the full train set for pretraining and finetuning. Details on this
+architecture are given in Appendix \ref{apd:pipelines:cehr_bert}.
+
+
+\subsection{Final step estimator}\label{subsec:predictive_models:estimators}
+
+These choices of featurizers are not task-specific. To obtain probabilities of
+occurrence for the target, the analyst needs to choose and train an estimator $f$
+and its corresponding parameters $\lambda_f$. The prediction is given by the chain of the featurizer and the
+estimator: $\hat{y} = f(g(\cdot, \lambda_g), \lambda_f)$.
+
+For CEHR-BERT, the predictor is the final layer of the neural network. It is
+trained together with the sequence representations during the fine-tuning step.
+For the other featurizers, we create a scikit-learn pipeline
+\footnote{\url{https://scikit-learn.org/stable/modules/compose.html\#combining-estimators}}
+where a featurizer is followed by an estimator: either a penalized logistic
+regression or a random forest. The hyperparameters of the featurizers and
+estimators can be cross-validated together. %
+We experimented with gradient boosting trees, without observing significant performance gains.
+
 
 \section{Empirical Study}\label{sec:predictive_models:empirical_study}
 
-\subsection{Evaluation pipeline}\label{subsec:predictive_models:evaluation_pipeline}
+\subsection{Three clinical and operational tasks}%
+\label{subsec:predictive_models:task_definitions}%
 
-\subsection{Three clinical and operational tasks}\label{subsec:predictive_models:task_definitions}
+\paragraph{Heathcare database: Paris hospital data warehouse}%
+\label{sec:data_extraction}%
 
-\paragraph{Length Of Stay: Plan}
+We used data extracted from Greater Paris Hospitals (AP-HP) data
+warehouse, hosting routine care data from 38 hospitals in the Paris area.
+Details on this database is given in Appendix \ref{apd:database_description}. We
+include every medical event among drug administrations, ICD10 diagnosis and
+procedure billing codes. We also add selected static features at the stay level:
+age at hospitalization, gender, admission reason.
 
-\paragraph{Diagnosis Prediction: Benchmark}
+\paragraph{Correctly framing the prediction task} General workflows describe key
+steps to develop predictive models with good practical utility
+\citep{ohdsi2019book,tomavsev2021use,jiang2023health}. Here, we detail our
+framework to precisely define each task. First, we define a \emph{study period}
+during which data acquisition was sufficiently stable. Then, we define and
+select the \emph{cohort} detailed for each task. Inclusion criteria are detailed
+in the flowcharts of Figure \ref{apd:fig:flowcharts}. We define
+the task outcome with: an \emph{index visit}, an \emph{observation period}
+during which events are fed to the predictive model, an \emph{horizon} after the
+end of the observation period defining the followup, and a target event potentially occurring
+during the followup.
 
-\paragraph{Major Adverse Cardiovascular Events: Prevent}
+We study three tasks of increasing clinical value and implementation complexity
+with decreasing benchmark interest. Table \ref{table:predictive_tasks_summary}
+summarizes key characteristics of the cohorts and task definitions.
 
-\subsection{Results: Performance-sample trade-offs}
+\begin{table}[!ht]
+  \centering
+  \resizebox*{0.8\textwidth}{!}{
+
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      \textbf{}                   & \textbf{Long LOS}                     & \textbf{Prognosis}                  & \textbf{MACE} \\ \hline
+      \textbf{Task}               & Binary classification                 & \makecell[l]{Multi-Label                            \\binary classification}                                       & Binary classification                             \\ \hline
+      \textbf{Index Visit}        & First inpatient visit                 & Random Non-Final Visit              & Random Visit  \\ \hline
+      \textbf{Observation Period} & Index visit                           & \makecell[l]{Full trajectory before                 \\end of index visit}                           & \makecell[l]{Full Ttrajectory before\\end of index visit} \\ \hline
+      \textbf{Horizon}            & End of index visit                    & End of next visit                   & 12 Months     \\ \hline
+      \textbf{Median Age}         & 56.4                                  & 61.5                                & 60.0          \\ \hline
+      \textbf{Female}             & 54.6\%                                & 53.3\%                              & 53.7          \\ \hline
+      \textbf{Cohort Size}        & 27,053                                & 10,786                              & 165,948       \\ \hline
+      \textbf{Prevalence}         & 23.1\%                                & From 1.3 to 55.9\%                  & 2.6 \%        \\ \hline
+      \textbf{Number of cases}    & 6,249                                 & From 139 to 6,029                   & 4,315         \\ \hline
+      \textbf{Description}        & \makecell[l]{Long stay classification                                                       \\ (longer than 7 days)} & \makecell[l]{Next stay prognosis:\\ICD10 chapter classification} & \makecell[l]{MACE Prognosis\\at one year}                                      \\ \hline
+    \end{tabular}
+  }
+  \vspace{1em}%
+  \caption{Tasks definitions and cohort characteristics.}%
+  \label{table:predictive_tasks_summary}%
+\end{table}
+
+\paragraph{Plan -- Long Length Of Stay interpolation
+  (LOS)}\label{par:task_definitions:los}%
+% los justification
+During complete hospitalization, stays with extreme LOS values are responsible
+for a large share of hospital costs and resource uses. The ability to predict
+extreme LOS is useful for resource managements
+\citep{omachonu2004predicting,caetano2014data,jiang2023health}.
+% los definition
+We define LOS as a binary task categorizing each inpatient stay as long if LOS
+greater than 7 days or short if LOS shorter than 7 days. Appendix
+\ref{apd:task_details:los} details the task definition.
+
+\paragraph{Stratify -- Prognosis prediction}\label{par:task_definitions:prognosis}%%
+% prognosis justification
+Prognosis is important for prevention as it can influence shared decision-making
+between the clinician and the patient.
+% prognosis definition
+We define a proxy for prognosis as a multi-label binary classification task
+where we predict the next stay ICD10 codes starting from a random non final stay
+for each patient. We reduce the granularity of the codes to only 21 chapters
+at the highest level of the hierarchy. Appendix \ref{apd:task_details:prognosis}
+details the task definition. For this task, we realized that providing the index
+stay ICD10 chapters was a strong baseline. We
+therefore concatenated these codes as separated demographic features for all
+pipelines after aggregation.
+
+\paragraph{Prevent -- Predict Major Adverse Cardiovascular Events}\label{par:task_definitions:mace}
+
+% MACE justification
+Prediction of all-chapters billing codes does not focus on a clinically
+well-defined population. On the contrary, the composite outcome of Major Adverse
+Cardiovascular Events (MACE) is often used in clinical trials targets the
+cardio-vascular risk.
+% MACE definition
+We define MACE prediction as the prognosis of incident MACE at one year for a
+randomly chosen stay for each patient. Appendix \ref{apd:task_details:mace}
+details the task definition.
+
+% remark on low prevalence
+For well-defined clinical tasks such as MACE, the study population is only a
+small part of the initial general population. Even when studying regional data
+warehouses, the relevant population for the algorithm is an order of magnitude
+smaller than the full population, requiring better sample efficiency than
+general tasks such as LOS or prognosis.
+
+
+\subsection{Evaluation procedure}\label{subsec:predictive_models:evaluation_pipeline}
+
+We split each cohort obtained in Sub-section
+\ref{subsec:predictive_models:task_definitions} into a train and a test set
+following a temporal split based on inclusion date with a 0.8/0.2 ratio (Split
+detailed in Appendix \ref{apd:evaluation_procedure}). Each patient only
+appears in one of the two sets. To study the sample efficiency of the different
+pipelines, we further restrict the effective train set size to increasing ratio
+of its full size: $N_{train, r}= r \cdot N_{\mathcal{T}} \quad with \quad r \in
+  [0.1, 0.25, 0.5, 0.9, 1]$. Figure \ref{fig:evaluation_procedure} summarizes the
+procedure.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{img/chapter_3/selection_procedure.pdf}
+  \caption{Evaluation procedure for non deep learning estimators: For each
+    effective train set of size $r$, each pair of featurizer and estimator are
+    cross-validated together to obtain the best parameters, then evaluated on a
+    fixed validation set.}\label{fig:evaluation_procedure}
+\end{figure}
+
+Appendix \ref{apd:hospital_split} details an alternative geographic split
+validation procedure for LOS and prognosis tasks, exploring the validity of our
+results when testing the models on patient from other hospitals. We report Area
+Under the Receiver Operating Characteristic Curve (ROC AUC) and refer to
+appendices for brier score and average precision results (AUPRC).
+
+
+\subsection{Results: Performance-sample
+  trade-offs}\label{subsec:predictive_models:results}
+
+
+\paragraph{Long LOS interpolation: saturating a simple task already requires
+  10,000 samples}%
+
+
+Figure \ref{fig:los_roc_auc} shows that ROC AUC performances for LOS saturates
+at 95\% ROC AUC for random forests and every featurizers but the demographics.
+The transformer model is not able to reach the best performances, certainly
+because of the lack of samples.
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
+  \caption{LOS ROC AUC for different featurizers and estimators. The
+    performances are averaged over 5 folds. The shaded area represents the
+    standard deviation. The task performance seems to saturate at 95\% ROC AUC
+    for random forest and all featurizers but the demographics and CEHR-BERT,
+    suggesting that the Bayes error rate is reached. However, for lower sample
+    regimes --below 12,500 patients, we see a clear advantage of static
+    embeddings over count encoding of events (both for logistic regression and
+    random forest). Appendix \ref{apd:temporal_split:los} details the AUPRC.}%
+  \label{fig:los_roc_auc}
+\end{figure}
+
+
+\paragraph{Prognosis prediction: static embeddings are not more sample efficient
+  than count encoding}%
+
+Figure \ref{fig:prognosis_roc_auc} shows the ROC AUC performances of the
+different pipelines for the prognosis task. The performances are averaged over
+ICD10 chapters with equal weight (Figure \ref{fig:prognosis_roc_auc_macro}) or
+with chapter prevalences as weights (Figure \ref{fig:prognosis_roc_auc_weighted}).
+Count encoding featurizer outperform static embeddings with random forest
+outperforms other pipelines. Interestingly, the performances of logistic
+regression hardly improve on the previous stay baseline even with the full train
+set. This indicates that the high number of features only damaged the estimation
+compared to the baseline. This is confirmed by the good performance of the
+demographic-only pipelines.
+
+\begin{figure}[!h]
+  \begin{subfigure}[b]{1\textwidth}
+    \centering
+    \caption{}\label{fig:prognosis_roc_auc_macro}
+    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_macro.pdf}
+  \end{subfigure}
+  \vfill
+  \begin{subfigure}[b]{1\textwidth}
+    \centering
+    \caption{}\label{fig:prognosis_roc_auc_weighted}
+    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_weighted.pdf}
+  \end{subfigure}
+  \caption{Prognosis ROC AUC average over chapters for different featurizers and
+    estimators. The performances are averaged over 5 folds. The shaded area
+    represents the standard deviation. The horizontal black lines display the
+    naive baseline that predicts the previous stay codes for the target stay.
+    Figure \ref{fig:prognosis_roc_auc_macro} averages all chapters with equal
+    weight whereas \ref{fig:prognosis_roc_auc_weighted} averages chapters with
+    their weight as prevalences. Random forest have better performances. Count
+    encoder outperforms other featurizers, suggesting the importance of low
+    count events that are smoothed out in embedding methods. Appendix
+    \ref{apd:temporal_split:prognosis} details the results for each chapter and
+    display Average Precision and Brier Score results.}%
+  \label{fig:prognosis_roc_auc}
+\end{figure}
+
+Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
+performances for full effective train set and random forest estimators.
+Performances increase with target prevalence. Appendix
+\ref{apd:prognosis_prevalences} show similar results for ROC AUC and
+linear estimators.
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
+  \caption{ Bigger target prevalences yield better average precision. The
+    different chapters are binned in prevalence bins. The estimator used for
+    this plot is random forest trained on the full effective train set. Appendix \ref{apd:prognosis_prevalences} details
+    the ROC AUC curve.}%
+  \label{fig:prognosis_prevalences_auprc}
+\end{figure}
+
+Figure \ref{fig:prognosis_training_time} shows the training time of the
+different pipelines, highlighting the efficiency of the static embedding
+methods.
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/training_testing_time_per_chapter.pdf}
+  \caption{Static embeddings are quicker to train. The training times are
+    reported for the full train set for the prognosis task average on the 21
+    ICD10 chapters. For all featurizers expect to CEHR-BERT, jobs were submitted
+    with 10 CPU cores and 36GB memory on a slurm cluster. For CEHR-BERT, the
+    calculation took place on the same cluster with a Nvidia T4 GPU with 16Gb of
+    memory.}%
+  \label{fig:prognosis_training_time}
+\end{figure}
+
+
+\paragraph{Static embeddings are quicker to train}%
+
+Figure \ref{fig:prognosis_roc_auc} shows the training time of the different
+pipelines for one chapter on the prognosis task.
+
+% \begin{figure}
+%   \centering
+%   \includegraphics{img/chapter_3/training_times.pdf}
+%   \caption{Training time for the different pipelines. The training time is
+%     averaged over 5 folds for . The shaded area represents the standard deviation.
+%     The training time for the transformer based model is significantly longer
+%     than the other pipelines.}%
+% \end{figure}
+
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
 
+
+% Restating the study
+State-of-the-art predictive models from structured Electronic Medical Records
+models are hindered by the unsolved challenge of publicly sharing pre-trained
+models \citep{wornow2023shaky}. Training them from scratch requires important
+computing resources, and access to very large cohorts. We explored the
+complexity trade-off by studying different types of predictive algorithms, from
+simple baseline to large scale transformers.
+
+
+\paragraph{Simple problems are satured with simple models} The Long LOS
+interpolation task is saturated by every model with close to 95\% ROC AUC.
+Transferring static embeddings from a large external database allows to reach the
+maximum performances with a small number of samples. For simple predictive tasks
+such as administrative ones and small sample sizes, our results suggest that
+using simple baselines based either on count encodings or static embeddings
+followed by random forest is sufficient to reach good performances.
+
+\paragraph{If concerned with training time, use static embedding pipelines}
+
+The static embedding pipelines are faster to train than the count encoding and
+transformer models. They show similar performances for most of the tasks and
+medium sample size. They should be favored if it is necessary to frequently retrain the algorithm.
+
+\paragraph{The prognosis task might not be a sound evaluation of predictive models}
+Our experiments show that the prognosis task relies heavily on the previous stay
+diagnoses codes and the patient demographics (age, sex, type of admission), with
+only a small improvement of performances brought by the other type of features.
+The inclusion of detailed events only matters for specific ICD10 chapters. This
+highlights the importance of evaluating predictive models on clinically relevant
+tasks aiming for inclusion in the healthcare workflow \citep{wornow2023shaky}.
+
+\paragraph{Currently, we did not benchmark the MACE task}
+
+MACE is more complicated to evaluate because of the low prevalence of the
+outcome. This forced us to use a larger cohort to collect enough cases. Both
+simple and complex models require large computing resources. However, the type
+of theses resources are different. Static embeddings can reach satisfying
+performances on big samples with large memory consumption (eg. 100GB of RAM).
+Transformer architectures require large GPUs to be trained even for small sample
+sizes. Because of constraints for these two types of resources on the AP-HP
+computing cluster, we are currently not able to evaluate the MACE task on the
+full cohort.
+
+% limit
+\paragraph{Further work} The high number of laboratory measurements for
+hospitalized patients could improve the performances for all tasks. Due to
+resource constraints, we did not include them into our features. For better
+benchmarking with previous transformer-based models, a fourth task on heart
+failure among type 2 diabetics should be explored. %
+
+One argument in favor of recent large predictive models is their easy
+repurposing for new sites and clinical tasks, requiring few labelled data.
+However, there is currently little evidence of such successful transfers due to
+difficult regulatory access to the pretrained model. Transferring between
+hospitals and tasks in the APHP data warehouse would be a first step to evaluate this
+claim.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Prediction is not all we need: Causal thinking for decision making on
   Electronic Health Records}\label{chapter:causal_tuto}
 
@@ -4781,7 +5304,7 @@ repartition of these mistreated patients conditionally on patient conditions.
   \renewcommand{\thesection}{\thechapter.\arabic{section}} % Include chapter letter in section numbering
   \renewcommand{\thesubsection}{\thesection.\arabic{subsection}} % Include chapter letter in subsection numbering
 
-  \chapter{Chapter \ref{chap:intro}}\label{apd:intro}
+  \chapter{Chapter \ref{chapter:intro}}\label{apd:intro}
 
   \section{Statistical learning theory}\label{apd:intro:statistical_learning}
 
@@ -5394,6 +5917,950 @@ repartition of these mistreated patients conditionally on patient conditions.
   available) available in free access.
 
   \chapter{Chapter \ref{chapter:predictive_models}}\label{apd:predictive_models}
+
+  \section{Code}
+
+  The code for the experiments is available at
+  \url{https://gitlab.inria.fr/soda/medical_embeddings_transfer}.\md{need to move
+    the package to github.}
+
+  A fork of the CEHR-BERT implementation is available at \url{https://github.com/strayMat/cehr-bert}. It was necessary
+  to adapt the code to our data format and to the AP-HP computing environment.
+
+  All count encoding and static embedding featurizers are available as a standalone
+  package at \url{https://gitlab.com/strayMat/event2vec}.
+
+
+  \section{Predictive models and tasks on EHRs}\label{apd:review_predictions}
+
+  \subsection{Why predictive models in healthcare ?}\label{apd:review_tasks}%
+
+
+  \paragraph{Risk stratification in the clinic}
+
+  % risk stratification
+  Early prediction of a complication calls for early intervention. Focused on short
+  term interventions in the clinic, these models seek to increase short or long
+  terms outcomes of the patients thanks to early intervention before deterioration
+  \citep{tang2007global, rothman2013development, wong2021external}. Those so-called alert systems
+  \citep{yu2018artificial} map complex inputs --eg. a combination of nursing
+  assessments, vital signs, laboratory results and cardiac rhythms-- to simpler
+  risk scores, allowing clinicians to rapidly judge the evolution of the patient.
+  % Long term prevention
+  The same kind of risk stratification is also used for long term prevention under
+  the term \emph{screening}.
+  %
+
+  \paragraph{Predict to identify important risk factors}
+
+  Risk stratification is close to the research of risk factors.
+  % historical model: risk factor
+  The Framingham risk score, one of the earliest predictive models in medicine was
+  designed to predict Coronary heart disease risk by fitting a cox model using
+  seven features on 5300 patients: age, cholesterol, systolic blood pressure,
+  hematocrit, ECG status, smoking at intake, and relative body weight
+  \citep{brand1976multivariate}. The authors aim to identify important risk factors
+  allowing the selection of individuals for intervention programs.
+  % biostatistics view
+  Biostatistics also focuses on risk factors for subgroup identification, framing
+  this task as therapeutics \citep{steyerberg2009applications} or heterogeneous
+  treatment effect \citep{harrell2001regression}.
+  %
+
+  \paragraph{Prognosis for automated decision-making}
+  % Roots in Artificial Intelligence in Medicine
+  Multiple applications of Artificial Intelligence in Medicine were already
+  discussed in the early 80s \citep[Chapter~1]{Szolovits1982artificial}:
+  diagnostic and therapeutic program for glaucoma (CASNET), diagnostic and therapy
+  for infectious diseases (MYCIN) \citep{shortliffe1976computer}, therapic advice
+  for patients with heart disease, diagnosis in general internal medicine
+  (INTERNIST-I). In this line of work, a good predictive model often serves as a
+  module in a larger decision-making system aiming at personalized medicine
+  \citep{topol2019high}.
+
+  \paragraph{Predict to better plan and pilot}
+
+  In complex healthcare organizations, accurate individual predictions help to
+  use efficiently constrained medical resources \citep{topol2019high}. One of such
+  operational tasks is Length Of Stay (LOS) prediction, allowing to plan the
+  number of beds and members of staff required, identify individual outliers
+  \citep{verburg2017models}. %
+  Identified as a quality of care indicator, unplanned readmission at 30 days is
+  used to benchmark and finance hospitals in several countries
+  \citep{cms2019readmission, kristensen2015roadmap}. In addition to the risk
+  reduction for patients, it incentivized the hospital to develop better
+  prediction models for unplanned readmission.
+  % A plethora of such models have been published: \citep{zhou2016utility}, structured data (prescriptions,
+  % diagnoses, procedures, demographic data) combined with logistic
+  % regression, random forests, boosting and neural networks
+  % yielding up to 0.69 ROC AUC \citep{dhalluin2020comparison}, Bert on clinical notes
+  % yielding 0.80 ROC AUC \citep{jiang2023health}.
+
+  Interestingly, recent developments of predictive models on EHRs (described in next section) focused mainly on administrative tasks and
+  less on the risk factors or the intervention aspect.
+
+  \subsection{Predictive models on EHRs: from simple to complex}%
+  \label{apd:review_models}%
+
+  \paragraph{Predictions on EHRs originally used linear models on few carefully selected statics variables}
+  Early work for predictive models on EHR used \textcolor{M}{parsimonious logistic regression}
+  (selecting 10 variables on average) to predict \textcolor{O}{Heart Failure} (12\% case
+  prevalence) within 6 months reaching \textcolor{S}{0.77 AUC} \citep{wu2010prediction}.
+
+  \cite{goldstein2017opportunities} identified key characteristics of 107 studies
+  on predictive models on EHRs: a very large study size (median=26,100), few
+  predictors are included (median = 27 variables), few longitudinal data (37
+  studies), half multi-center studies. The tasks and performances were
+  \textcolor{O}{mortality} with \textcolor{S}{0.84 AUC}, \textcolor{O}{clinical
+    prediction (various clinical endpoints)} with \textcolor{S}{0.83 AUC},
+  \textcolor{O}{hospitalization} with \textcolor{S}{0.71 AUC},
+  \textcolor{O}{service utilization} with \textcolor{S}{0.71 AUC}.
+  \textcolor{M}{Generalized linear models such as logistic regression or Cox
+    regression} (87 studies) were the most common, followed by \textcolor{M}{Bayes
+    methods} (11 studies), \textcolor{M}{random forests} (10 studies) and
+  \textcolor{M}{regularized regressions} (7 studies).
+
+  \paragraph{Including high-cardinality and time-varying features thanks to neural networks}
+
+  Acknowledging the high cardinality of medical vocabularies used in EHRs, medical
+  informatics leveraged representation learning (mostly algorithms used in Natural
+  Language Processing) to embed them into low dimensional feature spaces
+  \citep{shickel2017deep}. The goal was to reduce the costly feature engineering
+  work used by traditional predictive models.
+
+  This line of work focused first on concept representations:
+  \textcolor{M}{restricted bolzmann machines} for \textcolor{O}{suicide
+    predictions} (13.1\% prevalence) \citep{tran2015learning}.
+
+  Then it included time: word2vec with temporal contexts
+  \citep{beam2019clinical}, \textcolor{M}{convolutional neural networks} for
+  \textcolor{O}{unplanned readmission} at 6 months (balanced case/control) with
+  \textcolor{S}{0.82 AUC} \citep{nguyen2016mathtt}, \textcolor{M}{LSTM} for
+  \textcolor{O}{diagnosis} from physiological signals with \textcolor{S}{0.86
+    weighted ROC AUC and 0.12 precision at 10} \citep{lipton2016learning},
+  \textcolor{M}{recurrent neural networks} for \textcolor{O}{heart failure}
+  (selected 9 to 10 control to cases) with \textcolor{S}{0.88 AUC}
+  \citep{choi2017using}, \textcolor{M}{recurrent neural networks} for
+  \textcolor{O}{Length Of Stay over 7 days} (20.68\% prevalence),
+  \textcolor{O}{mortality} (1.74\% prevalence) and \textcolor{O}{30-day
+    readmission} (12.93\% prevalence) with respectively \textcolor{S}{0.79, 0.87 and
+    0.70 AUC} all using 24 first hours of observation data
+  \citep{beaulieu2021machine}.
+
+
+  Rare benchmarks of these different methods include :
+  \begin{itemize}
+    \item \cite{harutyunyan2019multitask} benchmarked four clinical tasks on
+          MIMIC-III database, a EHR rich in signals since it covers Intense Care
+          Units. The tasks were in-hospitality prediction based on the first 48
+          hours of data, decompensation prediction at each hour, Length-Of-Stay
+          prediction at each remaining hour of stay, phenotyping of 25 acute care
+          conditions. This benchmark uses 17 time-varying clinical measurements
+          but with a measure each hours, focusing on the temporal part of EHRs.
+          They found that LSTM processing separately each signal were the mist
+          performant for all tasks.
+    \item \cite{solares2021transfer} benchmarked different concept embedding
+          methods to predict the presence of three ICD10 codes (level 2) at six
+          months in General practitioner data. They use either Auto Encoders to
+          reconstruct the patient histories, Neural collaborative filtering  with
+          positive/negative sampling, Continuous Bag of Words (context window is
+          not precised), CBOW with time aware attention for the context window
+          \citep{cai2018medical}, and BEHRT \citep{li2020behrt}. This benchmark
+          covers the high-cardinality part of EHRs. There is less emphasis on
+          temporality since patients only have up to 10 different visits.
+  \end{itemize}
+
+
+  \paragraph{The age of foundation models for EHRs?}
+
+  Foundation models (FMs) are machine learning models capable of performing many
+  different tasks after being trained on large, typically unlabeled datasets
+  \citep{wornow2023shaky}. Leveraging the transformer architecture \cite{vaswani2017attention} that proved
+  efficient for Natural Language Processing, large EHR modeling models are
+  pre-trained on large volume of data, then evaluated on downstream tasks.%
+
+  \textcolor{M}{BEHRT} focus on \textcolor{O}{301 diseases predictions in next general
+    practitioner visits within 6 months} with \textcolor{S}{0.958 AUROC and 0.525
+    APS}. It was pretrained on 1.6 million patients from UK general practitioners
+  encounters diagnoses. %
+  \textcolor{M}{Med-BERT} focus on \textcolor{O}{heart failure for diabetes patients
+    (DHF) (6.2\% prevalence) and pancreatic cancer prediction (30\% prevalence)}
+  with respectively \textcolor{S}{84 and 74 AUROC } \citep{rasmy2021med}. It was
+  pretrained on 28.5 million patients from IBM MarketScan billing codes. %
+  \textcolor{M}{Cerh-Bert} predicts \textcolor{O}{30-days all-cause readmission in
+    heart failure (24.116\% prevalence), mortality within 1 year since discharge
+    to home (4.85\% prevalence), heart failure for DT2 patients (9.38\%
+    prevalence) and 2 year risk of hospitalization starting from the 3rd year
+    since the inital entry into the EHR (10.9\% prevalence)} with respective
+  AUROC/APS \textcolor{S}{66/38.6, 94.6/52.7, 80.7/32.3, 75.9/31.1}
+  \citep{pang2021cehr}. It was pretrained on 2.4 million patients from the
+  Columbia University Irving Medical Center-New York Presbyterian Hospital.%
+
+  \cite{wornow2023shaky} review other published FMs for EHRs highlighting the
+  small scale of patients used for pretraining, and the lack of model weights
+  accessibility. To improve upon the existing they advise: 1) for better
+  predictive performances (measured both on AUOC, AUPRC and ranking metrics) as
+  well as calibration performances; 2) to detail the performances with the number
+  of labelled cases; 3) simplified model deployment; 4) Emergent clinical
+  applications; 5) Multimodality.
+
+  \section{Number of cases used in foundation models downstream tasks}%
+  \label{apd:foundation_model_nb_cases}
+
+  \begin{table}[]
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{lllllll}
+        \textbf{Model}                                                                          &
+        \multicolumn{1}{l}{\textbf{Task}}                                                       &
+        \textbf{Cohort size}                                                                    &
+        \textbf{Prevalence}                                                                     &
+        \textbf{\begin{tabular}[c]{@{}l@{}}Number of \\ Cases\end{tabular}}                     &
+        \textbf{ROC AUC}                                                                        &
+        \textbf{AUPRC}                                                                            \\ \hline
+        \begin{tabular}[c]{@{}l@{}}CEHR-BERT\\ \citep{pang2021cehr}\end{tabular}                &
+        \multicolumn{1}{l}{\begin{tabular}[c]{@{}l@{}}Heart Failure\\ readmission\end{tabular}} &
+        97,758                                                                                  &
+        24.16\%                                                                                 &
+        23,618                                                                                  &
+        66.3 (0.2)                                                                              &
+        38.6 (0.1)                                                                                \\
+        \begin{tabular}[c]{@{}l@{}}CEHR-BERT\\ \citep{pang2021cehr}\end{tabular}                &
+        \begin{tabular}[c]{@{}l@{}}Discharge home\\ Death\end{tabular}                          &
+        207,919                                                                                 &
+        4.85\%                                                                                  &
+        10,084                                                                                  &
+        94.6 (0.1)                                                                              &
+        52.7 (0.4)                                                                                \\
+        \begin{tabular}[c]{@{}l@{}}CEHR-BERT \\ \citep{pang2021cehr}\end{tabular}               &
+        \begin{tabular}[c]{@{}l@{}}T2DM \\ Heart Failure\end{tabular}                           &
+        114,564                                                                                 &
+        9.38\%                                                                                  &
+        10,746                                                                                  &
+        80.7 (0.6)                                                                              &
+        32.3 (1.0)                                                                                \\
+        \begin{tabular}[c]{@{}l@{}}CEHR-BERT \\ \citep{pang2021cehr}\end{tabular}               &
+        Hospitalization                                                                         &
+        590,578                                                                                 &
+        10.90\%                                                                                 &
+        64,373                                                                                  &
+        75.9 (0.1)                                                                              &
+        31.1 (0.4)                                                                                \\
+        \begin{tabular}[c]{@{}l@{}}Med-BERT\\  \citep{rasmy2021med}\end{tabular}                &
+        \begin{tabular}[c]{@{}l@{}}Pancreatic cancer \\ Cerner\end{tabular}                     &
+        29,405                                                                                  &
+        39\%                                                                                    &
+        11,486                                                                                  &
+        82.23 (0.29)                                                                            &
+        75.08 (0.36)                                                                              \\
+        \begin{tabular}[c]{@{}l@{}}Med-BERT \\ \citep{rasmy2021med}\end{tabular}                &
+        \begin{tabular}[c]{@{}l@{}}Pancreatic cancer\\ Truven\end{tabular}                      &
+        42,721                                                                                  &
+        40\%                                                                                    &
+        17,088                                                                                  &
+        80.57 (0.21)                                                                            &
+        71.54 (0.45)                                                                              \\
+        \begin{tabular}[c]{@{}l@{}}Med-BERT\\  \citep{rasmy2021med}\end{tabular}                &
+        \begin{tabular}[c]{@{}l@{}}T2DM \\ Heart Failure\end{tabular}                           &
+        672,647                                                                                 &
+        6.2\%                                                                                   &
+        39,727                                                                                  &
+        85.39 (0.05)                                                                            &
+        83.8 (0.05)                                                                               \\ \hline
+      \end{tabular}%
+    } %
+    \vspace{1em}%
+    \caption{For downstream tasks of both CEHR-BERT and Med-BERT, the number of
+      cases (ie. number of patients with the positive class) is out of reach for
+      numerous medical applications were the number of positive classes is closer to
+      the thousand --in the best cases.}%
+    \label{apd:table:foundation_model_nb_cases}%
+  \end{table}
+
+
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=0.9\linewidth]{img/chapter_3/behrt-performances.pdf}
+    \end{center}
+    \caption{BEHRT \citep{li2020behrt} performances for every diagnosis target.
+      Number of positive cases is above 5000 for almost every disease.}
+    \label{apd:fig:behrt_performances}
+  \end{figure}
+
+
+  A strong argument in favor of foundation models trained on EHRs is their
+  ability to transfer well to downstream once pretrained. However, in most of the
+  papers presenting these models, the number of cases used for the downstream
+  tasks is out of reach for numerous medical applications. Table
+  \ref{apd:table:foundation_model_nb_cases} shows the number of cases for
+  downstream tasks of Med-BERT and CEHR-BERT. All tasks exceed 10,000 cases, a
+  number of cases out of reach for the vast majority of healthcare centers. Figure
+  \ref{apd:fig:behrt_performances} outlines the performances of BEHRT on every
+  diagnosis. There is no clear trend that outlines better performances for higher
+  number of cases. However, the number of cases is still greater than 5000 for
+  almost all targeted diseases.
+
+  Coupled to the current impossibility to share (and transfer) the weights of
+  these models, this need for large downstream datasets is a strong limitation to
+  their use in practice.
+
+
+  \section{Review of computing resources for modern predictive models in healthcare}%
+  \label{apd:computing_resources_review}
+
+  The increasing architecture sizes of predictive models require appropriate
+  computing infrastructures to pre-train and deploy those models. Table
+  \ref{table:computing_resource_review} reviews the computing requirements for some
+  of these modern predictive models. Computing resources for Large Language Models
+  trained with clinical notes are greater than for EHR or claims models. Numbers
+  are rarely provided at deployment , since they require smaller computing
+  resources.
+
+
+  \begin{table}[]
+    \resizebox{\textwidth}{!}{%
+      \begin{tabular}{llllllll}
+        \toprule
+        \begin{tabular}[c]{@{}l@{}}Data\\ Type\end{tabular}                                                                                                               &
+        \begin{tabular}[c]{@{}l@{}}GPU  \\ number\end{tabular}                                                                                                            &
+        GPU model                                                                                                                                                         &
+        \begin{tabular}[c]{@{}l@{}}Training \\ time (hours)\end{tabular}                                                                                                  &
+        Pretraining                                                                                                                                                       &
+        \begin{tabular}[c]{@{}l@{}}Sample size\\ (millions)\end{tabular}                                                                                                  &
+        Server details                                                                                                                                                    &
+        Reference                                                                                                                                                           \\
+        \hline
+        Claims                                                                                                                                                            &
+        4                                                                                                                                                                 &
+        Nvidia V100                                                                                                                                                       &
+        \textless{}24                                                                                                                                                     &
+        No                                                                                                                                                                &
+        43                                                                                                                                                                &
+        72 CPU cores                                                                                                                                                      &
+        \cite{beaulieu2021machine}                                                                                                                                          \\
+        EHR                                                                                                                                                               &
+        NA                                                                                                                                                                &
+        \begin{tabular}[c]{@{}l@{}}Nvidia Titan Xp\end{tabular}                                                                                                           &
+        NA                                                                                                                                                                &
+        Yes                                                                                                                                                               &
+        1.6                                                                                                                                                               &
+        NA                                                                                                                                                                &
+        \cite{li2020behrt}                                                                                                                                                  \\
+        EHR                                                                                                                                                               &
+        2                                                                                                                                                                 &
+        \begin{tabular}[c]{@{}l@{}}Nvidia RTX \\ 20280 Ti\end{tabular}                                                                                                    &
+        45                                                                                                                                                                &
+        Yes                                                                                                                                                               &
+        2.4                                                                                                                                                               &
+        768 GB memory                                                                                                                                                     &
+        \cite{pang2021cehr}                                                                                                                                                 \\
+        EHR                                                                                                                                                               &
+        1                                                                                                                                                                 &
+        \begin{tabular}[c]{@{}l@{}}Nvidia V100\\ 32 GB\end{tabular}                                                                                                       &
+        168                                                                                                                                                               &
+        Yes                                                                                                                                                               &
+        28                                                                                                                                                                &
+        NA                                                                                                                                                                &
+        \cite{rasmy2021med}                                                                                                                                                 \\
+        Text                                                                                                                                                              &
+        24                                                                                                                                                                &
+        \begin{tabular}[c]{@{}l@{}}Nvidia A100\\ 40GB\end{tabular}                                                                                                        &
+        504                                                                                                                                                               &
+        Yes                                                                                                                                                               &
+        0.39                                                                                                                                                              &
+        \begin{tabular}[c]{@{}l@{}}Pre-training on NYU Langone \\ High-Performance Computing;\\ \\ Deployment on 128 GB RAM\\  servers with 2  RTX 3090 GPUs\end{tabular} &
+        \cite{jiang2023health}                                                                                                                                              \\
+        Text                                                                                                                                                              &
+        992                                                                                                                                                               &
+        Nvidia A100                                                                                                                                                       &
+        144                                                                                                                                                               &
+        Yes                                                                                                                                                               &
+        2                                                                                                                                                                 &
+        HiperGator-AI cluster                                                                                                                                             &
+        \cite{yang2022gatortron}                                                                                                                                            \\
+        \bottomrule
+      \end{tabular}%
+    }
+    \vspace{1em}
+    \caption{Computing resources for modern large scale predictive models.}
+    \label{table:computing_resource_review}
+  \end{table}
+
+  \section{Detailed pipelines}\label{apd:pipelines}
+
+  For all methods except demographics, the event features are the following
+  structured events: billing codes (ICD-10), procedure codes (CCAM nomenclature),
+  drugs administration (ATC7 nomenclature). Despite their high predictive
+  potential, we did not consider biology since the number of events was too big
+  for our memory capacity.
+
+  \subsection{Demographics}\label{apd:pipelines:demographics}
+
+  All static features correspond to the index visit of the task (T1=target stay,
+  T2=first included stay, T3=???): age, gender, admission reason, discharge destination,
+  type and value.
+
+  The feature time of day was built as followed: morning between 7am and 12pm,
+  afternoon between 12pm and 20pm and night between 20pm and 7am. This feature was
+  mostly set at night, because almost all times are set to 22:00pm in our data
+  extraction. More fine grained details should be available in the information
+  system but were not communicated to us.
+
+  \subsection{Count encoding}\label{apd:pipelines:count_encoding}
+
+  Figure \ref{apd:fig:pipelines:count_encoding} details how counts and time decays
+  are computed. During cross-validation, the explored decay parameters are:
+  $\big[[0], [0, 1], [0, 7], [0, 30], [0, 90]\big]$.
+
+  \begin{figure}
+    \includegraphics[width=0.9\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
+    \caption{Count encoding procedure.}\label{apd:fig:pipelines:count_encoding}
+  \end{figure}
+
+  \subsection{Static Embeddings of event features}\label{apd:pipelines:static_embeddings}
+
+  \paragraph{SVD-PPMI}\label{apd:medical_concept_embeddings:svdppmi} We recall the
+  SVD-PPMI algorithm developed by \cite{beam2019clinical} and used for
+  transferring phenotyping in \cite{hong2021clinical}.
+
+  The algorithm takes a sequence of coded events as input and outputs vector
+  representations. As shown in Figure \ref{fig:cooccurrence}, it builds a
+  context window around every event $e=(i,t, c)$ , then updates the cooccurrence matrix for
+  the corresponding medical code $P(c, c_j) \, \forall \, c_j \in Vocabulary$.
+
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=0.9\linewidth]{img/chapter_3/cooccurrence.pdf}
+    \end{center}
+    \caption{The cooccurrence matrix is updated when two events occur in a
+      specified time window.} \label{fig:cooccurrence}
+  \end{figure}
+
+  The PPMI matrix is then computed as the logged-shifted version of the
+  cooccurrence matrix.
+  \begin{equation}\label{eq:pmi}
+    PMI(c_i, c_j) = log\frac{P(c_i, c_j)N}{P(c_i)P(c_j)}
+  \end{equation}
+
+  where $P(c_i)$ is the total count of the event $c_i$ and $N$ is the total count of events.
+
+  \begin{equation}\label{eq:ppmi}
+    PPMI = max(0, PMI - log(k))
+  \end{equation}
+
+  Finally, concept embeddings are recovered by SVD factorization and taking the
+  mean of the context and target word matrix.
+
+  \begin{equation}
+    PPMI = U \cdot \Sigma \cdot V
+  \end{equation}
+
+  \begin{equation}
+    embeddings = U_d \cdot \sqrt{\Sigma_d} + V_d \cdot \sqrt{\Sigma_d}
+  \end{equation}
+
+  Where the subscript $d$ denotates the restriction to the first $d$ components of
+  the matrices.
+
+  \paragraph{Aggregation of the static embbedings}
+
+  Figure \ref{apd:fig:pipelines:static_embeddings_aggregation} details how the aggregation on a
+  patient sequence is performed before feeding the vector to a scikit-learn estimator.
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/chapter_3/static_embeddings_aggregation.png}
+    \caption{Aggregation of the embeddings to yield one vector representing each
+      patient sequence. The left blue matrix is the same as the one computed in
+      the count encoding method. It is multiplied by the embedding matrix $\Phi$ either
+      learned on the training set or transferred from the SNDS claims database.
+    }\label{apd:fig:pipelines:static_embeddings_aggregation}
+  \end{figure}
+
+  \subsection{CEHR-BERT}\label{apd:pipelines:cehr_bert}
+
+  CEHR-BERT is based on the original BERT architecture \citep{devlin2018bert}.
+  \cite{pang2021cehr} modified previous transformers applied on EHR in two ways.
+  They embed absolute and relative time with age of the patients, using a fourier
+  transform of time numerical values. Secondly, they add the Visit Type Prediction
+  objective. In addition to the usual sequence reconstruction task (masked
+  language model) for concept embeddings, the model also tries to reconstruct the
+  type of the visit associated with the masked concepts (inpatient,
+  outpatient,emergency).
+
+  \section{Experimental study}\label{apd:predictive_models:experimental_study}
+
+  \subsection{Database description: two extractions from the Paris hospitals data warehouse}%
+  \label{apd:database_description}
+
+  We use two data extractions from the clinical data warehouse of the Greater
+  Hospital of Paris (AP-HP) hosting routine care data from 38 hospitals formatted
+  in the OHDSI OMOP format \citep{hripcsak2015observational}. The first extraction
+  containing 200,000 randomly sampled patients, is used for the LOS
+  (\ref{par:task_definitions:los}) and Prognosis
+  (\ref{par:task_definitions:prognosis}) tasks. For the MACE task
+  \ref{par:task_definitions:mace}, the number of case events --prevalence-- was
+  lower than for the two other tasks, so we had to work on a bigger extraction
+  containing 2.1 million patients. In both cases, raw data contained diagnoses and
+  procedures billing codes, prescriptions and administrations of drugs,
+  administrative information, laboratory results for inpatient only and clinical
+  notes.
+
+  We sessionize the visits to merge indices that are closer than one day into one
+  unique stay. This avoids to consider transfers as two different hospitalizations.
+
+  %
+  \subsection{Tasks
+    descriptions}\label{apd:tasks:population_selection}
+
+  The Figure \ref{apd:fig:flowcharts} shows the selection flowcharts for the three tasks.
+
+  \begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/chapter_3/flowchart_t1_los.pdf}
+      \caption{Selection flowchart for Length Of Stay interpolation task.}
+      \label{apd:fig:flowchart_t1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=1.1\textwidth]{img/chapter_3/flowchart_t2_icd10.pdf}
+      \caption{Selection flowchart for ICD-10 chapter prediction task.}
+      \label{apd:fig:flowchart_t2}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}[b]{0.5\textwidth}
+      \centering
+      \includegraphics[width=1.1\textwidth]{img/chapter_3/flowchart_t3_mace.pdf}
+      \caption{Selection flowchart for MACE prognosis.}
+      \label{apd:fig:flowchart_t3}
+    \end{subfigure}
+    \caption{Selection flowcharts for the three tasks.}
+    \label{apd:fig:flowcharts}
+  \end{figure}
+
+  \paragraph{LOS interpolation}\label{apd:task_details:los}
+
+  The \emph{study period} was january 2017 to june 2022. The \emph{population at
+    risk} are the patients aged above 18, with at least one hospitalization
+  lasting at least 24 hours. Stays with in-hospital mortality are discarded. The
+  \emph{index visit} is the first included visit for each individual. LOS is
+  defined as a binary classification task for each index visit. The label is 0
+  if the stay lasts less than 7 days and 1 if the stay lasts more than 7 days.
+  The \emph{horizon} is the end of the index visit and the \emph{observation
+    period} is the full index visit. This task is an interpolation since we
+  classify the length of the stay with data from the whole stay.
+
+  \paragraph{Prognosis task}\label{apd:task_details:prognosis}
+
+  The study period was january 2017 to june 2022. The \emph{cohort}
+  are the patients aged above 18, with at least two hospitalization (inpatient or
+  outpatient). Stays with in-hospital mortality are discarded. The \emph{index
+    stay} is defined as a random stay for each individual before its last stay. The
+  \emph{horizon} is the beginning of the next stay and the \emph{observation
+    period} is the full patient trajectory up to the end of the index visit.
+  Prognosis is defined as a multi-label classification task. In the following stay
+  after the index visit, for each of the 20 ICD10 chapters with a prevalence
+  greater than 1\%, the label is 1 if the stay contains a diagnosis in this
+  chapter, otherwise it is 0.
+
+  \paragraph{Major Adverse Cardiovascular Events}\label{apd:task_details:mace}
+
+  The study period was january 2018 to december 2020. The \emph{population at
+    risk} are the patients aged above 18, with at least two hospitalization
+  (inpatient or outpatient). \emph{The index visits} are for each patients a
+  randomly selected stay without in-hospital mortality, with at least an
+  \emph{horizon} of 12 months between the end of the stay and the end of the
+  study period. The \emph{observation period} is the whole patient trajectory up
+  to the end of the index visit. MACE is defined as a binary classification task.
+  The label is 1 if a MACE billing code is observed (see Table
+  \ref{apd:tasks:mace_codes}) and 0 otherwise. We used billing codes defined by
+  \cite{bosco2021major} and complement them with other codes specific to the French healthcare
+  system \cite{cnam2022_top_patho}.
+
+  \begin{table*}[!tb]
+    \resizebox*{\textwidth}{!}{
+      \input{img/chapter_3/mace_codes.tex}
+    } \caption{ICD10 codes used for MACE definition.}\label{apd:tasks:mace_codes}
+  \end{table*}
+
+  \subsection{Training procedure}\label{apd:evaluation_procedure}
+
+  The temporal split was designed for the train/test ratio to be 0.8/0.2. This
+  resulted in different split dates for each dataset. For LOS, training period
+  covers 2017-01-01 to 2021-04-06 and test period covers 2021-04-07 to 2022-05-01.
+  For Prognosis, train period covers 2017-01-01 to 2021-04-21 and test period
+  covers 2021-04-22 to 2022-05-20. For MACE, train period covers 2018-01-01 to
+  2019-08-11 and test period covers 2019-08-11 to 2020-01-05.
+
+  Note that CEHR-BERT is also pre-trained on growing parts of the train
+  set but only uses a validation set for stopping pretraining. Due to the high
+  computing cost of transformers, we could not cross-validate its internal
+  parameters.
+
+
+  \section{Supplementary results for temporal split}\label{apd:temporal_split}
+
+  \subsection{LOS interpolation}\label{apd:temporal_split:los}
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=\linewidth]{img/chapter_3/los/average_precision_score_performances.pdf}
+    \caption{LOS average precision curve for different featurizers and estimators.
+      The performances are averaged over 5 folds. The shaded area represents the
+      standard deviation. The task performance seems to saturate at 98\% average
+      precision for random forest and all featurizers but the demographics,
+      suggesting that the Bayes error rate is reached. However, for lower sample
+      regimes --below 12,500 patients, we see an advantage of static embeddings
+      over event counts (both for logistic regression and random forest).}%
+    \label{fig:los_auprc}
+  \end{figure}
+
+
+
+  \subsection{Prognosis}\label{apd:temporal_split:prognosis}
+
+  \paragraph{Average Precision}
+
+  Figure \ref{fig:prognosis_auprc} displays the area under the precision
+  recall curve (average precision) averaged with equal weight for each chapter (Macro)
+  and with the chapter prevalence as the weight (weighted).
+
+
+  \begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{1\textwidth}
+      \caption{}\label{fig:prognosis_auprc_macro}
+      \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_macro.pdf}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}[b]{1\textwidth}
+      \caption{}\label{fig:prognosis_auprc_weighted}
+      \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
+    \end{subfigure}
+    \caption{Prognosis average precisions average over chapters for different featurizers and
+      estimators. The performances are averaged over 5 folds. The shaded area
+      represents the standard deviation. The horizontal black lines display the
+      naive baseline that predicts the previous stay codes for the target stay.
+      Figure \ref{fig:prognosis_auprc_macro} average all chapter with equal weight
+      whereas \ref{fig:prognosis_auprc_weighted} averages chapters by prevalences.
+      Random forest have better performances. Count encoder outperform other
+      featurizers, suggesting the importance of low count events that are smoothed
+      out in embedding methods. Appendix \ref{apd:temporal_split:prognosis}
+      details the results for each chapter and display Average Precision and Brier
+      Score results.}%
+    \label{fig:prognosis_auprc}
+  \end{figure}
+
+
+  \paragraph{Average precision scores for every ICD10 chapter}
+
+  Figure \ref{fig:prognosis_average_precision_score__c_1} to
+  \ref{fig:prognosis_average_precision_score__c_22} display AUPRC scores for every
+  ICD10 chapters with respect to number of patients in the train set. Recall that
+  contrary  to ROC AUC where the random baseline is 0.5, the random baseline for
+  AUPRC is the prevalence of the target class.
+
+  \def\icdchapterlist{21,4,9,18,5,2,6,11,13,14,10,19,3,1,7,22,12,20,15,17,8}
+  \def\prognosispath{img/chapter_3/prognosis}
+  \foreach \x in \icdchapterlist{%   
+    \ifnum\x=16
+      %
+    \else
+      \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\textwidth]{\prognosispath/average_precision_score__c_\x.pdf}%
+        \caption{ICD10 chapter \x}\label{fig:prognosis_average_precision_score__c_\x}
+      \end{figure}
+    \fi
+  }
+
+  \paragraph{Prevalence results}\label{apd:prognosis_prevalences}
+
+
+  Figure \ref{apd:fig:prognosis_prevalences_auprc_linear} shows the prevalence
+  results for the Average precision curve and the linear estimator.
+
+  Figure \ref{apd:fig:prognosis_prevalences_auroc_linear} shows the prevalence
+  results for the ROC AUC curve and the linear estimator.
+
+  Figure \ref{apd:fig:prognosis_prevalences_auroc} shows the prevalence results
+  for the ROC AUC curve and the random forest estimator.
+
+
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/prevalence_results__est_ridge_boxplot_roc_auc_score_xlog.pdf}
+    \caption{Bigger target prevalences yield better ROC AUC. The different
+      chapters are binned in prevalence bins. The estimator used for this plot is
+      a penalized linear model trained on the full effective train set. Each box
+      contour represents Q1-Q3 inter-quartile range.}%
+    \label{apd:fig:prognosis_prevalences_auprc_linear}
+  \end{figure}
+
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/prevalence_results__est_ridge_boxplot_average_precision_score_xlog.pdf}
+    \caption{ Bigger target prevalences yield better average precision. The different
+      chapters are binned in prevalence bins. The estimator used for this plot
+      is a penalized linear model trained on the full effective train set.}%
+    \label{apd:fig:prognosis_prevalences_auroc_linear}
+  \end{figure}
+
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_roc_auc_score_xlog.pdf}
+    \caption{ Bigger target prevalences yield better ROC AUC. The
+      different chapters are binned in prevalence bins. The estimator used for
+      this plot is random forest trained on the full effective train set.}%
+    \label{apd:fig:prognosis_prevalences_auroc}
+  \end{figure}
+
+
+
+
+  \subsection{MACE}\label{apd:temporal_split:mace}
+
+  \section{Results for the geographic split}\label{apd:hospital_split}
+
+  \subsection{Dataset split by hospital}
+
+  To evaluate the geographic validity of our results, we proceed to a
+  geographic split for train and test, according to hospitals. In the test set,
+  the patients visited one of the following hospitals: Avicenne, Jean Verdier,
+  Cochin, Ambroise Pare and Raymond Poincare-Berck. In the train set, patients
+  visited another of the AP-HP 38 hospitals. Patients having a visit in both
+  hospital groups were removed from both the train and test data. Figure
+  \ref{apd:fig:hospital_split} shows the hospital cooccurrence matrix for
+  patient populations.
+
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{img/chapter_3/hospital_split_coocurrence_dice_score.pdf}
+    \caption{Hospitals clustered by average euclidean distance in common patients
+      from the LOS cohort. Scale in dice score: $2 \cdot |A \cap B| / (|A| + |B|)$. Test
+      set hospitals appear in purple on the left.}\label{apd:fig:hospital_split}
+  \end{figure}
+
+
+  \subsection{Hospital split results}
+
+  \paragraph{LOS interpolation}\label{apd:hospital_split:los}
+
+  This task is saturated by the best machine learning models so we did not
+  evaluate the transformer on it. Instead, we benchmarked the transfer from
+  cui2vec embeddings, trained on american claims \citep{beam2019clinical}. To be
+  fair to these embeddings, we restricted the vocabulary of medical codes to the
+  common intersection of 2100 codes occurring both in cui2vec and in our dataset.
+  The decay was set to 7 days (not cross-validated as in the main experiments).
+  Figure \ref{apd:fig:hospital_split_los_decay7_roc_auc} shows all
+  embeddings methods outperforming the count models.
+
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{img/chapter_3/hospital_split_los_decay7_roc_auc.pdf}
+    \caption{LOS task, transfer between hospitals with 2100 codes only, ROC AUC:
+      The local, SNDS or cui2vec embeddings with forest and boosting are all
+      equivalent. For logistic regression, the local embeddings remain the best
+      performing method. We also compare the effect of reducing the dimension by applying a
+      Singular Value Decomposition with 30 components kept. This increases a
+      little bit the performance for logistic regression but decreases the performances of the
+      other estimators.}\label{apd:fig:hospital_split_los_decay7_roc_auc}
+  \end{figure}
+
+
+  \paragraph{Prognosis}\label{apd:hospital_split:prognosis}
+
+  Figure \ref{apd:fig:hospital_split_prognosis_roc_auc} shows the results on the
+  prognosis task, with train/test split by hospital. We average the results for
+  the 21 target diagnosis chapters: either with the same weight for each chapter
+  (macro) or weighted by each chapter prevalence (weighted). The Random forest estimators
+  with SNDS embeddings seem to be the best performing method. The transformer
+  method begins to be competitive only with 8000 thousands patients in the train
+  set. An interesting result is the performance of the naive method that predicts
+  a diagnosis if it is present in the index visit (last stay before prediction
+  target). It outperforms all other methods by a large margin, suggesting than
+  ICD10 predictions might not be a useful predictive task. This result made us add
+  the codes from the previous visit as new static feature to the prediction matrix
+  in the main analysis.
+
+  \begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+      \includegraphics[width=\linewidth]{img/chapter_3/hospital_split_prognosis_roc_auc_score__c_macro.pdf}
+      \caption{}%
+      \label{apd:fig:hospital_split_prognosis_roc_auc_macro}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}[b]{\linewidth}
+      \includegraphics[width=\linewidth]{img/chapter_3/hospital_split_prognosis_roc_auc_score__c_micro.pdf}
+      \caption{}%
+      \label{apd:fig:hospital_split_prognosis_roc_auc_weighted}
+    \end{subfigure}
+    \caption{Prognosis task, transfer between hospitals, weighted average (by chapter
+      prevalence) and macro average ROC AUC: The black vertical line shows the
+      results from predicting the next diagnoses if they appear in the last visits
+      in the observation period.}%
+    \label{apd:fig:hospital_split_prognosis_roc_auc}
+  \end{figure}
+
+  \section{Vibration study on the effects of the decay}
+  \label{apd:vibration_study_decay}
+
+  Using the LOS task, we investigated if the decay hyperparameter played an
+  important role in the performances of the different pipelines. We evaluated this
+  vibration analysis on a randomly chose train set (no temporal or hospital data
+  shift). Figure \ref{apd:fig:vibration_decay} shows the big impact of different
+  decay hyperparameters on ROC AUC. This led us to cross-validate the decays in
+  the main analyses. Interestingly, concatenating multiple decays only had a
+  significant impact on the count pipelines.
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{img/chapter_3/random_split_los_decay_vibration_roc_auc.pdf}
+    \caption{LOS task, random test set, ROC AUC, estimator is random forest:
+      Concatenating a one day decay add 10 points of ROC AUC to the embedding
+      pipeline.}\label{apd:fig:vibration_decay}
+  \end{figure}
+
+
+  \section{Medical concept embeddings}\label{apd:medical_concept_embeddings}
+
+  \subsection{Previous work and motivation}\label{apd:medical_concept_embeddings:previous_work}
+
+  Building on a formulation of word2vec \citep{mikolov2013distributed} as the
+  factorization of the Positive Pointwise Information Matrix --PPMI eq.
+  \ref{eq:ppmi}--, \citet{beam2019clinical} built medical concept embeddings from
+  both text and structured data. These embeddings are non-contextual, meaning that
+  they do not take into account the full sequence of event at the time of
+  inference. These make them less powerful than contextual embeddings such as the ones from
+  the transformer-based models \citep{li2020behrt, rasmy2021med, pang2021cehr}.
+
+  However, the information at the basis of the non-contextual embeddings is a
+  sharable aggregated data: the cooccurrence matrix. The easy creation and
+  exchange of medical concept embeddings opens a wide range of applications that
+  efficiently pulls data from multiple sites, overcoming both the heterogeneity of
+  the data, and the administrative barriers to access individual patient data.
+  Transferring these dense representations of healthcare events to specific
+  low-sampled cohorts might provide \textit{efficient} pretrained data
+  representations even in setups where very few patients are available.
+
+
+  \subsection{Background on medical concept embeddings for prediction}%
+  \label{apd:background_static_embeddings}%
+
+  Only few works have studied the transfer capabilities of clinical concept
+  embeddings for relevant prognosis tasks. None of them studied how such
+  representations can be used in a combination with traditional machine learning
+  techniques such as random forests or logistic regressions.
+
+  \cite{huang2018privacy} used the same embeddings method on the two EHR in MIMIC,
+  fusing them with Procruste. Utility is evaluated on diagnoses prediction tasks,
+  using Patient Diagnosis Projection Similarity, top-K cosine distance between a
+  temporally weighted average of the embedding for a given patient and the
+  diagnoses embeddings. They show that Procruste fused embeddings are almost as
+  performant (measured with ROC-AUC) as embeddings derived from the two databases.
+
+  \cite{hong2021clinical} used SVD-PPMI factorization on two databases. They
+  evaluated the utility of embeddings on a phenotyping downstream task for eight
+  diseases: coronary artery disease (CAD), type I diabetes mellitus (T1DM), type
+  II diabetes mellitus (T2DM), depression, rheumatoid arthritis (RA), multiple
+  sclerosis (MS), Crohn's disease (CD) and ulcerative colitis (UC). They did not
+  evaluate them for predictive tasks, only for differential diagnosis.
+
+  \cite{xiang2019time} fine-tuned a LSTM on top of different medical concept
+  representations (FastText \citep{bojanowski2017enriching}, SVD-PPMI or Skip-Gram
+  with a time context window \citep{beam2019clinical} and ), for heart failure
+  (11.7\% prevalence) reaching respectively for each representation 84.9, 82.4
+  and 85.4 ROC AUC.
+
+  \subsection{Embeddings implementation}\label{apd:medical_concept_embeddings:implementation}
+
+  We published event2vec \footnote{\url{https://gitlab.com/strayMat/event2vec/}},
+  a python package to quickly build medical concept embeddings using the SVD-PPMI
+  algorithm \cite{beam2019clinical, levy2014neural}. Our package proposes two
+  backends for the computation of this cooccurrence matrix: pandas for small
+  datasets (ten thousand of patients), spark for big datasets
+  \citep{salloum2016big}.
+
+  \subsection{Qualitative assessment of the embeddings}
+
+  Figure \ref{tsne_plots} displays 2D Tsne projections \cite{van2008visualizing}
+  of the embeddings. Clear groups of pathologies has been recovered by the
+  algorithm. Table \ref{table:embedding_nn} shows the ten closest neighbors of the
+  \textit{Diabete type 1 with acidosis} concept for each dataset (by cosine
+  distance), reflecting discrepancies between both dataset for this billing code.
+  Interactive Tsne plots and full embeddings (SNDS only) are available on our
+  gitlab repository
+  \footnote{\url{https://gitlab.com/strayMat/event2vec/-/tree/main/data/results/}}.
+
+  \begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \caption{AP-HP}
+      \includegraphics[width=\linewidth]{img/chapter_3/aphp2vec_annotated.png}
+      \label{fig:tsne_plots:aphp}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+      \centering
+      \caption{SNDS}
+      \includegraphics[width=\linewidth]{img/chapter_3/snds2vec_annotated.png}
+      \label{fig:tsne_plots:snds}
+    \end{subfigure}
+
+    \caption{TSNE projection of medical event embeddings. Each point is a
+      projection in 2D of the embedded vector for a given medical concept: a) in
+      the AP-HP Clinical Data Warehouse (200, 000 random patients extractions), b)
+      in the French Medical Claims (SNDS). Colors correspond to different medical
+      vocabularies: drugs in green, billing diagnoses in blue, billing procedures
+      in red, biology in pink (different vocabulary for AP-HP and SNDS), general
+      practitioner (GP) activity in yellow. Interactive versions of these plots
+      are available at:
+      \url{https://straymat.gitlab.io/event2vec/visualizations.html}}
+    \label{tsne_plots}
+  \end{figure}
+
+  \begin{table}
+    \resizebox*{\textwidth}{!}{
+      \begin{tabular}{llllr}
+        \toprule
+        Concept code & Concept label
+                     & medical vocabulary                                                                                     & similarity                 \\
+        \midrule
+        I210         & Acute myocardial infarction
+                     & ICD10:diagnosis                                                                                        & 1.000000                   \\
+        I25          & Chronic ischemic heart disease                                                                         & ICD10:diagnosis & 0.491964 \\
+        DDAF006      & \begin{tabular}[c]{@{}l@{}}Intraluminal dilatation of a \\coronary vessel with stenting\end{tabular}   & CCAM:procedures & 0.459349 \\
+        DDQJ001      & \begin{tabular}[c]{@{}l@{}}Intra-arterial coronary ultrasound\\ and/or Doppler ultrasound\end{tabular} & CCAM:procedures & 0.455709 \\
+        B01AC22      & Prasugrel                                                                                              & ATC7:drugs      & 0.426467 \\
+        C03DA04      & Eplerenone                                                                                             & ATC7:drugs      & 0.385482 \\
+        TNS          & Nicotine replacement therapy                                                                           & NGAP:GP         & 0.399372 \\
+        SRA          & Resuscitation supplement                                                                               & NGAP:GP         & 0.392237 \\
+        1526         & Creatine phosphokinase                                                                                 & NABM:biology    & 0.385801 \\
+        521          & Lactate deshydrogenase (LDH)                                                                           & NABM:biology
+                     & 0.315254                                                                                                                            \\
+        \bottomrule
+      \end{tabular}
+    }
+    \caption{Two closest concepts for each vocabulary for the medical concept I210
+      of Transmural infarction with the claims SNDS embeddings. Prasugrel is a
+      medication used to prevent formation of blood clots. Eplerenone is an
+      aldosterone antagonist type of potassium-sparing diuretic that is used to
+      treat chronic heart failure and high blood pressure. Creatine phosphokinase
+      used to be determined specifically in patients with chest pain. Because
+      Lactate deshydrogenase is released during tissue damage, it is a
+      marker of common injuries and disease such as heart failure}%
+    \label{table:embedding_nn}
+  \end{table}
+
 
 
   \chapter{Chapter \ref{chapter:causal_tuto}}\label{apd:causal_tuto}
