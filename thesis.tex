@@ -621,13 +621,14 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 \mainmatter
 
 \chapter{Introduction: Amazing opportunities of health data?}\label{chapter:intro}
+\md{move the personal experience in a dedicated section above. Only keep the gist and the subsection 1.1.4}
 
 \minitoc
-\section{How I came into this landscape}\label{sec:intro:landscape}
+\section{Why focus on health inference from Electronic Health Records}\label{sec:intro:landscape}
 
-My thesis work has been strongly shaped by the current machine learning
-landscape and my first experiences with healthcare data. An overview of these
-circumstances should be helpful to understand why I became interested in
+This work has been strongly shaped by the current machine learning
+landscape and my prior experiences with healthcare data. An overview of these
+circumstances should be helpful to understand why focus on health
 inference from Electronic Health Records (EHRs).
 
 \subsection{Learning statistics during the Natural Language Processing revolution}
@@ -678,12 +679,11 @@ relying on neural networks \citep{dernoncourt2017identification,
   paris2019desidentification}.
 
 % apport
-I realized that routine care data was not a familiar material for medical
-research. Influenced by a circle of engineers and NLP researchers, I linked this
-fact to the novel complexity and scale of the data collection process, both
-requiring innovating tools. It is only when arriving at the Health Authority of
-Health that I realized the difference of nature between experimental and
-observational data (presented in Subsection
+Yet, routine care data is not a familiar material for medical research. In
+circle of engineers and NLP researchers, this fact is often linked to the novel
+complexity and scale of the data collection process, both requiring innovating
+tools. For epidemiologists and physicians, their major difference lies in the
+opposition between experimental and observational data (presented in Subsection
 \ref{subsec:intro:interventional_vs_observational}).
 
 \subsection{Billing claims: new data for public health?}
@@ -955,16 +955,15 @@ benefit from innovative methods.
   The previous paragraph discussed average treatment effect. However,
   heterogeneity of treatment among subgroups is also an object of interest in
   healthcare \citep{hernan2020causal}. It is at the heart of the personalized
-  medicine paradigm --also coined as precision medicine. Originally anchored into
+  medicine paradigm --also called precision medicine. Originally anchored into
   genomics, this concept tries to take individual variability into account for
   tailored treatment recommendations \citep{schork2015personalized,
     topol2019high}.
 
   % RL  
-  In sequential decision making problems, heterogeneity of
-  treatment effect is close to subfields of machine learning such
-  as operational research \citep{schaefer2004modeling} or reinforcement learning
-  \citep{bareinboim2015bandits}. These fields are focused on sequential
+  In sequential decision-making problems, heterogeneity of treatment effect is
+  close to operational research \citep{schaefer2004modeling} or reinforcement
+  learning \citep{bareinboim2015bandits}. These fields are focused on sequential
   decision making processes with a large action-state space, rather than one-off
   treatment as in this thesis. To robustly estimate the probabilities involved
   in large dimensional state-action spaces, these works often require a
@@ -983,14 +982,14 @@ benefit from innovative methods.
 
 \cite{breiman2001statistical} clearly distinguished two statistical cultures: a
 predominant community at the time focused on models, and an emerging trend that
-rely only on predictive accuracy. The latter is now called machine learning.
+rely only on predictive accuracy. The latter is called machine learning.
 
 \subsection{Model-based statistics: oracle domain experts}%
 \label{subsec:intro:biostatistics_framework}
 
 % focus of biostats and epidemiology on models
 Biostatistics puts a strong emphasis on model specification, often interpreting
-model parameters as valid nature constructs \citep{cox2001statistical}. Maybe because
+model parameters as real mechanisms \citep{cox2001statistical}. Maybe because
 epidemiology seek to estimate causes and effects, it also favors the model-based
 culture as one can judge from textbooks \citep{rothman2012epidemiology}:
 \textit{In many epidemiological applications, it is the choice among effect
@@ -1002,7 +1001,7 @@ It is tempting to link explicit relations between variables in linear models to
 claims over the data. But interpretability of the model parameters is a strong
 assumption \citep{lipton2018mythos}, which relies on the well-specification of
 the model: The underlying variables and their relations built into the models
-should describe \emph{real} mechanisms.
+should describe natural laws as in physics.
 
 % Importance of validity by generalization of theory rather than statistical
 %   generalization: established epidemiological knowledge should \textit{tell us
@@ -1016,7 +1015,7 @@ should describe \emph{real} mechanisms.
 Despite judging model choice as \textit{crucial to fruitful application}
 \citep{cox2006principles}, this tedious task is left to experts, that should have an
 appropriate theoretical model of the problem \citep{cox2001statistical}. This
-habit is prone to circular reasoning where a model is chosen only to justify an
+practice is prone to circular reasoning where a model is chosen only to justify an
 established theory. Crowdsourcing studies asking the same question to
 different teams of experts showed that the choice of model and features is far
 from consensual and yield substantially different quantitative and qualitative
@@ -1050,7 +1049,7 @@ models and interpreting their inner part as causal.
   approximation of the features-outcome association. Appendix
   \ref{apd:intro:statistical_learning} recalls the formal definition of the
   supervised regression problem. Appendix \ref{apd:intro:statistical_models}
-  details the principles of random forest and gradient boosting since we are
+  details the principles of random forest and gradient boosting as we are
   using these two algorithms in different chapters of this thesis.
 
   \paragraph{Model selection -- How to choose between multiple promising models}
@@ -1070,8 +1069,8 @@ models and interpreting their inner part as causal.
 
   Note, that despite being valid for model selection --choosing the best model,
   cross-validation yields biased estimates to evaluate a given model
-  \citep{wager2020cross}. Nested cross-validation has been proposed as a simple
-  way to perform this final model evaluation \citep{varoquaux2017assessing}.
+  \citep{wager2020cross}. Nested cross-validation is a classic way to perform
+  this final model evaluation \citep{varoquaux2017assessing}.
 
 \end{background_box_left}
 
