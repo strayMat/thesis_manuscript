@@ -5370,12 +5370,14 @@ models.
 \section{Lessons learned}
 
 %
-\paragraph{Substantial efforts are needed to collect routine care data}
+\paragraph{Substantial efforts are engaged to collect routine care data for reuse}
 
 Vast amount of new data is collected in healthcare at the cost of new
-infrastructures. Navigating through this mass data is simplified by . A lot of
-hope, mainly in research, but also in applying to care. Very complicated to use
-in practice, because of heterogeneity of data, local practices and resources.
+infrastructures. Navigating through this mass of data is simplified moslty by
+NLP techniques. Mainly sold for research, creating new evidences is hard because
+of the poor normalization of data, and unexhaustive collect of critical elements
+of the healthcare trajectories even during hospital care, heterogeneity of local
+practices and resources.
 
 
 \paragraph{These data repositories are not big enough} Even a regional scale
@@ -5421,15 +5423,19 @@ hard to capture but is a key aspect of causal inference).
 
 \section{Personal convictions for perspectives}
 
+\paragraph{Claims data: they are not the solution for every questions, but could
+be leverage more for public health.} They are super normalized, lack
+few critical PICO elements \citep{caruana2023administrative}. 
+
 % Those problem are more pragmatic than theoretical. Thus, data and conclusions need to circulate. 
 \paragraph{The unreasonable effectiveness of healthcare data is yet out of
-reach} Due to the impossibility to transfer models or administrative barriers to
+  reach} Due to the impossibility to transfer models or administrative barriers to
 access data (due to multiplicity of the involved actors), predictive models
 deployment is almost unexistant. \md{source PA pour le non remboursement des DMs
-avec IA.} This forces us to rely on efficient techniques that make the best of
+  avec IA.} This forces us to rely on efficient techniques that make the best of
 medium-sized data or rely on sharable sources of knowledge. This calls for more
 work in research network methodologies \citep{hripcsak2015observational} and
-model sharing such as federated learning, and trained estimators. 
+model sharing such as federated learning, and trained estimators.
 
 %
 Ultimately, I am convinced that resource constraints and the ever-increasing
