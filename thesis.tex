@@ -5373,18 +5373,19 @@ models.
 \paragraph{Substantial efforts are engaged to collect routine care data for reuse}
 
 Vast amount of new data is collected in healthcare at the cost of new
-infrastructures. Navigating through this mass of data is simplified moslty by
-NLP techniques. Mainly sold for research, creating new evidences is hard because
-of the poor normalization of data, and unexhaustive collect of critical elements
-of the healthcare trajectories even during hospital care, heterogeneity of local
-practices and resources.
+infrastructures. Navigating through this mass of data is greatly simplified,
+mostly by the centralization of data fragmented in non interoperable softawares
+and NLP techniques. Mainly aiming to improve clinical research, deriving new
+evidences from EHRs is currently freined by a poor normalization of data access
+processes, heterogeneity of local practices, and unexhaustive collection of
+critical elements of the healthcare trajectories even during hospital care.
 
-
-\paragraph{These data repositories are not big enough} Even a regional scale
-data center such as the AP-HP has a small number of cases for common pathologies
-such as cardiovascular adverse events as \ref{chapter:predictive_models} shows.
-On these medium sized datasets, simple flexible models --based on forest-- are doing
-better than transformer-based models.
+\paragraph{These data repositories are not big enough} Even the regional scale
+data center of the AP-HP has a small number of cases for common pathologies such
+as cardiovascular adverse events as \ref{chapter:predictive_models} shows. On
+these medium sized datasets, flexible models on top of simple data
+representations --such as random forest with event counts-- are performing
+better than transformer-based models while being simpler to be deployed.
 
 \paragraph{Big data is no magic trick, we need causal thinking} Size of data put appart,
 the observational nature of EHRs data require clear and robust workflows
@@ -5420,12 +5421,25 @@ most of our information. We can rely pretraining models outside the healthcare
 domain. We should leverage it more in the context of care (limit: temporality is
 hard to capture but is a key aspect of causal inference).
 
+\section{Scientific perspectives}
 
-\section{Personal convictions for perspectives}
+\paragraph{Could design model that optimize the R-loss directly?}
+
+%There is a paper from the chernozukhov
+% clics that does that : rieznet I think. DIcuss the relation with the
+% two-headed neural networks studied by Johansson et al.
+
+\paragraph{How to explain the high inter-experience variance for model selection?}
+% Overlap is a component but there 
+
+\paragraph{The potential of Large Language Models for prediction from EHRs}
+% 
+
+\section{Personal convictions for practical perspectives}
 
 \paragraph{Claims data: they are not the solution for every questions, but could
-be leverage more for public health.} They are super normalized, lack
-few critical PICO elements \citep{caruana2023administrative}. 
+  be leverage more for public health.} They are super normalized, lack
+few critical PICO elements \citep{caruana2023administrative}.
 
 % Those problem are more pragmatic than theoretical. Thus, data and conclusions need to circulate. 
 \paragraph{The unreasonable effectiveness of healthcare data is yet out of
