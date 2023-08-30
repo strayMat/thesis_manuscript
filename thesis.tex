@@ -534,30 +534,27 @@
   databases pose a number of challenges for effectively answering these
   questions. To remedy these problems, econometricians and epidemiologists have
   recently proposed the use of flexible models combining causal inference with
-  high-dimensional machine learning.
+  high-dimensional machine learning. 
 
-  Chapter \ref{chapter:intro} details the current tension between these new
-  sources of data, machine learning and modern public health issues. This
-  motivates the main research question of this work: How flexible models can
-  help delivering appropriate treatment to each and every patient to improve her
-  health?
-
-  Chapter \ref{chapter:cdw} summarizes semi-structured interviews from a
-  national case study of the Clinical Data Warehouses (CDWs) of the 32 French
-  regional and university hospitals. It highlights key aspects of this
-  cornerstone infrastructure for the collect and analysis of Electronic Health
-  Records (EHRs).
-
-  Acknowledging the difficulty to access large sample sizes and computational
-  power to develop generalizable predictive models, chapter
-  \ref{chapter:predictive_models} explores a complexity gradient in
-  representation and predictive algorithms for EHRs.
-
-  Anchored in causal thinking, chapter \ref{chapter:causal_tuto} details
-  key elements necessary to robustly estimate treatment effect from time-varying
-  EHR data. It illustrates various possible variations in studying the effect
-  of albumin on sepsis mortality in the Medical Information Mart for Intensive
-  Care database (MIMIC-IV).
+  We first detail the current tension between these new sources of data, machine
+  learning and modern public health issues. This tension motivates the main
+  research question of this work: How flexible models can help delivering
+  appropriate treatment to each and every patient to improve her health? In
+  order to gain a better understanding of the key aspects of modern
+  infrastructures for collecting and analyzing Electronic Health Records (EHRs),
+  we summarize semi-structured interviews conducted as part of a national case
+  study of the clinical data warehouses (CDWs) of the 32 French regional and university
+  hospitals. Acknowledging the difficulty to access large sample sizes and
+  computational power to develop generalizable predictive models, we explore a
+  complexity gradient in representation and predictive algorithms for EHRs. We
+  then turn to causal thinking, detailing key elements necessary to robustly
+  estimate treatment effect from time-varying EHR data. We illustrate various
+  possible variations in studying the effect of albumin on sepsis mortality in
+  the Medical Information Mart for Intensive Care database (MIMIC-IV). In
+  high-dimensional settings, the selection of hyper-parameters for the causal
+  model is crucial to avoid under- or over-learning. In a simulation and three
+  semi-simulated datasets, we shows that the doubly robust R-risk outperforms
+  other existing risks.
   % Despite a current focus on artificial intelligence, healthcare does
   % not seek purely predictive models, but appropriate interventions that will
   % benefit specific patients. This is a decision making problem highly amenable to
@@ -566,15 +563,9 @@
   % highlight the importance of the different practical choices when developing
   % counterfactual prediction algorithms on time-varying data collected in routine
   % care.
-  In high-dimensional settings, the selection of hyper-parameters for the causal
-  model is crucial to avoid under- or over-learning. Chapter
-  \ref{chapter:causal_model_selection} shows that the doubly robust R-risk
-  outperforms other existing risks in a simulation and three semi-simulated
-  datasets.
-
-  Chapter \ref{chapter:conclusion} discusses potentially interesting avenues to
-  improve the development and the evaluation of tailored interventions, public
-  health policies or quality-of-care indicators.
+  % Chapter \ref{chapter:conclusion} discusses potentially interesting avenues to
+  % improve the development and the evaluation of tailored interventions, public
+  % health policies or quality-of-care indicators.
 \end{chapterabstract}
 \vfill
 
@@ -594,31 +585,27 @@
   l'utilisation de modèles flexibles combinant l'inférence causale et
   l'apprentissage automatique en grande dimension.
 
-  Le chapitre \ref{chapitre:intro} détaille la tension actuelle entre ces
-  nouvelles sources de données, l'apprentissage automatique et des
-  problématiques modernes de santé publique. Cette tension motive la principale
-  question de recherche de ce travail : Comment des modèles flexibles
-  peuvent-ils aider à fournir un traitement approprié à chaque patient afin
-  d'améliorer sa santé ?
-
-  Le chapitre \ref{chapter:cdw} résume les entretiens semi-structurés menés dans
-  le cadre d'une étude de cas nationale portant sur les entrepôts de données
-  cliniques des 32 hôpitaux régionaux et universitaires français. Il met en
-  lumière les principaux aspects de cette infrastructure essentielle pour la
-  collecte et l'analyse des dossiers patients informatisés (DPI).
-
+  Dans un premier temps, nous illustrons par quelques exemples la tension
+  actuelle entre ces nouvelles sources de données, l'apprentissage automatique
+  et des problématiques modernes de santé publique. Ces exemples motivent la
+  question centrale de notre travail : Comment des modèles flexibles peuvent-ils
+  aider à fournir un traitement approprié à chaque patient afin d'améliorer sa
+  santé ?%
+  Afin de mieux comprendre quelles sont les principaux aspects des
+  infrastructures modernes de collecte et d'analyse des dossiers patients
+  informatisés (DPI), nous faisons la synthèse d'entretiens semi-structurés
+  menés dans le cadre d'une étude de cas nationale portant sur les entrepôts de
+  données cliniques des 32 hôpitaux régionaux et universitaires français.%
   Reconnaissant la difficulté d'accéder à des échantillons de grande taille et à
   la puissance de calcul pour développer des modèles prédictifs généralisables,
   le chapitre \ref{chapter:predictive_models} explore un gradient de complexité
-  dans les représentations et les algorithmes prédictifs sur DPI.
-
+  dans les représentations et les algorithmes prédictifs sur DPI.%
   Ancré dans la pensée causale, le chapitre \ref{chapter:causal_tuto}
   détaille les éléments clés nécessaires pour estimer de manière robuste l'effet
   du traitement à partir de données de DPI variant dans le temps. Il illustre
   diverses variations possibles dans l'étude de l'effet de l'albumine sur la
   mortalité dans des cas de septicémie avec la base de données MIMIC-IV (Medical
-  Information Mart for Intensive Care).
-
+  Information Mart for Intensive Care).%
   Dans des problèmes à grande dimension, la sélection d'hyperparamètres pour les
   modèles causaux est cruciale pour éviter le sous-apprentissage ou le
   sur-apprentissage. Le chapitre \ref{chapter:causal_model_selection} montre que
@@ -5508,18 +5495,18 @@ repartition of these mistreated patients conditionally on patient conditions.
   classification, splits are chosen by minimizing some impurity measure of the
   class probabilities over the two new created nodes instead of the squared
   error. A typical impurity measure is the Gini index $\sum_{k=1}^K \hat p_{mk}
-  (1-\hat p_{mk})$ where $\hat p_{mk}$ is the empirical probability of class k
+    (1-\hat p_{mk})$ where $\hat p_{mk}$ is the empirical probability of class k
   in node m. The complexity of a tree is determined by its maximal depth --ie,
   the maximum number of splits before reaching a terminal node --called a leaf.
   Figure \ref{fig:tree_regression} illustrates on a toy dataset, decision trees
   with depth 1, 2 and 5.
 
-  \begin{figure}
+  \begin{figure}[!b]
     \centering
-    \includegraphics{img/chapter_1/tree_3.pdf}
+    \includegraphics[width=0.8\linewidth]{img/chapter_1/tree_3.pdf}
     \caption{Illustration of regression trees with depth 1, 2 and 5.\\Code
-    adapated from
-    \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
+      adapated from
+      \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
     \label{fig:tree_regression}
   \end{figure}
 
@@ -5541,12 +5528,12 @@ repartition of these mistreated patients conditionally on patient conditions.
   \ref{fig:forest_regression} shows on a toy dataset random forests with
   increasing number of trees of depth 4.
 
-  \begin{figure}
+  \begin{figure}[!t]
     \centering
-    \includegraphics{img/chapter_1/forest_4.pdf}
+    \includegraphics[width=0.8\linewidth]{img/chapter_1/forest_4.pdf}
     \caption{Illustration of random forest with increasing number of
-    trees.\\Code adapated from
-    \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
+      trees.\\Code adapated from
+      \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
     \label{fig:forest_regression}
   \end{figure}
 
@@ -5554,19 +5541,19 @@ repartition of these mistreated patients conditionally on patient conditions.
   \subsection{Gradient Boosting}\label{apd:intro:boosting}
 
   Random forest is the aggregation of overfitting estimators. On the countrary,
-  boosting \citep{freund1995desicion} is a method that iteratively sums weak
-  learners --typically trees-- to each other. Each new weak learner improves
-  over the errors of the previous averaged estimators. Improvement on errors can
-  be performed by solving analytically the error loss function or numerically by
-  gradient descent \citep{friedman2001greedy}. The later has the advantage to
-  avoid a new implementation for every new loss function. The final estimator
-  has the same form than a random forest, but require substantially less trees
-  to converge. Figure \ref{fig:boosting_regression} illustrates on a toy example
-  of boosting trees with increasing number of trees of depth 4.
+  boosting \citep{freund1995desicion} is a method that iteratively sums
+  underfitted learners --typically trees-- to each other. Each new weak learner
+  improves over the errors of the previous averaged estimators. Improvement on
+  errors can be performed by solving analytically the error loss function or
+  numerically by gradient descent \citep{friedman2001greedy}. The later has the
+  advantage to avoid a new implementation for every new loss function. The final
+  estimator has the same form than a random forest, but require substantially
+  less trees to converge. Figure \ref{fig:boosting_regression} illustrates on a
+  toy example of boosting trees with increasing number of trees of depth 4.
 
- \begin{figure}
+  \begin{figure}[!b]
     \centering
-    \includegraphics{img/chapter_1/boosting_4.pdf}
+    \includegraphics[width=0.8\linewidth]{img/chapter_1/boosting_4.pdf}
     \caption{Illustration of boosting trees with increasing number of
       trees.\\Code adapated from
       \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
@@ -7321,202 +7308,200 @@ repartition of these mistreated patients conditionally on patient conditions.
 
   \section{Major causal-inference methods}\label{apd:causal_methods}
 
-  \begin{background_box_left}
 
 
-    \subsection{Causal estimators: When to use which method ?}\label{apd:causal_estimators}
+  \subsection{Causal estimators: When to use which method ?}\label{apd:causal_estimators}
 
-    \paragraph{Difference in Mean, \citep{splawa1990application}} This is the most intuitive method to
-    estimate the ATE. It processes by comparing the mean of the outcome between both populations:
+  \paragraph{Difference in Mean, \citep{splawa1990application}} This is the most intuitive method to
+  estimate the ATE. It processes by comparing the mean of the outcome between both populations:
 
-    \begin{equation}
-      \hat \tau_{DM} = \frac{1}{n_1} \sum_{A_i=1} Y_i(1) - \frac{1}{n_0} \sum_{A_i=0} Y_i(0)
-    \end{equation}
+  \begin{equation}
+    \hat \tau_{DM} = \frac{1}{n_1} \sum_{A_i=1} Y_i(1) - \frac{1}{n_0} \sum_{A_i=0} Y_i(0)
+  \end{equation}
 
-    In the case of randomization, we have an independence between the treatment
-    and the potential outcomes: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep
-      A_{i}$. We can thus show that this estimator is unbiased, ie.
-    $\mathbb{E}[\hat \tau_{DM}] = \tau$:
+  In the case of randomization, we have an independence between the treatment
+  and the potential outcomes: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep
+    A_{i}$. We can thus show that this estimator is unbiased, ie.
+  $\mathbb{E}[\hat \tau_{DM}] = \tau$:
+
+  \begin{align*}
+    \mathbb{E}\left[Y \mid A =1\right] & = \mathbb{E}\left[YA \mid  A=1\right]         &  & \text{Binary nature of $A$}                                       \\
+                                       & = \mathbb{E}\left[Y^{(1)}A^2 \mid  A=1\right] &  & \text{Consistency $Y_i = A_i \, Y_i^{(1)} + (1-A_i)\, Y_i^{(0)}$} \\
+                                       & = \mathbb{E}\left[Y^{(1)} \mid  A=1\right]    &  & \text{Binary nature of $A$}                                       \\
+                                       & = \mathbb{E}\left[ Y^{(1)}\right]             &  & \text{Randomization,}
+  \end{align*}
+  The same calculation with $A=0$ give the result. Note that this result does
+  not apply to observational data, where we only have conditional
+  randomization: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep A_{i} | X_i$.
+  Thus, we should rely on more elaborated estimation strategies if the data is
+  observational.
+
+  \paragraph{G-formula} This estimator is also called conditional mean regression
+  \citep{wendling2018comparing}, g-computation \citep{robins_role_1986}, or
+  Q-model \citep{snowden2011implementation}. It is directly modeling
+  the outcome, also referred to as the response surface: $\mu_{(a)}(x)
+    =\mathbb{E}\left(Y \mid A=a, \mathbf{X}=x\right)$
+
+  Using an outcome estimator to learn a model for the response surface $\hat
+    \mu$ (eg. a linear model), the ATE estimator is an average over the n samples:
+  \begin{equation}
+    \hat{\tau}_G(\hat \mu) = \frac{1}{n} \sum_{i=1}^n \hat \mu(x_i, 1) - \hat \mu(x_i, 0) = \frac{1}{n} \sum_{i=1}^n \hat \mu_{(1)}(x_i) - \hat \mu_{(0)}(x_i)
+  \end{equation}
+
+  This estimator is unbiased if the model of the conditional response surface
+  $\hat \mu_{(a)}$ is well-specified. This approach assumes than $Y(a) =
+    \mu_a(X) + \epsilon_a$ with $\mathbb E[\epsilon|X] = 0$. The main drawback is
+  the extrapolation of the learned outcome estimator from samples with similar
+  covariates X but different intervention A.
+
+  \begin{proof}[Unbiasdness of the G-formula, \citep{robins_role_1986}]
+    Suppose, we have access to the oracle mean response surfaces $\mu_{(a)}$,
+    then the finite sample estimator is $\hat{\tau}_G(\mu) = \frac{1}{n}
+      \sum_{i=1}^n  \mu_{(1)}(x_i) -  \mu_{(0)}(x_i)$
+    \begin{align*}
+      \tau(x) & =\mathbb{E}\left[Y(1)-Y(0) \mid X=x\right]                                                   &  & \text{Definition of CATE}                      \\
+              & =\mathbb{E}\left[Y(1) \mid X=x, A=1\right]-\mathbb{E}\left[Y(0) \mid X=x, A=0\right]         &  & \text{Ignorability, eq. \ref{eq:ignorability}} \\
+              & =\mathbb{E}\left[A Y(1) \mid X=x, A=1\right]-\mathbb{E}\left[(1-A) Y(0) \mid X=x, A=0\right] &  & \text{Binary nature of A}                      \\
+              & =\mathbb{E}[Y \mid X=x, A=1]-\mathbb{E}[Y \mid X=x, A=0]                                     &  & \text{Consistency, eq. \ref{eq:consistancy}}   \\
+              & =\mathbb{E}[\hat{\tau}_G(\mu)]                                                               &  &
+    \end{align*}
+  \end{proof}
+
+  Note that without further parametric assumption on the conditional response
+  surface $\mu_{(a)}$, the asymptotic properties of this estimator are unknown.
+
+  \paragraph{Propensity Score Matching (PSM)} To avoid confounding bias, the
+  ignorability assumption \ref{assumption:ignorability}) requires to contrast
+  treated and control outcomes only between comparable patients with respect to
+  treatment allocation probabilities. A simple way to do this is to group
+  patients into bins, or subgroups, of similar confounders and contrast the two
+  population outcomes by matching patients inside of these bins
+  \citep{stuart2010matching}. However, the number of confounder bins grows
+  exponentially with the number of variables. \cite{rosenbaum_central_1983} proved
+  that matching patients on the individual probabilities to receive treatment
+  --propensity scores-- is sufficient to verify ignorability. PSM is a
+  conceptually simple method, but has delicate parameters to tune such as
+  choosing a model for the propensity score, deciding what is the maximum
+  distance between two potential matches (the caliper width), the number of
+  matches by sample, and matching with or without replacement. It also prunes data
+  not meeting the caliper width criteria, and suffers form high estimation
+  variance in highly-dimensional data where extreme propensity weights are common.
+  Finally, the simple bootstrap confidence intervals are not theoretically
+  grounded \citep{abadie2008failure}, making PSM more difficult
+  to use for applied practitioners.
+
+
+  \paragraph{Inverse Propensity Weighting (IPW)}
+
+  A simple alternative to propensity score matching is to weight the outcome by
+  the inverse of the propensity score: Inverse Propensity Weighting
+  \citep{austin2015moving}. It relies on the same idea than matching but builds
+  automatically balanced population by reweighting the outcomes with the
+  propensity score model $\hat{e}$ to estimate the ATE:
+  \begin{equation}
+    \hat \tau_{IPW}(\hat e) = \frac{1}{n} \sum_{i=1}^N \frac{A_i Y_i}{\hat e(X_i)} - \frac{(1-A_i)Y_i}{(1-\hat e(X_i))}
+  \end{equation}
+
+  This estimate is unbiased if $\hat e$ is well-specified. IPW suffers from high
+  variance if some weights are too close to 0 or 1. In high-dimensional cases
+  where poor overlap between treated and control is common, one can clip extreme
+  weights to limit estimation instability.
+
+  \begin{proof}[Unbiasdness of IPW, \citep{rosenbaum_central_1983}]
+    As an intermediary result, we need to show that the propensity score e is a balancing score, ie. if
+    ignorability (\ref{eq:ignorability}) holds then $\{Y(1), Y(0)\} \indep A | e(X)$.
+    Thus, need to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = \mathbb P[A=1 \mid e(X)]$
+    First remark that $\mathbb P [A=1 \mid e(X)] = e(X)$:
+    \begin{align*}
+      \mathbb P [A=1 \mid e(X)] & = \mathbb E \big[ \mathbb P [A=1 \mid X, e(X)] \mid e(X) \big ] &  & \text{Law of total expectation}              \\
+                                & = \mathbb E \big[ \mathbb P [A=1 \mid X] \mid e(X) \big ]       &  & \text{X contains all information of e(X)}    \\
+                                & = \mathbb E \big[ e(X) \mid e(X) \big ]                         &  & \text{by definition of the propensity score} \\
+                                & = e(X)                                                          &  & \text{e(X) contains all information of e(X)}
+    \end{align*}
+    Thus, we only have to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = e(X)$:
+    \begin{align*}
+       & \mathbb P[A=1 \mid Y(1), Y(0), e(X)]                                                  &  &                                              \\
+       & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X, e(X)] \mid  Y(1), Y(0), e(X) \big] &  & \text{Law of total expectation}              \\
+       & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X] \mid  Y(1), Y(0), e(X) \big]       &  & \text{X contains all information of e(X)}    \\
+       & = \mathbb E \big[\mathbb P[A=1 \mid X] \mid  Y(1), Y(0), e(X) \big]                   &  & \text{ignorability}                          \\
+       & = \mathbb E \big[ e(X) \mid  Y(1), Y(0), e(X) \big ]                                  &  & \text{by definition of the propensity score} \\
+       & = e(X)                                                                                &  & \text{e(X) contains all information of e(X)}
+    \end{align*}
+
+    Suppose that we have access to the oracle propensity score $e$, then the
+    finite sample estimator is $\hat{\tau}_{IPW}(e)=\frac{1}{n} \sum_{i=1}^{n}
+      \frac{A_{i} Y_{i}}{e\left(X_{i}\right)}-\frac{(1-A_{i})
+      Y_{i}}{1-e\left(X_{i}\right)}$.
 
     \begin{align*}
-      \mathbb{E}\left[Y \mid A =1\right] & = \mathbb{E}\left[YA \mid  A=1\right]         &  & \text{Binary nature of $A$}                                       \\
-                                         & = \mathbb{E}\left[Y^{(1)}A^2 \mid  A=1\right] &  & \text{Consistency $Y_i = A_i \, Y_i^{(1)} + (1-A_i)\, Y_i^{(0)}$} \\
-                                         & = \mathbb{E}\left[Y^{(1)} \mid  A=1\right]    &  & \text{Binary nature of $A$}                                       \\
-                                         & = \mathbb{E}\left[ Y^{(1)}\right]             &  & \text{Randomization,}
+      \mathbb E \big[\frac{A Y}{e(X)}] & =\mathbb E \big[\frac{A^2 Y(1)}{e(X)}\big]                                                  &  & \text{Consistency, eq. \ref{eq:consistancy}}   \\
+                                       & =\mathbb E \big[\frac{A^2 Y(1)}{e(X)}\big]                                                  &  & \text{Binary nature of A}                      \\
+                                       & =\mathbb E \big[\mathbb E \big[\frac{A Y(1)}{e(X)}|e(X)\big]\big]                           &  & \text{Law of total expectation}                \\
+                                       & =\mathbb E \big[\mathbb E \big[\frac{A}{e(X)}|e(X)\big] \mathbb E \big[Y(1)|e(X)\big] \big] &  & \text{Ignorability and e is a balancing score} \\
+                                       & =\mathbb E[Y(1)]                                                                            &  & \text{since} e(X)=\mathbb P[A=1|X]
     \end{align*}
-    The same calculation with $A=0$ give the result. Note that this result does
-    not apply to observational data, where we only have conditional
-    randomization: $\left\{Y_{i}^{(0)}, Y_{i}^{(1)}\right\} \indep A_{i} | X_i$.
-    Thus, we should rely on more elaborated estimation strategies if the data is
-    observational.
+    Doing the same calculation for $A=0$ gives the result.
+  \end{proof}
 
-    \paragraph{G-formula} This estimator is also called conditional mean regression
-    \citep{wendling2018comparing}, g-computation \citep{robins_role_1986}, or
-    Q-model \citep{snowden2011implementation}. It is directly modeling
-    the outcome, also referred to as the response surface: $\mu_{(a)}(x)
-      =\mathbb{E}\left(Y \mid A=a, \mathbf{X}=x\right)$
+  \paragraph{Doubly Robust Learning, DRL} It is also called Augmented Inverse
+  Probability Weighting (AIPW) \citep{robins1994estimation}.
 
-    Using an outcome estimator to learn a model for the response surface $\hat
-      \mu$ (eg. a linear model), the ATE estimator is an average over the n samples:
-    \begin{equation}
-      \hat{\tau}_G(\hat \mu) = \frac{1}{n} \sum_{i=1}^n \hat \mu(x_i, 1) - \hat \mu(x_i, 0) = \frac{1}{n} \sum_{i=1}^n \hat \mu_{(1)}(x_i) - \hat \mu_{(0)}(x_i)
-    \end{equation}
+  The underlying idea of DRL is to combine the G-formula and IPW estimators to
+  protect against a mis-specification of one of them. It first requires to
+  estimate the two nuisance parameters: a model for the intervention $\hat{e}$
+  and a model for the outcome $f$. If one of the two nuisance is unbiased, the
+  following ATE estimator is as well:
 
-    This estimator is unbiased if the model of the conditional response surface
-    $\hat \mu_{(a)}$ is well-specified. This approach assumes than $Y(a) =
-      \mu_a(X) + \epsilon_a$ with $\mathbb E[\epsilon|X] = 0$. The main drawback is
-    the extrapolation of the learned outcome estimator from samples with similar
-    covariates X but different intervention A.
+  $$\begin{aligned} \widehat{\tau}_{A I P W}=\frac{1}{n}
+      \sum_{i=1}^{n}\left(\hat \mu_{(1)}\left(x_{i}\right)-\hat \mu_{(0)}\left(x_{i}\right)+a_{i}
+      \frac{y_{i}-\hat \mu_{(1)}\left(x_{i}\right)}{\hat{e}\left(x_{i}\right)}-\left(1-a_{i}\right)
+      \frac{y_{i}-\hat \mu_{(0)}\left(x_{i}\right)}{1-\hat{e}\left(x_{i}\right)}\right)
+    \end{aligned}$$
 
-    \begin{proof}[Unbiasdness of the G-formula, \citep{robins_role_1986}]
-      Suppose, we have access to the oracle mean response surfaces $\mu_{(a)}$,
-      then the finite sample estimator is $\hat{\tau}_G(\mu) = \frac{1}{n}
-        \sum_{i=1}^n  \mu_{(1)}(x_i) -  \mu_{(0)}(x_i)$
-      \begin{align*}
-        \tau(x) & =\mathbb{E}\left[Y(1)-Y(0) \mid X=x\right]                                                   &  & \text{Definition of CATE}                      \\
-                & =\mathbb{E}\left[Y(1) \mid X=x, A=1\right]-\mathbb{E}\left[Y(0) \mid X=x, A=0\right]         &  & \text{Ignorability, eq. \ref{eq:ignorability}} \\
-                & =\mathbb{E}\left[A Y(1) \mid X=x, A=1\right]-\mathbb{E}\left[(1-A) Y(0) \mid X=x, A=0\right] &  & \text{Binary nature of A}                      \\
-                & =\mathbb{E}[Y \mid X=x, A=1]-\mathbb{E}[Y \mid X=x, A=0]                                     &  & \text{Consistency, eq. \ref{eq:consistancy}}   \\
-                & =\mathbb{E}[\hat{\tau}_G(\mu)]                                                               &  &
-      \end{align*}
-    \end{proof}
+  Moreover, despite the need to estimate two models, this estimator is more
+  efficient in the sense that it converges quicker than single model estimators
+  \citep{wager2020stats}. For this propriety to hold, one need to fit and apply
+  the two nuisance models in a cross-fitting manner. This means that we split
+  the data into K folds. Then for each fold, we fit the nuisance models on the
+  K-1 complementary folds, and predict on the remaining fold.
 
-    Note that without further parametric assumption on the conditional response
-    surface $\mu_{(a)}$, the asymptotic properties of this estimator are unknown.
+  To recover Conditional Treatment Effects from the AIPW estimator,
+  \cite{foster2019orthogonal} suggested to regress the Individual Treatment
+  Effect estimates from AIPW on potential sources of heterogeneity $X^{cate}$:
+  $\hat tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
+  for $\Theta$ some class of model (eg. linear model).
 
-    \paragraph{Propensity Score Matching (PSM)} To avoid confounding bias, the
-    ignorability assumption \ref{assumption:ignorability}) requires to contrast
-    treated and control outcomes only between comparable patients with respect to
-    treatment allocation probabilities. A simple way to do this is to group
-    patients into bins, or subgroups, of similar confounders and contrast the two
-    population outcomes by matching patients inside of these bins
-    \citep{stuart2010matching}. However, the number of confounder bins grows
-    exponentially with the number of variables. \cite{rosenbaum_central_1983} proved
-    that matching patients on the individual probabilities to receive treatment
-    --propensity scores-- is sufficient to verify ignorability. PSM is a
-    conceptually simple method, but has delicate parameters to tune such as
-    choosing a model for the propensity score, deciding what is the maximum
-    distance between two potential matches (the caliper width), the number of
-    matches by sample, and matching with or without replacement. It also prunes data
-    not meeting the caliper width criteria, and suffers form high estimation
-    variance in highly-dimensional data where extreme propensity weights are common.
-    Finally, the simple bootstrap confidence intervals are not theoretically
-    grounded \citep{abadie2008failure}, making PSM more difficult
-    to use for applied practitioners.
+  \paragraph{Double Machine Learning} \citep{chernozhukov2018double} It is also known
+  as the R-learner \citep{nie2021quasi}. It is based on the R-decomposition,
+  \citep{robinson_rootnconsistent_1988}, and the modeling of the conditional mean outcome,
+  $m(x)=\mathbb E[Y|X=x]$ and the propensity score, $e(x)=\mathbb E[A=1|X=x]$:
+  \begin{equation}\label{eq:r_decomposition_dml}
+    y_{i}-m\left(x_{i}\right)=\left(a_{i}-e\left(x_{i}\right)\right) \tau\left(x_{i}\right)+\varepsilon_{i} \quad \text{with} \; \varepsilon_{i}=y_{i}-\varepsilon\left[4_{i} \mid x_{i}, a_{i}\right]
+  \end{equation}
+  Note that we can impose that the conditional treatment effect $\tau(x)$ only
+  relies on a subset of the features, $x^{cate}$ on which we want to study
+  treatment heterogeneity.
 
+  From this decomposition, we can derive an estimation of the ATE $\tau$, where
+  the right hand-side term is the empirical R-Loss:
+  \begin{align}\label{eq:r_loss}
+    \hat{\tau}(\cdot)=\operatorname{argmin}_{\tau}\left\{\frac{1}{n} \sum_{i=1}^{n}\left(\left(y_{i}-m\left(x_{i}\right)\right)-\left(a_{i}-e(x_{i})\right) \tau\left(x^{cate}_{i}\right)\right)^{2}\right\}
+  \end{align}
 
-    \paragraph{Inverse Propensity Weighting (IPW)}
+  The full procedure for R-learning is:
+  \begin{itemize}
+    \item Fit nuisances: $\hat m$ and $\hat e$
+    \item Minimize the estimated R-loss eq.\ref{eq:r_loss}, where the oracle nuisances $(e, m)$
+          have been replaced by their estimated counterparts $(\hat e, \hat m)$.
+          Minimization can be done by regressing the outcome residuals weighted by the
+          treatment residuals
+    \item Get the ATE by averaging conditional treatment effect $\tau(x^{cate})$ over the population
+  \end{itemize}
 
-    A simple alternative to propensity score matching is to weight the outcome by
-    the inverse of the propensity score: Inverse Propensity Weighting
-    \citep{austin2015moving}. It relies on the same idea than matching but builds
-    automatically balanced population by reweighting the outcomes with the
-    propensity score model $\hat{e}$ to estimate the ATE:
-    \begin{equation}
-      \hat \tau_{IPW}(\hat e) = \frac{1}{n} \sum_{i=1}^N \frac{A_i Y_i}{\hat e(X_i)} - \frac{(1-A_i)Y_i}{(1-\hat e(X_i))}
-    \end{equation}
+  This estimator has also the doubly robust proprieties described for AIPW. it
+  should have less variance than AIPW since it does not use the propensity score
+  in the denominator.
 
-    This estimate is unbiased if $\hat e$ is well-specified. IPW suffers from high
-    variance if some weights are too close to 0 or 1. In high-dimensional cases
-    where poor overlap between treated and control is common, one can clip extreme
-    weights to limit estimation instability.
-
-    \begin{proof}[Unbiasdness of IPW, \citep{rosenbaum_central_1983}]
-      As an intermediary result, we need to show that the propensity score e is a balancing score, ie. if
-      ignorability (\ref{eq:ignorability}) holds then $\{Y(1), Y(0)\} \indep A | e(X)$.
-      Thus, need to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = \mathbb P[A=1 \mid e(X)]$
-      First remark that $\mathbb P [A=1 \mid e(X)] = e(X)$:
-      \begin{align*}
-        \mathbb P [A=1 \mid e(X)] & = \mathbb E \big[ \mathbb P [A=1 \mid X, e(X)] \mid e(X) \big ] &  & \text{Law of total expectation}              \\
-                                  & = \mathbb E \big[ \mathbb P [A=1 \mid X] \mid e(X) \big ]       &  & \text{X contains all information of e(X)}    \\
-                                  & = \mathbb E \big[ e(X) \mid e(X) \big ]                         &  & \text{by definition of the propensity score} \\
-                                  & = e(X)                                                          &  & \text{e(X) contains all information of e(X)}
-      \end{align*}
-      Thus, we only have to prove that $\mathbb P[A=1 \mid Y(1), Y(0), e(X)] = e(X)$:
-      \begin{align*}
-         & \mathbb P[A=1 \mid Y(1), Y(0), e(X)]                                                  &  &                                              \\
-         & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X, e(X)] \mid  Y(1), Y(0), e(X) \big] &  & \text{Law of total expectation}              \\
-         & = \mathbb E \big[\mathbb P[A=1 \mid Y(1), Y(0), X] \mid  Y(1), Y(0), e(X) \big]       &  & \text{X contains all information of e(X)}    \\
-         & = \mathbb E \big[\mathbb P[A=1 \mid X] \mid  Y(1), Y(0), e(X) \big]                   &  & \text{ignorability}                          \\
-         & = \mathbb E \big[ e(X) \mid  Y(1), Y(0), e(X) \big ]                                  &  & \text{by definition of the propensity score} \\
-         & = e(X)                                                                                &  & \text{e(X) contains all information of e(X)}
-      \end{align*}
-
-      Suppose that we have access to the oracle propensity score $e$, then the
-      finite sample estimator is $\hat{\tau}_{IPW}(e)=\frac{1}{n} \sum_{i=1}^{n}
-        \frac{A_{i} Y_{i}}{e\left(X_{i}\right)}-\frac{(1-A_{i})
-        Y_{i}}{1-e\left(X_{i}\right)}$.
-
-      \begin{align*}
-        \mathbb E \big[\frac{A Y}{e(X)}] & =\mathbb E \big[\frac{A^2 Y(1)}{e(X)}\big]                                                  &  & \text{Consistency, eq. \ref{eq:consistancy}}   \\
-                                         & =\mathbb E \big[\frac{A^2 Y(1)}{e(X)}\big]                                                  &  & \text{Binary nature of A}                      \\
-                                         & =\mathbb E \big[\mathbb E \big[\frac{A Y(1)}{e(X)}|e(X)\big]\big]                           &  & \text{Law of total expectation}                \\
-                                         & =\mathbb E \big[\mathbb E \big[\frac{A}{e(X)}|e(X)\big] \mathbb E \big[Y(1)|e(X)\big] \big] &  & \text{Ignorability and e is a balancing score} \\
-                                         & =\mathbb E[Y(1)]                                                                            &  & \text{since} e(X)=\mathbb P[A=1|X]
-      \end{align*}
-      Doing the same calculation for $A=0$ gives the result.
-    \end{proof}
-
-    \paragraph{Doubly Robust Learning, DRL} It is also called Augmented Inverse
-    Probability Weighting (AIPW) \citep{robins1994estimation}.
-
-    The underlying idea of DRL is to combine the G-formula and IPW estimators to
-    protect against a mis-specification of one of them. It first requires to
-    estimate the two nuisance parameters: a model for the intervention $\hat{e}$
-    and a model for the outcome $f$. If one of the two nuisance is unbiased, the
-    following ATE estimator is as well:
-
-    $$\begin{aligned} \widehat{\tau}_{A I P W}=\frac{1}{n}
-        \sum_{i=1}^{n}\left(\hat \mu_{(1)}\left(x_{i}\right)-\hat \mu_{(0)}\left(x_{i}\right)+a_{i}
-        \frac{y_{i}-\hat \mu_{(1)}\left(x_{i}\right)}{\hat{e}\left(x_{i}\right)}-\left(1-a_{i}\right)
-        \frac{y_{i}-\hat \mu_{(0)}\left(x_{i}\right)}{1-\hat{e}\left(x_{i}\right)}\right)
-      \end{aligned}$$
-
-    Moreover, despite the need to estimate two models, this estimator is more
-    efficient in the sense that it converges quicker than single model estimators
-    \citep{wager2020stats}. For this propriety to hold, one need to fit and apply
-    the two nuisance models in a cross-fitting manner. This means that we split
-    the data into K folds. Then for each fold, we fit the nuisance models on the
-    K-1 complementary folds, and predict on the remaining fold.
-
-    To recover Conditional Treatment Effects from the AIPW estimator,
-    \cite{foster2019orthogonal} suggested to regress the Individual Treatment
-    Effect estimates from AIPW on potential sources of heterogeneity $X^{cate}$:
-    $\hat tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
-    for $\Theta$ some class of model (eg. linear model).
-
-    \paragraph{Double Machine Learning} \citep{chernozhukov2018double} It is also known
-    as the R-learner \citep{nie2021quasi}. It is based on the R-decomposition,
-    \citep{robinson_rootnconsistent_1988}, and the modeling of the conditional mean outcome,
-    $m(x)=\mathbb E[Y|X=x]$ and the propensity score, $e(x)=\mathbb E[A=1|X=x]$:
-    \begin{equation}\label{eq:r_decomposition_dml}
-      y_{i}-m\left(x_{i}\right)=\left(a_{i}-e\left(x_{i}\right)\right) \tau\left(x_{i}\right)+\varepsilon_{i} \quad \text{with} \; \varepsilon_{i}=y_{i}-\varepsilon\left[4_{i} \mid x_{i}, a_{i}\right]
-    \end{equation}
-    Note that we can impose that the conditional treatment effect $\tau(x)$ only
-    relies on a subset of the features, $x^{cate}$ on which we want to study
-    treatment heterogeneity.
-
-    From this decomposition, we can derive an estimation of the ATE $\tau$, where
-    the right hand-side term is the empirical R-Loss:
-    \begin{align}\label{eq:r_loss}
-      \hat{\tau}(\cdot)=\operatorname{argmin}_{\tau}\left\{\frac{1}{n} \sum_{i=1}^{n}\left(\left(y_{i}-m\left(x_{i}\right)\right)-\left(a_{i}-e(x_{i})\right) \tau\left(x^{cate}_{i}\right)\right)^{2}\right\}
-    \end{align}
-
-    The full procedure for R-learning is:
-    \begin{itemize}
-      \item Fit nuisances: $\hat m$ and $\hat e$
-      \item Minimize the estimated R-loss eq.\ref{eq:r_loss}, where the oracle nuisances $(e, m)$
-            have been replaced by their estimated counterparts $(\hat e, \hat m)$.
-            Minimization can be done by regressing the outcome residuals weighted by the
-            treatment residuals
-      \item Get the ATE by averaging conditional treatment effect $\tau(x^{cate})$ over the population
-    \end{itemize}
-
-    This estimator has also the doubly robust proprieties described for AIPW. it
-    should have less variance than AIPW since it does not use the propensity score
-    in the denominator.
-
-  \end{background_box_left}
 
   \subsection{Statistical considerations when implementing
     estimation}\label{apd:statistical_considerations}
