@@ -536,25 +536,25 @@
   recently proposed the use of flexible models combining causal inference with
   high-dimensional machine learning. 
 
-  We first detail the current tension between these new sources of data, machine
-  learning and modern public health issues. This tension motivates the main
-  research question of this work: How flexible models can help delivering
-  appropriate treatment to each and every patient to improve her health? In
-  order to gain a better understanding of the key aspects of modern
+  We first illustrate with three examples the current tension between these new
+  sources of data, machine learning and modern public health issues. These
+  examples motivate the main research question of this work: How flexible models
+  can help delivering appropriate treatment to each and every patient to improve
+  her health? In order to gain a better understanding of the  modern
   infrastructures for collecting and analyzing Electronic Health Records (EHRs),
   we summarize semi-structured interviews conducted as part of a national case
-  study of the clinical data warehouses (CDWs) of the 32 French regional and university
-  hospitals. Acknowledging the difficulty to access large sample sizes and
-  computational power to develop generalizable predictive models, we explore a
-  complexity gradient in representation and predictive algorithms for EHRs. We
-  then turn to causal thinking, detailing key elements necessary to robustly
-  estimate treatment effect from time-varying EHR data. We illustrate various
-  possible variations in studying the effect of albumin on sepsis mortality in
-  the Medical Information Mart for Intensive Care database (MIMIC-IV). In
-  high-dimensional settings, the selection of hyper-parameters for the causal
-  model is crucial to avoid under- or over-learning. In a simulation and three
-  semi-simulated datasets, we shows that the doubly robust R-risk outperforms
-  other existing risks.
+  study of the clinical data warehouses (CDWs) of the 32 French regional and
+  university hospitals. Acknowledging the difficulty to access large sample
+  sizes and computational power to develop generalizable predictive models, we
+  explore a complexity gradient in representation and predictive algorithms for
+  EHRs. We then turn to causal thinking, detailing key elements necessary to
+  robustly estimate treatment effect from time-varying EHR data. We illustrate
+  the impact of methodological choices in studying the effect of albumin on
+  sepsis mortality in the Medical Information Mart for Intensive Care database
+  (MIMIC-IV). In high-dimensional settings, the selection of hyper-parameters
+  for the causal model is crucial to avoid under- or over-learning. In a
+  simulation and three semi-simulated datasets, we shows that the doubly robust
+  R-risk outperforms other existing causal risks.
   % Despite a current focus on artificial intelligence, healthcare does
   % not seek purely predictive models, but appropriate interventions that will
   % benefit specific patients. This is a decision making problem highly amenable to
@@ -574,48 +574,42 @@
   Les bases de données de vie réelle sont de plus en plus accessibles,
   exhaustives, avec des détails temporels précis. Contrairement aux données
   utilisées dans la recherche clinique traditionnelle, elles capturent
-  l'organisation routinière des soins. Ces enregistrements des soins quotidiens
-  ouvrent la porte à de nouvelles questions de recherche, notamment en ce qui
-  concerne la qualité des soins, l'efficacité des interventions après leur mise
-  sur le marché, l'hétérogénéité de leurs bénéfices dans les populations mal
-  desservies ou le développement de traitements personnalisés. D'un autre côté,
-  la complexité et la nature à grande échelle de ces bases de données posent un
+  l'organisation routinière des soins. Ces données de soins quotidiens ouvrent
+  la porte à de nouvelles questions de recherche, notamment en ce qui concerne
+  la qualité des soins, l'efficacité des interventions après leur mise sur le
+  marché, l'hétérogénéité de leurs bénéfices dans les populations mal desservies
+  ou le développement de traitements personnalisés. D'un autre côté, la
+  complexité et la nature à grande échelle de ces bases de données posent un
   certain nombre de défis pour leur utilisation efficace. Pour remédier à ces
   problèmes, les économètres et les épidémiologistes ont récemment proposé
   l'utilisation de modèles flexibles combinant l'inférence causale et
   l'apprentissage automatique en grande dimension.
 
-  Dans un premier temps, nous illustrons par quelques exemples la tension
-  actuelle entre ces nouvelles sources de données, l'apprentissage automatique
-  et des problématiques modernes de santé publique. Ces exemples motivent la
-  question centrale de notre travail : Comment des modèles flexibles peuvent-ils
-  aider à fournir un traitement approprié à chaque patient afin d'améliorer sa
-  santé ?%
-  Afin de mieux comprendre quelles sont les principaux aspects des
-  infrastructures modernes de collecte et d'analyse des dossiers patients
-  informatisés (DPI), nous faisons la synthèse d'entretiens semi-structurés
-  menés dans le cadre d'une étude de cas nationale portant sur les entrepôts de
-  données cliniques des 32 hôpitaux régionaux et universitaires français.%
+  Dans un premier temps, nous illustrons par trois exemples la tension actuelle
+  entre ces nouvelles sources de données, l'apprentissage automatique et des
+  problématiques modernes de santé publique. Ces exemples motivent notre principale question
+  de recherche : Comment des modèles flexibles peuvent-ils aider à
+  fournir un traitement approprié à chaque patient afin d'améliorer sa santé ?%
+  Afin de mieux comprendre les infrastructures modernes de collecte
+  et d'analyse des dossiers patients informatisés (DPI), nous faisons la
+  synthèse d'entretiens semi-structurés menés dans le cadre d'une étude de cas
+  nationale portant sur les entrepôts de données cliniques des 32 hôpitaux
+  régionaux et universitaires français.%
   Reconnaissant la difficulté d'accéder à des échantillons de grande taille et à
   la puissance de calcul pour développer des modèles prédictifs généralisables,
-  le chapitre \ref{chapter:predictive_models} explore un gradient de complexité
-  dans les représentations et les algorithmes prédictifs sur DPI.%
-  Ancré dans la pensée causale, le chapitre \ref{chapter:causal_tuto}
-  détaille les éléments clés nécessaires pour estimer de manière robuste l'effet
-  du traitement à partir de données de DPI variant dans le temps. Il illustre
-  diverses variations possibles dans l'étude de l'effet de l'albumine sur la
-  mortalité dans des cas de septicémie avec la base de données MIMIC-IV (Medical
-  Information Mart for Intensive Care).%
+  nous étudions un gradient de complexité dans les représentations et les
+  algorithmes prédictifs sur DPI.%
+  En se tournant vers le cadre causal, nous détaillons ensuite les éléments clés
+  nécessaires pour estimer de manière robuste l'effet du traitement à partir de
+  données de DPI variant dans le temps. Nous documentons l'impact de différents
+  choix méthodologiques pour l'étude de l'effet de
+  l'albumine sur la mortalité dans des cas de septicémie avec la base de données
+  MIMIC-IV (Medical Information Mart for Intensive Care).%
   Dans des problèmes à grande dimension, la sélection d'hyperparamètres pour les
   modèles causaux est cruciale pour éviter le sous-apprentissage ou le
-  sur-apprentissage. Le chapitre \ref{chapter:causal_model_selection} montre que
-  le risque R doublement robuste surpasse d'autres risques existants dans une
-  simulation et trois ensembles de données semi-simulées.
-
-  Le chapitre \ref{chapter:conclusion} examine des pistes potentiellement
-  intéressantes pour améliorer le développement et l'évaluation d'interventions
-  adaptées, de politiques de santé publique ou d'indicateurs de qualité des
-  soins.
+  sur-apprentissage. Pour une simulation et trois ensembles de données
+  semi-simulées, nous montrons que le risque R doublement robuste surpasse
+  d'autres risques causaux existants.
 \end{chapterabstract}
 \vfill
 
