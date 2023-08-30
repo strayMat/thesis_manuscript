@@ -536,41 +536,46 @@
   recently proposed the use of flexible models combining causal inference with
   high-dimensional machine learning.
 
-  \gv{poser une question générale et être plus court sur chaque chapitre.}
-  Chapter 1 uses a national case study of the 32 French regional and
-  university hospitals to highlight key aspects of modern Clinical Data
-  Warehouses (CDWs), the cornerstone infrastructure of precision medicine. From
-  semi-structured interviews and an analysis of declared observational studies
-  on CDWs in France, I highlight both the current potential and challenges of
-  leveraging these routinely collected data for research purposes.
+  Chapter \ref{chapter:intro} details the current tension between these new
+  sources of data, machine learning and modern public health issues. This
+  motivates the main research question of this work: How flexible models can
+  help delivering appropriate treatment to each and every patient to improve her
+  health?
 
-  % Acknowledging the difficulty to access large sample sizes and computational
-  % power to develop generalizable predictive models, Chapter 2 leverages
-  % distributional representations of medical concepts for clinical tasks. I show
-  % that these sharable representations out-perform more complex models for
-  % small sample datasets.
+  Chapter \ref{chapter:cdw} summarizes semi-structured interviews from a
+  national case study of the 32 French regional and university hospitals
+  Clinical Data Warehouses (CDWs). It highlights key aspects of this cornerstone
+  infrastructure for the collect and analysis of Electronic Health Records
+  (EHRs).
 
-  % Despite a current focus on artificial intelligence, healthcare does not seek
-  % purely predictive models, but appropriate interventions that will benefit
-  % specific patients. This is a decision making problem highly amenable to
-  % counterfactual prediction rather than statistical learning. Chapter 3 emulates
-  % a clinical trial to evaluate an intervention in the intensive care unit. I
-  % highlight the importance of the different practical choices when developing
-  % counterfactual prediction algorithms on time-varying data collected in routine
-  % care.
+  Acknowledging the difficulty to access large sample sizes and computational
+  power to develop generalizable predictive models, chapter
+  \ref{chapter:predictive_models} explores a complexity gradient in
+  representation and predictive algorithms for EHRs.
 
-  % In high-dimensional settings such as time-varying data and heterogeneity of
-  % interventions on subgroups, the selection of hyper-parameters for the causal
-  % model is crucial to avoid under- or over-learning. Chapter 4 demonstrates the
-  % fragility of the usual evaluation metrics (Mean Squared Error) for
-  % counterfactual predictions. I highlight the performance of the doubly robust
-  % R-risk over other existing risks and discuss their effectiveness regimes in a
-  % simulation and three semi-simulated datasets.
+  Anchored in causal thinking, chapter \ref{chapter:predictive_models} details
+  key elements necessary to robustly estimate treatment effect from time-varying
+  EHR data. Despite a current focus on artificial intelligence, healthcare does
+  not seek purely predictive models, but appropriate interventions that will
+  benefit specific patients. This is a decision making problem highly amenable to
+  counterfactual prediction rather than statistical learning. Chapter 3 emulates a
+  clinical trial to evaluate an intervention in the intensive care unit. I
+  highlight the importance of the different practical choices when developing
+  counterfactual prediction algorithms on time-varying data collected in routine
+  care.
 
-  % Chapter 5 concludes by highlighting the potential of combining machine
-  % learning methods and routine care data to shed light on current public health
-  % issues. I discuss new avenues to improve the development and the evaluation of
-  % tailored interventions, public health policies or quality-of-care indicators.
+  In high-dimensional settings such as time-varying data and heterogeneity of
+  interventions on subgroups, the selection of hyper-parameters for the causal
+  model is crucial to avoid under- or over-learning. Chapter
+  \ref{chapter:causal_model_selection} demonstrates the fragility of the usual
+  evaluation metrics (Mean Squared Error) for counterfactual predictions. I
+  highlight the performance of the doubly robust R-risk over other existing
+  risks and discuss their effectiveness regimes in a simulation and three
+  semi-simulated datasets.
+
+  Chapter \ref{chapter:conclusion} discuss potentially interesting avenues to
+  improve the development and the evaluation of tailored interventions, public
+  health policies or quality-of-care indicators.
 \end{chapterabstract}
 \vfill
 
@@ -704,8 +709,8 @@ To improve and accelerate analytics on this new platform, they built upon the
 work from \cite{bacry2020scalpel3} to leverage parallel computing and developed
 collaborative documentation \citep{documentation_snds}. However, describing
 sequences of cares remained challenging due to the high number of different
-medical events used in this data. This problem known as the \emp{curse of
-dimensionality} has been introduced in operational research
+medical events used in this data. This problem known as the \emph{curse of
+  dimensionality} has been introduced in operational research
 \citep{bellman1957dynamic} and is well known in statistics
 \citep{breiman2001statistical}: The required number of samples to train
 predictive algorithms exponentially grow with the number of dimensions.%
@@ -1563,7 +1568,7 @@ targets. To encourage more thorough study, we publish scikit-learn compatible
 implementations of our proposed medical event pipelines.
 
 \paragraph{Chapter \ref{chapter:causal_tuto}: Prediction is not all we need:
-  Causal thinking for decision making on EHRs} This chapter explores the causal
+  Causal thinking for decision making on EHRs} This chapter exploits the causal
 framework to build clinically valuable models. It shows that predictions
 --even accurate as with machine learning, may not suffice to provide optimal
 healthcare for every patient. Anchored in causal thinking, it details key
@@ -2854,7 +2859,9 @@ compared to the baseline. This is confirmed by the good performance of the
 demographic-only pipelines.
 
 \md{Changer par la weigthed average. }
-\md{Piste d'amélioration.}
+\md{Piste d'amélioration: détailler le cost effectiveness des méthodes. Proche
+  de public health, qu'est ce qu'on y gagne opérationnellement? Pour ça voir si on
+  a des références pour mace ou pour un chapitre icd10}
 \begin{figure}[!h]
   \begin{subfigure}[b]{1\textwidth}
     \centering
