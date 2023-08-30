@@ -465,7 +465,7 @@
   \footnotesize Référent: : voir annexe
   \vspace{15mm}
 
-  \textbf{Thèse présentée et soutenue à .....,\\ le .... 202X, par}\\
+  \textbf{Thèse présentée et soutenue à Saclay,\\ le 20 novembre 2023, par}\\
   \bigskip
   \Large {\color{Prune} \textbf{Matthieu DOUTRELIGNE}}
 
@@ -621,15 +621,32 @@ m'avoir permis de prendre quelques plombs dans les super voies de BP.\\
 \mainmatter
 
 \chapter{Introduction: Amazing opportunities of health data?}\label{chapter:intro}
-\md{move the personal experience in a dedicated section above. Only keep the gist and the subsection 1.1.4}
 
 \minitoc
 \section{Why focus on health inference from Electronic Health Records}\label{sec:intro:landscape}
 
-This work has been strongly shaped by the current machine learning
-landscape and my prior experiences with healthcare data. An overview of these
-circumstances should be helpful to understand why focus on health
-inference from Electronic Health Records (EHRs).
+% This work has been strongly shaped by the current machine learning
+% landscape and my prior experiences with healthcare data. 
+
+\subsection{\textit{Data looking for a question [...] and rais[ing] puzzles} \citep{cox2001statistical}}%
+\label{subsec:intro:wrapup}%
+
+% Promises of machine learning in healthcare
+The successes of machine learning in leveraging large amount of poor quality and
+weakly labelled data in Natural Language Processing or computer vision have
+deeply impressed other scientific fields. Because \textit{medical practice, and
+  biomedical research, [are] inherently information-management tasks}
+\citep{patel2009coming}, many researchers foresaw a big potential for improving
+healthcare in applying machine learning to novel data collections
+\citep{topol2019high,rajkomar2019machine}.
+
+% overview of concepts
+There is currently a tension between massive routine care data collections
+--claims or Electronic Health Records (EHRs) presented in Section \ref{sec:intro:data}, a new statistical
+framework --machine learning \citep{breiman2001statistical} described in Section
+\ref{sec:intro:two_cultures}, and pressing analytical questions in public health
+--detailed in Section \ref{sec:intro:causality}. Three concrete examples illustrating this tension should be helpful to
+understand why focus on health inference from EHRs.
 
 \subsection{Learning statistics during the Natural Language Processing revolution}
 
@@ -644,22 +661,17 @@ faces, or hands. These intermediary representations can be reused
 predicting the severity of a traumatism from a photo. This paradigm --called
 pre-training-- has been very successful in applied domains such as computer
 vision \citep{krizhevsky2012imagenet}, then Natural Language Processing (NLP)
-\citep{devlin2018bert} and structural biology \citep{jumper2021highly}.
-
-% education
-I was trained in statistics and machine learning from 2014 to 2018, precisely
-between the image and text revolutions in artificial intelligence. Despite
-textbooks largely focused on previous flexible pattern recognition techniques,
-the fascination for deep learning made me wonder --like many other students at
-this time-- in what other fields these techniques could be successfully applied.
+\citep{devlin2018bert} and structural biology \citep{jumper2021highly}. A
+valuable question is whether pre-training could be applied to other fields with
+vast amounts of complex data such as healthcare.
 
 % public policy
-On the other hand, being a civil servant, part of the French National Institute of
-Statistics and Economics (Institut National de la Statistique et des Etudes Economiques), I
-was also interested in the use of data for public policy. However, economics and
-econometrics taught during my formation were hardly mentioning the algorithm
-progresses of the 2000s. Does flexible machine learning techniques, or even
-pre-training methods could help inform public policies?
+% On the other hand, being a civil servant, part of the French National Institute of
+% Statistics and Economics (Institut National de la Statistique et des Etudes Economiques), I
+% was also interested in the use of data for public policy. However, economics and
+% econometrics taught during my formation were hardly mentioning the algorithm
+% progresses of the 2000s. Does flexible machine learning techniques, or even
+% pre-training methods could help inform public policies?
 
 \subsection{Paris hospitals, a large scale repository of clinical notes}
 
@@ -668,22 +680,18 @@ In 2017, the emerging healthcare data warehouse of the Paris Hospitals (AP-HP),
 acknowledging the continuous improvement of NLP, ambitioned to leverage its vast
 repository of clinical notes for research.
 % problem
-However, letting researchers outside the medical staff access very detailed
-elements of patient cares embedded in clinical notes raised new privacy
-concerns.
-% solution
-The Paris Hospitals (AP-HP) decided to remove all identification elements from
-the clinical notes of their patients --a processed called pseudonymization. I
-helped merging previous rule-based systems with a state-of-the-art approach
-relying on neural networks \citep{dernoncourt2017identification,
-  paris2019desidentification}.
-
 % apport
-Yet, routine care data is not a familiar material for medical research. In
-circle of engineers and NLP researchers, this fact is often linked to the novel
-complexity and scale of the data collection process, both requiring innovating
-tools. For epidemiologists and physicians, their major difference lies in the
-opposition between experimental and observational data (presented in Subsection
+Yet, routine care data is not a familiar material for medical research. It
+requires new methods to process and extract knowledge from these data. One such
+example is the necessity to remove all identification elements from the clinical
+notes of patients before letting researchers outside the medical staff access
+them --a processed called pseudonymization \citep{dernoncourt2017identification,
+  paris2019desidentification}.%
+For engineers and NLP researchers, RWD are different than traditional research
+data collection because it requires innovating tools --eg. from NLP-- to deal
+with the novel complexity and scale of the data collection process. For
+epidemiologists and physicians, the major difference lies in the opposition
+between experimental and observational data (presented in Subsection
 \ref{subsec:intro:interventional_vs_observational}).
 
 \subsection{Billing claims: new data for public health?}
@@ -692,24 +700,25 @@ In 2018, the direction of statistics of the French ministry of health extracted
 billions of national claims from the aging national health platform into a
 dedicated server.
 %
-My first job was to help improve and accelerate analytics on this new platform.
-Building upon the work of \cite{bacry2020scalpel3}, I learned that parallel
-computing and good collaborative documentation \citep{documentation_snds}
-dramatically improve the quality and the rapidity of descriptive analytics on
-big healthcare data bases. However, describing sequences of cares remained
-challenging due to the high number of different medical events used in this
-data.%
-
+To improve and accelerate analytics on this new platform, they built upon the
+work from \cite{bacry2020scalpel3} to leverage parallel computing and developed
+collaborative documentation \citep{documentation_snds}. However, describing
+sequences of cares remained challenging due to the high number of different
+medical events used in this data. This problem known as the \emp{curse of
+dimensionality} has been introduced in operational research
+\citep{bellman1957dynamic} and is well known in statistics
+\citep{breiman2001statistical}: The required number of samples to train
+predictive algorithms exponentially grow with the number of dimensions.%
 Sequences of claim events can be viewed as a sequence of tokens, just as natural
-sentences. Inspired by NLP techniques, I created low dimensional representations
---embeddings-- of medical concepts replicating \cite{beam2019clinical} (see an
-overview of these representations in Figure \ref{fig:tsne_plots:snds}). The
-relationships between events captured by these embeddings were strikingly
-close to known associations. But I was frustrated with my inability to find a
-downstream utility of such representations. Public health policy is not
-concerned with knowledge representation or even predictive accuracy. Public
-services seek to understand the heterogeneities in healthcare consumptions: what
-is an appropriate care and how to measure it from the data
+sentences. A trend from medical informatics, draws from NLP techniques, to
+create low dimensional representations --embeddings-- of medical concepts
+\citep{beam2019clinical}. The relationships between events captured by these
+embeddings are strikingly close to known associations as shown in Figure
+\ref{fig:tsne_plots:snds}. However, the downstream utility of such
+representations remains unclear. Public health policy is not concerned with
+knowledge representation or even predictive accuracy. Public services seek to
+understand the heterogeneities in healthcare consumptions: what is an
+appropriate care and how to measure it from the data
 \citep{cma_policy_appropriateness_2015}? This question is motivated by the
 growing necessity to adapt healthcare funding to a resource-constrained system
 \citep{mcginnis2013best,aubert_2019}.
@@ -726,26 +735,7 @@ growing necessity to adapt healthcare funding to a resource-constrained system
 % data creating process, standard pipelines, standard tests and documentation : it
 % is inherently a group effort.
 
-\subsection{\textit{Data looking for a question [...] and rais[ing] puzzles} \citep{cox2001statistical}}%
-\label{subsec:intro:wrapup}%
-
-% Promises of machine learning in healthcare
-The successes of machine learning in leveraging large amount of poor quality and
-weakly labelled data in NLP or computer vision have deeply impressed other
-scientific fields. Because \textit{medical practice, and biomedical research,
-  [are] inherently information-management tasks} \citep{patel2009coming},
-many researchers foresaw a big potential for improving healthcare in applying
-machine learning to novel data collections
-\citep{topol2019high,rajkomar2019machine}.
-
-% overview of concepts
-These first experiences illustrate a tension between massive routine care data
-collections --claims or EHRs presented in Section \ref{sec:intro:data}, a new
-statistical framework --machine learning \citep{breiman2001statistical} described
-in Section \ref{sec:intro:two_cultures}, and pressing analytical questions in
-public health --detailed in Section \ref{sec:intro:causality}.%
-
-In the following sections, I will review the new data collection mechanisms,
+In the following section, I will review the new data collection mechanisms,
 highlight the different stance taken by machine learning over traditional
 statistics and precise critical questions in public health that could
 benefit from innovative methods.
@@ -1425,8 +1415,8 @@ guide this link between patient characteristics and intervention.
     drown). Under all three scenarios, we can observe exactly the same data, but
     the implications for an ice cream ban are very different. Hence, answering
     questions about what will happen under an intervention requires us to
-    incorporate some causal knowledge of the world—e.g., which of these scenarios
-    is plausible?}\md{Find better than this ice cream example?}
+    incorporate some causal knowledge of the world — e.g., which of these scenarios
+    is plausible?}
 
   % Connexion with important questions in healthcare: 
   Causality also has connections with other important issues in healthcare such
@@ -2362,9 +2352,9 @@ would provide a complete view of patient care.
     {\small{This chapter presents ongoing work. A communication was accepted for
         the Simpa2023 day on patient similarity.}}\\
 
-    {\small\hfill{} work done with Jean-Baptiste \textsc{Julla}, Julie
-    \textsc{Adjerad}, Theo \textsc{Jolivet}, Judith \textsc{Abecassis},, Louis
-    \textsc{Potier} and Gaël \textsc{Varoquaux}.}
+    {\small\hfill{} work done with Judith \textsc{Abecassis}, Julie
+    \textsc{Adjerad}, Theo \textsc{Jolivet}, Jean-Baptiste \textsc{Julla} and Gaël
+    \textsc{Varoquaux}.}
   \end{minipage}
 \end{flushright}
 
@@ -2453,7 +2443,10 @@ recurrent neural network \citep{lipton2016learning}, then with transformer based
 architectures \citep{li2020behrt}. Appendix \ref{apd:review_models} further
 details this evolution of predictive model complexity.
 
-\subsection{Transfer learning: no silver bullet}%
+
+\gv{Small populations: no silver bullet. Il faut qu'on parle d'abord de petites
+  populations. Ensuite on peut parler de transfer learning. Donner plus de poids
+  aux faibles number of cases.} \subsection{Transfer learning: no silver bullet}%
 \label{subsec:predictive_models:low_prevalence}%
 
 \gv{First tell us how we get the small number of datasets. Show us how starting
@@ -2514,6 +2507,10 @@ strength of this evidence requires to repeatedly test these systems on
 different prospective populations with intuitive metrics for physicians
 \citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
 
+\md{mieux distinguer la frugalité en données et la frugalité en ressources. Etre
+  plus cash sur la situation dans le monde entier avec les ressources de calcul
+  et la course aux GPUs. Et plutôt le tourner en positive.}
+\md{Faire apparaitre commoditty hardware.}
 \paragraph{Complex systems and privacy requirements hinders model deployments}
 The growing body of predictive models from EHR focus mainly on accuracy
 performances. They are rarely shared due to privacy requirements. They are tied
@@ -2751,7 +2748,7 @@ We define LOS as a binary task categorizing each inpatient stay as long if LOS
 greater than 7 days or short if LOS shorter than 7 days. Appendix
 \ref{apd:task_details:los} details the task definition.
 
-\paragraph{Stratify -- Prognosis prediction}\label{par:task_definitions:prognosis}%%
+\paragraph{Stratify -- Prognosis}\label{par:task_definitions:prognosis}%%
 % prognosis justification
 Prognosis is important for prevention as it can influence shared decision-making
 between the clinician and the patient.
@@ -2826,7 +2823,7 @@ at 95\% ROC AUC for random forests and every featurizers but the demographics.
 The transformer model is not able to reach the best performances, certainly
 because of the lack of samples.
 
-
+\md{Améliorer la figure: eg. plus de densité, milliers de patients en x plus lisible.}
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
@@ -2856,6 +2853,8 @@ set. This indicates that the high number of features only damaged the estimation
 compared to the baseline. This is confirmed by the good performance of the
 demographic-only pipelines.
 
+\md{Changer par la weigthed average. }
+\md{Piste d'amélioration.}
 \begin{figure}[!h]
   \begin{subfigure}[b]{1\textwidth}
     \centering
