@@ -5405,11 +5405,19 @@ the same train set as the candidate models introduces negligeable bias.
 
 \section{Personal convictions for perspectives}
 
-\paragraph{Claims data: they are not the solution for every questions, but could
-  be leverage more for public health.} They are super normalized, lack
-few critical PICO elements \citep{caruana2023administrative}.
+% The case of claims data
+\paragraph{Claims data are not the solution for every questions, but should be
+  used more for public health} They are well normalized, well documented, lack
+few critical PICO elements \citep{caruana2023administrative}. Despite some
+difficulty to define precise populations in some pathologies, they are an
+interesting source for studying treatment effectiveness and public health
+policy at the population level. Estimations methods borrowed to econometrics
+such as difference-in-difference \citep{athey2006identification}, regression
+discontinuity design \citep{bor2014regression} and instrumental variables \citep{}
+should be investigated.
 
-% Those problem are more pragmatic than theoretical. Thus, data and conclusions need to circulate. 
+% Data does not flow, thus we should focus on small models or make use of
+% pretrained models from other domain
 \paragraph{The unreasonable effectiveness of healthcare data is yet out of
   reach} Due to the impossibility to transfer models or administrative barriers
 to access data (due to multiplicity of the involved actors), predictive models
@@ -5419,14 +5427,20 @@ best of medium-sized data or rely on sharable sources of knowledge. This calls
 for more work adopting research network methodologies
 \citep{hripcsak2015observational}, model sharing such as federated learning.
 Another interesting avenue is to leverage large language models pretrained on
-language to either extract information from clinical notes, or . This requires
+language to either extract information from clinical notes, or directly for
+predictive tasks \citep{jiang2023health}.
 
+% methodoligcal work on representations for inference
+\paragraph{For treatment effect estimations, relying on text calls for better
+  understanding on causal representations learning}
 
-\paragraph{For treatment effect estimations, relying on text call for more
-  methodological understanding on causal representations learning}
-
-Could design model that optimize the R-loss directly? How to explain the high
-inter-experience variance for model selection?
+Using text for confouder adjustment opens many research question when looping
+back to causal thinking. How to build a causal graph as in Figure
+\ref{fig:causal_diagram_albumin}? Optimizing directly the R-loss by gradient
+descent could be an interesting avenue, which is closely related to the work of
+\cite{johansson2022generalization} and \cite{chernozhukov2022riesznet} with
+non-text data. Vibration analysis confronting these methods is needed, eg. by
+replicating on text the analysis of chapter \ref{chapter:causal_tuto}.
 
 %There is a paper from the chernozukhov
 % clics that does that : rieznet I think. DIcuss the relation with the
