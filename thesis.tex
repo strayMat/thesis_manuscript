@@ -5413,54 +5413,58 @@ difficulty to define precise populations in some pathologies, they are an
 interesting source for studying treatment effectiveness and public health
 policy at the population level. Estimations methods borrowed to econometrics
 such as difference-in-difference \citep{athey2006identification}, regression
-discontinuity design \citep{bor2014regression} and instrumental variables \citep{}
-should be investigated.
+discontinuity design \citep{bor2014regression} and instrumental variables
+\citep{greenland2000introduction} should be investigated as they might be
+adapted for specific questions.
 
 % Data does not flow, thus we should focus on small models or make use of
 % pretrained models from other domain
 \paragraph{The unreasonable effectiveness of healthcare data is yet out of
   reach} Due to the impossibility to transfer models or administrative barriers
 to access data (due to multiplicity of the involved actors), predictive models
-deployment is almost unexistant. \md{source PA pour le non remboursement des
-  DMs avec IA.} This forces us to rely on efficient techniques that make the
-best of medium-sized data or rely on sharable sources of knowledge. This calls
-for more work adopting research network methodologies
-\citep{hripcsak2015observational}, model sharing such as federated learning.
-Another interesting avenue is to leverage large language models pretrained on
-language to either extract information from clinical notes, or directly for
-predictive tasks \citep{jiang2023health}.
+deployment is still rare. This encourages us to rely on saple efficient
+techniques that make the best of medium-sized data or rely on sharable sources
+of knowledge. This calls for more work adopting research network methodologies
+\citep{hripcsak2015observational} and model sharing strategies such as
+federated learning \citep{rieke2020future}. Another interesting avenue is to
+leverage large language models pretrained on language to either extract
+information from clinical notes, or directly for predictive tasks
+\citep{jiang2023health} --at the condition to have sufficient computing
+resources for finetuning.
 
 % methodoligcal work on representations for inference
 \paragraph{For treatment effect estimations, relying on text calls for better
   understanding on causal representations learning}
 
 Using text for confouder adjustment opens many research question when looping
-back to causal thinking. How to build a causal graph as in Figure
-\ref{fig:causal_diagram_albumin}? Optimizing directly the R-loss by gradient
-descent could be an interesting avenue, which is closely related to the work of
+back to causal thinking. Building a causal graph as in Figure
+\ref{fig:causal_diagram_albumin} become tedious. Even if all information is
+present in the text, should we extract every variable or is it possible to build
+appropriate representations. Optimizing directly the R-loss by gradient descent
+could be an interesting avenue, which is closely related to the work of
 \cite{johansson2022generalization} and \cite{chernozhukov2022riesznet} with
 non-text data. Vibration analysis confronting these methods is needed, eg. by
 replicating on text the analysis of chapter \ref{chapter:causal_tuto}.
 
-%There is a paper from the chernozukhov
-% clics that does that : rieznet I think. DIcuss the relation with the
-% two-headed neural networks studied by Johansson et al.
-
-% Overlap is a component but there 
-
 %
-\paragraph{Modern public healthcare problems should take into account the
-  fragmented nature of healthcare} Modern healthcare burdens and costs are driven
-by chronic diseases where death is not the only outcome of interest. Focus on
-smaller rewards, on which experiments are easier to conduct and where error is
-acceptable: it would allow better learning for decision making since we can
-repeat more experiments, and possibly high delayed reward because of better
-prevention.
+\paragraph{Modern public health problems should take into account the fragmented
+  nature of healthcare} Modern healthcare burdens and costs are driven by
+  chronic diseases where death or rehospitalization are not the only outcomes of
+  interest. Most of care is provided outside of the hospital
+  \citep{white1961ecology}, therefore requiring data linking between 
+
+
+
+Public health interventions should focus on smaller
+rewards, for which experiments are easier to conduct and where error is more
+acceptable. Adopting methods from adapative would allow better evaluation and
+continuous improvement for interventions since we can repeat more experiments.
+and possibly high delayed reward because of better prevention.
 
 Ultimately, I am convinced that resource constraints and the
 ever-increasing demand on healthcare bridges the care effectiveness question to
 equity. Some patients will always be less treated than others: public health
-should seek for random repartition of these mistreated patients conditionally
+should seek for a random repartition of these mistreated patients conditionally
 on patient conditions.
 
 
