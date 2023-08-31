@@ -2444,9 +2444,7 @@ This complexity stems from predictive models trying to model ever richer data
 sources.
 
 \paragraph{Original complexity of the data}
-\gv{Can you make this paragraph a bit shorter: it is not the center of
-  our contribution}
-\md{better?}
+
 % Big observational databases are complex but contain interesting information
 EHRs contain time varying variables with a high cardinality. Time-consuming work
 from medical and computer experts is required to clean and transform these
@@ -2476,20 +2474,13 @@ architectures \citep{li2020behrt}. Appendix \ref{apd:review_models} further
 details this evolution of predictive model complexity.
 
 
-\gv{Small populations: no silver bullet. Il faut qu'on parle d'abord de petites
-  populations. Ensuite on peut parler de transfer learning. Donner plus de poids
-  aux faibles number of cases.} \subsection{Transfer learning: no silver bullet}%
+
+\subsection{Transfer learning: no silver bullet}%
 \label{subsec:predictive_models:low_prevalence}%
 
-\gv{First tell us how we get the small number of datasets. Show us how starting
-  from a big data, we get to small data. Then, merge the two paragraph below in
-  a smaller, shorter one "Transfer learning: no silver bullet". Make it shorter,
-  because right now you are putting a lot of words on it, so you are drawing
-  attention to it, and you are going to prime the reader to ask you to compare
-  to it (actually, I wonder whether this should not be moved to the
-  discussion)}\md{Is it better ? I moved to the discussion the interrogation on
-  the performances of large transformer models and added the concrete example
-  for small number of cases.}
+\gv{Small populations: no silver bullet. Il faut qu'on parle d'abord de petites
+  populations. Ensuite on peut parler de transfer learning. Donner plus de poids
+  aux faibles number of cases.}%
 
 % Low prevalence
 %\paragraph{Transferring to new tasks still requires a high number of cases }
@@ -2855,7 +2846,6 @@ at 95\% ROC AUC for random forests and every featurizers but the demographics.
 The transformer model is not able to reach the best performances, certainly
 because of the lack of samples.
 
-\md{Améliorer la figure: eg. plus de densité, milliers de patients en x plus lisible.}
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
@@ -2890,28 +2880,20 @@ demographic-only pipelines.
   de public health, qu'est ce qu'on y gagne opérationnellement? Pour ça voir si on
   a des références pour mace ou pour un chapitre icd10}
 \begin{figure}[!h]
-  \begin{subfigure}[b]{1\textwidth}
-    \centering
-    \caption{}\label{fig:prognosis_roc_auc_macro}
-    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_macro.pdf}
-  \end{subfigure}
-  \vfill
-  \begin{subfigure}[b]{1\textwidth}
-    \centering
-    \caption{}\label{fig:prognosis_roc_auc_weighted}
-    \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_weighted.pdf}
-  \end{subfigure}
-  \caption{Prognosis ROC AUC average over chapters for different featurizers and
-    estimators. The performances are averaged over 5 folds. The shaded area
-    represents the standard deviation. The horizontal black lines display the
-    naive baseline that predicts the previous stay codes for the target stay.
-    Figure \ref{fig:prognosis_roc_auc_macro} averages all chapters with equal
-    weight whereas \ref{fig:prognosis_roc_auc_weighted} averages chapters with
-    their weight as prevalences. Random forest have better performances. Count
-    encoder outperforms other featurizers, suggesting the importance of low
-    count events that are smoothed out in embedding methods. Appendix
-    \ref{apd:temporal_split:prognosis} details the results for each chapter and
-    display Average Precision and Brier Score results.}%
+
+  \centering
+
+  \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
+
+  \caption{Prognosis average precision score, weigthed by prevalences over all
+    ICD10 chapters for different featurizers and estimators. The performances
+    are averaged over 5 folds. The shaded area represents the standard
+    deviation. The horizontal black line displays the naive baseline that
+    predicts the previous stay codes for the target stay. Random forest have
+    better performances. Count encoder outperforms other featurizers, suggesting
+    the importance of low count events that are smoothed out in embedding
+    methods. Appendix \ref{apd:temporal_split:prognosis} details average
+    precision scores for each chapter and displays ROC AUC results.}%
   \label{fig:prognosis_roc_auc}
 \end{figure}
 
@@ -5438,26 +5420,26 @@ applications such as the one presented in chapter \ref{chapter:causal_tuto}.
 % The case of claims data
 \paragraph{Claims data are an interesting source for studying treatment
   effectiveness and public health policy} Some difficulty to define precise
-  populations make claims inadaptated to precise clinical questions, but they
-  are a good source for many public health and medico-economic questions. They
-  are well normalized, well documented, lack few critical PICO elements
-  \citep{caruana2023administrative}. Estimations methods borrowed to
-  econometrics such as difference-in-difference \citep{athey2006identification},
-  regression discontinuity design \citep{bor2014regression} and instrumental
-  variables \citep{greenland2000introduction} might be adapted.
+populations make claims inadaptated to precise clinical questions, but they
+are a good source for many public health and medico-economic questions. They
+are well normalized, well documented, lack few critical PICO elements
+\citep{caruana2023administrative}. Estimations methods borrowed to
+econometrics such as difference-in-difference \citep{athey2006identification},
+regression discontinuity design \citep{bor2014regression} and instrumental
+variables \citep{greenland2000introduction} might be adapted.
 
 %
 \paragraph{Modern public health problems should take into account the fragmented
   nature of healthcare} Healthcare burdens and costs are driven by chronic
-  diseases where death or rehospitalization are not the only outcomes of
-  interest. Most of care is provided outside of the hospital
-  \citep{white1961ecology}, therefore requiring to link city care, and
-  socio-economics features to hospital data. This would allow to study less
-  critical outcomes, for which experiments are easier to conduct and where error
-  is more acceptable. Adopting methods from policy learning
-  \citep{athey2021policy} would allow better evaluation and continuous
-  improvement for interventions, opening the door to potentially big prevention
-  benefits.
+diseases where death or rehospitalization are not the only outcomes of
+interest. Most of care is provided outside of the hospital
+\citep{white1961ecology}, therefore requiring to link city care, and
+socio-economics features to hospital data. This would allow to study less
+critical outcomes, for which experiments are easier to conduct and where error
+is more acceptable. Adopting methods from policy learning
+\citep{athey2021policy} would allow better evaluation and continuous
+improvement for interventions, opening the door to potentially big prevention
+benefits.
 %
 Ultimately, I am convinced that the resource constraints face by modern
 healthcare systems bridges the care effectiveness question to equity. Some
@@ -6734,9 +6716,9 @@ random repartition of these mistreated patients.
 
   \subsection{Prognosis}\label{apd:temporal_split:prognosis}
 
-  \paragraph{Average Precision}
+  \paragraph{ROC AUC}
 
-  Figure \ref{fig:prognosis_auprc} displays the area under the precision
+  Figure \ref{fig:prognosis_rocauc} displays the area under the precision
   recall curve (average precision) averaged with equal weight for each chapter (Macro)
   and with the chapter prevalence as the weight (weighted).
 
@@ -6744,30 +6726,46 @@ random repartition of these mistreated patients.
   \begin{figure}[!h]
     \centering
     \begin{subfigure}[b]{1\textwidth}
-      \caption{}\label{fig:prognosis_auprc_macro}
-      \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_macro.pdf}
+      \caption{}\label{fig:prognosis_rocauc_macro}
+      \includegraphics[width=\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_macro.pdf}
     \end{subfigure}
     \vfill
     \begin{subfigure}[b]{1\textwidth}
-      \caption{}\label{fig:prognosis_auprc_weighted}
-      \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
+      \caption{}\label{fig:prognosis_rocauc_weighted}
+      \includegraphics[width=\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_weighted.pdf}
     \end{subfigure}
-    \caption{Prognosis average precisions average over chapters for different featurizers and
+    \caption{Prognosis ROC AUC averaged over chapters for different featurizers and
       estimators. The performances are averaged over 5 folds. The shaded area
       represents the standard deviation. The horizontal black lines display the
       naive baseline that predicts the previous stay codes for the target stay.
-      Figure \ref{fig:prognosis_auprc_macro} average all chapter with equal weight
-      whereas \ref{fig:prognosis_auprc_weighted} averages chapters by prevalences.
+      Figure \ref{fig:prognosis_rocauc_macro} average all chapter with equal weight
+      whereas \ref{fig:prognosis_rocauc_weighted} averages chapters by prevalences.
       Random forest have better performances. Count encoder outperform other
       featurizers, suggesting the importance of low count events that are smoothed
-      out in embedding methods. Appendix \ref{apd:temporal_split:prognosis}
-      details the results for each chapter and display Average Precision and Brier
-      Score results.}%
-    \label{fig:prognosis_auprc}
+      out in embedding methods.}%
+    \label{fig:prognosis_rocauc}
+  \end{figure}
+
+  \paragraph{Average precision scores for every ICD10 chapter}
+
+  Figure \ref{fig:prognosis_auprc_macro} displays the area under the precision
+  recall curve (average precision) averaged with equal weight for each chapter (Macro).
+  \begin{figure}[!h]
+    \centering
+
+    \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_macro.pdf}
+
+    \caption{Prognosis Average Precision averaged by prevalence over chapters
+      for different featurizers and estimators. The performances are averaged
+      over 5 folds. The shaded area represents the standard deviation. The
+      horizontal black line displays the naive baseline that predicts the
+      previous stay codes for the target stay.}%
+    \label{fig:prognosis_auprc_macro}
   \end{figure}
 
 
   \paragraph{Average precision scores for every ICD10 chapter}
+
 
   Figure \ref{fig:prognosis_average_precision_score__c_1} to
   \ref{fig:prognosis_average_precision_score__c_22} display AUPRC scores for every
