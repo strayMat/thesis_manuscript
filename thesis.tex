@@ -997,7 +997,7 @@ benefit from innovative methods.
   Bridges with healthcare and personalized medicine include application in
   optimizing antiretroviral therapy in HIV \citep{guez2008adaptive} or
   management of sepsis in the Intense Care Unit \citep{komorowski2018artificial}
-  but lack wide adoption \citep{senn2018statistical}.
+  and is an active area of research \citep{coronato2020reinforcement}.
 
 \end{background_box_left}
 
@@ -5368,74 +5368,42 @@ models.
 \chapter{Conclusion}\label{chapter:conclusion}
 
 \section{Lessons learned}
+%
+\paragraph{Substantial efforts are engaged to prepare routine care data for reuse}
+Vast amount of new data is collected in healthcare at the cost of new
+infrastructures: the Clinical Data Warehouses (CDWs). Navigating through this
+mass of data is simplified, mostly by the centralization of data fragmented in
+non interoperable softawares and NLP techniques. These CDWs are mainly aiming to
+improve clinical research. However, deriving new evidences from EHRs is
+currently hampered  by a poorly standardized data access processes,
+heterogeneous local care practices, and the non-exhaustive collection of
+critical elements of care trajectories, even during hospital care.
+%
+\paragraph{These data repositories are not big enough for large neural network
+  on structured data} Even the regional scale data center of the AP-HP has only
+few thousands of cases for common pathologies such as cardiovascular adverse
+events. On these medium sized datasets, flexible models on top of simple data
+representations --such as random forest with event counts-- are performing
+better than transformer-based models while being simpler to deploy and more
+compute efficient. These results echo the recent benchmark from
+\cite{grinsztajn2022tree} showing the superiority of tree based methods over
+deep learning on tabular data.
+%
+\paragraph{Big data is no oracle, we need causal thinking} Size of data put
+appart, the observational nature of EHRs data require clear and robust workflows
+inspired by modern causal inference. Using flexible predictive models without a
+causal framework opens the door to collider biases, but using only linear models
+is prone to underfitting and biased estimates as well.
 
 %
-\paragraph{Substantial efforts are engaged to collect routine care data for reuse}
+\paragraph{Selecting outcome models for heterogeneous treatment effects benefit
+  from flexible estimation of nuisances} Causal model selection should not been
+performed with the usual mean squared error. Estimating nuisance parameters of
+the doubly robust R-risk thanks to flexible models is the most performant
+approach. In practice, a simple procedure where nuisances are estimated with
+the same train set as the candidate models introduces negligeable bias.
 
-Vast amount of new data is collected in healthcare at the cost of new
-infrastructures. Navigating through this mass of data is greatly simplified,
-mostly by the centralization of data fragmented in non interoperable softawares
-and NLP techniques. Mainly aiming to improve clinical research, deriving new
-evidences from EHRs is currently freined by a poor normalization of data access
-processes, heterogeneity of local practices, and unexhaustive collection of
-critical elements of the healthcare trajectories even during hospital care.
-
-\paragraph{These data repositories are not big enough} Even the regional scale
-data center of the AP-HP has a small number of cases for common pathologies such
-as cardiovascular adverse events as \ref{chapter:predictive_models} shows. On
-these medium sized datasets, flexible models on top of simple data
-representations --such as random forest with event counts-- are performing
-better than transformer-based models while being simpler to be deployed.
-
-\paragraph{Big data is no magic trick, we need causal thinking} Size of data put appart,
-the observational nature of EHRs data require clear and robust workflows
-inspired by modern causal inference. Using flexible predictive models without a
-causal framework opens the door to collider biases, but using only
-linear models is prone to underfitting and biased estimates as well.
-
-%Healthcare burden in modern world is access to healthcare, and chronic disease
-%ie. resource issues more than better products, our methodological toolbox to
-%distinguish between good and bad management is not adapted to the task since it
-%involved complicated process specific to each situation. Some can be borrowed
-%from economics, but specificities from epidemiology should be mixed in. 
-Modern healthcare burdens and costs are driven by chronic diseases where death
-is not the only outcome of interest. Focus on smaller rewards, on which
-experiments are easier to conduct and where error is acceptable: it would allow
-better learning for decision making since we can repeat more experiments, and
-possibly high delayed reward because of better prevention.
-
-Modern collection of data in healthcare makes it a domain closer to social
-sciences than usually considered. It involves institutions and individuals with
-complex data collection patterns and choices that are seldom well controlled by
-the researcher alone. Therefore, we should bridge traditional statistics with
-econometrics and social sciences to analyze it. This does not impose to abandon
-the scientific method, but to adapt it to constant distribution shifts, unkown
-complex mechanisms, different variable constructs.
-
-% Pattern exists in the massive data collected: we need to extract them
-% automatically and articulate these with scientific questions guided by
-% knowledge domain.
-Complex patterns in big data call for machine learning methods, which haveq been shown to
-highly perform . Text is pervasive, we are using it to communicate and to log
-most of our information. We can rely pretraining models outside the healthcare
-domain. We should leverage it more in the context of care (limit: temporality is
-hard to capture but is a key aspect of causal inference).
-
-\section{Scientific perspectives}
-
-\paragraph{Could design model that optimize the R-loss directly?}
-
-%There is a paper from the chernozukhov
-% clics that does that : rieznet I think. DIcuss the relation with the
-% two-headed neural networks studied by Johansson et al.
-
-\paragraph{How to explain the high inter-experience variance for model selection?}
-% Overlap is a component but there 
-
-\paragraph{The potential of Large Language Models for prediction from EHRs}
-% 
-
-\section{Personal convictions for practical perspectives}
+\section{Personal convictions for perspectives}
 
 \paragraph{Claims data: they are not the solution for every questions, but could
   be leverage more for public health.} They are super normalized, lack
@@ -5443,21 +5411,69 @@ few critical PICO elements \citep{caruana2023administrative}.
 
 % Those problem are more pragmatic than theoretical. Thus, data and conclusions need to circulate. 
 \paragraph{The unreasonable effectiveness of healthcare data is yet out of
-  reach} Due to the impossibility to transfer models or administrative barriers to
-access data (due to multiplicity of the involved actors), predictive models
-deployment is almost unexistant. \md{source PA pour le non remboursement des DMs
-  avec IA.} This forces us to rely on efficient techniques that make the best of
-medium-sized data or rely on sharable sources of knowledge. This calls for more
-work in research network methodologies \citep{hripcsak2015observational} and
-model sharing such as federated learning, and trained estimators.
+  reach} Due to the impossibility to transfer models or administrative barriers
+to access data (due to multiplicity of the involved actors), predictive models
+deployment is almost unexistant. \md{source PA pour le non remboursement des
+  DMs avec IA.} This forces us to rely on efficient techniques that make the
+best of medium-sized data or rely on sharable sources of knowledge. This calls
+for more work adopting research network methodologies
+\citep{hripcsak2015observational}, model sharing such as federated learning.
+Another interesting avenue is to leverage large language models pretrained on
+language to either extract information from clinical notes, or . This requires
+
+
+\paragraph{For treatment effect estimations, relying on text call for more
+  methodological understanding on causal representations learning}
+
+Could design model that optimize the R-loss directly? How to explain the high
+inter-experience variance for model selection?
+
+%There is a paper from the chernozukhov
+% clics that does that : rieznet I think. DIcuss the relation with the
+% two-headed neural networks studied by Johansson et al.
+
+% Overlap is a component but there 
 
 %
-Ultimately, I am convinced that resource constraints and the ever-increasing
-demand on healthcare bridges the care effectiveness question to equity. Some
-patients will always be less treated than others: public health should seek for
-random repartition of these mistreated patients conditionally on patient
-conditions.
+\paragraph{Modern public healthcare problems should take into account the
+  fragmented nature of healthcare} Modern healthcare burdens and costs are driven
+by chronic diseases where death is not the only outcome of interest. Focus on
+smaller rewards, on which experiments are easier to conduct and where error is
+acceptable: it would allow better learning for decision making since we can
+repeat more experiments, and possibly high delayed reward because of better
+prevention.
 
+Ultimately, I am convinced that resource constraints and the
+ever-increasing demand on healthcare bridges the care effectiveness question to
+equity. Some patients will always be less treated than others: public health
+should seek for random repartition of these mistreated patients conditionally
+on patient conditions.
+
+
+
+%Healthcare burden in modern world is access to healthcare, and chronic disease
+%ie. resource issues more than better products, our methodological toolbox to
+%distinguish between good and bad management is not adapted to the task since it
+%involved complicated process specific to each situation. Some can be borrowed
+%from economics, but specificities from epidemiology should be mixed in. 
+
+
+% Modern collection of data in healthcare makes it a domain closer to social
+% sciences than usually considered. It involves institutions and individuals with
+% complex data collection patterns and choices that are seldom well controlled by
+% the researcher alone. Therefore, we should bridge traditional statistics with
+% econometrics and social sciences to analyze it. This does not impose to abandon
+% the scientific method, but to adapt it to constant distribution shifts, unkown
+% complex mechanisms, different variable constructs.
+
+% Pattern exists in the massive data collected: we need to extract them
+% automatically and articulate these with scientific questions guided by
+% knowledge domain.
+% Complex patterns in big data call for machine learning methods, which haveq been shown to
+% highly perform . Text is pervasive, we are using it to communicate and to log
+% most of our information. We can rely pretraining models outside the healthcare
+% domain. We should leverage it more in the context of care (limit: temporality is
+% hard to capture but is a key aspect of causal inference).
 
 
 \clearpage
