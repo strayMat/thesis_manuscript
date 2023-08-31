@@ -2837,6 +2837,44 @@ appendices for brier score and average precision results (AUPRC).
   trade-offs}\label{subsec:predictive_models:results}
 
 
+  
+\paragraph{Prognosis prediction -- Static embeddings are not more sample efficient
+than count encoding}%
+
+Figure \ref{fig:prognosis_roc_auc} shows the ROC AUC performances of the
+different pipelines for the prognosis task. The performances are averaged over
+ICD10 chapters with equal weight (Figure \ref{fig:prognosis_roc_auc_macro}) or
+with chapter prevalences as weights (Figure \ref{fig:prognosis_roc_auc_weighted}).
+Count encoding featurizer outperform static embeddings with random forest
+outperforms other pipelines. Interestingly, the performances of logistic
+regression hardly improve on the previous stay baseline even with the full train
+set. This indicates that the high number of features only damaged the estimation
+compared to the baseline. This is confirmed by the good performance of the
+demographic-only pipelines.
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
+\caption{Prognosis average precision score, weigthed by prevalences over all
+  ICD10 chapters for different featurizers and estimators. The performances
+  are averaged over 5 folds. The shaded area represents the standard
+  deviation. The horizontal black line displays the naive baseline that
+  predicts the previous stay codes for the target stay. Random forest have
+  better performances. Count encoder outperforms other featurizers, suggesting
+  the importance of low count events that are smoothed out in embedding
+  methods. Appendix \ref{apd:temporal_split:prognosis} details average
+  precision scores for each chapter and displays ROC AUC results.}%
+\label{fig:prognosis_roc_auc}
+\end{figure}
+
+Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
+performances for full effective train set and random forest estimators.
+Performances increase with target prevalence. Appendix
+\ref{apd:prognosis_prevalences} show similar results for ROC AUC and
+linear estimators.
+
+
 \paragraph{Long LOS interpolation -- Saturating a simple task already requires
   10,000 samples}%
 
@@ -2861,48 +2899,7 @@ because of the lack of samples.
 \end{figure}
 
 
-\paragraph{Prognosis prediction -- Static embeddings are not more sample efficient
-  than count encoding}%
-
-Figure \ref{fig:prognosis_roc_auc} shows the ROC AUC performances of the
-different pipelines for the prognosis task. The performances are averaged over
-ICD10 chapters with equal weight (Figure \ref{fig:prognosis_roc_auc_macro}) or
-with chapter prevalences as weights (Figure \ref{fig:prognosis_roc_auc_weighted}).
-Count encoding featurizer outperform static embeddings with random forest
-outperforms other pipelines. Interestingly, the performances of logistic
-regression hardly improve on the previous stay baseline even with the full train
-set. This indicates that the high number of features only damaged the estimation
-compared to the baseline. This is confirmed by the good performance of the
-demographic-only pipelines.
-
-\md{Changer par la weigthed average. }
-\md{Piste d'amélioration: détailler le cost effectiveness des méthodes. Proche
-  de public health, qu'est ce qu'on y gagne opérationnellement? Pour ça voir si on
-  a des références pour mace ou pour un chapitre icd10}
-\begin{figure}[!h]
-
-  \centering
-
-  \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
-
-  \caption{Prognosis average precision score, weigthed by prevalences over all
-    ICD10 chapters for different featurizers and estimators. The performances
-    are averaged over 5 folds. The shaded area represents the standard
-    deviation. The horizontal black line displays the naive baseline that
-    predicts the previous stay codes for the target stay. Random forest have
-    better performances. Count encoder outperforms other featurizers, suggesting
-    the importance of low count events that are smoothed out in embedding
-    methods. Appendix \ref{apd:temporal_split:prognosis} details average
-    precision scores for each chapter and displays ROC AUC results.}%
-  \label{fig:prognosis_roc_auc}
-\end{figure}
-
-Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
-performances for full effective train set and random forest estimators.
-Performances increase with target prevalence. Appendix
-\ref{apd:prognosis_prevalences} show similar results for ROC AUC and
-linear estimators.
-
+\paragraph{The cost of low prevalence}
 
 \begin{figure}[!h]
   \centering
