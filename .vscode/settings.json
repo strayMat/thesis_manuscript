@@ -1,4 +1,16 @@
 {
     "cSpell.enabled": true,
-    "win-ca.inject": "append"
+    "win-ca.inject": "append",
+    "cSpell.ignoreRegExpList": [
+        "/\\\\[a-z]+/gi\t"
+    ],
+    "cSpell.checkLimit": 5000,
+    "cSpell.maxNumberOfProblems": 10000,
+    "cSpell.words": [
+        "crystalloids",
+        "PICO",
+        "pretrained",
+        "prevalences",
+        "reweighted"
+    ]
 }

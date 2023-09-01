@@ -699,13 +699,13 @@ de la geekitude il y a déjà un bon moment. Merci à Théo pour l'avoir renouve
 l'X. Merci Pierre pour cette amitié qui tient malgré la distance: j'espère que
 nos discussions académiques et profanes continueront encore longtemps. Merci aux
 zamishs pour les diners administratifs: Matthieu, Vincent, Albane, Erwan. Merci
-à tous ceux de Saint-Ex avec qui je m'échappe le moment d'un WE: Dédé, Paupaul,
+à tous ceux de Saint-Ex avec qui je m'échappe le moment d'un WE: Dédé, Pôle,
 Thomas, Lélé, Tiph, Laura, Girou, Cindy, Mathilde et Nils. Merci Nico et Daph,
 toujours là pour une séance à Bleau. Merci à tous ceux de la grimpe, les
 semaines en falaises sont inoubliables grâce à vous: Lorraine, Théo, Albane,
 Théo$^2$, Lucas, Alice, Louis (promis après ce manuscrit je fais du typst), et
-Noémie. Merci Orel pour ces séances de grimpe à Pantin. Merci Philou pour les
-grands moments de discussion. \\
+Noémie. Merci Orel pour ces soirées de grimpe à Pantin. Merci Philou d'être cet
+ami attentif.\\
 
 Papa, Maman, Cécile, vous m'avez accompagné depuis les premiers tintins jusqu'à
 l'école d'ingénieur et la thèse. Je sais ce que je vous dois et j'espère ne pas
@@ -1089,7 +1089,7 @@ culture as one can judge from textbooks \citep{rothman2012epidemiology}:
   measures that dictates the type of model the investigator ought to use.} In
 medical journals, Cox model for survival data and logistic regression for binary
 outcomes have been the standard for publication. %
-% why simple models ? because they are simpple
+% why simple models ? because they are simple
 It is tempting to link explicit relations between variables in linear models to
 claims over the data. But interpretability of the model parameters is a strong
 assumption \citep{lipton2018mythos}, which relies on the well-specification of
@@ -2568,7 +2568,7 @@ solution to local small sample sizes is to transfer models pretrained on large
 populations. However, privacy requirements, once again prevent such transfer
 between institutions \footnote{We asked for CEHR-BERT to be published, but so
   far without success: \url{https://github.com/cumc-dbmi/cehr-bert/issues/2}}.
-Even if publically available, major dataset shifts might break effective transfer
+Even if publicly available, major dataset shifts might break effective transfer
 of predictive pipelines \citep{finlayson2021clinician}: heterogeneity in coding
 practices \citep{juven2013codage}, socio-economic status
 \citep{gianfrancesco2018potential}, inconsistency of practices in different
@@ -2599,23 +2599,29 @@ strength of this evidence requires to repeatedly test these systems on
 different prospective populations with intuitive metrics for physicians
 \citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
 
-\md{mieux distinguer la frugalité en données et la frugalité en ressources. Etre
-  plus cash sur la situation dans le monde entier avec les ressources de calcul
-  et la course aux GPUs. Et plutôt le tourner en positive.}
-\md{Faire apparaitre commoditty hardware.}
-\paragraph{Complex systems and privacy requirements hinders model deployments}
-The growing body of predictive models from EHR focus mainly on accuracy
-performances. They are rarely shared due to privacy requirements. They are tied
-to specific tasks hardcoded into the model architectures
-\citep{wornow2023shaky}. The increasing sample and architecture sizes require
-ever greater computing and technical resources -- as detailed in Appendix
-\ref{apd:computing_resources_review}. These factors lead to models being trained and
-evaluated on a small fraction of existing healthcare datasets, endangering
-external validity, integration into EHR and ultimately usefulness
-\citep{sharma2021,wornow2023shaky}.
 
-There is a need to balance good predictive performances with better clinical
-integration, which is tightly linked with simple deployment.
+\paragraph{Simple pipelines facilitate model deployments}
+
+Hospital softwares already run on complex information systems. We should aim for
+predictive models that can run on pre-existing hardware such as the successful
+QRISK for cardiovascular risk prediction \citep{hippisley2017development}.
+Relying on such commodity hardware facilitates model training, calibration and
+deployment, eventually leading to better clinical adoption and integration into
+healthcare processes. To benefit to the largest number of patients, predictive
+models should be an appropriate technology: it should be \emph{easily and
+  economically utilized from readily available resources by local communities to
+  meet their needs} \citep{pearce2012case}. However, recent predictive pipelines strongly focus
+on performance gains, at the cost of increasing architecture sizes requiring
+ever greater computing and technical resources --as detailed in Appendix
+\ref{apd:computing_resources_review}.
+% The growing body of predictive models from EHR focus mainly on accuracy
+% performances. They are rarely shared due to privacy requirements. They are
+% tied to specific tasks hardcoded into the model architectures
+% \citep{wornow2023shaky}. These factors lead to models being trained and
+% evaluated on a small fraction of existing healthcare datasets, endangering
+% external validity, integration into EHR and ultimately usefulness
+% \citep{sharma2021,wornow2023shaky}.
+There is a need to balance good predictive performances with model frugality.
 
 \subsection{Objective and outline of the paper}%
 \label{subsec:predictive_models:contribution}%
@@ -2879,7 +2885,7 @@ forest outperforms other pipelines. For these two tasks, the transformer model
 is far from the best performance, certainly because of the small samples.
 
 
-% lienar combination of icd10 chapter is a strong baseline
+% linear combination of icd10 chapter is a strong baseline
 Interestingly for prognosis, the performances of logistic regression with
 demographic is already very good. This indicates that a simple linear
 combination of the previous stay chapters is a strong baseline.
@@ -2887,7 +2893,7 @@ combination of the previous stay chapters is a strong baseline.
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
-  \caption{Prognosis average precision score, weigthed by prevalences over 21
+  \caption{Prognosis average precision score, weighted by prevalences over 21
     ICD10 chapters with more than 1\% prevalence. The performances are averaged
     over 5 folds. The shaded area represents the standard deviation. The
     horizontal black line displays the naive baseline that predicts the previous
@@ -3009,12 +3015,12 @@ The high number of laboratory measurements --only available for inpatients--
 could improve the performances for all tasks. However, the addition of these
 high-frequency features exceeds the computing resources currently at our
 disposal. Our benchmark also lacks a pre-trained model on large data and the
-intersting avenue of repurposing large language model for predictive tasks
+interesting avenue of repurposing large language model for predictive tasks
 directly from clinical notes. These two approaches need large GPU resources,
-making a poor use of the comodity hardware already present in hospitals.
-Healthcare financial resources are already scarse in rich countries. It is still
+making a poor use of the commodity hardware already present in hospitals.
+Healthcare financial resources are already scarce in rich countries. It is still
 an open question to assess if the prevention benefits brought by large scale
-models from EHRs outweight the cost of their deployment.
+models from EHRs outweigh the cost of their deployment.
 
 % One argument in favor of recent large predictive models is their easy
 % repurposing for new sites and clinical tasks, requiring few labelled data.
@@ -3107,10 +3113,11 @@ readmission risk, mortality, or future comorbidities
 And yet, there is growing evidence that machine-learning models may not benefit
 patients equally. They reproduce and amplify biases in the data
 \citep{rajkomar2018ensuring}, such as gender or racial biases
-\citep{singh2022generalizability,gichoya2022ai,roosli2022peeking},
-or marginalization of under-served populations
-\citep{seyyed2021underdiagnosis}. The models
-typically encode these biases by capturing shortcuts: stereotypical features in the data or inequal sampling \citep{geirhos2020shortcut,winkler2019association,degrave2021ai}.
+\citep{singh2022generalizability,gichoya2022ai,roosli2022peeking}, or
+marginalization of under-served populations \citep{seyyed2021underdiagnosis}.
+The models typically encode these biases by capturing shortcuts: stereotypical
+features in the data or unequal sampling
+\citep{geirhos2020shortcut,winkler2019association,degrave2021ai}.
 %
 For instance, an excellent predictive model of mortality in the Intense Care Unit
 (ICU) might be of poor clinical value if it uses information available
@@ -5404,7 +5411,7 @@ biased estimates as well.
 performed with the classical mean squared error. Estimating nuisance parameters of
 the doubly robust R-risk thanks to flexible models is the most performant
 approach. In practice, a simple procedure where nuisances are estimated with
-the same train set as the candidate models introduces negligeable bias.
+the same train set as the candidate models introduces negligible bias.
 
 \section{Personal convictions for perspectives}
 
@@ -5428,20 +5435,20 @@ computing resources for finetuning the language models.
 \paragraph{For treatment effect estimations, relying on text calls for better
   understanding on causal representations learning}
 
-Using text for confouder adjustment opens many research question when looping
+Using text for confounder adjustment opens many research question when looping
 back to causal thinking. Building a causal graph as in Figure
 \ref{fig:causal_diagram_albumin} becomes tedious. Even if all information is
 present in the text, should we extract every variable or is it possible to build
 appropriate representations? Optimizing directly the R-loss by gradient descent
 could be an interesting avenue, which is closely related to the work of
 \cite{johansson2022generalization} and \cite{chernozhukov2022riesznet} with
-non-text data. Vibration analysis is needed to confronte these methods on
+non-text data. Vibration analysis is needed to confront these methods on
 applications such as the one presented in chapter \ref{chapter:causal_tuto}.
 
 % The case of claims data
 \paragraph{Claims data are an interesting source for studying treatment
   effectiveness and public health policy} Some difficulty to define precise
-populations make claims inadaptated to precise clinical questions, but they
+populations make claims inappropriate for precise clinical questions, but they
 are a good source for many public health and medico-economic questions. They
 are well normalized, well documented, lack few critical PICO elements
 \citep{caruana2023administrative}. Estimations methods borrowed to
@@ -5574,7 +5581,7 @@ random repartition of these mistreated patients.
     \centering
     \includegraphics[width=0.8\linewidth]{img/chapter_1/tree_3.pdf}
     \caption{Illustration of regression trees with depth 1, 2 and 5.\\Code
-      adapated from
+      adapted from
       \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
     \label{fig:tree_regression}
   \end{figure}
@@ -5601,7 +5608,7 @@ random repartition of these mistreated patients.
     \centering
     \includegraphics[width=0.8\linewidth]{img/chapter_1/forest_4.pdf}
     \caption{Illustration of random forest with increasing number of
-      trees.\\Code adapated from
+      trees.\\Code adapted from
       \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
     \label{fig:forest_regression}
   \end{figure}
@@ -5609,7 +5616,7 @@ random repartition of these mistreated patients.
 
   \subsection{Gradient Boosting}\label{apd:intro:boosting}
 
-  Random forest is the aggregation of overfitting estimators. On the countrary,
+  Random forest is the aggregation of overfitting estimators. On the contrary,
   boosting \citep{freund1995desicion} is a method that iteratively sums
   underfitted learners --typically trees-- to each other. Each new weak learner
   improves over the errors of the previous averaged estimators. Improvement on
@@ -5624,7 +5631,7 @@ random repartition of these mistreated patients.
     \centering
     \includegraphics[width=0.8\linewidth]{img/chapter_1/boosting_4.pdf}
     \caption{Illustration of boosting trees with increasing number of
-      trees.\\Code adapated from
+      trees.\\Code adapted from
       \url{https://scikit-learn.org/stable/auto_examples/ensemble/plot_adaboost_regression.html}.}%
     \label{fig:boosting_regression}
   \end{figure}
@@ -6307,7 +6314,7 @@ random repartition of these mistreated patients.
     heart failure (24.116\% prevalence), mortality within 1 year since discharge
     to home (4.85\% prevalence), heart failure for DT2 patients (9.38\%
     prevalence) and 2 year risk of hospitalization starting from the 3rd year
-    since the inital entry into the EHR (10.9\% prevalence)} with respective
+    since the initial entry into the EHR (10.9\% prevalence)} with respective
   AUROC/APS \textcolor{S}{66/38.6, 94.6/52.7, 80.7/32.3, 75.9/31.1}
   \citep{pang2021cehr}. It was pretrained on 2.4 million patients from the
   Columbia University Irving Medical Center-New York Presbyterian Hospital.%
@@ -6574,7 +6581,7 @@ random repartition of these mistreated patients.
     embeddings = U_d \cdot \sqrt{\Sigma_d} + V_d \cdot \sqrt{\Sigma_d}
   \end{equation}
 
-  Where the subscript $d$ denotates the restriction to the first $d$ components of
+  Where the subscript $d$ indicates the restriction to the first $d$ components of
   the matrices.
 
   \paragraph{Aggregation of the static embbedings}
