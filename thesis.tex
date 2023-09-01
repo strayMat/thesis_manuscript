@@ -2459,7 +2459,7 @@ looks for prognosis model as part of larger \emph{decision-making} systems
 \citep{Szolovits1982artificial}. In complex healthcare organizations, accurate
 individual predictions help to use efficiently constrained medical resource by
 informing \emph{care planning} \citep{topol2019high}. Appendix
-\ref{apd:review_tasks} details these four type of predictive objectives for
+\ref{apd:review_predictive_tasks} details these four type of predictive objectives for
 healthcare.
 
 Following the trend for evaluating current state-of-the-art models
@@ -2529,7 +2529,7 @@ samples.
 solution to local small sample sizes is to transfer models pretrained on large
 populations. However, privacy requirements, once again prevent such transfer
 between institutions \footnote{We asked for CEHR-BERT to be published, but so
-far without success: \url{https://github.com/cumc-dbmi/cehr-bert/issues/2}}.
+  far without success: \url{https://github.com/cumc-dbmi/cehr-bert/issues/2}}.
 Even if publically available, major dataset shifts might break effective transfer
 of predictive pipelines \citep{finlayson2021clinician}: heterogeneity in coding
 practices \citep{juven2013codage}, socio-economic status
@@ -2544,7 +2544,6 @@ healthcare \citep{futoma2020myth}. Different population, information systems and
 healthcare practices may require tailored tools \citep{rose2018}. For example,
 \cite{wong2021external} evaluated externally a widely deployed sepsis prediction
 model showing poor transfer performance of 0.63 ROC AUC.
-
 
 
 \subsection{Current barriers to predictive models usefulness}%
@@ -2751,21 +2750,25 @@ include every medical event among drug administrations, ICD10 diagnosis and
 procedure billing codes. We also add selected static features at the stay level:
 age at hospitalization, gender, admission reason.
 
-\paragraph{Correctly framing the prediction task} General workflows describe key
-steps to develop predictive models with good practical utility
-\citep{ohdsi2019book,tomavsev2021use,jiang2023health}. Here, we detail our
-framework to precisely define each task. First, we define a \emph{study period}
-during which data acquisition was sufficiently stable. Then, we define and
-select the \emph{cohort} detailed for each task. Inclusion criteria are detailed
-in the flowcharts of Figure \ref{apd:fig:flowcharts}. We define
-the task outcome with: an \emph{index visit}, an \emph{observation period}
-during which events are fed to the predictive model, an \emph{horizon} after the
-end of the observation period defining the followup, and a target event potentially occurring
-during the followup.
+\paragraph{Prediction tasks framing} General workflows describe key steps to
+develop predictive models with good practical utility
+\citep{ohdsi2019book,tomavsev2021use}. Here, we detail our framework to
+precisely define each task. First, we define a \emph{study period} during which
+data acquisition was sufficiently stable. Then, we define and select the
+\emph{cohort} detailed for each task. Inclusion criteria are detailed in the
+flowcharts of Figure \ref{apd:fig:flowcharts}. We define the task outcome with:
+an \emph{index visit}, an \emph{observation period} during which events are fed
+to the predictive model, an \emph{horizon} after the end of the observation
+period defining the followup, and a target event potentially occurring during
+the followup.
 
 We study three tasks of increasing clinical value and implementation complexity
-with decreasing benchmark interest. Table \ref{table:predictive_tasks_summary}
-summarizes key characteristics of the cohorts and task definitions.
+with decreasing benchmark interest: Long Length Of Stay interpolation (LOS),
+prognosis as a multi-label binary classification task where we predict the next
+stay ICD10 chapters, and prediction at one year of incident Major Adverse
+Cardiovascular Events (MACE). Table \ref{table:predictive_tasks_summary}
+summarizes key characteristics of the cohorts and task definitions and Appendix
+\ref{apd:tasks:population_selection} details each task.
 
 \begin{table}[!ht]
   \centering
@@ -2776,7 +2779,7 @@ summarizes key characteristics of the cohorts and task definitions.
       \textbf{}                   & \textbf{Long LOS}                     & \textbf{Prognosis}                  & \textbf{MACE} \\ \hline
       \textbf{Task}               & Binary classification                 & \makecell[l]{Multi-Label                            \\binary classification}                                       & Binary classification                             \\ \hline
       \textbf{Index Visit}        & First inpatient visit                 & Random Non-Final Visit              & Random Visit  \\ \hline
-      \textbf{Observation Period} & Index visit                           & \makecell[l]{Full trajectory before                 \\end of index visit}                           & \makecell[l]{Full Ttrajectory before\\end of index visit} \\ \hline
+      \textbf{Observation Period} & Index visit                           & \makecell[l]{Full trajectory before                 \\end of index visit}                           & \makecell[l]{Full Trajectory before\\end of index visit} \\ \hline
       \textbf{Horizon}            & End of index visit                    & End of next visit                   & 12 Months     \\ \hline
       \textbf{Median Age}         & 56.4                                  & 61.5                                & 60.0          \\ \hline
       \textbf{Female}             & 54.6\%                                & 53.3\%                              & 53.7          \\ \hline
@@ -2790,51 +2793,6 @@ summarizes key characteristics of the cohorts and task definitions.
   \caption{Tasks definitions and cohort characteristics.}%
   \label{table:predictive_tasks_summary}%
 \end{table}
-
-\paragraph{Plan -- Long Length Of Stay interpolation
-  (LOS)}\label{par:task_definitions:los}%
-% los justification
-During complete hospitalization, stays with extreme LOS values are responsible
-for a large share of hospital costs and resource uses. The ability to predict
-extreme LOS is useful for resource managements
-\citep{omachonu2004predicting,caetano2014data,jiang2023health}.
-% los definition
-We define LOS as a binary task categorizing each inpatient stay as long if LOS
-greater than 7 days or short if LOS shorter than 7 days. Appendix
-\ref{apd:task_details:los} details the task definition.
-
-\paragraph{Stratify -- Prognosis}\label{par:task_definitions:prognosis}%%
-% prognosis justification
-Prognosis is important for prevention as it can influence shared decision-making
-between the clinician and the patient.
-% prognosis definition
-We define a proxy for prognosis as a multi-label binary classification task
-where we predict the next stay ICD10 codes starting from a random non final stay
-for each patient. We reduce the granularity of the codes to only 21 chapters
-at the highest level of the hierarchy. Appendix \ref{apd:task_details:prognosis}
-details the task definition. For this task, we realized that providing the index
-stay ICD10 chapters was a strong baseline. We
-therefore concatenated these codes as separated demographic features for all
-pipelines after aggregation.
-
-\paragraph{Prevent -- Predict Major Adverse Cardiovascular Events}\label{par:task_definitions:mace}
-
-% MACE justification
-Prediction of all-chapters billing codes does not focus on a clinically
-well-defined population. On the contrary, the composite outcome of Major Adverse
-Cardiovascular Events (MACE) is often used in clinical trials targets the
-cardio-vascular risk.
-% MACE definition
-We define MACE prediction as the prognosis of incident MACE at one year for a
-randomly chosen stay for each patient. Appendix \ref{apd:task_details:mace}
-details the task definition.
-
-% remark on low prevalence
-For well-defined clinical tasks such as MACE, the study population is only a
-small part of the initial general population. Even when studying regional data
-warehouses, the relevant population for the algorithm is an order of magnitude
-smaller than the full population, requiring better sample efficiency than
-general tasks such as LOS or prognosis.
 
 
 \subsection{Evaluation procedure}\label{subsec:predictive_models:evaluation_pipeline}
@@ -2933,7 +2891,7 @@ because of the lack of samples.
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
+  \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
   \caption{ Bigger target prevalences yield better average precision. The
     different chapters are binned in prevalence bins. The estimator used for
     this plot is random forest trained on the full effective train set. Appendix \ref{apd:prognosis_prevalences} details
@@ -2941,9 +2899,13 @@ because of the lack of samples.
   \label{fig:prognosis_prevalences_auprc}
 \end{figure}
 
+
+\paragraph{Static embeddings are quicker to train}%
+
+
 Figure \ref{fig:prognosis_training_time} shows the training time of the
-different pipelines, highlighting the efficiency of the static embedding
-methods.
+different pipelines average over the 21 chapters on the prognosis task,
+highlighting the efficiency of the static embedding methods.
 
 
 \begin{figure}[!h]
@@ -2957,21 +2919,6 @@ methods.
     memory.}%
   \label{fig:prognosis_training_time}
 \end{figure}
-
-
-\paragraph{Static embeddings are quicker to train}%
-
-Figure \ref{fig:prognosis_roc_auc} shows the training time of the different
-pipelines for one chapter on the prognosis task.
-
-% \begin{figure}
-%   \centering
-%   \includegraphics{img/chapter_3/training_times.pdf}
-%   \caption{Training time for the different pipelines. The training time is
-%     averaged over 5 folds for . The shaded area represents the standard deviation.
-%     The training time for the transformer based model is significantly longer
-%     than the other pipelines.}%
-% \end{figure}
 
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
@@ -6155,7 +6102,7 @@ random repartition of these mistreated patients.
 
   \section{Predictive models and tasks on EHRs}\label{apd:review_predictions}
 
-  \subsection{Why predictive models in healthcare ?}\label{apd:review_tasks}%
+  \subsection{Why predictive models in healthcare ?}\label{apd:review_predictive_tasks}%
 
 
   \paragraph{Risk stratification in the clinic}
@@ -6631,8 +6578,9 @@ random repartition of these mistreated patients.
   unique stay. This avoids to consider transfers as two different hospitalizations.
 
   %
-  \subsection{Tasks
-    descriptions}\label{apd:tasks:population_selection}
+  \subsection{Tasks descriptions}\label{apd:tasks:population_selection}
+
+  \paragraph{Selection flowcharts}\label{apd:tasks:flowcharts}
 
   The Figure \ref{apd:fig:flowcharts} shows the selection flowcharts for the three tasks.
 
@@ -6664,17 +6612,38 @@ random repartition of these mistreated patients.
 
   \paragraph{LOS interpolation}\label{apd:task_details:los}
 
+  \paragraph{Plan -- Long Length Of Stay interpolation (LOS)}%
+  \label{apd:task_definitions:los}%
+  % los justification and definition
+  During complete hospitalization, stays with extreme LOS values are responsible
+  for a large share of hospital costs and resource uses. The ability to predict
+  extreme LOS is useful for resource managements
+  \citep{omachonu2004predicting,caetano2014data,jiang2023health}. We define LOS as
+  a binary task categorizing each inpatient stay as long if LOS greater than 7
+  days or short if LOS shorter than 7 days.
+  % details
   The \emph{study period} was january 2017 to june 2022. The \emph{population at
-    risk} are the patients aged above 18, with at least one hospitalization
-  lasting at least 24 hours. Stays with in-hospital mortality are discarded. The
+    risk} are the patients aged above 18, with at least one hospitalization lasting
+  at least 24 hours. Stays with in-hospital mortality are discarded. The
   \emph{index visit} is the first included visit for each individual. LOS is
-  defined as a binary classification task for each index visit. The label is 0
-  if the stay lasts less than 7 days and 1 if the stay lasts more than 7 days.
-  The \emph{horizon} is the end of the index visit and the \emph{observation
-    period} is the full index visit. This task is an interpolation since we
-  classify the length of the stay with data from the whole stay.
+  defined as a binary classification task for each index visit. The label is 0 if
+  the stay lasts less than 7 days and 1 if the stay lasts more than 7 days. The
+  \emph{horizon} is the end of the index visit and the \emph{observation period}
+  is the full index visit. This task is an interpolation since we classify the
+  length of the stay with data from the whole stay.
 
-  \paragraph{Prognosis task}\label{apd:task_details:prognosis}
+
+  \paragraph{Stratify -- Prognosis}\label{apd:task_details:prognosis}%%
+  % prognosis justification and definition
+  Prognosis is important for prevention as it can influence shared decision-making
+  between the clinician and the patient. We define a proxy for prognosis as a
+  multi-label binary classification task where we predict the next stay ICD10
+  codes starting from a random non final stay for each patient. We reduce the
+  granularity of the codes to only 21 chapters at the highest level of the
+  hierarchy. For this task, we realized that providing the index stay ICD10
+  chapters was a strong baseline. We therefore concatenated these codes as
+  separated demographic features for all pipelines after aggregation.
+  % details
 
   The study period was january 2017 to june 2022. The \emph{cohort}
   are the patients aged above 18, with at least two hospitalization (inpatient or
@@ -6687,19 +6656,36 @@ random repartition of these mistreated patients.
   greater than 1\%, the label is 1 if the stay contains a diagnosis in this
   chapter, otherwise it is 0.
 
-  \paragraph{Major Adverse Cardiovascular Events}\label{apd:task_details:mace}
 
+
+  \paragraph{Prevent -- Predict Major Adverse Cardiovascular Events}%
+  \label{apd:task_details:mace}
+
+  % MACE justification and definition
+  Prediction of all-chapters billing codes does not focus on a clinically
+  well-defined population. On the contrary, the composite outcome of Major Adverse
+  Cardiovascular Events (MACE) is often used in clinical trials targets the
+  cardio-vascular risk. We define MACE prediction as the prognosis of incident
+  MACE at one year for a randomly chosen stay for each patient.
+  % details
   The study period was january 2018 to december 2020. The \emph{population at
     risk} are the patients aged above 18, with at least two hospitalization
   (inpatient or outpatient). \emph{The index visits} are for each patients a
   randomly selected stay without in-hospital mortality, with at least an
-  \emph{horizon} of 12 months between the end of the stay and the end of the
-  study period. The \emph{observation period} is the whole patient trajectory up
-  to the end of the index visit. MACE is defined as a binary classification task.
-  The label is 1 if a MACE billing code is observed (see Table
+  \emph{horizon} of 12 months between the end of the stay and the end of the study
+  period. The \emph{observation period} is the whole patient trajectory up to the
+  end of the index visit. MACE is defined as a binary classification task. The
+  label is 1 if a MACE billing code is observed (see Table
   \ref{apd:tasks:mace_codes}) and 0 otherwise. We used billing codes defined by
-  \cite{bosco2021major} and complement them with other codes specific to the French healthcare
-  system \cite{cnam2022_top_patho}.
+  \cite{bosco2021major} and complement them with other codes specific to the
+  French healthcare system \cite{cnam2022_top_patho}.
+
+  % remark on low prevalence
+  For well-defined clinical tasks such as MACE, the study population is only a
+  small part of the initial general population. Even when studying regional data
+  warehouses, the relevant population for the algorithm is an order of magnitude
+  smaller than the full population, requiring better sample efficiency than
+  general tasks such as LOS or prognosis.
 
   \begin{table*}[!tb]
     \resizebox*{\textwidth}{!}{
