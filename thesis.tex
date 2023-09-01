@@ -2735,9 +2735,10 @@ estimators can be cross-validated together. %
 We experimented with gradient boosting trees, without observing significant performance gains.
 
 
-\section{Empirical Study}\label{sec:predictive_models:empirical_study}
+\section{Empirical Study -- Benchmarking three operational and clinical
+tasks}\label{sec:predictive_models:empirical_study}
 
-\subsection{Three clinical and operational tasks}%
+\subsection{Navigating between clinical and benchmarking utilities}%
 \label{subsec:predictive_models:task_definitions}%
 
 \paragraph{Heathcare database -- Paris hospital data warehouse}%
@@ -2762,8 +2763,11 @@ to the predictive model, an \emph{horizon} after the end of the observation
 period defining the followup, and a target event potentially occurring during
 the followup.
 
-We study three tasks of increasing clinical value and implementation complexity
-with decreasing benchmark interest: Long Length Of Stay interpolation (LOS),
+The more clinically anchored a task is, the less appropriate it is for
+calibration models, as local practices will be more important in
+defining precise clinical criteria than general operational tasks. We study
+three tasks of increasing clinical value and implementation complexity with
+decreasing benchmark interest: Long Length Of Stay interpolation (LOS),
 prognosis as a multi-label binary classification task where we predict the next
 stay ICD10 chapters, and prediction at one year of incident Major Adverse
 Cardiovascular Events (MACE). Table \ref{table:predictive_tasks_summary}
@@ -2795,7 +2799,8 @@ summarizes key characteristics of the cohorts and task definitions and Appendix
 \end{table}
 
 
-\subsection{Evaluation procedure}\label{subsec:predictive_models:evaluation_pipeline}
+\subsection{Evaluation procedure -- Exploring the performance-sample trade-off}%
+\label{subsec:predictive_models:evaluation_pipeline}
 
 We split each cohort obtained in Sub-section
 \ref{subsec:predictive_models:task_definitions} into a train and a test set
@@ -2823,8 +2828,8 @@ Under the Receiver Operating Characteristic Curve (ROC AUC) and refer to
 appendices for brier score and average precision results (AUPRC).
 
 
-\subsection{Results: Performance-sample
-  trade-offs}\label{subsec:predictive_models:results}
+\subsection{Results -- Tree-based models over event counts outperform elaborated embedding models}%
+\label{subsec:predictive_models:results}
 
 
 
@@ -2856,11 +2861,6 @@ This is confirmed by the good performance of the demographic-only pipelines.
   \label{fig:prognosis_auprc}
 \end{figure}
 
-Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
-performances for full effective train set and random forest estimators.
-Performances increase with target prevalence. Appendix
-\ref{apd:prognosis_prevalences} show similar results for ROC AUC and
-linear estimators.
 
 
 \paragraph{Long LOS interpolation -- Saturating a simple task already requires
@@ -2889,13 +2889,21 @@ because of the lack of samples.
 
 \paragraph{The cost of low prevalence}
 
+Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
+performances on the prognosis task plotted against the prevalence. Low
+prevalences translate into small number of cases, which decreases overall
+performances and increase variances among chapters with less than 5\%
+prevalences. Appendix \ref{apd:prognosis_prevalences} show similar results for
+ROC AUC and linear estimators.
+
+
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
   \caption{ Bigger target prevalences yield better average precision. The
     different chapters are binned in prevalence bins. The estimator used for
-    this plot is random forest trained on the full effective train set. Appendix \ref{apd:prognosis_prevalences} details
-    the ROC AUC curve.}%
+    this plot is random forest trained on the full effective train set of size
+    8560. Appendix \ref{apd:prognosis_prevalences} details the ROC AUC curves.}%
   \label{fig:prognosis_prevalences_auprc}
 \end{figure}
 
@@ -2919,6 +2927,9 @@ highlighting the efficiency of the static embedding methods.
     memory.}%
   \label{fig:prognosis_training_time}
 \end{figure}
+
+
+%\section{Cost-effective learning -- Looking at the benefits for patients}
 
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
