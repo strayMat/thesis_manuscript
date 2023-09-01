@@ -2736,7 +2736,7 @@ We experimented with gradient boosting trees, without observing significant perf
 
 
 \section{Empirical Study -- Benchmarking three operational and clinical
-tasks}\label{sec:predictive_models:empirical_study}
+  tasks}\label{sec:predictive_models:empirical_study}
 
 \subsection{Navigating between clinical and benchmarking utilities}%
 \label{subsec:predictive_models:task_definitions}%
@@ -2802,8 +2802,8 @@ summarizes key characteristics of the cohorts and task definitions and Appendix
 \subsection{Evaluation procedure -- Exploring the performance-sample trade-off}%
 \label{subsec:predictive_models:evaluation_pipeline}
 
-We split each cohort obtained in Sub-section
-\ref{subsec:predictive_models:task_definitions} into a train and a test set
+We split each cohort described in Table
+\ref{table:predictive_tasks_summary} into a train and a test set
 following a temporal split based on inclusion date with a 0.8/0.2 ratio (Split
 detailed in Appendix \ref{apd:evaluation_procedure}). Each patient only
 appears in one of the two sets. To study the sample efficiency of the different
@@ -2828,49 +2828,41 @@ Under the Receiver Operating Characteristic Curve (ROC AUC) and refer to
 appendices for brier score and average precision results (AUPRC).
 
 
-\subsection{Results -- Tree-based models over event counts outperform elaborated embedding models}%
+\subsection{Results -- Tree-based models on event counts prevail}%
 \label{subsec:predictive_models:results}
 
 
+\paragraph{Count encoding followed by random forest outperform elaborated
+  embedding models}%
 
-\paragraph{Prognosis prediction -- Static embeddings are not more sample efficient
-  than count encoding}%
+Both for the prognosis task (shown if Figure \ref{fig:prognosis_auprc}) and the
+LOS task (shown in Figure \ref{fig:los_roc_auc}), count encoding with random
+forest outperforms other pipelines. For these two tasks, the transformer model
+is far from the best performance, certainly because of the small samples.
 
-Figure \ref{fig:prognosis_auprc} shows the ROC AUC performances of the different
-pipelines for the prognosis task. The performances are averaged over ICD10
-chapters with by reweighing by chapter prevalences. Count encoding featurizer
-outperform static embeddings with random forest outperforms other pipelines.
-Interestingly, the performances of logistic regression hardly improve on the
-previous stay baseline even with the full train set. This indicates that the
-high number of features only damaged the estimation compared to the baseline.
-This is confirmed by the good performance of the demographic-only pipelines.
 
+% lienar combination of icd10 chapter is a strong baseline
+Interestingly for prognosis, the performances of logistic regression with
+demographic is already very good. This indicates that a simple linear
+combination of the previous stay chapters is a strong baseline.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
-  \caption{Prognosis average precision score, weigthed by prevalences over all
-    ICD10 chapters for different featurizers and estimators. The performances
-    are averaged over 5 folds. The shaded area represents the standard
-    deviation. The horizontal black line displays the naive baseline that
-    predicts the previous stay codes for the target stay. Random forest have
-    better performances. Count encoder outperforms other featurizers, suggesting
-    the importance of low count events that are smoothed out in embedding
-    methods. Appendix \ref{apd:temporal_split:prognosis} details average
-    precision scores for each chapter and displays ROC AUC results.}%
+  \caption{Prognosis average precision score, weigthed by prevalences over 21
+    ICD10 chapters with more than 1\% prevalence. The performances are averaged
+    over 5 folds. The shaded area represents the standard deviation. The
+    horizontal black line displays the naive baseline that predicts the previous
+    stay codes for the target stay. Random forest have better performances.
+    Count encoder outperforms other featurizers, suggesting the importance of
+    low count events that are smoothed out in embedding methods. We report
+    average precision rather than ROC AUC, since it takes better into account
+    the difference in prevalence between chapters. Appendix
+    \ref{apd:temporal_split:prognosis} details average precision scores for each
+    chapter and displays averaged ROC AUC.}%
   \label{fig:prognosis_auprc}
 \end{figure}
 
-
-
-\paragraph{Long LOS interpolation -- Saturating a simple task already requires
-  10,000 samples}%
-
-
-Figure \ref{fig:los_roc_auc} shows that ROC AUC performances for LOS saturates
-at 95\% ROC AUC for random forests and every featurizers but the demographics.
-The transformer model is not able to reach the best performances, certainly
-because of the lack of samples.
 
 \begin{figure}[!h]
   \centering
@@ -2893,7 +2885,7 @@ Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
 performances on the prognosis task plotted against the prevalence. Low
 prevalences translate into small number of cases, which decreases overall
 performances and increase variances among chapters with less than 5\%
-prevalences. Appendix \ref{apd:prognosis_prevalences} show similar results for
+prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar results for
 ROC AUC and linear estimators.
 
 
@@ -2915,17 +2907,19 @@ Figure \ref{fig:prognosis_training_time} shows the training time of the
 different pipelines average over the 21 chapters on the prognosis task,
 highlighting the efficiency of the static embedding methods.
 
-
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/training_testing_time_per_chapter.pdf}
-  \caption{Static embeddings are quicker to train. The training times are
-    reported for the full train set for the prognosis task average on the 21
-    ICD10 chapters. For all featurizers expect to CEHR-BERT, jobs were submitted
-    with 10 CPU cores and 36GB memory on a slurm cluster. For CEHR-BERT, the
-    calculation took place on the same cluster with a Nvidia T4 GPU with 16Gb of
-    memory.}%
-  \label{fig:prognosis_training_time}
+  \begin{minipage}{.35\linewidth}
+    \caption{Static embeddings are quicker to train. The training times are
+      reported for the full train set for the prognosis task average on the 21
+      ICD10 chapters. For all featurizers expect to CEHR-BERT, jobs were submitted
+      with 10 CPU cores and 36GB memory on a slurm cluster. For CEHR-BERT, the
+      calculation took place on the same cluster with a Nvidia T4 GPU with 16Gb of
+      memory.}\label{fig:prognosis_training_time}
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}{.62\linewidth}
+    \includegraphics[width=\linewidth]{img/chapter_3/prognosis/training_testing_time_per_chapter.pdf}
+  \end{minipage}
 \end{figure}
 
 
@@ -2934,7 +2928,7 @@ highlighting the efficiency of the static embedding methods.
 
 \section{Conclusion}\label{sec:predictive_models:conclusion}
 
-
+\md{Syntethize the findings in one paragraph.}
 % Restating the study
 State-of-the-art predictive models from structured Electronic Medical Records
 models are hindered by the unsolved challenge of publicly sharing pre-trained
@@ -2978,6 +2972,7 @@ sizes. Because of constraints for these two types of resources on the AP-HP
 computing cluster, we are currently not able to evaluate the MACE task on the
 full cohort.
 
+\md{Detail comodity hardware and large language models.}
 % limit
 \paragraph{Further work} The high number of laboratory measurements for
 hospitalized patients could improve the performances for all tasks. Due to
