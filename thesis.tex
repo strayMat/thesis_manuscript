@@ -617,29 +617,38 @@
 \chapter*{Remerciements}
 
 % Encadrants
-Merci avant tout à toi, Gaël. Merci pour ta confiance, merci pour ta présence
-continue et bienveillante. Merci pour les conseils, les encouragements, les
-relectures tardives. Merci de m'avoir pousser à chercher les bonnes questions et à
+Avant tout, merci à toi, Gaël. Merci pour ta confiance, merci pour ta présence
+continue et bienveillante, merci pour ton énergie et ton enthousiasme
+communiquants. Merci pour les conseils, les encouragements, les relectures
+attentives. Merci de m'avoir pousser à chercher les bonnes questions et à
 montrer pourquoi celles-ci sont importantes. Je n'aurais pas pu rêver d'un
-meilleur directeur de thèse. 
-
-Merci à Claire d'avoir été là. Ca n'a pas toujours été facile de garder le contact
-à distance, mais nos discussions et tes conseils ont été précieux. 
+meilleur directeur de thèse. J'ai l'impression d'avoir énormément appris à tes
+côtés. J'espère à l'avenir, faire honneur à cette formation. Merci à Claire
+d'avoir été là. Ca n'a pas été facile de garder contact à distance, mais nos
+discussions et tes conseils ont toujours été précieux.
 % 
-Un immense merci à Pierre-Alain, qui a été un manager toujours bienveillant et
-attentif, et un très grand exemple de rigueur. J'espère continuer à partager ton
-enthousiasme et ton recul critique pour tous les sujets de données de santé. 
+Un immense merci à toi Pierre-Alain. Tu as été le manager parfait pour cette
+garde partagée:  bienveillant, attentif et un très grand exemple de
+rigueur. Merci pour tes encouragements et tes conseils. J'espère continuer à
+partager ton enthousiasme et ton recul critique pour tous les sujets de données
+de santé.
+% Jury
 % Inria
-Merci à toutes les personnes croisées à l'Inria dans ces merveilleuses équipes
-MIND -- SODA. Merci à tous les PI, post-docs: Marine, Judith, Jill-Jenn, Thomas
-(team café moulu), . Et merci également à tous les occupants occasionnels de
-l'open-space doctorant: Alexis, Alex, Julie, Cédric et Benoît, Vincent. Merci
-pour les discussions passionantes que ce soit sur les plans scientifiques ou
-juste de café de comptoir. Merci Théo pour les discussions et les soutiens
-galères sur l'entrepôt de l'AP. 
+Merci à toutes les personnes de l'Inria dans ces brillantes équipes
+MIND -- SODA/scikit-learn. Merci à tous les PI et post-docs: Marine, Judith,
+Jill-Jenn, Thomas (team café moulu), Olivier, Guillaume, Franck, Riccardo, Arturo, Jun.
+Et merci également à tous les occupants occasionnels de l'open-space doctorant:
+Alexis, Alex, Thomas, Julie, Jovan, Cédric, Benoît, Lillian, Loic, Vincent, Léo, Samuel. Une
+pensée particulière pour Béné, que j'ai pu réellement rencontré à l'Inria six
+ans seulement après notre arrivée commune sur le plateau de Saclay. Merci pour les
+discussions passionantes que ce soit sur les plans scientifiques ou juste de
+café de comptoir. Merci Théo pour les discussions et les soutiens galères sur
+l'entrepôt de l'AP. Je réalise la chance que j'ai eu de travailler dans un
+environnement aussi stimulant et bienveillant.
 % APHP
-Merci à toute l'équipe de Data Science de l'APHP pour leur accueil les jeudis :
-Romain, Thomas, Perceval, Ariel, Etienne, Adam, Christelle, et ceux que j'oublie.
+Merci à toute l'équipe de Data Science de l'AP-HP pour leur accueil chaleureux
+du jeudi et les chouquettes: Romain, Thomas, Perceval, Ariel, Adam, Charline, Etienne,
+Christelle, et ceux que j'oublie.
 % HAS
 J'aimerais également remercier tous les membres de la mission Data de la HAS :
 Timothée pour ses PR magnifiques, Pavel pour Despacito et les discussions NLP,
@@ -2497,34 +2506,35 @@ details this evolution of predictive model complexity.
 
 
 
-\subsection{Transfer learning: no silver bullet}%
+\subsection{Small populations: no silver bullet}%
 \label{subsec:predictive_models:low_prevalence}%
 
-\gv{Small populations: no silver bullet. Il faut qu'on parle d'abord de petites
-  populations. Ensuite on peut parler de transfer learning. Donner plus de poids
-  aux faibles number of cases.}%
-
 % Low prevalence
-%\paragraph{Transferring to new tasks still requires a high number of cases }
-Well-defined clinical questions concern a very small number of cases --diseases
-are rare, often with less than 5\% of prevalence. For example, consider the
-prediction of cardiovascular complications --a rather common clinical
-condition--, we first extracted a cohort of 2,101,819 patients. After running
-all inclusion criteria --shown in Figure \ref{apd:fig:flowchart_t3}, we are left
-with only 4,360 cases among a population at risk of 165,930 patients. Currently,
-large models are trained on larger number of cases (see a review of number of
-cases for three major transformer based models in Appendix
-\ref{apd:foundation_model_nb_cases}). Due to the difficulty to access data
-linked to privacy rights, we should also compare this to problems with
-smaller samples.
+\paragraph{Well-defined clinical questions concern small numbers of cases}
+Diseases are rare, often with less than 5\% of prevalence
+\citep{cnam2023pathologies}. The number of cases is even lower if considering
+incidence. For example, consider the prediction of cardiovascular complications
+--a rather common clinical condition--, we first extracted a cohort of 2,101,819
+patients. After running all inclusion criteria --shown in Figure
+\ref{apd:fig:flowchart_t3}, we are left with only 4,360 cases among a population
+at risk of 165,930 patients. Currently, large models are trained on larger
+number of cases (see a review of number of cases for three major transformer
+based models in Appendix \ref{apd:foundation_model_nb_cases}). Due to the
+difficulty to access data linked to privacy rights enforced by the General Data
+Protection Regulation (GDPR), we should evaluate prognosis models on smaller
+samples.
 
 % Major dataset shifts
-%\paragraph{Transferring predictive pipelines from one data site to another is rarely effective} Due to dataset shifts
-%\citep{moreno-torres_unifying_2012,storkey_when_2013,finlayson2021clinician}.
-Major dataset shifts make it difficult to transfer predictive
-pipelines \citep{finlayson2021clinician}: heterogeneity in coding practices \citep{juven2013codage},
-socio-economic status \citep{gianfrancesco2018potential}, inconsistency of
-practices in different organizations \citep{agniel2018biases}.
+\paragraph{Transferring predictive pipelines might not be effective} A potential
+solution to local small sample sizes is to transfer models pretrained on large
+populations. However, privacy requirements, once again prevent such transfer
+between institutions \footnote{We asked for CEHR-BERT to be published, but so
+far without success: \url{https://github.com/cumc-dbmi/cehr-bert/issues/2}}.
+Even if publically available, major dataset shifts might break effective transfer
+of predictive pipelines \citep{finlayson2021clinician}: heterogeneity in coding
+practices \citep{juven2013codage}, socio-economic status
+\citep{gianfrancesco2018potential}, inconsistency of practices in different
+organizations \citep{agniel2018biases}.
 % The small number
 % of external evaluations of transformer based models is not sufficient to
 % conclude to their transfer capacities.
