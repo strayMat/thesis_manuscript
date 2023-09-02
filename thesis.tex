@@ -623,13 +623,14 @@ communiquants. Merci pour les conseils, les encouragements, les relectures
 attentives. Merci de m'avoir pousser à chercher les bonnes questions et à
 montrer pourquoi celles-ci sont importantes. Je n'aurais pas pu rêver d'un
 meilleur directeur de thèse. J'ai l'impression d'avoir énormément appris à tes
-côtés. J'espère à l'avenir, faire honneur à cette formation. Merci à Claire
-d'avoir été là. Ca n'a pas été facile de garder contact à distance, mais nos
-discussions et tes conseils ont toujours été précieux.\\
+côtés. J'espère à l'avenir, faire honneur à cette formation. Un grand merci
+également à Claire d'avoir été là. Ca n'a pas été facile de garder contact à
+distance, mais nos discussions et tes conseils ont toujours été très précieux
+pour ma réflexion.\\
 
 % 
 Un immense merci à toi Pierre-Alain. Tu as été le manager parfait pour cette
-garde partagée:  bienveillant, attentif et un très grand exemple de
+garde partagée :  bienveillant, attentif et un très grand exemple de
 rigueur. Merci pour tes encouragements et tes conseils. J'espère continuer à
 partager ton enthousiasme et ton recul critique pour tous les sujets de données
 de santé.\\
@@ -645,7 +646,7 @@ in front of great researchers who inspire me.\\
 
 % Inria
 Merci à toutes les personnes de l'Inria dans ces brillantes équipes
-MIND -- SODA/scikit-learn. Merci à tous les PI et post-docs: Marine, Judith,
+MIND -- SODA/scikit-learn. Merci à tous les PI, post-docs et ingénieurs: Marine, Judith,
 Jill-Jênn, Thomas (team café moulu), Olivier, Guillaume, Franck, Riccardo, Arturo, Jun.
 Et merci également à tous les occupants occasionnels de l'open-space doctorant:
 Alexis, Alex, Thomas, Julie, Jovan, Cédric, Benoît, Lillian, Loic, Vincent, Léo, Samuel. Une
@@ -658,7 +659,7 @@ environnement aussi stimulant et bienveillant.\\
 
 % APHP
 Merci à toute l'équipe de Data Science de l'AP-HP pour leur accueil chaleureux
-du jeudi et les chouquettes: Romain, Thomas, Perceval, Ariel, Adam, Charline, Etienne,
+les jeudis et pour les chouquettes : Romain, Thomas, Perceval, Ariel, Adam, Charline, Etienne,
 Christelle, et ceux que j'oublie.\\
 
 % HAS
@@ -682,7 +683,7 @@ monde de la donnée de santé (et lors du Covid): Nicolas, Adrien, Ivan, Xavier,
 Stéphanie, Albert, Phong, Arnaud, Raphaële, Antoine N., Antoine L.\\
 
 % Boston
-Thanks to everyone at MIT who made my stay there so enjoyable. Thanks to Leo
+Thanks to everyone at MIT or Harvard who made my two-month stay in Boston so enjoyable. Thanks to Leo
 Celi for the kind welcoming and the burpees. Thanks to Tristan for the nice
 French conversations and his great advices for chapter 4. Thanks to Fredrik for
 his communicating enthusiasm. Thanks to João, Luis and all the organizing team
@@ -707,10 +708,10 @@ Théo$^2$, Lucas, Alice, Louis (promis après ce manuscrit je fais du typst), et
 Noémie. Merci Orel pour ces soirées de grimpe à Pantin. Merci Philou d'être cet
 ami attentif.\\
 
-Papa, Maman, Cécile, vous m'avez accompagné depuis les premiers tintins jusqu'à
-l'école d'ingénieur et la thèse. Je sais ce que je vous dois et j'espère ne pas
-l'oublier. Merci pour votre présence et pour le goût de la lecture, qui mène si
-loin. \\
+Papa, Maman, Cécile, vous m'avez accompagné depuis la première rentrée des
+classes jusqu'à l'école d'ingénieur et la thèse. Je sais ce que je vous dois et
+j'espère ne pas l'oublier. Merci pour votre présence et pour le goût de la
+lecture, qui mène si loin. \\
 
 Merci à toi Manon d'exister et d'être là.
 
@@ -7483,7 +7484,15 @@ random repartition of these mistreated patients.
   $\hat \mu_{(a)}$ is well-specified. This approach assumes than $Y(a) =
     \mu_a(X) + \epsilon_a$ with $\mathbb E[\epsilon|X] = 0$. The main drawback is
   the extrapolation of the learned outcome estimator from samples with similar
-  covariates X but different intervention A.
+  covariates X but different intervention A. Figure \ref{apd:gformula_intuition}
+  shows the intuition of g-formula on a example with a single confounder.
+
+  \begin{figure}[!b]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/chapter_4/outcome_model__RandomForestRegressor.pdf}
+    \caption{G-formula fit a model on the outcome against the confounders and the treatment.}
+    \label{apd:gformula_intuition}
+  \end{figure}
 
   \begin{proof}[Unbiasdness of the G-formula, \citep{robins_role_1986}]
     Suppose, we have access to the oracle mean response surfaces $\mu_{(a)}$,
@@ -7536,8 +7545,21 @@ random repartition of these mistreated patients.
   This estimate is unbiased if $\hat e$ is well-specified. IPW suffers from high
   variance if some weights are too close to 0 or 1. In high-dimensional cases
   where poor overlap between treated and control is common, one can clip extreme
-  weights to limit estimation instability.
+  weights to limit estimation instability. Figure \ref{apd:ipw_intuition}
+  illustrates the intuition of IPW on an example with a single confounder.
 
+  \begin{figure}[!t]
+    \centering
+    \includegraphics[width=0.8\linewidth]{img/chapter_4/ipw_model__RandomForestClassifier.pdf}
+    \caption{IPW reweights individual to build a balanced population with
+      respect to the treatment. It gives more weight to treated samples having a
+      small chance to receive the treatment (bigger blue points on the left), and
+      more weight to controls having a small chance to not receive the treatment
+      (bigger orange points on the right).}
+    \label{apd:ipw_intuition}
+  \end{figure}
+
+  \newpage
   \begin{proof}[Unbiasdness of IPW, \citep{rosenbaum_central_1983}]
     As an intermediary result, we need to show that the propensity score e is a balancing score, ie. if
     ignorability (\ref{eq:ignorability}) holds then $\{Y(1), Y(0)\} \indep A | e(X)$.
@@ -7775,7 +7797,7 @@ random repartition of these mistreated patients.
 
   \subsection{Hyper-parameter search for the nuisance models}\label{apd:hyper_parameter_search}
 
-  \begin{figure}[!b]
+  \begin{figure}[!t]
     %  \begin{minipage}{.38\linewidth}
     % \end{minipage}%
     %\hfill
@@ -7820,6 +7842,8 @@ random repartition of these mistreated patients.
   CPU 12th Gen Intel(R) Core(TM) i7-1270P with 16 threads and 15 GB of RAM.
 
   \section{Selection flowchart}\label{apd:selection_flowchart}
+
+  Figure \ref{fig:selection_flowchart} details the selection flowchart for the emulated trial.
 
   \begin{figure}[!htb]
     \centering
@@ -8869,7 +8893,7 @@ random repartition of these mistreated patients.
 
   \vspace{-.5cm}
   \begin{multicols}{2}
-    \noindent \textbf{Résumé:}Blabla
+    \noindent \textbf{Résumé:} 
   \end{multicols}
 
 \end{mdframed}
@@ -8881,7 +8905,7 @@ random repartition of these mistreated patients.
   \noindent \textbf{Keywords:} Machine learning, Electronic Health Records, Causality
 
   \begin{multicols}{2}
-    \noindent \textbf{Abstract:} Blabla
+    \noindent \textbf{Abstract:} 
   \end{multicols}
 \end{mdframed}
 
