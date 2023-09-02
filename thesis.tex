@@ -7602,16 +7602,30 @@ random repartition of these mistreated patients.
   The underlying idea of DRL is to combine the G-formula and IPW estimators to
   protect against a mis-specification of one of them. It first requires to
   estimate the two nuisance parameters: a model for the intervention $\hat{e}$
-  and a model for the outcome $f$. If one of the two nuisance is unbiased, the
-  following ATE estimator is as well:
+  and a model for the outcome $f$. 
 
-  $$\begin{aligned} \widehat{\tau}_{A I P W}=\frac{1}{n}
-      \sum_{i=1}^{n}\left(\hat \mu_{(1)}\left(x_{i}\right)-\hat \mu_{(0)}\left(x_{i}\right)+a_{i}
-      \frac{y_{i}-\hat \mu_{(1)}\left(x_{i}\right)}{\hat{e}\left(x_{i}\right)}-\left(1-a_{i}\right)
-      \frac{y_{i}-\hat \mu_{(0)}\left(x_{i}\right)}{1-\hat{e}\left(x_{i}\right)}\right)
-    \end{aligned}$$
+  \begin{align*} \widehat{\tau}_{A I P W} & =\frac{1}{n}
+      \sum_{i=1}^{n}\left(\hat \mu_{(1)}\left(x_{i}\right)-\hat
+      \mu_{(0)}\left(x_{i}\right) + \frac{a_{i}}{\hat{e}\left(x_{i}\right)} \left( y_{i}-\hat
+      \mu_{(1)} \left(x_{i}\right) \right) - \frac{1-a_{i}}{1-\hat{e}\left(x_{i}\right)}
+      \left( y_{i}-\hat \mu_{(0)}\left(x_{i}\right) \right)\right)\\
+      &=\frac{1}{n} \sum_{i=1}^{n}\left(\frac{a_i y_i}{\hat e (x_i)} -
+      \frac{(1-a_i) y_i}{1-\hat e(x_i)} + \hat \mu_{(1)}(x_{i})\big (1 -
+      \frac{a_i}{\hat e(x_i)} \big) - \hat \mu_{(0)}(x_{i}) \big (1 - \frac{1 -
+      a_i}{1 - \hat e(x_i)} \big) \right)
+  \end{align*}
 
-  Moreover, despite the need to estimate two models, this estimator is more
+  If one of the two nuisance is unbiased, the following ATE estimator is as
+  well. We see it easily in the previous equation. Suppose that the outcome
+  model is unbiased. Then, looking at the first line, we see that the first term
+  is the G-formula estimator so it is unbiased. And the second term has mean
+  zero since $\mathbb E [Y - \mu_{(A)} \mid X, A=1]=0$ and $\mathbb E [Y -
+  \mu_{(0)} \mid X, A=0]=0$. Suppose now that the propensity score model is
+  unbiased. Then, looking at the second line, we see that the first term is the 
+  IPW estimator so it is unbiased. And the second term has mean zero since 
+  $\mathbb E[1-\frac{A}{e(X)}|X]=0$ and $\mathbb E[1-\frac{1-A}{1-e(X)}|X]=0$.
+
+  More interestingly, despite the need to estimate two models, this estimator is more
   efficient in the sense that it converges quicker than single model estimators
   \citep{wager2020stats}. For this propriety to hold, one need to fit and apply
   the two nuisance models in a cross-fitting manner. This means that we split
@@ -7621,7 +7635,7 @@ random repartition of these mistreated patients.
   To recover Conditional Treatment Effects from the AIPW estimator,
   \cite{foster2019orthogonal} suggested to regress the Individual Treatment
   Effect estimates from AIPW on potential sources of heterogeneity $X^{cate}$:
-  $\hat tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
+  $\hat \tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
   for $\Theta$ some class of model (eg. linear model).
 
   \paragraph{Double Machine Learning} \citep{chernozhukov2018double} It is also known
