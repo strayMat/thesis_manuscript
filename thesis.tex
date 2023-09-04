@@ -2870,9 +2870,25 @@ Appendix \ref{apd:hospital_split} details an alternative geographic split
 validation procedure for LOS and prognosis tasks, exploring the validity of our
 results when testing the models on patient from other hospitals.
 
+\begin{figure}[!b]
+  \centering
+  \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
+  \caption{Prognosis AUPRC, weighted by prevalences over 21
+    ICD10 chapters with more than 1\% prevalence. The performances are averaged
+    over 5 folds. The shaded area represents the standard deviation. The
+    horizontal black line displays the naive baseline that predicts the previous
+    stay codes for the target stay. Random forest have better performances.
+    Count encoder outperforms other featurizers, suggesting the importance of
+    low count events that are smoothed out in embedding methods. We report
+    AUPRC rather than ROC AUC, since it takes better into account
+    the difference in prevalence between chapters. Appendix
+    \ref{apd:temporal_split:prognosis} details AUPRC for each
+    chapter and displays averaged ROC AUC.}%
+  \label{fig:prognosis_auprc}
+\end{figure}
+
 \subsection{Results -- Tree-based models on event counts, a simple performer}%
 \label{subsec:predictive_models:results}
-
 
 \paragraph{Count encoding followed by random forest outperforms elaborated
   embedding models}%
@@ -2891,25 +2907,7 @@ index stay chapters is a strong baseline.
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
-  \caption{Prognosis AUPRC, weighted by prevalences over 21
-    ICD10 chapters with more than 1\% prevalence. The performances are averaged
-    over 5 folds. The shaded area represents the standard deviation. The
-    horizontal black line displays the naive baseline that predicts the previous
-    stay codes for the target stay. Random forest have better performances.
-    Count encoder outperforms other featurizers, suggesting the importance of
-    low count events that are smoothed out in embedding methods. We report
-    AUPRC rather than ROC AUC, since it takes better into account
-    the difference in prevalence between chapters. Appendix
-    \ref{apd:temporal_split:prognosis} details AUPRC for each
-    chapter and displays averaged ROC AUC.}%
-  \label{fig:prognosis_auprc}
-\end{figure}
-
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=1.05\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
+  \includegraphics[width=0.9\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
   \caption{LOS ROC AUC for different featurizers and estimators. The
     performances are averaged over 5 folds. The shaded area represents the
     standard deviation. The task performance seems to saturate at 95\% ROC AUC
@@ -2924,15 +2922,7 @@ index stay chapters is a strong baseline.
 
 \paragraph{The cost of low prevalence}
 
-Figure \ref{fig:prognosis_prevalences_auprc} shows the AUPRC
-performances on the prognosis task plotted against the prevalence for a random
-forest estimator. Low prevalences translate into small number of cases, which
-decreases overall performances and increase variances among chapters with less
-than 5\% prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar
-results for ROC AUC and linear estimators.
-
-
-\begin{figure}[!h]
+\begin{figure}[!b]
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
   \caption{ Bigger target prevalences yield better AUPRC. The
@@ -2941,6 +2931,13 @@ results for ROC AUC and linear estimators.
     8560. Appendix \ref{apd:prognosis_prevalences} details the ROC AUC curves.}%
   \label{fig:prognosis_prevalences_auprc}
 \end{figure}
+
+Figure \ref{fig:prognosis_prevalences_auprc} shows the AUPRC
+performances on the prognosis task plotted against the prevalence for a random
+forest estimator. Low prevalences translate into small number of cases, which
+decreases overall performances and increase variances among chapters with less
+than 5\% prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar
+results for ROC AUC and linear estimators.
 
 
 \paragraph{Static embeddings are quicker to train}%
@@ -2953,11 +2950,11 @@ highlighting the efficiency of the static embedding methods.
 \begin{figure}[!h]
   \begin{minipage}{.35\linewidth}
     \caption{Static embeddings are quicker to train. The training times are
-      reported for the full train set for the prognosis task average on the 21
-      ICD10 chapters. For all featurizers expect to CEHR-BERT, jobs were submitted
-      with 10 CPU cores and 36GB memory on a slurm cluster. For CEHR-BERT, the
-      calculation took place on the same cluster with a Nvidia T4 GPU with 16Gb of
-      memory.}\label{fig:prognosis_training_time}
+      reported for the full train set for the prognosis task averaged on the 21
+      ICD10 chapters. For all featurizers with the exception of CEHR-BERT, jobs
+      have been submitted with 10 CPU cores and 36GB memory on a slurm cluster. For
+      CEHR-BERT, the calculation took place on the same cluster with a Nvidia T4
+      GPU with 16Gb of memory.}\label{fig:prognosis_training_time}
   \end{minipage}%
   \hfill%
   \begin{minipage}{.62\linewidth}
