@@ -3997,8 +3997,8 @@ specific individuals, such as patients undergoing sceptic shock.
 \label{chapter:causal_model_selection}%
 
 \begin{citationbox}
-  Nature marks each growth ... according to its curative benefit.
-  \par\hfill -- Paracelsus
+  ~
+  \par\hfill --
 \end{citationbox}
 
 \begin{chapterabstract}
@@ -5381,12 +5381,12 @@ models.
 \section{Lessons learned}
 %
 \paragraph{Considerable efforts are being made to prepare routine care data for reuse}
-A vast amount of new data is being collected in healthcare =, at the cost of new
+A vast amount of new data is being collected in healthcare, at the cost of new
 infrastructures: the Clinical Data Warehouses (CDWs). Navigating this mass of
 data is simplified, mainly by centralizing fragmented data from poorly
-interoperable softwares and NLP techniques. The main aim of these CDWs is to
-improve clinical research. However, deriving new evidences from EHRs is
-currently hampered  by a poorly standardized data access processes,
+interoperable softwares and the use of NLP techniques. The main aim of these
+CDWs is to improve clinical research. However, deriving new evidences from EHRs
+is currently hampered  by a poorly standardized data access processes,
 heterogeneous local care practices, and the non-exhaustive collection of
 critical elements of care trajectories, even during hospital care.
 %
@@ -5405,15 +5405,17 @@ data, the observational nature of EHRs requires clear and robust workflows
 inspired by modern causal inference to derive unbiased intervention effects.
 Using flexible predictive models without a causal framework opens the door to
 collider biases, but using only linear models is prone to underfitting and
-biased estimates as well.
+biased estimates as well. Vibration analyses are key to better spot bias in
+observational studies.
 
 %
 \paragraph{Selecting outcome models for heterogeneous treatment effects benefits
   from flexible estimations of nuisances} Causal model selection should not been
-performed with the classical mean squared error. Estimating nuisance parameters of
-the doubly robust R-risk thanks to flexible models is the most performant
-approach. In practice, a simple procedure where nuisances are estimated with
-the same train set as the candidate models introduces negligible bias.
+performed with mean squared error as it is done in predictive modeling.
+Estimating nuisance parameters of the doubly robust R-risk thanks to flexible
+models is the most performant approach. In practice, a simple procedure where
+nuisances are estimated with the same train set as the candidate models
+introduces negligible bias.
 
 \section{Personal convictions for perspectives}
 
@@ -5430,22 +5432,23 @@ of knowledge. This calls for more work adopting research network methodologies
 federated learning \citep{rieke2020future}. Another interesting avenue is to
 leverage large language models pretrained on natural text to either extract
 information from clinical notes, or directly to build predictive models
-\citep{jiang2023health}. These perspectives require having sufficient
+\citep{jiang2023health}. These last perspectives require having sufficient
 computing resources for finetuning the language models.
 
 % methodoligcal work on representations for inference
 \paragraph{For treatment effect estimations, relying on text calls for better
-  understanding on causal representations learning}
+  understanding of causal representation learning}
 
-Using text for confounder adjustment opens many research question when looping
-back to causal thinking. Building a causal graph as in Figure
-\ref{fig:causal_diagram_albumin} becomes tedious. Even if all information is
-present in the text, should we extract every variable or is it possible to build
-appropriate representations? Optimizing directly the R-loss by gradient descent
-could be an interesting avenue, which is closely related to the work of
-\cite{johansson2022generalization} and \cite{chernozhukov2022riesznet} with
-non-text data. Vibration analysis is needed to confront these methods on
-applications such as the one presented in chapter \ref{chapter:causal_tuto}.
+Using text for confounder adjustment in causal studies opens many research
+questions. Building a causal graph as in Figure \ref{fig:causal_diagram_albumin}
+becomes tedious. Even if all information is present in the text --satisfying the
+ignorability assumption \ref{assumption:ignorability}, should we extract every
+confounder or is it possible to build appropriate representations? Optimizing
+directly the R-loss by gradient descent could be an interesting avenue, which is
+closely related to the work of \cite{johansson2022generalization} and
+\cite{chernozhukov2022riesznet} with non-text data. Vibration analysis is needed
+to confront these methods to applications and known effects such as the one
+presented in chapter \ref{chapter:causal_tuto}.
 
 % The case of claims data
 \paragraph{Claims data are an interesting source for studying treatment
@@ -5456,7 +5459,8 @@ are well normalized, well documented, lack few critical PICO elements
 \citep{caruana2023administrative}. Estimations methods borrowed to
 econometrics such as difference-in-difference \citep{athey2006identification},
 regression discontinuity design \citep{bor2014regression} and instrumental
-variables \citep{greenland2000introduction} might be adapted.
+variables \citep{greenland2000introduction} might be also considered when
+appropriate for the question of interest.
 
 %
 \paragraph{Modern public health problems should take into account the fragmented
@@ -5464,17 +5468,19 @@ variables \citep{greenland2000introduction} might be adapted.
 diseases where death or rehospitalization are not the only outcomes of
 interest. Most of care is provided outside of the hospital
 \citep{white1961ecology}, therefore requiring to link city care, and
-socio-economics features to hospital data. This would allow to study less
+socio-economic features to hospital data. This would allow to study less
 critical outcomes, for which experiments are easier to conduct and where error
 is more acceptable. Adopting methods from policy learning
 \citep{athey2021policy} would allow better evaluation and continuous
 improvement for interventions, opening the door to potentially big prevention
 benefits.
 %
-Ultimately, I am convinced that the resource constraints face by modern
-healthcare systems bridges the care effectiveness question to equity. Some
-patients will be less treated than others but public health should seek for a
-random repartition of these mistreated patients.
+Ultimately, I am convinced that the resource constraints faced by modern
+healthcare systems link the issue care effectiveness to that of equity. Some
+patients will be treated less well than others. Public health seeks to minimize
+these mistreated patients, hopefully without discrimination. More observational
+studies could help identify which subpopulations benefit the most from effective
+interventions.
 
 % Modern collection of data in healthcare makes it a domain closer to social
 % sciences than usually considered. It involves institutions and individuals with
