@@ -144,8 +144,13 @@
 \colorlet{GRAY}{Gray}
 
 % bibliography
-\usepackage[natbib=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber,uniquename=false,uniquelist=false,firstinits=true]{biblatex}
+\usepackage[natbib=true,backref=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber,uniquename=false,uniquelist=false,firstinits=true]{biblatex}
 \DeclareNameAlias{sortname}{first-last}
+% redefine backref pages as proposed by https://tex.stackexchange.com/questions/36307/formatting-back-references-in-bibliography
+\DefineBibliographyStrings{english}{%
+  backrefpage = {cited p.},% originally "cited on page"
+  backrefpages = {cited p.},% originally "cited on pages"
+}
 
 % separators for bib
 \DeclareDelimFormat{finalnamedelim}{\addsemicolon\space}
@@ -553,7 +558,8 @@
   sepsis mortality in the Medical Information Mart for Intensive Care database
   (MIMIC-IV). In high-dimensional settings, the selection of hyper-parameters
   for the causal model is crucial to avoid under- or over-learning. In a
-  simulation and three semi-simulated datasets, we shows that the doubly robust
+  simulation and three semi-simulated datasets, we shows that the usual machine
+  learning risk are not adapted to the causal setting and that the doubly robust
   R-risk outperforms other existing causal risks.
   % Despite a current focus on artificial intelligence, healthcare does
   % not seek purely predictive models, but appropriate interventions that will
@@ -608,7 +614,8 @@
   Dans des problèmes à grande dimension, la sélection d'hyperparamètres pour les
   modèles causaux est cruciale pour éviter le sous-apprentissage ou le
   sur-apprentissage. Pour une simulation et trois ensembles de données
-  semi-simulées, nous montrons que le risque R doublement robuste surpasse
+  semi-simulées, nous montrons que le risque usuel en apprentissage statistique
+  n'est pas adapté au cadre causal et que le risque R doublement robuste surpasse
   d'autres risques causaux existants.
 \end{chapterabstract}
 \vfill
@@ -789,12 +796,12 @@ requires new methods to process and extract knowledge from these data. One such
 example is the necessity to remove all identification elements from the clinical
 notes of patients before letting researchers outside the medical staff access
 them --a processed called pseudonymization \citep{dernoncourt2017identification,
-  paris2019desidentification}.%
-For engineers and NLP researchers, RWD are different than traditional research
-data collection because it requires innovating tools --eg. from NLP-- to deal
-with the novel complexity and scale of the data collection process. For
-epidemiologists and physicians, the major difference lies in the opposition
-between experimental and observational data (presented in Subsection
+  paris2019desidentification}. For engineers and NLP researchers, this routine
+care data are different from traditional research data collection because it
+requires innovating tools --eg. from NLP-- to deal with the novel complexity and
+scale of the data collection process. For epidemiologists and physicians, the
+major difference lies in the opposition between experimental and observational
+data (presented in Subsection
 \ref{subsec:intro:interventional_vs_observational}).
 
 \subsection{Billing claims: new data for public health?}
@@ -811,7 +818,7 @@ medical events used in this data. This problem known as the \emph{curse of
   dimensionality} has been introduced in operational research
 \citep{bellman1957dynamic} and is well known in statistics
 \citep{breiman2001statistical}: The required number of samples to train
-predictive algorithms exponentially grow with the number of dimensions.%
+predictive algorithms exponentially grow with the number of dimensions.
 Sequences of claim events can be viewed as a sequence of tokens, just as natural
 sentences. A trend from medical informatics, draws from NLP techniques, to
 create low dimensional representations --embeddings-- of medical concepts
@@ -838,7 +845,7 @@ growing necessity to adapt healthcare funding to a resource-constrained system
 % data creating process, standard pipelines, standard tests and documentation : it
 % is inherently a group effort.
 
-The following section reviews new data collection mechanisms,
+The following sections review new data collection mechanisms,
 highlights the different stance taken by machine learning over traditional
 statistics and precises critical questions in public health that could
 benefit from innovative methods.
@@ -853,7 +860,7 @@ benefit from innovative methods.
   \paragraph{Traditional research data collections}
   % Evidence based medicine and RCTs
   The gold standard for generating new evidence in healthcare are Random Control
-  Trials (RCTs). Based on the randomization of patients to a treatment or
+  Trials (RCTs). Based on the randomization of patients to a treatment or a
   control group, the data collection is designed for one experiment, addressing
   one precise research question. RCTs are at the heart of \emph{evidence-based
     medicine}, which promotes a hierarchy of evidence in which randomized
@@ -961,17 +968,16 @@ benefit from innovative methods.
   control populations depart from each other in such way that it is doubtful
   whether the difference in results can be attributed to the treatment alone.
   Such population discrepancies call for dedicated estimation methodologies
-  presented in Section \ref{subsec:causal_tuto:estimation}.
+  --presented in Section \ref{subsec:causal_tuto:estimation}.
 
 \end{background_box_left}
 
 \begin{figure}[h!]
   \begin{minipage}{0.32\textwidth}
-    \caption{a) In routine care,
-      treatments allocation is not random: priority is often given to patients
-      that will benefit the most from the intervention.\\%
-      b) In interventional studies,
-      randomization ensures the comparability of treated and controls on average.
+    \caption{a) In routine care, treatments allocation is not random: priority
+      is often given to patients that will benefit the most from the
+      intervention.\\% b) In interventional studies, randomization ensures the
+      comparability of treated and control population on average.
       \label{intro:fig:observational_vs_interventional}
     }
   \end{minipage}
@@ -1058,9 +1064,9 @@ benefit from innovative methods.
   In sequential decision-making problems, heterogeneity of treatment effect is
   close to operational research \citep{schaefer2004modeling} or reinforcement
   learning \citep{bareinboim2015bandits}. These fields are focused on sequential
-  decision making processes with a large action-state space, rather than one-off
-  treatment as in this thesis. To robustly estimate the probabilities involved
-  in large dimensional state-action spaces, these works often require a
+  decision making processes with a large action-state space, rather than a
+  one-off treatment as in this thesis. To robustly estimate the probabilities
+  involved in large dimensional state-action spaces, these works often require a
   simulated environment \citep{bennett2013artificial}. Simulations allow to
   collect large samples of trajectory implementing the policy to be evaluated
   but are hard to build for complicated problems such as patient trajectories.
@@ -1076,7 +1082,7 @@ benefit from innovative methods.
 
 \cite{breiman2001statistical} clearly distinguished two statistical cultures: a
 predominant community at the time focused on models, and an emerging trend that
-rely only on predictive accuracy. The latter is called machine learning.
+relies only on predictive accuracy. The latter is called machine learning.
 
 \subsection{Model-based statistics: oracle domain experts}%
 \label{subsec:intro:biostatistics_framework}
@@ -1138,7 +1144,7 @@ models and interpreting their inner part as causal.
 
   Statistical learning \citep{vapnik1999nature} is the theoretical framework
   underpinning machine learning. It has been introduced in the 1960s and
-  popularized in the 1990s with the developments of flexible pattern recognition
+  popularized in the 1990s with the development of flexible pattern recognition
   models. It is concerned with empirical risk minimization: Finding good
   approximation of the features-outcome association. Appendix
   \ref{apd:intro:statistical_learning} recalls the formal definition of the
@@ -1161,14 +1167,14 @@ models and interpreting their inner part as causal.
   the training set K-1 time and is used once as test set. Algorithms are then
   selected on the average performances over the K test sets.
 
-  Note, that despite being valid for model selection --choosing the best model,
+  Note, that despite being valid for model selection --i.e. choosing the best model,
   cross-validation yields biased estimates to evaluate a given model
   \citep{wager2020cross}. Nested cross-validation is a classic way to perform
   this final model evaluation \citep{varoquaux2017assessing}.
 
 \end{background_box_left}
 
-\begin{figure}[!b]
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.8\linewidth]{img/chapter_1/cross_validation.png}
   \caption{Cross-validation: the data is split into training and testing sets.
@@ -1214,8 +1220,8 @@ models and interpreting their inner part as causal.
   in using these data are fragmented --as developed in the next section.
   Moreover, healthcare interest in pure predictive problems is unclear --see
   Section \ref{sec:causal_tuto:motivation}. Finally, the circulation of data or
-  representations in healthcare are almost non-existent for confidentiality
-  purposes. These specific features of RWD call into question the
+  representations in healthcare are almost non-existent due to privacy
+  requirements. These specific features of RWD call into question the
   appropriateness of constructing universal representations in healthcare.
   % Focus on variable selection: root in hand collected variables in carefully
   % designed subpopulation ?
@@ -1240,12 +1246,12 @@ models and interpreting their inner part as causal.
 In this thesis, we focus on EHRs, even if some of our results could be relevant
 for insurance claims as well. The complexity of using EHRs in statistical
 frameworks is linked with their potential to address complex questions in public
-health: they register almost all aspect of the hospital care trajectories.
-Therefore, the dimensionality of EHRs data is high: diagnoses, laboratory
-measurements and procedures are logged with medical terminologies having ten of
-thousands of codes; unstructured text data is by nature high dimensional.
-Finally, the temporal dimension of EHRs poses a challenge for statistical
-models, usually assuming a static vector of features for each unit.
+health: they register almost all aspect of the patients care trajectories in the
+hospital. Therefore, the dimensionality of EHRs data is high: diagnoses,
+laboratory measurements and procedures are logged with medical terminologies
+having ten of thousands of codes; unstructured text data is by nature high
+dimensional. Finally, the temporal dimension of EHRs poses a challenge for
+statistical models, usually assuming a static vector of features for each unit.
 % This perspective reflects the modern tendency to go to more elaborated models
 % and richer data.
 For such high dimensional data where the number of (selected) features could
@@ -1356,10 +1362,10 @@ to the main goal of epidemiology: \textit{the study of the distribution
 
 % Monitoring and evaluation: public policy and industry, two faces of the same coin
 Health Technology Assessment (HTA) agencies in many countries have conducted
-extensive work to better support the generation and use of real-life data
+extensive work to better support the generation and use of RWD
 \citep{fda_real-world_2021,has_real-world_2021,kent_nice_2022,plamondongenevieve_integration_2022}.
-Study programs have been launched by regulatory agencies: the DARWIN EU program
-by the European Medicines Agency and the Real World Evidence Program by the Food
+Study programs have been launched by regulatory agencies: for example, the \emph{DARWIN EU program}
+by the European Medicines Agency and the \emph{Real World Evidence Program} by the Food
 and Drug Administration \citep{fda_real_2018}. However, recent surges in data
 collection also encouraged deviation from the standard interventional design by
 relaxing some of the methodological constraint of RCTs. HTA agencies witnessed a
@@ -1367,12 +1373,12 @@ deterioration of evidences for new drugs and strongly advocate against
 observational studies for replacing new drugs evaluation
 \citep{wieseler2023replacing,vanier2023rapid}. This debate crystallizes tensions
 between the pharmaceutical industry and regulators since drug prices are
-mainly driven by drug efficacy (assessed in trials).
+mainly driven by drug efficacy --assessed in trials.
 %
-There is still active debates to better understand what is the place of these
-data to develop new evidence on the effectiveness of interventions --see
-\ref{def:external_validity} \citep{richesson_electronic_2013,wang2023emulation}.
-%\md{develop: schneeweiss and the replicate program}.
+There are still active debates to better understand what is the place of these
+data to develop new evidence on the effectiveness --def. in Section
+\ref{def:external_validity}-- of interventions \citep{richesson_electronic_2013,wang2023emulation}.
+%\md{develop: schneeweiss and the replicate progra?m}.
 % % too much
 % Industries also have a strong interest in gathering and analyzing data. For
 % market access, they need to carefully describe what population is reached by
@@ -1408,7 +1414,7 @@ Committee on Learning Healthcare System suggested to better use routine data to
 adapt evidence to real practice and accelerate its diffusion
 \citep{mcginnis2013best}.
 
-In line with this roadmap, this thesis is motivated by the opportunities offered by
+In line with this roadmap, this work is motivated by the opportunities offered by
 EHRs to evaluate the effectiveness of medical guidelines. Formally, a
 guideline can be expressed as an action (or a series of actions) to take given a
 patient risk profile. The action/characteristic reflects the
@@ -1422,11 +1428,12 @@ guide this link between patient characteristics and intervention.
   \label{subsec:intro:prediction_causation}%
 
   % Can I use plain prediction for this question?
-  Is statistical learning a useful tool to answer these questions? There is a
+  Is statistical learning a useful tool to evaluate these guidelines? There is a
   growing interest in predictive models in healthcare. This trend is reflected
   by the exponential increase in the proportion of publications per year in
-  Pubmed shown in Figure \ref{fig:intro:pubmed_query}. However, the prognosis
-  literature does not focus on prediction as an objective per-se.
+  Pubmed shown in Figure \ref{fig:intro:pubmed_query}. Nonetheless, the
+  prognosis literature does not specifically emphasize prediction as its primary
+  objective.
 
   % Epidemiological books, confounding is the very first explained concept
   % \citep{rothman2012epidemiology}.
@@ -1495,8 +1502,8 @@ guide this link between patient characteristics and intervention.
   \paragraph{The central concept of causality}%
   \label{subsec:intro:causation}%
 
-  Causality is an central concept in epidemiology
-  \citep{hill1965environment,hernan2020causal} and have been developed formally
+  Causality is a central concept in epidemiology
+  \citep{hill1965environment,hernan2020causal} and has been developed formally
   in statistics \citep{rubin1974estimating}, econometrics
   \citep{imbens2009recent} and machine learning \citep{pearl2018book}.
 
@@ -1562,10 +1569,11 @@ guide this link between patient characteristics and intervention.
   We might be tempted to equate the mean of a potential outcome to the mean of
   the observed outcome conditionally on the treatment. However, in general:
   $\mathbb E[Y(a)] \neq \mathbb E [Y|A=a]$. This is because the right hand side
-  reads as \emph{the expected value of Y given A =a}, thus we restrict the
+  reads as \emph{the expected value of Y given A = a}, thus we restrict the
   outcome to the individuals that actually received the treatment. If this group
-  has different outcomes than the other group, the equality does not hold as
-  illustrated in Figure \ref{intro:fig:observational_vs_interventional}.
+  has a different potential outcomes distribution than the other group, the
+  equality does not hold as illustrated in Figure
+  \ref{intro:fig:observational_vs_interventional}.
 
   The statistical assumptions required to estimate these quantities from
   observational data are presented in Section
@@ -1595,9 +1603,9 @@ guide this link between patient characteristics and intervention.
 
 % objective
 First influenced by the growing successes of machine learning in predictive
-modeling, this thesis seeks to understand what models and framework might help
+modeling, this work seeks to understand what models and framework might help
 evaluating the effectiveness of clinical guidelines using the time varying and
-high dimensional Electronic Health Records. What predictive models are useful ?
+high dimensional EHRs. What predictive models are useful ?
 Why prediction is not enough ? How flexible models can serve the true
 objective of healthcare: delivering appropriate treatment to each and every
 patient to improve her health \citep{cma_policy_appropriateness_2015}?
@@ -1628,7 +1636,7 @@ Therefore it is not detailed in this manuscript.
   Warehouse, a case study in France} This chapter draws the first overview of
 the Clinical Data Warehouses (CDWs) in France. These technical and
 organizational infrastructures are emerging in the hospitals to collect and
-analyze the data produced in Electronic Health Records. This work is an
+analyze the data produced in EHRs. This work is an
 attempt to better characterize the reality of data reuses in university
 hospitals. It documents key aspects of the collection and organization of
 routine care data into homogeneous databases: governance, transparency, types
@@ -1649,7 +1657,8 @@ of this chapter contrasts with the general mathematical context of the thesis.
   gradient in representation and predictive algorithms for EHRs} Acknowledging
 the growing interest in predictive algorithms for EHR data, this chapter
 introduces two simple feature construction methods taking raw medical events
-as input features. It benchmarks four predictive pipelines of increasing
+  as input features before feeding a predictive model. It benchmarks four
+  predictive pipelines of increasing
 complexity on three predictive tasks: length of stay interpolation, next visit
 prognosis and cardiovascular adverse events prediction. It focuses on medium
 sized datasets where the population at risk (after inclusion and exclusion
@@ -1657,7 +1666,7 @@ rules) ranges from 10,000 to 20,000 samples. In these setups, this work
 explores the complexity-performance tradeoff from simple baseline models to
 recent transformer-based neural networks.
 
-We show that for these medium sample-size settings, simple baseline outperform
+We show that for these medium sample-size settings, simple baselines outperform
 transformer-based models both in predictive accuracy and computing resource
 efficiency. We note a strong influence of case prevalences on the predictive
 performances, indicating increasing problem difficulties for rare clinical
@@ -2869,6 +2878,7 @@ imbalanced tasks.
 Appendix \ref{apd:hospital_split} details an alternative geographic split
 validation procedure for LOS and prognosis tasks, exploring the validity of our
 results when testing the models on patient from other hospitals.
+
 
 \begin{figure}[!b]
   \centering
