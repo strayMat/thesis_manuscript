@@ -2427,24 +2427,23 @@ would provide a complete view of patient care.
 \begin{chapterabstract}\label{sec:predictive_models:abstract}%
   As chapter \ref{chapter:cdw} shows, Electronic Health Records (EHRs) contain
   multiple categories of data sparkling interest in the development of
-  predictive algorithms. Text and image put apart, this data can
-  be represented as time-varying features with high cardinality encoded in medical codes.
-  Current state-of-the-art predictive models for EHRs build on increasingly
-  elaborated pipelines --based on the transformer architecture-- to handle the
-  complexity of these data. Acknowledging the difficulty to deploy, transfer and
-  adapt these models on local care environments, we explore a complexity-benefit
+  predictive algorithms. Text and image put apart, this data can be represented
+  as time-stamped medical codes with a high number of categories. Current
+  state-of-the-art predictive models for EHRs build on increasingly elaborated
+  pipelines --based on the transformer architecture-- to handle the complexity
+  of these data. Acknowledging the difficulty to deploy, transfer and adapt
+  these models on local care environments, we explore a complexity-benefit
   tradeoff by comparing them to simple aggregation of events. We use three
   predictive tasks involving time-varying structured EHRs and increasingly
-  clinically relevant problems. We show that these benchmarking tasks display
-  heterogeneous predictive difficulties. We introduce a simple aggregation of
-  static embeddings --transferred from national claims and publicly available--,
+  clinically relevant problems. We introduce a simple aggregation of static
+  embeddings --transferred from national claims and publicly available--,
   showing that it outperforms transformer-based models on simple tasks with
   medium sample sizes. We highlight the sample and computing resource efficiency
   of these models. Finally, clinically relevant problems generally present a
   strong class imbalance, which complicates models development and undermines
-  their performances. Further work is needed to understand if transformer-based
-  models perform well in these scenarios where the number of cases requires good
-  sample efficiency.
+  their performances. Further work is needed to understand which types of models
+  well in these scenarios where the number of cases requires good sample
+  efficiency.
 \end{chapterabstract}
 
 
@@ -2478,13 +2477,11 @@ would provide a complete view of patient care.
   type of tasks.}
 
 % promises
-Increasing availability of routine care data and progress in
-machine learning, have brought much hope in predictive modeling for healthcare.
-The richness of the data in EHRs and their integration in routine care make them
-a promising application area \citep{raghupathi2014big}.
+The increasing availability of routine care data and advances in machine
+learning are raising hope for predictive modeling in healthcare. The richness of
+the data in EHRs and their integration in routine care make them a promising
+application area \citep{raghupathi2014big}.
 
-Benchmarking these models is not easy due to the wide range of potential use
-cases.
 % However, there is a shift from clinically meaningful objectives towards abstract
 % outcomes in EHR predictive modeling literature.
 In biostatistics and clinical medicine, prognosis models have been motivated by
@@ -2495,7 +2492,7 @@ either focused on the short term with alarm models
 \citep{tang2007global,rothman2013development,wong2021external} or on the long
 term with screening models. In parallel, artificial intelligence in medicine
 looks for prognosis model as part of larger \emph{decision-making} systems
-\citep{Szolovits1982artificial}. In complex healthcare organizations, accurate
+\citep{Szolovits1982artificial}. Finally, in complex healthcare organizations, accurate
 individual predictions help to use efficiently constrained medical resource by
 informing \emph{care planning} \citep{topol2019high}. Appendix
 \ref{apd:review_predictive_tasks} details these four type of predictive objectives for
@@ -2510,7 +2507,7 @@ more specific clinical cases.
   complex}%
 \label{subsec:predictive_models:complex_data}%
 
-This complexity stems from predictive models trying to model ever richer data
+This complexity stems from predictive algorithms trying to model ever richer data
 sources.
 
 \paragraph{Original complexity of the data}
@@ -2523,8 +2520,9 @@ sources into data tables suited for statistical analysis
 preprocessing usually requires to map non standard terminologies, create derived
 variables by aggregating measures over specific time periods. The choices of
 baseline covariates should be driven by medical experts which are often not
-familiar the complexity of the EHR data processing pipeline. We propose to leverage models that takes raw
-data as input to avoid as much as possible these preprocessing steps.
+familiar the complexity of the full EHR data processing pipeline. We propose to
+leverage models that takes raw structured data as input to avoid as much as possible these
+preprocessing steps.
 
 %  At the time of study, population
 %  inclusion criteria should be aligned with expert conception -- a task known as
@@ -2537,9 +2535,9 @@ data as input to avoid as much as possible these preprocessing steps.
 Predictions on EHRs originally used linear models on few carefully selected
 static variables for tens of thousand patients coming from a single center
 \citep{goldstein2017opportunities}. To overcome the high cardinality of EHRs
-medical vocabularies, a range of deep learning methods were developed
+medical vocabularies, a series of deep learning methods have been developed
 \citep{shickel2017deep}. Time varying features were first modelled thanks to
-recurrent neural network \citep{lipton2016learning}, then with transformer based
+recurrent neural network \citep{lipton2016learning}, then with large transformer-based
 architectures \citep{li2020behrt}. Appendix \ref{apd:review_models} further
 details this evolution of predictive model complexity.
 
@@ -2557,16 +2555,17 @@ incidence. For example, consider the prediction of cardiovascular complications
 patients. After running all inclusion criteria --shown in Figure
 \ref{apd:fig:flowchart_t3}, we are left with only 4,360 cases among a population
 at risk of 165,930 patients. Currently, large models are trained on larger
-number of cases (see a review of number of cases for three major transformer
-based models in Appendix \ref{apd:foundation_model_nb_cases}). Due to the
-difficulty to access data linked to privacy rights enforced by the General Data
-Protection Regulation (GDPR), we should evaluate prognosis models on smaller
-samples.
+number of cases (see a review of number of cases for three major
+transformer-based models in Appendix \ref{apd:foundation_model_nb_cases}).
+Privacy rights enforced by the General Data Protection Regulation (GDPR) make it
+difficult to access large repositories of healthcare data. We should thus
+develop and evaluate prognosis models on small samples, accessible in many
+hospitals.
 
 % Major dataset shifts
-\paragraph{Transferring predictive pipelines might not be effective} A potential
+\paragraph{We don't know if transferring predictive is effective} A potential
 solution to local small sample sizes is to transfer models pretrained on large
-populations. However, privacy requirements, once again prevent such transfer
+populations. However, privacy requirements also prevent such transfer
 between institutions \footnote{We asked for CEHR-BERT to be published, but so
   far without success: \url{https://github.com/cumc-dbmi/cehr-bert/issues/2}}.
 Even if publicly available, major dataset shifts might break effective transfer
@@ -2578,12 +2577,13 @@ organizations \citep{agniel2018biases}.
 % of external evaluations of transformer based models is not sufficient to
 % conclude to their transfer capacities.
 % Model generalization might not be desirable
-It might not even be possible to generalize machine learning models in
-healthcare \citep{futoma2020myth}. Different population, information systems and
-healthcare practices may require tailored tools \citep{rose2018}. For example,
-\cite{wong2021external} evaluated externally a widely deployed sepsis prediction
-model showing poor transfer performance of 0.63 ROC AUC.
-
+\cite{futoma2020myth} even argues that it is not possible to generalize machine
+learning models in healthcare: Different population, information systems and
+healthcare practices may require tailored tools \citep{rose2018}. As an example
+of failed generalization, \cite{wong2021external} externally evaluated a sepsis
+prediction model deplyed in hundered of US caresites. The model transfer
+performance dropped from 0.76 to 0.83 area under the receiver operating curve
+(ROC AUC) declared by the manufacturer to to 0.63.
 
 \subsection{Current barriers to predictive models usefulness}%
 \label{subsec:predictive_models:useful}%
@@ -2608,13 +2608,13 @@ predictive models that can run on pre-existing hardware such as the successful
 QRISK for cardiovascular risk prediction \citep{hippisley2017development}.
 Relying on such commodity hardware facilitates model training, calibration and
 deployment, eventually leading to better clinical adoption and integration into
-healthcare processes. To benefit to the largest number of patients, predictive
-models should be an appropriate technology: it should be \emph{easily and
-  economically utilized from readily available resources by local communities to
-  meet their needs} \citep{pearce2012case}. However, recent predictive pipelines strongly focus
-on performance gains, at the cost of increasing architecture sizes requiring
-ever greater computing and technical resources --as detailed in Appendix
-\ref{apd:computing_resources_review}.
+healthcare processes. To benefit to the largest number of patients accross the
+world, predictive models should be an appropriate technology: it should be
+\emph{easily and economically utilized from readily available resources by local
+  communities to meet their needs} \citep{pearce2012case}. However, recent
+predictive pipelines strongly focus on performance gains, at the cost of
+increasing architecture sizes requiring ever greater computing and technical
+resources --as detailed in Appendix \ref{apd:computing_resources_review}.
 % The growing body of predictive models from EHR focus mainly on accuracy
 % performances. They are rarely shared due to privacy requirements. They are
 % tied to specific tasks hardcoded into the model architectures
@@ -2648,14 +2648,14 @@ implications.
 
 \paragraph{Main findings}
 
-With small to moderate sample sizes -up to 10,000 patients-, simple models have
-better performances than transformer models on general tasks such as length of
-stay or prognosis. Among the simpler model based on row counts or static
-embeddings, no featurization choice largely outperforms others in any single
-task but random forest estimators are always more performant than linear models.
-Static embeddings models are the most compute and memory efficient solution.
-Small target prevalence --linked to the number of cases-- is detrimental
-to the performances of prognosis models.
+With small to moderate sample sizes -up to 20,000 patients-, simple models have
+better performances than transformer-based models on general tasks such as
+length of stay interpolation or prognosis. Among the simpler model based on row counts or
+static embeddings, no featurization choice largely outperforms others in any
+single task but random forest estimators are always more performant than linear
+estimators. Static embeddings models are the most compute and memory efficient
+solution. We quantify the detrimental effects on prognosis performances of
+low target prevalences --linked to the number of cases.
 
 %Benchmark tasks are simpler to instantiate but are hard to include into a
 %practical medical workflow. 
@@ -2668,14 +2668,15 @@ to the performances of prognosis models.
 \label{subsec:predictive_models:event_format}%
 % Time-varying features with high cardinality is the specificity and is handled
 % by the event data format
-We adopt the common modeling of patient healthcare trajectory as a sequence of
-events \citep{beam2019clinical, bacry2020scalpel3, chazard2022book}. Each event
-is described by a triplet: a person identifier $i$, a datetime $t$ and a medical
+We model the patient healthcare trajectory as a sequence of events
+\citep{beam2019clinical, bacry2020scalpel3, chazard2022book}. Each event is
+described by a triplet: a person identifier $i$, a datetime $t$ and a medical
 code $c$, $e = (i, t, c)$ as shown in Figure \ref{fig:ehr_prediction_timeline}.
 For each patient $i$, the complete trajectory is the ordered collection of its
-$T_i$ events $\{e_k\}_{k=1..T_i}$. This simple format integrates together a wide
-variety of time varying features without imposing data transformation or feature
-selection --often brittle to modelization choices. However, it calls for
+$T_i$ events $S_i = \{e_k\}_{k=1..T_i}$. S is the collection of sequences for
+all N patients: $S = \{S_i\}_{i=1..N}$.This simple format integrates together a
+wide variety of time varying features without imposing data transformation or
+feature selection --often brittle to modelization choices. However, it calls for
 adequate aggregation methods to reduce the long event table into a patient-wise
 features table of shape $N \times d$ matrix for $d$  that can be passed over to
 statistical estimators.
@@ -2702,12 +2703,13 @@ $\lambda_g$ are the parameters of the featurizers.
 
 A simple featurization choice --pervasive before machine learning techniques--
 considers only a few demographic features available in the patient record: age,
-gender, admission origin, discharge destination, admission date.
+gender, admission origin, discharge destination, admission date. These
+demographics as new columns to all other featurizers.
 
 \subsection{Count encoding of event features: $g_{count}$}\label{subsec:predictive_models:count_encoding}
 
 We process the raw events by computing a sparse count matrix $C$ of shape
-$(n_{patients}, n_{vocabulary})$ where each row collapses the patient history by
+$(N, n_{vocabulary})$ where each row collapses the patient history by
 counting the number of times a concept is present in the patient history. To
 better take into account the temporal dimension, we also computed a decayed
 count of the events in the patient history, noted $C_{\delta}$. For an event
@@ -2718,7 +2720,7 @@ Then, we decay the count matrix with an exponential of half life $\delta$.
 $$C_{\delta}[i, c] += e^{-\frac{\Delta t}{\delta}}$$% 
 Finally, we obtain the patient features by concatenating each
 delayed count matrix; eg. with decay 0 and decay $\delta$.
-$$g_{count}(X, (0, \delta))= [C_{0}, C_{\delta}]$$% 
+$$g_{count}(S, (0, \delta))= [C_{0}, C_{\delta}]$$% 
 Several decays can be selected and concatenated together. The decays are
 considered hyperparameters which are selected by cross-validation. Appendix
 \ref{apd:pipelines:count_encoding} details this feature processing procedure.
@@ -2734,14 +2736,14 @@ by opposition to transformer-based embeddings that adapts to the context.
 \paragraph{Static embeddings locally trained: $g_{emb-local}$} We apply the
 SVD-PPMI algorithm to the training cohort yielding static embeddings
 $\Phi_{local}$. Aggregation at the stay level is done using the same
-count matrices as for \ref{subsec:predictive_models:count_encoding} --eventually
-with decayed counts: $g_{emb-local}(X, (0, \delta))=[C_{0} \cdot \Phi_{local}, C_{\delta} \cdot \Phi_{local}]$.
+count matrices as for \ref{subsec:predictive_models:count_encoding} --potentially
+with decayed counts: $g_{emb-local}(S, (0, \delta))=[C_{0} \cdot \Phi_{local}, C_{\delta} \cdot \Phi_{local}]$.
 
 \paragraph{Transfer trained static embeddings} Instead of retraining the
 embeddings on the train cohort, we rely on static embeddings $\Phi_{SNDS}$
 pre-computed on French national claims data from 3,112,565 patients
 \citep{doutrelignerepresentations}. The aggregation is performed similarly as
-for count encoding and local embeddings: $g_{emb-SNDS}((X, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
+for count encoding and local embeddings: $g_{emb-SNDS}((S, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
   \Phi_{SNDS}]$.
 
 \subsection{Transformer based: $g_{cbert}$}%
@@ -2759,16 +2761,15 @@ auxiliary task using a large database. In our case, this task is a Masked Langua
 Model (MLM): the network tries to predict the medical concept of randomly masked
 events in the sequences. The CEHR-BERT implementation also tries to predict the
 type of the next visit. b) Then fine-tune the model on the task of interest. We
-use the full train set for pretraining and finetuning. Details on this
+use the train set for pretraining and finetuning. Details on this
 architecture are given in Appendix \ref{apd:pipelines:cehr_bert}.
-
 
 \subsection{Final step estimator}\label{subsec:predictive_models:estimators}
 
 These choices of featurizers are not task-specific. To obtain probabilities of
 occurrence for the target, the analyst needs to choose and train an estimator $f$
-and its corresponding parameters $\lambda_f$. The prediction is given by the chain of the featurizer and the
-estimator: $\hat{y} = f(g(\cdot, \lambda_g), \lambda_f)$.
+and its corresponding parameters $\lambda_f$. The predictions are given by the chain of the featurizer and the
+estimator: $\hat{y}(s_i) = f(g(s_i, \lambda_g), \lambda_f)$.
 
 For CEHR-BERT, the predictor is the final layer of the neural network. It is
 trained together with the sequence representations during the fine-tuning step.
@@ -2786,30 +2787,28 @@ We experimented with gradient boosting trees, without observing significant perf
 \subsection{Navigating between clinical and benchmarking utilities}%
 \label{subsec:predictive_models:task_definitions}%
 
-\paragraph{Heathcare database -- Paris hospital data warehouse}%
+\paragraph{Heathcare database -- Greater Paris Hospitals}%
 \label{sec:data_extraction}%
 
-We used data extracted from Greater Paris Hospitals (AP-HP) data
-warehouse, hosting routine care data from 38 hospitals in the Paris area.
-Details on this database is given in Appendix \ref{apd:database_description}. We
-include every medical event among drug administrations, ICD10 diagnosis and
-procedure billing codes. We also add selected static features at the stay level:
-age at hospitalization, gender, admission reason.
+We used data extracted from the data warehouse of the Greater Paris Hospitals
+(AP-HP), hosting routine care data from 38 hospitals in the Paris area. Details
+on this database is given in Appendix \ref{apd:database_description}. We include
+every medical event among drug administrations, ICD10 diagnosis and procedure
+billing codes.
 
-\paragraph{Prediction tasks framing} General workflows describe key steps to
-develop predictive models with good practical utility
-\citep{ohdsi2019book,tomavsev2021use}. Here, we detail our framework to
-precisely define each task. First, we define a \emph{study period} during which
-data acquisition was sufficiently stable. Then, we define and select the
-\emph{cohort} detailed for each task. Inclusion criteria are detailed in the
-flowcharts of Figure \ref{apd:fig:flowcharts}. We define the task outcome with:
-an \emph{index visit}, an \emph{observation period} during which events are fed
-to the predictive model, an \emph{horizon} after the end of the observation
-period defining the followup, and a target event potentially occurring during
-the followup.
+\paragraph{Prediction tasks framing} Here, we detail our framework to precisely
+define each predictive task, taking inspiration from
+\cite{ohdsi2019book,tomavsev2021use}. First, we define a \emph{study period}
+during which data acquisition was sufficiently stable. Then, we define and
+select the \emph{cohort} detailed for each task. Inclusion criteria are detailed
+in the flowcharts of Figure \ref{apd:fig:flowcharts}. We define the task outcome
+with: an \emph{index visit}, an \emph{observation period} during which events
+are fed to the predictive model, an \emph{horizon} after the end of the
+observation period defining the followup, and a target event potentially
+occurring during the followup.
 
 The more clinically anchored a task is, the less appropriate it is for
-calibration models, as local practices will be more important in
+benchmarking models, as local practices will be more important in
 defining precise clinical criteria than general operational tasks. We study
 three tasks of increasing clinical value and implementation complexity with
 decreasing benchmark interest: Long Length Of Stay interpolation (LOS),
@@ -2821,7 +2820,7 @@ summarizes key characteristics of the cohorts and task definitions and Appendix
 
 \begin{table}[!ht]
   \centering
-  \resizebox*{0.8\textwidth}{!}{
+  \resizebox*{0.9\textwidth}{!}{
 
     \begin{tabular}{|l|l|l|l|}
       \hline
@@ -2831,11 +2830,11 @@ summarizes key characteristics of the cohorts and task definitions and Appendix
       \textbf{Observation Period} & Index visit                           & \makecell[l]{Full trajectory before                 \\end of index visit}                           & \makecell[l]{Full Trajectory before\\end of index visit} \\ \hline
       \textbf{Horizon}            & End of index visit                    & End of next visit                   & 12 Months     \\ \hline
       \textbf{Median Age}         & 56.4                                  & 61.5                                & 60.0          \\ \hline
-      \textbf{Female}             & 54.6\%                                & 53.3\%                              & 53.7          \\ \hline
+      \textbf{Female}             & 54.6\%                                & 53.3\%                              & 53.7\%        \\ \hline
       \textbf{Cohort Size}        & 27,053                                & 10,786                              & 165,948       \\ \hline
       \textbf{Prevalence}         & 23.1\%                                & From 1.3 to 55.9\%                  & 2.6 \%        \\ \hline
       \textbf{Number of cases}    & 6,249                                 & From 139 to 6,029                   & 4,315         \\ \hline
-      \textbf{Description}        & \makecell[l]{Long stay classification                                                       \\ (longer than 7 days)} & \makecell[l]{Next stay prognosis:\\ICD10 chapter classification} & \makecell[l]{MACE Prognosis\\at one year}                                      \\ \hline
+      \textbf{Description}        & \makecell[l]{Long stay classification                                                       \\ (longer than 7 days)} & \makecell[l]{Next stay prognosis:\\ICD10 chapter classification} & \makecell[l]{MACE prognosis\\at one year}                                      \\ \hline
     \end{tabular}
   }
   \vspace{1em}%
@@ -2847,63 +2846,62 @@ summarizes key characteristics of the cohorts and task definitions and Appendix
 \subsection{Evaluation procedure -- Exploring the performance-sample trade-off}%
 \label{subsec:predictive_models:evaluation_pipeline}
 
-We split each cohort described in Table
-\ref{table:predictive_tasks_summary} into a train and a test set
-following a temporal split based on inclusion date with a 0.8/0.2 ratio (Split
-detailed in Appendix \ref{apd:evaluation_procedure}). Each patient only
-appears in one of the two sets. To study the sample efficiency of the different
-pipelines, we further restrict the effective train set size to increasing ratio
-of its full size: $N_{train, r}= r \cdot N_{\mathcal{T}} \quad with \quad r \in
-  [0.1, 0.25, 0.5, 0.9, 1]$. Figure \ref{fig:evaluation_procedure} summarizes the
-procedure.
+We split each cohort described in Table \ref{table:predictive_tasks_summary}
+into a train and a test set following a temporal split based on each patient
+inclusion date with a 0.8/0.2 ratio (split detailed in Appendix
+\ref{apd:evaluation_procedure}). Each patient only appears in one of the two
+sets. To study the sample efficiency of the different pipelines, we further
+restrict the effective train set size to increasing ratio of its full size.
+Figure \ref{fig:evaluation_procedure} summarizes the procedure. We report Area
+Under the Receiver Operating Characteristic Curve (ROC AUC) or Area Under the
+Precision Recall Curve results (AUPRC) which is more adapted to highly
+imbalanced tasks.
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\linewidth]{img/chapter_3/selection_procedure.pdf}
-  \caption{Evaluation procedure for non deep learning estimators: For each
-    effective train set of size $r$, each pair of featurizer and estimator are
-    cross-validated together to obtain the best parameters, then evaluated on a
-    fixed validation set.}\label{fig:evaluation_procedure}
+  \includegraphics[width=0.8\linewidth]{img/chapter_3/selection_procedure.pdf}
+  \caption{Evaluation procedure: For
+    each effective train set of size $r$, each pair of featurizer and estimator
+    are cross-validated together to obtain the best parameters, then evaluated
+    on a fixed validation set.}\label{fig:evaluation_procedure}
 \end{figure}
 
 Appendix \ref{apd:hospital_split} details an alternative geographic split
 validation procedure for LOS and prognosis tasks, exploring the validity of our
-results when testing the models on patient from other hospitals. We report Area
-Under the Receiver Operating Characteristic Curve (ROC AUC) and refer to
-appendices for brier score and average precision results (AUPRC).
+results when testing the models on patient from other hospitals.
 
-
-\subsection{Results -- Tree-based models on event counts prevail}%
+\subsection{Results -- Tree-based models on event counts, a simple performer}%
 \label{subsec:predictive_models:results}
 
 
-\paragraph{Count encoding followed by random forest outperform elaborated
+\paragraph{Count encoding followed by random forest outperforms elaborated
   embedding models}%
 
-Both for the prognosis task (shown if Figure \ref{fig:prognosis_auprc}) and the
+Both for the prognosis (shown if Figure \ref{fig:prognosis_auprc}) and the
 LOS task (shown in Figure \ref{fig:los_roc_auc}), count encoding with random
 forest outperforms other pipelines. For these two tasks, the transformer model
-is far from the best performance, certainly because of the small samples.
-
+is far from the best performance, certainly because of too small samples.
 
 % linear combination of icd10 chapter is a strong baseline
-Interestingly for prognosis, the performances of logistic regression with
-demographic is already very good. This indicates that a simple linear
-combination of the previous stay chapters is a strong baseline.
+For the prognosis task, we added to all featurizers the previous index stay
+ICD10 chapters as supplementary features. This intuitive baseline is reported as
+the horizontal black line. The good performances of the logistic regression with
+demographic features only indicates that a simple linear combination of the
+index stay chapters is a strong baseline.
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
-  \caption{Prognosis average precision score, weighted by prevalences over 21
+  \caption{Prognosis AUPRC, weighted by prevalences over 21
     ICD10 chapters with more than 1\% prevalence. The performances are averaged
     over 5 folds. The shaded area represents the standard deviation. The
     horizontal black line displays the naive baseline that predicts the previous
     stay codes for the target stay. Random forest have better performances.
     Count encoder outperforms other featurizers, suggesting the importance of
     low count events that are smoothed out in embedding methods. We report
-    average precision rather than ROC AUC, since it takes better into account
+    AUPRC rather than ROC AUC, since it takes better into account
     the difference in prevalence between chapters. Appendix
-    \ref{apd:temporal_split:prognosis} details average precision scores for each
+    \ref{apd:temporal_split:prognosis} details AUPRC for each
     chapter and displays averaged ROC AUC.}%
   \label{fig:prognosis_auprc}
 \end{figure}
@@ -2911,7 +2909,7 @@ combination of the previous stay chapters is a strong baseline.
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
+  \includegraphics[width=1.05\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
   \caption{LOS ROC AUC for different featurizers and estimators. The
     performances are averaged over 5 folds. The shaded area represents the
     standard deviation. The task performance seems to saturate at 95\% ROC AUC
@@ -2919,25 +2917,25 @@ combination of the previous stay chapters is a strong baseline.
     suggesting that the Bayes error rate is reached. However, for lower sample
     regimes --below 12,500 patients, we see a clear advantage of static
     embeddings over count encoding of events (both for logistic regression and
-    random forest). Appendix \ref{apd:temporal_split:los} details the AUPRC.}%
+    random forest). Appendix \ref{apd:temporal_split:los} details AUPRC.}%
   \label{fig:los_roc_auc}
 \end{figure}
 
 
 \paragraph{The cost of low prevalence}
 
-Figure \ref{fig:prognosis_prevalences_auprc} shows the average precision score
-performances on the prognosis task plotted against the prevalence. Low
-prevalences translate into small number of cases, which decreases overall
-performances and increase variances among chapters with less than 5\%
-prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar results for
-ROC AUC and linear estimators.
+Figure \ref{fig:prognosis_prevalences_auprc} shows the AUPRC
+performances on the prognosis task plotted against the prevalence for a random
+forest estimator. Low prevalences translate into small number of cases, which
+decreases overall performances and increase variances among chapters with less
+than 5\% prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar
+results for ROC AUC and linear estimators.
 
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
-  \caption{ Bigger target prevalences yield better average precision. The
+  \caption{ Bigger target prevalences yield better AUPRC. The
     different chapters are binned in prevalence bins. The estimator used for
     this plot is random forest trained on the full effective train set of size
     8560. Appendix \ref{apd:prognosis_prevalences} details the ROC AUC curves.}%
@@ -2949,7 +2947,7 @@ ROC AUC and linear estimators.
 
 
 Figure \ref{fig:prognosis_training_time} shows the training time of the
-different pipelines average over the 21 chapters on the prognosis task,
+different pipelines averaged over the 21 chapters of the prognosis task,
 highlighting the efficiency of the static embedding methods.
 
 \begin{figure}[!h]
@@ -2974,15 +2972,13 @@ highlighting the efficiency of the static embedding methods.
 \section{Conclusion}\label{sec:predictive_models:conclusion}
 
 % Restating the study objective
-State-of-the-art predictive models from structured Electronic Medical Records
-models are hindered by the challenge of publicly sharing pre-trained models
-\citep{wornow2023shaky}. Training them from scratch requires important computing
-resources, and access to very large cohorts. We explored a
+Training state-of-the-art predictive models from EHRs from scratch requires
+important computing resources, and access to very large cohorts. We explored a
 performance-complexity trade-off by studying different types of predictive
 algorithms, from simple baseline to large transformer-based pipelines.
 
 \paragraph{Tree-based models outperform other pipelines}
-For simple predictive tasks such as LOS or prognosis at the ICD10 level and
+For simple predictive tasks such as LOS interpolation or prognosis at the ICD10 level and
 small sample sizes, simple pipelines based either on count encodings or static
 embeddings followed by random forest are sufficient to reach good performances.
 Transformer-based models struggle with these low-sample regimes. In low
@@ -3002,26 +2998,26 @@ as count encoding and more than five times faster than transformers.
 \paragraph{MACE is challenging due to low prevalence}
 MACE is more complicated to evaluate because of the low prevalence of the
 outcome. This forced us to use a larger cohort to collect enough cases. Both
-simple and complex models require large computing resources. However, the type
-of theses resources are different. Static embeddings can reach satisfying
-performances on big samples with large memory consumption (eg. 100GB of RAM).
-Transformer architectures require large GPUs to be trained even for small sample
-sizes. Because of constraints for these two types of resources on the AP-HP
-computing cluster, we are currently not able to evaluate the MACE task on the
-full cohort.
+simple and complex models require larger computing resources than those we can
+access. However, the type of theses resources are different. Static embeddings
+can reach satisfying performances on big samples with large memory consumption
+(eg. 100GB of RAM). Transformer architectures require large GPUs to be trained
+even for small sample sizes. Because of constraints for these two types of
+resources on the AP-HP computing cluster, we are currently struggling to
+evaluate the MACE task on the full cohort.
 
 % limit
 \paragraph{Comparing to bigger or pretrained models}
 The high number of laboratory measurements --only available for inpatients--
 could improve the performances for all tasks. However, the addition of these
 high-frequency features exceeds the computing resources currently at our
-disposal. Our benchmark also lacks a pre-trained model on large data and the
-interesting avenue of repurposing large language model for predictive tasks
-directly from clinical notes. These two approaches need large GPU resources,
-making a poor use of the commodity hardware already present in hospitals.
-Healthcare financial resources are already scarce in rich countries. It is still
-an open question to assess if the prevention benefits brought by large scale
-models from EHRs outweigh the cost of their deployment.
+disposal. Our benchmark also lacks a pre-trained model on large structured data
+and the interesting avenue of repurposing large language model for predictive
+tasks directly from clinical notes. These two approaches require large GPU
+resources, making a poor use of the commodity hardware already present in
+hospitals. Healthcare financial resources are already scarce in rich countries.
+It is still an open question to assess if the prevention benefits brought by
+large scale models from EHRs outweigh the cost of their deployment.
 
 % One argument in favor of recent large predictive models is their easy
 % repurposing for new sites and clinical tasks, requiring few labelled data.
@@ -6769,7 +6765,7 @@ random repartition of these mistreated patients.
   \begin{figure}[!h]
     \centering
     \includegraphics[width=\linewidth]{img/chapter_3/los/average_precision_score_performances.pdf}
-    \caption{LOS average precision curve for different featurizers and estimators.
+    \caption{LOS AUPRC for different featurizers and estimators.
       The performances are averaged over 5 folds. The shaded area represents the
       standard deviation. The task performance seems to saturate at 98\% average
       precision for random forest and all featurizers but the demographics,
@@ -6783,10 +6779,17 @@ random repartition of these mistreated patients.
 
   \subsection{Prognosis}\label{apd:temporal_split:prognosis}
 
+  Performances are reported with Area Under the Receiver Operating
+  Characteristic Curve (ROC AUC) and Area Under the Precision Recall Curve
+  (AUPRC) using
+  \url{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html}
+  and
+  \url{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score}
+  implementations to compute the scores.
+
   \paragraph{ROC AUC}
 
-  Figure \ref{fig:prognosis_rocauc} displays the area under the precision
-  recall curve (average precision) averaged with equal weight for each chapter (Macro)
+  Figure \ref{fig:prognosis_rocauc} displays the AUPRC averaged with equal weight for each chapter (Macro)
   and with the chapter prevalence as the weight (weighted).
 
 
@@ -6813,16 +6816,15 @@ random repartition of these mistreated patients.
     \label{fig:prognosis_rocauc}
   \end{figure}
 
-  \paragraph{Average precision scores for every ICD10 chapter}
+  \paragraph{AUPRC scores for every ICD10 chapter}
 
-  Figure \ref{fig:prognosis_auprc_macro} displays the area under the precision
-  recall curve (average precision) averaged with equal weight for each chapter (Macro).
+  Figure \ref{fig:prognosis_auprc_macro} displays the AUPRC averaged with equal weight for each chapter (Macro).
   \begin{figure}[!h]
     \centering
 
     \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_macro.pdf}
 
-    \caption{Prognosis Average Precision averaged by prevalence over chapters
+    \caption{Prognosis AUPRC averaged by prevalence over chapters
       for different featurizers and estimators. The performances are averaged
       over 5 folds. The shaded area represents the standard deviation. The
       horizontal black line displays the naive baseline that predicts the
@@ -6831,7 +6833,7 @@ random repartition of these mistreated patients.
   \end{figure}
 
 
-  \paragraph{Average precision scores for every ICD10 chapter}
+  \paragraph{AUPRC scores for every ICD10 chapter}
 
 
   Figure \ref{fig:prognosis_average_precision_score__c_1} to
@@ -6858,7 +6860,7 @@ random repartition of these mistreated patients.
 
 
   Figure \ref{apd:fig:prognosis_prevalences_auprc_linear} shows the prevalence
-  results for the Average precision curve and the linear estimator.
+  results for the AUPRC curve and the linear estimator.
 
   Figure \ref{apd:fig:prognosis_prevalences_auroc_linear} shows the prevalence
   results for the ROC AUC curve and the linear estimator.
@@ -6882,7 +6884,7 @@ random repartition of these mistreated patients.
   \begin{figure}[!h]
     \centering
     \includegraphics[width=0.8\linewidth]{img/chapter_3/prognosis/prevalence_results__est_ridge_boxplot_average_precision_score_xlog.pdf}
-    \caption{ Bigger target prevalences yield better average precision. The different
+    \caption{ Bigger target prevalences yield better AUPRC. The different
       chapters are binned in prevalence bins. The estimator used for this plot
       is a penalized linear model trained on the full effective train set.}%
     \label{apd:fig:prognosis_prevalences_auroc_linear}
