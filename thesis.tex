@@ -1657,8 +1657,8 @@ of this chapter contrasts with the general mathematical context of the thesis.
   gradient in representation and predictive algorithms for EHRs} Acknowledging
 the growing interest in predictive algorithms for EHR data, this chapter
 introduces two simple feature construction methods taking raw medical events
-  as input features before feeding a predictive model. It benchmarks four
-  predictive pipelines of increasing
+as input features before feeding a predictive model. It benchmarks four
+predictive pipelines of increasing
 complexity on three predictive tasks: length of stay interpolation, next visit
 prognosis and cardiovascular adverse events prediction. It focuses on medium
 sized datasets where the population at risk (after inclusion and exclusion
@@ -1668,10 +1668,9 @@ recent transformer-based neural networks.
 
 We show that for these medium sample-size settings, simple baselines outperform
 transformer-based models both in predictive accuracy and computing resource
-efficiency. We note a strong influence of case prevalences on the predictive
-performances, indicating increasing problem difficulties for rare clinical
-targets. To encourage more thorough study, we publish scikit-learn compatible
-implementations of our proposed medical event pipelines.
+efficiency. We note a performance decrease for prognosis with low case
+prevalences. To encourage more thorough study, we publish scikit-learn
+compatible implementations of our proposed medical event featurization pipelines.
 
 \paragraph{Chapter \ref{chapter:causal_tuto}: Prediction is not all we need:
   Causal thinking for decision making on EHRs} This chapter exploits the causal
@@ -1681,7 +1680,7 @@ healthcare for every patient. Anchored in causal thinking, it details key
 elements necessary to robustly estimate treatment effect from time-varying EHR
 data. We present a step-by-step framework to help build valid decision making
 from real-life patient records by emulating a randomized trial before
-individualizing decisions, eg with machine learning. We illustrate the various
+individualizing decisions, e.g. with machine learning. We illustrate the various
 choices in studying the effect of albumin on sepsis mortality in the Medical
 Information Mart for Intensive Care database (MIMIC-IV). We study the impact
 of various choices at every step, from feature extraction to causal-estimator
@@ -1690,8 +1689,8 @@ selection.
 We find that subtle bias such as immortal time bias can change the conclusion
 of a study. However, we show that these errors can be captured by following a
 careful trial emulation design and by comparing different modeling hypotheses
-in a vibration analyses. We validate our estimation of average treatment
-effect with RCT gold-standards and inspect heterogeneous treatment effect in
+in a vibration analysis. We validate our estimation of average treatment
+effect with RCT gold-standards and inspect heterogeneous treatment effects in
 subpopulations. In a tutorial spirit, the code and the data are openly available.
 
 \paragraph{Chapter \ref{chapter:causal_model_selection}: How to select
@@ -1699,7 +1698,7 @@ subpopulations. In a tutorial spirit, the code and the data are openly available
 of results presented in chapter \ref{chapter:causal_tuto}. Can we explain why
 some models yield better treatment effect estimation than others? Statistical
 learning theory establishes how to select models for prediction. This chapter
-establishes that classic machine-learning model selection does not pick the
+shows that classic machine-learning model selection does not pick the
 best models for causal inference. We review more elaborated risks developed in
 the causal inference literature. These risks rely on the estimation of
 nuisances that allow for the identification of the causal effect. However,
@@ -1717,7 +1716,7 @@ We also show theoretically that the R-risk is a reweighted version of the
 oracle unobserved risk between predicted and potential outcomes. This property
 lead to accurate estimation of treatment heterogeneity when treated and
 untreated population differ little, as in RCTs. To facilitate better model
-selection, we provide Python code implementing our procedure.
+selection, we provide python code implementing our procedure.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
