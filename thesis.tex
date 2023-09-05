@@ -60,7 +60,7 @@
 \usepackage{multicol} %% Pour mettre un texte sur plusieurs colonnes
 \usepackage{makecell}
 \usepackage{pifont}
-
+%
 \usepackage[right]{lineno}
 \usepackage[nopatch=eqnum]{microtype}
 \usepackage{lscape} % landscape pages
@@ -75,6 +75,10 @@
 \newcommand{\highlight}[2]{\colorbox{#1!17}{$\displaystyle #2$}}
 \renewcommand{\highlight}[2]{\colorbox{#1!17}{#2}}
 
+% define colors for soul highligting
+\usepackage{soul}
+\colorlet{important_example}{Emerald!17}
+\sethlcolor{important_example}
 % Define some commands for table
 \newcolumntype{+}{!{\vrule width 2pt}}
 % create \thickcline for thick horizontal lines of variable length
@@ -113,7 +117,8 @@
 \colorlet{M}{Periwinkle}
 \colorlet{S}{RedOrange}
 
-
+% background colors
+\colorlet{h_color}{Emerald}
 \colorlet{bayes_error}{purple}
 \colorlet{approximation_error}{Orchid}
 \colorlet{estimation_error}{SeaGreen}
@@ -143,6 +148,12 @@
 %\colorlet{CHAPTERCOLOR}{chaptercolor}
 \colorlet{GRAY}{Gray}
 
+
+
+%\hl{texts}
+% don't span several lines...
+%\newcommand{\important}[1]{\colorbox{Emerald!17}{\textbf{#1}}}
+
 % bibliography
 \usepackage[natbib=true,backref=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber,uniquename=false,uniquelist=false,firstinits=true]{biblatex}
 \DeclareNameAlias{sortname}{first-last}
@@ -151,7 +162,6 @@
   backrefpage = {cited p.},% originally "cited on page"
   backrefpages = {cited p.},% originally "cited on pages"
 }
-
 % separators for bib
 \DeclareDelimFormat{finalnamedelim}{\addsemicolon\space}
 \DeclareDelimFormat[bib]{nametitledelim}{\addcolon\space}
@@ -672,17 +682,18 @@ Christelle, et ceux que j'oublie.\\
 % HAS
 J'aimerais également remercier tous les membres de la mission Data de la HAS :
 Timothée pour ses PR magnifiques, Pavel pour Despacito et les discussions NLP,
-Morgane pour les poules, Adeline pour ses conseils \sout{psycho} précis et
-rigoureux, Catherine pour les cafés du lundi matin, Christine pour sa bonne
-humeur, et Viktor pour les Ti Punchs. Malgré une présence en dent de scie de ma
-part, vous m'avez intégré pleinement dans l'équipe. C'est magique d'avoir vu
-cette équipe se construire et d'en faire partie aujourd'hui. Merci également aux
-autres personnes que j'ai cotoyées à la HAS, et qui m'ont accompagné durant
-cette aventure: Judith Fernandez, Pierre Liot, Agnès Solomniac, Sandrine Morin.
-Merci à Thomas Wanecq qui a rendu cette thèse possible, fait rare dans le milieu
-de l'administration. Merci à Aude-Marie Lalanne Berdouticq et Emmanuel Didier
-(Institut Santé numérique en Société) pour leur regard de sociologues lors de la
-revue sur les entrepôts de données de santé.\\
+Morgane pour les nouvelles de la campagne Normande, Adeline pour ses conseils
+\sout{trop} carrés, Catherine pour les cafés du lundi matin,
+Christine pour sa bonne humeur, et Viktor pour les Ti Punchs. Malgré une
+présence en dent de scie de ma part, vous m'avez intégré pleinement dans
+l'équipe. C'est magique d'avoir vu cette équipe se construire et d'en faire
+partie aujourd'hui. Merci également aux autres personnes que j'ai cotoyées à la
+HAS, et qui m'ont accompagné durant cette aventure: Judith Fernandez, Pierre
+Liot, Agnès Solomniac, Sandrine Morin. Merci à Thomas Wanecq qui a rendu cette
+thèse possible, fait rare dans le milieu de l'administration. Merci à Aude-Marie
+Lalanne Berdouticq et Emmanuel Didier (Institut Santé numérique en Société) pour
+leur regard de sociologues lors de la revue sur les entrepôts de données de
+santé.\\
 
 
 Merci à ceux de l'APHP, de la Drees et d'ailleurs qui m'ont introduit dans le
@@ -939,9 +950,9 @@ benefit from innovative methods.
   \citep{butte2006creation,patel2009coming}. Interest in EHR studies developed
   during the early 2000s highlighting their increasing rich data modalities.
   EHRs also provide a potential alternative to costly traditional data collections
-  with decreasing financial supports. \cite{casey2016using} estimated the
-  average cost per participant in traditional studies of cardio-vascular disease
-  risk factors between US\$2,700 and US\$17,700 compared to US\$0.11 for a recent EHR.
+  with decreasing financial supports. \cite{casey2016using} estimated \hl{the
+    average cost per participant in traditional studies of cardio-vascular disease
+    risk factors between US\$2,700 and US\$17,700 compared to US\$0.11 for a recent EHR.}
   Today's interest of EHR for research has been acknowledged in AIM
   \citep{yu2018artificial}, clinical research \citep{cowie2017electronic} and
   epidemiological studies \citep{casey2016using,gianfrancesco2021narrative}.
@@ -1030,8 +1041,8 @@ benefit from innovative methods.
   findings of a study may not generalize to other populations. As a practical
   consequence, RCTs may not apply to real world situations since included
   populations and experimental conditions differ too much from usual practices.
-  For example, only 6\% of asthmatics would have been eligible for their own
-  treatment RCTs \citep{travers2007external}. An advantage of observational data
+  \hl{For example, only 6\% of asthmatics would have been eligible for their own
+    treatment RCTs} \citep{travers2007external}. An advantage of observational data
   over RCTs is their description of usual care practices, opening a window on
   care effectiveness \citep{cochrane1972effectiveness}: How well does a
   treatment work in practice, outside the ideal circumstances of the
@@ -1116,10 +1127,10 @@ Despite judging model choice as \textit{crucial to fruitful application}
 \citep{cox2006principles}, this tedious task is left to experts, that should have an
 appropriate theoretical model of the problem \citep{cox2001statistical}. This
 practice is prone to circular reasoning where a model is chosen only to justify an
-established theory. Crowdsourcing studies asking the same question to
-different teams of experts showed that the choice of model and features is far
-from consensual and yield substantially different quantitative and qualitative
-results. \cite{botvinik2020variability} attributed this dispersion to different
+established theory. \hl{Crowdsourcing studies asking the same question to
+  different teams of experts showed that the choice of model and features is far
+  from consensual and yield substantially different quantitative and qualitative
+  results.} \cite{botvinik2020variability} attributed this dispersion to different
 modeling choice in a crowdsourced analysis of brain imaging data by 70 teams.
 \cite{schweinsberg2021same} showed that theoretical constructs --how the
 model input variables are defined from raw data-- also contribute to the heterogeneity of results.
@@ -1335,17 +1346,17 @@ poor analytical capacities.
 Recent discourse and successes are heavily influenced by this line of though,
 with the aim to automate ever more specialized parts of care. Machines read
 medical images faster and more efficiently than most practitioners
-\citep{zhou2021review}. Structured data from Electronic Health Records
-\citep{rajkomar2018scalable} or administrative databases
-\citep{beaulieu2021machine} outperform rule-based clinical scores in predicting
-patient's readmission, in-hospital mortality or future comorbidities
+\citep{zhou2021review}. Machine learning algorithms trained on structured data
+from EHR \citep{rajkomar2018scalable} or administrative
+databases \citep{beaulieu2021machine} outperform rule-based clinical scores in
+predicting patient's readmission, in-hospital mortality or future comorbidities
 \citep{li2020behrt}. Recently, large language models (LLMs) leveraged clinical
 notes from several hospitals for length of stay prediction
 \citep{jiang2023health}. Hope is high that LLMs models will soon be able to help
 practitioners during consultation \citep{lee2023benefits}. The trend towards
 personalized medicine is gradually moving away from the automation of
-well-understood but tedious tasks to tailored individual care, where mechanisms are less
-understood \citep{schork2015personalized, topol2019high}.
+well-understood but tedious tasks to tailored individual care, where mechanisms
+are less understood \citep{schork2015personalized, topol2019high}.
 
 \paragraph{New data for better knowledge acquisition?}
 
@@ -1392,8 +1403,8 @@ The \emph{Coming revolution In Medicine} is described by
   large amounts of new knowledge that no single physician could hope to digest; 3)
   a geographic maldistribution of M[edical] D[octors]s; 4) increasing demands on
   the physician's time as increasing numbers of individuals began to demand
-  quality medical care.} Fifty years later, the same preoccupations are
-destabilizing healthcare systems in rich countries: increasing costs
+  quality medical care.} \hl{Fifty years later, the same preoccupations are
+  destabilizing healthcare systems in rich countries:} increasing costs
 \citep{data_oecd_health_spending}, knowledge produced too quickly to be
 assimilable by a single person \citep{mcginnis2013best}, geographic disparities
 and lack of trained physicians \citep{anguis2021quelle,aamc2021}.
@@ -1406,9 +1417,9 @@ However, measuring the appropriateness of a care is a delicate question
 issue medical guidelines built upon the scientific literature to recommend ideal
 care trajectories. However, these recommendations often focus on single-disease
 approaches, insufficiently covering today's population of patients: increasingly
-old and multimorbid \citep{skou2022multimorbidity}. Fewer than half of the
-clinical guidelines for the nine most common chronic conditions consider older
-patients with multiple comorbid chronic conditions
+old and multimorbid \citep{skou2022multimorbidity}. \hl{Fewer than half of the
+  clinical guidelines for the nine most common chronic conditions consider older
+  patients with multiple comorbid chronic conditions}
 \citep{boyd2005clinical,parekh2010challenge}. In the United States, the
 Committee on Learning Healthcare System suggested to better use routine data to
 adapt evidence to real practice and accelerate its diffusion
@@ -5498,7 +5509,6 @@ interventions.
 % most of our information. We can rely pretraining models outside the healthcare
 % domain. We should leverage it more in the context of care (limit: temporality is
 % hard to capture but is a key aspect of causal inference).
-
 
 \clearpage
 \begin{appendices}
