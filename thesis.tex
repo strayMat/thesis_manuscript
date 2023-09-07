@@ -2756,8 +2756,9 @@ $$g_{count}(S, (0, \delta))= [C_{0}, C_{\delta}]$$%
 Several decays can be selected and concatenated together. The decays are
 considered hyperparameters which are selected by cross-validation.
 
-\begin{figure}
-  \includegraphics[width=0.7\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
+\begin{figure}[!b]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
   \caption{Illustration of the decayed counting
     procedure.}\label{fig:pipelines:count_encoding}
 \end{figure}
@@ -2925,7 +2926,7 @@ results when testing the models on patient from other hospitals.
 \end{figure}
 
 \subsection{Results -- Tree-based models on event counts, a simple but efficient
-performer}%
+  performer}%
 \label{subsec:predictive_models:results}
 
 \paragraph{Decayed counting followed by random forest outperforms elaborate
@@ -2958,12 +2959,12 @@ index stay chapters is a strong baseline.
 \end{figure}
 
 
-\paragraph{The cost of low prevalence}
+\paragraph{The challenge of low prevalence}
 
 \begin{figure}[!b]
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
-  \caption{ Bigger target prevalences yield better AUPRC. The
+  \caption{Higher target prevalences yield better AUPRC. The
     different chapters are binned in prevalence bins. The estimator used for
     this plot is random forest trained on the full effective train set of size
     8560. Appendix \ref{apd:prognosis_prevalences} details the ROC AUC curves.}%
@@ -2978,12 +2979,13 @@ than 5\% prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar
 results for ROC AUC and linear estimators.
 
 
-\paragraph{Static embeddings are quicker to train}%
+\paragraph{Static embeddings reduce computational costs}%
 
 
 Figure \ref{fig:prognosis_training_time} shows the training time of the
 different pipelines averaged over the 21 chapters of the prognosis task,
-highlighting the efficiency of the static embedding methods.
+highlighting the efficiency of the static embedding methods. There is a 10-times
+speed up of local embeddings over the transformer-based model.
 
 \begin{figure}[!h]
   \begin{minipage}{.35\linewidth}
