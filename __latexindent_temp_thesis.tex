@@ -2958,12 +2958,12 @@ index stay chapters is a strong baseline.
 \end{figure}
 
 
-\paragraph{The cost of low prevalence}
+\paragraph{The challenge of low prevalence}
 
 \begin{figure}[!b]
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
-  \caption{ Bigger target prevalences yield better AUPRC. The
+  \caption{Higher target prevalences yield better AUPRC. The
     different chapters are binned in prevalence bins. The estimator used for
     this plot is random forest trained on the full effective train set of size
     8560. Appendix \ref{apd:prognosis_prevalences} details the ROC AUC curves.}%
@@ -2978,12 +2978,13 @@ than 5\% prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar
 results for ROC AUC and linear estimators.
 
 
-\paragraph{Static embeddings are quicker to train}%
+\paragraph{Static embeddings reduce computational costs}%
 
 
 Figure \ref{fig:prognosis_training_time} shows the training time of the
 different pipelines averaged over the 21 chapters of the prognosis task,
-highlighting the efficiency of the static embedding methods.
+highlighting the efficiency of the static embedding methods. There is a 10-times
+speed up of local embeddings over the transformer-based model.
 
 \begin{figure}[!h]
   \begin{minipage}{.35\linewidth}
