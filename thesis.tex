@@ -2574,7 +2574,7 @@ details this evolution of predictive model complexity.
 
 
 
-\subsection{Small populations: no silver bullet}%
+\subsection{Low prevalence and local practice call for data frugality}%
 \label{subsec:predictive_models:low_prevalence}%
 
 % Low prevalence
@@ -2594,7 +2594,7 @@ develop and evaluate prognosis models on small samples, accessible in many
 hospitals.
 
 % Major dataset shifts
-\paragraph{We don't know if transferring predictive is effective} A potential
+\paragraph{Transferring predictive model is no silver bullet} A potential
 solution to local small sample sizes is to transfer models pretrained on large
 populations. However, privacy requirements also prevent such transfer
 between institutions \footnote{We asked for CEHR-BERT to be published, but so
@@ -2623,14 +2623,15 @@ performance dropped from 0.76 to 0.83 area under the receiver operating curve
 
 Some predictive risks are used in daily clinical practice: For example, the
 Glasgow Coma Scale \citep{teasdale1974assessment} or the APACHE III score
-\citep{knaus1991apache}. But only a small part of the published models are
-successfully deployed into clinical practice \citep{wyatt1995commentary,
-  kelly2019key}. Poor adoptions are due to lack of evidence for clinical
-credibility, accuracy, generality or clinical effectiveness. Improving the
-strength of this evidence requires to repeatedly test these systems on
-different prospective populations with intuitive metrics for physicians
-\citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
-
+\citep{knaus1991apache}, though these are very simple scores built from
+expertise rather than machine learning. But only a small part of the published
+models are successfully deployed into clinical practice
+\citep{wyatt1995commentary, kelly2019key}. Poor adoptions are due to lack of
+evidence for clinical credibility, accuracy, generality or clinical
+effectiveness. Improving the strength of this evidence requires to repeatedly
+test these systems on different prospective populations with intuitive metrics
+for physicians \citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
+Hence deployment simplicity is a key factor for model adoption.
 
 \paragraph{Simple pipelines facilitate model deployments}
 
@@ -2670,9 +2671,9 @@ most efficient to yield good practical utility?
 \paragraph{Outline}
 Section \ref{sec:predictive_models:pipelines} details four predictive pipelines
 of increasing complexity. Subsection
-\ref{subsec:predictive_models:task_definitions} define three clinical tasks
+\ref{subsec:predictive_models:expe_definitions} define three clinical tasks
 covering different benchmarking and clinical usefulness. Subsection
-\ref{subsec:predictive_models:evaluation_pipeline} details our evaluation
+\ref{par:predictive_models:evaluation_pipeline} details our evaluation
 pipeline. Finally subsection \ref{subsec:predictive_models:results} presents our
 results and section \ref{sec:predictive_models:conclusion} discusses their
 implications.
@@ -2695,7 +2696,7 @@ low target prevalences --linked to the number of cases.
 \section{From basic to complex: four increasingly sophisticated predictive pipelines}%
 \label{sec:predictive_models:pipelines}%
 
-\subsection{A simple non destructive data format: sequence of events}%
+\subsection{A simple information-preserving data format: sequence of events}%
 \label{subsec:predictive_models:event_format}%
 % Time-varying features with high cardinality is the specificity and is handled
 % by the event data format
@@ -2732,20 +2733,20 @@ $\lambda_g$ are the parameters of the featurizers.
 
 \subsection{Demographic features: $g_{demo}$}\label{subsec:predictive_models:demographic}
 
-A simple featurization choice --pervasive before machine learning techniques--
-considers only a few demographic features available in the patient record: age,
+One simple featurization choice ignores these sequence of events and only focus
+on a few demographic features available in the patient record: age,
 gender, admission origin, discharge destination, admission date. These
-demographics as new columns to all other featurizers.
+demographics are added as new columns for all other subsequent featurizers.
 
-\subsection{Count encoding of event features: $g_{count}$}\label{subsec:predictive_models:count_encoding}
+\subsection{Decayed counting of event features: $g_{count}$}\label{subsec:predictive_models:count_encoding}
 
-We process the raw events by computing a sparse count matrix $C$ of shape
-$(N, n_{vocabulary})$ where each row collapses the patient history by
-counting the number of times a concept is present in the patient history. To
-better take into account the temporal dimension, we also computed a decayed
-count of the events in the patient history, noted $C_{\delta}$. For an event
-triplet $(i, t, c)$, we compute the time delta between the event and the followup
-time.
+We process the raw events by computing a sparse count matrix $C$ of shape $(N,
+  n_{vocabulary})$ where each row collapses the patient history by counting the
+number of times a concept is present in the patient history as illustrated in
+Figure \ref{fig:pipelines:count_encoding}. To better take into account the
+temporal dimension, we also computed a decayed count of the events in the
+patient history, noted $C_{\delta}$. For an event triplet $(i, t, c)$, we
+compute the time delta between the event and the followup time.
 $$\Delta t = |t-T_0|$$
 Then, we decay the count matrix with an exponential of half life $\delta$.
 $$C_{\delta}[i, c] += e^{-\frac{\Delta t}{\delta}}$$% 
@@ -2753,16 +2754,24 @@ Finally, we obtain the patient features by concatenating each
 delayed count matrix; eg. with decay 0 and decay $\delta$.
 $$g_{count}(S, (0, \delta))= [C_{0}, C_{\delta}]$$% 
 Several decays can be selected and concatenated together. The decays are
-considered hyperparameters which are selected by cross-validation. Appendix
-\ref{apd:pipelines:count_encoding} details this feature processing procedure.
+considered hyperparameters which are selected by cross-validation.
+
+\begin{figure}
+  \includegraphics[width=0.7\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
+  \caption{Illustration of the decayed counting
+    procedure.}\label{fig:pipelines:count_encoding}
+\end{figure}
+
 
 \subsection{Static embeddings of event features: $g_{emb-local}$ or $g_{emb-SNDS}$}
 
 The SVD-PPMI algorithm (introduced by \cite{beam2018big}, detailed in Appendix
 \ref{apd:pipelines:static_embeddings}) performs a dimension reduction on the
-cooccurrence matrix between each medical concepts. Building upon this algorithm,
-we propose two sequence representation techniques. These embeddings are static
-by opposition to transformer-based embeddings that adapts to the context.
+cooccurrence matrix between each medical concepts. It creates neighboring vector
+representations for codes that coocurre frequently together and thus induces
+some sense of clinical relation. Building upon this algorithm, we propose two
+sequence representation techniques. These embeddings are static by opposition to
+transformer-based embeddings that adapts to the context.
 
 \paragraph{Static embeddings locally trained: $g_{emb-local}$} We apply the
 SVD-PPMI algorithm to the training cohort yielding static embeddings
@@ -2774,7 +2783,7 @@ with decayed counts: $g_{emb-local}(S, (0, \delta))=[C_{0} \cdot \Phi_{local}, C
 embeddings on the train cohort, we rely on static embeddings $\Phi_{SNDS}$
 pre-computed on French national claims data from 3,112,565 patients
 \citep{doutrelignerepresentations}. The aggregation is performed similarly as
-for count encoding and local embeddings: $g_{emb-SNDS}((S, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
+for decayed counting and local embeddings: $g_{emb-SNDS}((S, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
   \Phi_{SNDS}]$.
 
 \subsection{Transformer based: $g_{cbert}$}%
@@ -2815,13 +2824,13 @@ We experimented with gradient boosting trees, without observing significant perf
 \section{Empirical Study -- Benchmarking three operational and clinical
   tasks}\label{sec:predictive_models:empirical_study}
 
-\subsection{Navigating between clinical and benchmarking utilities}%
-\label{subsec:predictive_models:task_definitions}%
+\subsection{Experiments to explore the performance-complexity trade off}%
+\label{subsec:predictive_models:expe_definitions}%
 
 \paragraph{Heathcare database -- Greater Paris Hospitals}%
 \label{sec:data_extraction}%
 
-We used data extracted from the data warehouse of the Greater Paris Hospitals
+We use data extracted from the data warehouse of the Greater Paris Hospitals
 (AP-HP), hosting routine care data from 38 hospitals in the Paris area. Details
 on this database is given in Appendix \ref{apd:database_description}. We include
 every medical event among drug administrations, ICD10 diagnosis and procedure
@@ -2838,12 +2847,8 @@ are fed to the predictive model, an \emph{horizon} after the end of the
 observation period defining the followup, and a target event potentially
 occurring during the followup.
 
-The more clinically anchored a task is, the less appropriate it is for
-benchmarking models, as local practices will be more important in
-defining precise clinical criteria than general operational tasks. We study
-three tasks of increasing clinical value and implementation complexity with
-decreasing benchmark interest: Long Length Of Stay interpolation (LOS),
-prognosis as a multi-label binary classification task where we predict the next
+We study three tasks of increasing clinical value and implementation complexity:
+Long Length Of Stay interpolation (LOS), prognosis the prediction of the next
 stay ICD10 chapters, and prediction at one year of incident Major Adverse
 Cardiovascular Events (MACE). Table \ref{table:predictive_tasks_summary}
 summarizes key characteristics of the cohorts and task definitions and Appendix
@@ -2874,8 +2879,8 @@ summarizes key characteristics of the cohorts and task definitions and Appendix
 \end{table}
 
 
-\subsection{Evaluation procedure -- Exploring the performance-sample trade-off}%
-\label{subsec:predictive_models:evaluation_pipeline}
+\paragraph{Evaluation procedure -- Exploring sample efficiency}%
+\label{par:predictive_models:evaluation_pipeline}
 
 We split each cohort described in Table \ref{table:predictive_tasks_summary}
 into a train and a test set following a temporal split based on each patient
@@ -2922,11 +2927,11 @@ results when testing the models on patient from other hospitals.
 \subsection{Results -- Tree-based models on event counts, a simple performer}%
 \label{subsec:predictive_models:results}
 
-\paragraph{Count encoding followed by random forest outperforms elaborated
+\paragraph{Decayed counting followed by random forest outperforms elaborated
   embedding models}%
 
 Both for the prognosis (shown if Figure \ref{fig:prognosis_auprc}) and the
-LOS task (shown in Figure \ref{fig:los_roc_auc}), count encoding with random
+LOS task (shown in Figure \ref{fig:los_roc_auc}), decayed counting with random
 forest outperforms other pipelines. For these two tasks, the transformer model
 is far from the best performance, certainly because of too small samples.
 
@@ -2946,7 +2951,7 @@ index stay chapters is a strong baseline.
     for random forest and all featurizers but the demographics and CEHR-BERT,
     suggesting that the Bayes error rate is reached. However, for lower sample
     regimes --below 12,500 patients, we see a clear advantage of static
-    embeddings over count encoding of events (both for logistic regression and
+    embeddings over decayed counting of events (both for logistic regression and
     random forest). Appendix \ref{apd:temporal_split:los} details AUPRC.}%
   \label{fig:los_roc_auc}
 \end{figure}
@@ -3008,11 +3013,11 @@ algorithms, from simple baseline to large transformer-based pipelines.
 
 \paragraph{Tree-based models outperform other pipelines}
 For simple predictive tasks such as LOS interpolation or prognosis at the ICD10 level and
-small sample sizes, simple pipelines based either on count encodings or static
+small sample sizes, simple pipelines based either on decayed countings or static
 embeddings followed by random forest are sufficient to reach good performances.
 Transformer-based models struggle with these low-sample regimes. In low
 computing resources environments, static embedding pipelines are twice as fast
-as count encoding and more than five times faster than transformers.
+as decayed counting and more than five times faster than transformers.
 
 % \paragraph{Generic prognosis task might not be a sound evaluation}
 % Our experiments show that the prognosis task relies heavily on the previous stay
@@ -6180,7 +6185,7 @@ interventions.
   A fork of the CEHR-BERT implementation is available at \url{https://github.com/strayMat/cehr-bert}. It was necessary
   to adapt the code to our data format and to the AP-HP computing environment.
 
-  All count encoding and static embedding featurizers are available as a standalone
+  All decayed counting and static embedding featurizers are available as a standalone
   package at \url{https://gitlab.com/strayMat/event2vec}.
 
 
@@ -6558,16 +6563,13 @@ interventions.
   extraction. More fine grained details should be available in the information
   system but were not communicated to us.
 
-  \subsection{Count encoding}\label{apd:pipelines:count_encoding}
+  \subsection{Decayed counting}\label{apd:pipelines:count_encoding}
 
-  Figure \ref{apd:fig:pipelines:count_encoding} details how counts and time decays
-  are computed. During cross-validation, the explored decay parameters are:
+  % Figure \ref{apd:fig:pipelines:count_encoding} details how counts and time decays
+  % are computed. 
+
+  During cross-validation, the explored decay parameters are:
   $\big[[0], [0, 1], [0, 7], [0, 30], [0, 90]\big]$.
-
-  \begin{figure}
-    \includegraphics[width=0.9\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
-    \caption{Count encoding procedure.}\label{apd:fig:pipelines:count_encoding}
-  \end{figure}
 
   \subsection{Static Embeddings of event features}\label{apd:pipelines:static_embeddings}
 
@@ -6624,7 +6626,7 @@ interventions.
     \includegraphics[width=0.8\textwidth]{img/chapter_3/static_embeddings_aggregation.png}
     \caption{Aggregation of the embeddings to yield one vector representing each
       patient sequence. The left blue matrix is the same as the one computed in
-      the count encoding method. It is multiplied by the embedding matrix $\Phi$ either
+      the decayed  method. It is multiplied by the embedding matrix $\Phi$ either
       learned on the training set or transferred from the SNDS claims database.
     }\label{apd:fig:pipelines:static_embeddings_aggregation}
   \end{figure}
