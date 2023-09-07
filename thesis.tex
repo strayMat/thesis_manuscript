@@ -2478,10 +2478,11 @@ would provide a complete view of patient care.
   publicly available--, showing that it outperforms transformer-based models on
   simple tasks with medium sample sizes. We highlight the sample and computing
   resource efficiency of these models. Finally, clinically relevant problems
-  generally present a strong class imbalance, which complicates models
-  development and undermines their performances. Further work is needed to
-  understand which types of models well in these scenarios where the number of
-  cases requires good sample efficiency.
+  generally present a strong class imbalance, with low outcome prevalence. This
+  makes frugal models particularly attractive because of their capacity to
+  learn from few examples. Despite being attractive for large samples, complex
+  models, as with transformers may be less adpated to typical clinical settings
+  than lightweight data-processing pipelines using tree-based models.
 \end{chapterabstract}
 
 
@@ -2511,7 +2512,12 @@ would provide a complete view of patient care.
 The increasing availability of routine care data and advances in machine
 learning are raising hope for predictive modeling in healthcare. EHRs are
 promising because of the richness of their data and their integration in routine
-care. \citep{raghupathi2014big}.
+care. \citep{raghupathi2014big}. However, predictive algorithms trying to model
+this ever richer data sources gain in complexity. We explore a
+performance-complexity tradeoff in predictive models on three tasks ranging
+from general populations of patients to more specific clinical cases.
+
+\subsection{Focus on predictive models for planning or risk scores}%
 
 % However, there is a shift from clinically meaningful objectives towards abstract
 % outcomes in EHR predictive modeling literature.
@@ -2530,16 +2536,12 @@ informing \emph{care planning} \citep{topol2019high}. Appendix
 healthcare.
 
 Following the trend for evaluating current state-of-the-art models
-\citep{wornow2023shaky}, we focus on purely predictive models --risk scores or
-planning-- with three tasks ranging from general populations of patients to
-more specific clinical cases.
+\citep{wornow2023shaky}, we focus on purely predictive models: risk scores or
+planning.
 
 \subsection{Predictive pipelines fueling medical predictions are increasingly
   complex}%
 \label{subsec:predictive_models:complex_data}%
-
-This complexity stems from predictive algorithms trying to model ever richer data
-sources.
 
 \paragraph{Original complexity of the data}
 
@@ -2552,7 +2554,7 @@ preprocessing usually requires to map non standard terminologies, create derived
 variables by aggregating measures over specific time periods. The choices of
 baseline covariates should be driven by medical experts which are often not
 familiar the complexity of the full EHR data processing pipeline. We propose to
-leverage models that takes raw structured data as input to avoid as much as possible these
+leverage models that take raw structured data as input to avoid as much as possible these
 preprocessing steps.
 
 %  At the time of study, population
@@ -2571,8 +2573,6 @@ medical vocabularies, a series of deep learning methods have been developed
 recurrent neural network \citep{lipton2016learning}, then with large transformer-based
 architectures \citep{li2020behrt}. Appendix \ref{apd:review_models} further
 details this evolution of predictive model complexity.
-
-
 
 \subsection{Low prevalence and local practice call for data frugality}%
 \label{subsec:predictive_models:low_prevalence}%
