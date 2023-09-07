@@ -2738,15 +2738,24 @@ on a few demographic features available in the patient record: age,
 gender, admission origin, discharge destination, admission date. These
 demographics are added as new columns for all other subsequent featurizers.
 
+
+\begin{figure}[!b]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
+  \caption{Illustration of the decayed counting
+    procedure.}\label{fig:pipelines:count_encoding}
+\end{figure}
+
 \subsection{Decayed counting of event features: $g_{count}$}\label{subsec:predictive_models:count_encoding}
 
 We process the raw events by computing a sparse count matrix $C$ of shape $(N,
   n_{vocabulary})$ where each row collapses the patient history by counting the
 number of times a concept is present in the patient history as illustrated in
-Figure \ref{fig:pipelines:count_encoding}. To better take into account the
-temporal dimension, we also computed a decayed count of the events in the
-patient history, noted $C_{\delta}$. For an event triplet $(i, t, c)$, we
-compute the time delta between the event and the followup time.
+Figure \ref{fig:pipelines:count_encoding}. To better take into account the temporal dimension, we also computed a decayed
+count of the events in the patient history, noted $C_{\delta}$.
+
+For an event triplet $(i, t, c)$, we compute the time delta between the event
+and the followup time.
 $$\Delta t = |t-T_0|$$
 Then, we decay the count matrix with an exponential of half life $\delta$.
 $$C_{\delta}[i, c] += e^{-\frac{\Delta t}{\delta}}$$% 
@@ -2755,13 +2764,6 @@ delayed count matrix; eg. with decay 0 and decay $\delta$.
 $$g_{count}(S, (0, \delta))= [C_{0}, C_{\delta}]$$% 
 Several decays can be selected and concatenated together. The decays are
 considered hyperparameters which are selected by cross-validation.
-
-\begin{figure}[!b]
-  \centering
-  \includegraphics[width=0.8\textwidth]{img/chapter_3/patient_counter_with_decay.pdf}
-  \caption{Illustration of the decayed counting
-    procedure.}\label{fig:pipelines:count_encoding}
-\end{figure}
 
 
 \subsection{Static embeddings of event features: $g_{emb-local}$ or $g_{emb-SNDS}$}
@@ -2908,7 +2910,7 @@ validation procedure for LOS and prognosis tasks, exploring the validity of our
 results when testing the models on patient from other hospitals.
 
 
-\begin{figure}[!b]
+\begin{figure}[!t]
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
   \caption{Prognosis AUPRC, weighted by prevalences over 21
@@ -2961,7 +2963,7 @@ index stay chapters is a strong baseline.
 
 \paragraph{The challenge of low prevalence}
 
-\begin{figure}[!b]
+\begin{figure}[!h]
   \centering
   \includegraphics[width=1\linewidth]{img/chapter_3/prognosis/prevalence_results__est_random_forests_boxplot_average_precision_score_xlog.pdf}
   \caption{Higher target prevalences yield better AUPRC. The
