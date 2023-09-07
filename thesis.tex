@@ -1237,8 +1237,8 @@ models and interpreting their inner part as causal.
   % Why am I not doing this
   This thesis was originally motivated by studying deep representations for
   patient trajectories and their ability to transfer between healthcare
-  databases. However, the choice of a representation loops back to the choice
-  of a model, and hence to the measure of performances for relevant downstream
+  databases. However, the choice of a representation loops back to the choice of
+  a model, and hence to the measure of performances for relevant downstream
   tasks. For other domains such as NLP, consensual downstream tasks such as text
   classification have been established to evaluate the performances of
   representations. Aggregated in benchmarks such as GLUE \citep{wang2018glue},
@@ -1252,6 +1252,7 @@ models and interpreting their inner part as causal.
   representations in healthcare are almost non-existent due to privacy
   requirements. These specific features of RWD call into question the
   appropriateness of constructing universal representations in healthcare.
+
   % Focus on variable selection: root in hand collected variables in carefully
   % designed subpopulation ?
 
@@ -1684,7 +1685,7 @@ data beyond the hospital to better include city care. The qualitative aspect
 of this chapter contrasts with the general mathematical context of the thesis.
 
 \paragraph{Chapter \ref{chapter:predictive_models}: Exploring a complexity
-  gradient in representation and predictive algorithms for EHRs} Acknowledging
+  gradient in representation and predictive models for EHRs} Acknowledging
 the growing interest in predictive algorithms for EHR data, this chapter
 introduces two simple feature construction methods taking raw medical events
 as input features before feeding a predictive model. It benchmarks four
@@ -2479,10 +2480,11 @@ would provide a complete view of patient care.
   simple tasks with medium sample sizes. We highlight the sample and computing
   resource efficiency of these models. Finally, clinically relevant problems
   generally present a strong class imbalance, with low outcome prevalence. This
-  makes frugal models particularly attractive because of their capacity to
-  learn from few examples. Despite being attractive for large samples, complex
-  models, as with transformers may be less adpated to typical clinical settings
-  than lightweight data-processing pipelines using tree-based models.
+  makes frugal models particularly attractive because of their capacity to learn
+  from few examples. Despite being attractive for large sample sizes --over the
+  million, complex models, as with transformers may be less adpated to typical
+  clinical settings than lightweight data-processing pipelines using tree-based
+  models.
 \end{chapterabstract}
 
 
@@ -4411,7 +4413,7 @@ counterfactual nearest neighbors, which has been shown ineffective
   \label{subsec:causal_model_selection:framework}%
 
   \paragraph{Settings} We consider the Potential Outcomes framework introduced in
-  \ref{par:intro:causal_framework:neyman_rubin}.
+  \ref{subsec:intro:causal_framework}.
 
   \paragraph{Causal assumptions}\label{par:causal_assumptions}
 
@@ -6656,9 +6658,9 @@ interventions.
   Hospital of Paris (AP-HP) hosting routine care data from 38 hospitals formatted
   in the OHDSI OMOP format \citep{hripcsak2015observational}. The first extraction
   containing 200,000 randomly sampled patients, is used for the LOS
-  (\ref{par:task_definitions:los}) and Prognosis
-  (\ref{par:task_definitions:prognosis}) tasks. For the MACE task
-  \ref{par:task_definitions:mace}, the number of case events --prevalence-- was
+  (\ref{apd:task_details:los}) and Prognosis
+  (\ref{apd:task_details:prognosis}) tasks. For the MACE task
+  (\ref{apd:task_details:mace}), the number of case events --prevalence-- was
   lower than for the two other tasks, so we had to work on a bigger extraction
   containing 2.1 million patients. In both cases, raw data contained diagnoses and
   procedures billing codes, prescriptions and administrations of drugs,
