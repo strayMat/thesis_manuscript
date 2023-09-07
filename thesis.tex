@@ -75,10 +75,14 @@
 \newcommand{\highlight}[2]{\colorbox{#1!17}{$\displaystyle #2$}}
 \renewcommand{\highlight}[2]{\colorbox{#1!17}{#2}}
 
-% define colors for soul highligting
-\usepackage{soul}
-\colorlet{important_example}{Emerald!17}
-\sethlcolor{important_example}
+% define colors for soul highligting (box spanning several lines)
+% \usepackage{soul}
+% \colorlet{important_example}{Emerald!17}
+% \sethlcolor{important_example}
+%\textcolor{h_color}{texts}
+% don't span several lines...
+%\newcommand{\important}[1]{\colorbox{Emerald!17}{\textbf{#1}}}
+
 % Define some commands for table
 \newcolumntype{+}{!{\vrule width 2pt}}
 % create \thickcline for thick horizontal lines of variable length
@@ -118,7 +122,7 @@
 \colorlet{S}{RedOrange}
 
 % background colors
-\colorlet{h_color}{Emerald}
+\colorlet{h_color}{brown}
 \colorlet{bayes_error}{purple}
 \colorlet{approximation_error}{Orchid}
 \colorlet{estimation_error}{SeaGreen}
@@ -149,11 +153,6 @@
 \colorlet{GRAY}{Gray}
 
 
-
-%\hl{texts}
-% don't span several lines...
-%\newcommand{\important}[1]{\colorbox{Emerald!17}{\textbf{#1}}}
-
 % bibliography
 \usepackage[natbib=true,backref=true,style=authoryear,maxnames=999,maxcitenames=2,backend=biber,uniquename=false,uniquelist=false,firstinits=true]{biblatex}
 \DeclareNameAlias{sortname}{first-last}
@@ -171,6 +170,7 @@
 % small bibliography
 \DeclareFieldFormat{bibfont}{\footnotesize\sloppy #1}
 \addbibresource{references.bib}
+\AtEveryCite{\color{dark_green}}
 
 % appendix
 \usepackage[toc,titletoc,page]{appendix}
@@ -753,26 +753,28 @@ Merci à toi Manon d'exister et d'être là.
 \label{subsec:intro:wrapup}%
 
 % Promises of machine learning in healthcare
-The successes of machine learning in leveraging large amount of poor quality and
-weakly labelled data in Natural Language Processing or computer vision have
-deeply impressed other scientific fields. Because \textit{medical practice, and
-  biomedical research, [are] inherently information-management tasks}
-\citep{patel2009coming}, many researchers foresaw a big potential for improving
-healthcare in applying machine learning to novel data collections
-\citep{topol2019high,rajkomar2019machine}.
+Machine learning has met great success in leveraging large amount of poor
+quality and weakly labelled data in Natural Language Processing or computer
+vision. Can other applications benefit from such approach. Because
+\textit{medical practice, and biomedical research, [are] inherently
+  information-management tasks} \citep{patel2009coming}, many researchers foresaw
+a big potential for improving healthcare in applying machine learning to novel
+data collections \citep{topol2019high,rajkomar2019machine}.
 
 % overview of concepts
-There is currently a tension between massive routine care data collections
---claims or Electronic Health Records (EHRs) presented in Section \ref{sec:intro:data}, a new statistical
-framework --machine learning \citep{breiman2001statistical} described in Section
-\ref{sec:intro:two_cultures}, and pressing analytical questions in public health
---detailed in Section \ref{sec:intro:causality}. Three concrete examples illustrating this tension should be helpful to
-understand why focus on health inference from EHRs.
+There is currently a tension between massive routine care data collections suchg
+as claims or Electronic Health Records (EHRs) (presented in Section
+\ref{sec:intro:data}), a new statistical framework (machine learning
+\citep{breiman2001statistical} described in Section
+\ref{sec:intro:two_cultures}), and pressing analytical questions in public
+health (detailed in Section \ref{sec:intro:causality}). To understand the
+importance and the challenges of health inference from EHRs, let us discuss
+three concrete examples below.
 
 \subsection{Learning statistics during the Natural Language Processing revolution}
 
 % context 
-In the 2010's, \cite{halevy2009unreasonable} proposed to take advantages of
+In the 2010's, \cite{halevy2009unreasonable} proposed to take advantage of
 regularities present in large piles of data to automatically design features
 relevant for multiple application tasks. Consider a model trained to classify
 images from a massive collection of labelled pictures. During training, it
@@ -802,17 +804,12 @@ acknowledging the continuous improvement of NLP, ambitioned to leverage its vast
 repository of clinical notes for research.
 % problem
 % apport
-Yet, routine care data is not a familiar material for medical research. It
-requires new methods to process and extract knowledge from these data. One such
-example is the necessity to remove all identification elements from the clinical
-notes of patients before letting researchers outside the medical staff access
-them --a processed called pseudonymization \citep{dernoncourt2017identification,
-  paris2019desidentification}. For engineers and NLP researchers, this routine
-care data are different from traditional research data collection because it
-requires innovating tools --eg. from NLP-- to deal with the novel complexity and
-scale of the data collection process. For epidemiologists and physicians, the
-major difference lies in the opposition between experimental and observational
-data (presented in Subsection
+Yet, routine care data is not a familiar material for medical research. For
+engineers and NLP researchers, this routine care data are different from
+traditional research data collection because it requires new tools --eg. from
+NLP-- to deal with the novel complexity and scale of the data collection
+process. For epidemiologists and physicians, the major difference lies in the
+opposition between experimental and observational data (presented in Subsection
 \ref{subsec:intro:interventional_vs_observational}).
 
 \subsection{Billing claims: new data for public health?}
@@ -829,9 +826,9 @@ medical events used in this data. This problem known as the \emph{curse of
   dimensionality} has been introduced in operational research
 \citep{bellman1957dynamic} and is well known in statistics
 \citep{breiman2001statistical}: The required number of samples to train
-predictive algorithms exponentially grow with the number of dimensions.
+predictive algorithms typically grows exponentially with the number of dimensions.
 Sequences of claim events can be viewed as a sequence of tokens, just as natural
-sentences. A trend from medical informatics, draws from NLP techniques, to
+sentences. Thus, a trend from medical informatics, draws from NLP techniques, to
 create low dimensional representations --embeddings-- of medical concepts
 \citep{beam2019clinical}. The relationships between events captured by these
 embeddings are strikingly close to known associations as shown in Figure
@@ -843,6 +840,25 @@ appropriate care and how to measure it from the data
 \citep{cma_policy_appropriateness_2015}? This question is motivated by the
 growing necessity to adapt healthcare funding to a resource-constrained system
 \citep{mcginnis2013best,aubert_2019}.
+
+
+\begin{figure}[!t]
+  \begin{minipage}{0.32\textwidth}
+    \caption{Projection in two dimensions (TSNE) of medical event embeddings.
+      Each point is a projection of the embedded vector for a given medical
+      concept: Embeddings have been built from French Medical Claims (SNDS).
+      Colors correspond to different medical vocabularies: drugs in green, billing
+      diagnoses in blue, billing procedures in red, biology in pink, general
+      practitioner (GP) activity in yellow. An interactive version of this plot
+      is available at:
+      \url{https://straymat.gitlab.io/event2vec/visualizations.html}}
+    \label{intro:tsne_plots}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.65\textwidth}
+    \includegraphics[width=\linewidth]{img/chapter_3/snds2vec_annotated.png}
+  \end{minipage}
+\end{figure}
 
 % First questions: how useful are such wealth of data ? Is unsupervised learning
 % useful ? Is prediction a useful goal ? I was exactly in the atypical situation
@@ -861,6 +877,7 @@ highlights the different stance taken by machine learning over traditional
 statistics and precises critical questions in public health that could
 benefit from innovative methods.
 
+\pagebreak
 \section{The data: Electronic Health Records}\label{sec:intro:data}
 
 \begin{background_box_left}
@@ -943,17 +960,18 @@ benefit from innovative methods.
   communicate more or less well with each other.
 
   % interest for AIM and generation of evidence ?
-  As early as 1990, the Artificial Intelligence in Medicine (AIM) community
-  emphasized the importance of EHR \citep{shortliffe1993adolescence}. These
-  systems are a precious collection of natural experiments, allowing to complete
-  the understanding of genotype-environment interactions with phenotypes
+  As early as 1990, the artificial intelligence in medicine community emphasized
+  the importance of EHR \citep{shortliffe1993adolescence}. These systems are a
+  precious collection of natural experiments, allowing to complete the
+  understanding of genotype-environment interactions with phenotypes
   \citep{butte2006creation,patel2009coming}. Interest in EHR studies developed
   during the early 2000s highlighting their increasing rich data modalities.
-  EHRs also provide a potential alternative to costly traditional data collections
-  with decreasing financial supports. \cite{casey2016using} estimated \hl{the
-    average cost per participant in traditional studies of cardio-vascular disease
-    risk factors between US\$2,700 and US\$17,700 compared to US\$0.11 for a recent EHR.}
-  Today's interest of EHR for research has been acknowledged in AIM
+  EHRs also provide a potential alternative to costly traditional data
+  collections with decreasing financial supports. \cite{casey2016using}
+  estimated \textcolor{h_color}{the average cost per participant in traditional
+    studies of cardio-vascular disease risk factors between US\$2,700 and
+    US\$17,700 compared to US\$0.11 for a recent EHR.} Today's interest of EHR for
+  research has been acknowledged in artificial intelligence in medicine
   \citep{yu2018artificial}, clinical research \citep{cowie2017electronic} and
   epidemiological studies \citep{casey2016using,gianfrancesco2021narrative}.
   Opportunities and challenges of EHRs are further discussed and illustrated
@@ -1041,7 +1059,7 @@ benefit from innovative methods.
   findings of a study may not generalize to other populations. As a practical
   consequence, RCTs may not apply to real world situations since included
   populations and experimental conditions differ too much from usual practices.
-  \hl{For example, only 6\% of asthmatics would have been eligible for their own
+  \textcolor{h_color}{For example, only 6\% of asthmatics would have been eligible for their own
     treatment RCTs} \citep{travers2007external}. An advantage of observational data
   over RCTs is their description of usual care practices, opening a window on
   care effectiveness \citep{cochrane1972effectiveness}: How well does a
@@ -1127,7 +1145,7 @@ Despite judging model choice as \textit{crucial to fruitful application}
 \citep{cox2006principles}, this tedious task is left to experts, that should have an
 appropriate theoretical model of the problem \citep{cox2001statistical}. This
 practice is prone to circular reasoning where a model is chosen only to justify an
-established theory. \hl{Crowdsourcing studies asking the same question to
+established theory. \textcolor{h_color}{Crowdsourcing studies asking the same question to
   different teams of experts showed that the choice of model and features is far
   from consensual and yield substantially different quantitative and qualitative
   results.} \cite{botvinik2020variability} attributed this dispersion to different
@@ -1207,7 +1225,7 @@ models and interpreting their inner part as causal.
   representation should keep information on the output $y$ and loose non-useful
   information in the input $x$, making it robust to noise: I refer to
   \cite{achille2018emergence} for a detailed formalization. This definition of
-  usefulness highlights the need to find pretext tasks to supervise the learning
+  usefulness highlights the importance of finding pretext tasks to supervise the learning
   of representations. For example, in computer vision, the pretext task is to
   label coarse classes of images (eg. dog, cat, container, ...). In NLP, the
   pretext task is to predict randomly masked world in a text. These tasks should
@@ -1275,7 +1293,7 @@ turn towards machine learning techniques to leverage the full potential of EHRs.
 % statistics that consider mechanisms as generally unknown, and predictive
 % accuracy as the hallmark of validity \citep{breiman2001statistical}.
 Are flexible statistical models a valid tool to answer today's questions in
-healthcare? If we are concerned in identifying which levers to pull to improve
+healthcare? If we are concerned with identifying which levers to pull to improve
 healthcare, we might not need to specify in our statistical models all
 mechanisms involved in the care process and its interaction with the complex EHR
 measurement system. One can hope that sufficient amount of data would allow flexible algorithm to
@@ -1296,14 +1314,15 @@ detect useful regularities in the data and learn from them
 
 The recent increase in RWD collection is attracting the attention of many
 players. The optimism on the promises of healthcare data is shared by
-epidemiologists \citep{mooney2015epidemiology,hernan_using_2016}, AIM researchers
-\citep{schwartz1987artificial, yu2018artificial}, clinical researchers
+epidemiologists \citep{mooney2015epidemiology,hernan_using_2016}, artificial
+intelligence in medicine researchers \citep{schwartz1987artificial,
+  yu2018artificial}, clinical researchers
 \citep{schwalbe2020artificial,dzau2023anticipating}, the industry
 \citep{pfizer2019rwd,iqvia2023rwd} and government bodies
 \citep{mcginnis2013best,fda_real_2018,ema2023rwd}. New scientific journals such
 as the \emph{NEJM AI}\footnote{\url{https://ai.nejm.org/}} \citep{beam_2023} at
-the intersection between algorithmic advances and clinical practices
-demonstrate the sustained interest in leveraging RWD for improving healthcare.
+the intersection between algorithmic advances and clinical practices demonstrate
+the sustained interest in leveraging RWD for improving healthcare.
 
 Drawing a full picture of these expectations would be over-ambitious and
 partial. But it is relevant to disentangle them in order to delimitate
@@ -1327,11 +1346,11 @@ fragmented between numerous healthcare professionals.
 % device and applications and AI/ML used to conduct clinical research
 % \citep{haug2023artificial}.
 
-\paragraph{From the automation of the care workflow to personalized medicine}
+\paragraph{From automating the care workflow to personalized medicine}
 
 % AI in healthcare 
 The automation of tedious tasks in healthcare is part of the original agenda of
-AIM \citep{schwartz1987artificial}. The goal is to give more time to the
+artificial intelligence in medicine \citep{schwartz1987artificial}. The goal is to give more time to the
 physicians by accelerating and facilitating parts of their work that require
 poor analytical capacities.
 % Old example of such automation is the computer reading of electrocardiograms. A
@@ -1403,7 +1422,7 @@ The \emph{Coming revolution In Medicine} is described by
   large amounts of new knowledge that no single physician could hope to digest; 3)
   a geographic maldistribution of M[edical] D[octors]s; 4) increasing demands on
   the physician's time as increasing numbers of individuals began to demand
-  quality medical care.} \hl{Fifty years later, the same preoccupations are
+  quality medical care.} \textcolor{h_color}{Fifty years later, the same preoccupations are
   destabilizing healthcare systems in rich countries:} increasing costs
 \citep{data_oecd_health_spending}, knowledge produced too quickly to be
 assimilable by a single person \citep{mcginnis2013best}, geographic disparities
@@ -1417,7 +1436,7 @@ However, measuring the appropriateness of a care is a delicate question
 issue medical guidelines built upon the scientific literature to recommend ideal
 care trajectories. However, these recommendations often focus on single-disease
 approaches, insufficiently covering today's population of patients: increasingly
-old and multimorbid \citep{skou2022multimorbidity}. \hl{Fewer than half of the
+old and multimorbid \citep{skou2022multimorbidity}. \textcolor{h_color}{Fewer than half of the
   clinical guidelines for the nine most common chronic conditions consider older
   patients with multiple comorbid chronic conditions}
 \citep{boyd2005clinical,parekh2010challenge}. In the United States, the
@@ -1456,7 +1475,7 @@ guide this link between patient characteristics and intervention.
   % model performances.
   % Interesting concept of promoter, the last component cause that precede the
   % apparition of a disease.
-  % AIM is rooted in causality 
+
   The early Framingham study concludes that risk reduction is more important
   than identifying the strength of specific risk factors since this quantity is
   subject to slight changes in the risk model \citep{brand1976multivariate}:
@@ -1627,7 +1646,7 @@ articles as first-authors and one work in progress:
 \begin{itemize}
   \item Chapter \ref{chapter:cdw} published in \emph{PLOS Digital Health},
   \item Chapter \ref{chapter:predictive_models} is ongoing work,
-  \item Chapter \ref{chapter:causal_tuto} submitted to \emph{npj Digital Medicine},
+  \item Chapter \ref{chapter:causal_tuto} is being finalized for submission,
   \item Chapter \ref{chapter:causal_model_selection} submitted to \emph{Artificial Intelligence in Medicine}.
 \end{itemize}
 
@@ -2435,7 +2454,7 @@ would provide a complete view of patient care.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Exploring a complexity gradient in representation and predictive algorithms for EHRs}\label{chapter:predictive_models}
+\chapter{Exploring a complexity gradient in representation and predictive models for EHRs}\label{chapter:predictive_models}
 
 \begin{citationbox}
   What must one know a priori about an unknown functional dependency in order to
@@ -2445,24 +2464,24 @@ would provide a complete view of patient care.
 
 \begin{chapterabstract}\label{sec:predictive_models:abstract}%
   As chapter \ref{chapter:cdw} shows, Electronic Health Records (EHRs) contain
-  multiple categories of data sparkling interest in the development of
-  predictive algorithms. Text and image put apart, this data can be represented
-  as time-stamped medical codes with a high number of categories. Current
-  state-of-the-art predictive models for EHRs build on increasingly elaborated
-  pipelines --based on the transformer architecture-- to handle the complexity
-  of these data. Acknowledging the difficulty to deploy, transfer and adapt
-  these models on local care environments, we explore a complexity-benefit
-  tradeoff by comparing them to simple aggregation of events. We use three
-  predictive tasks involving time-varying structured EHRs and increasingly
-  clinically relevant problems. We introduce a simple aggregation of static
-  embeddings --transferred from national claims and publicly available--,
-  showing that it outperforms transformer-based models on simple tasks with
-  medium sample sizes. We highlight the sample and computing resource efficiency
-  of these models. Finally, clinically relevant problems generally present a
-  strong class imbalance, which complicates models development and undermines
-  their performances. Further work is needed to understand which types of models
-  well in these scenarios where the number of cases requires good sample
-  efficiency.
+  multiple categories of data sparking interest in the development of predictive
+  algorithms. Text and image put aside, this data can be represented as
+  time-stamped medical codes with a high number of categories and biological
+  measurements. Current state-of-the-art predictive models for EHRs build on
+  increasingly elaborated pipelines --for instance using the transformer
+  architecture-- to handle the complexity of these data. Given the operational
+  difficulties to transfer and adapt these models on local care environments, we
+  explore a complexity-benefit tradeoff by comparing them to simple aggregation
+  of events. We use three predictive tasks involving time-varying structured
+  EHRs and increasingly clinically relevant problems. We introduce a simple
+  aggregation of static embeddings --transferred from national claims and
+  publicly available--, showing that it outperforms transformer-based models on
+  simple tasks with medium sample sizes. We highlight the sample and computing
+  resource efficiency of these models. Finally, clinically relevant problems
+  generally present a strong class imbalance, which complicates models
+  development and undermines their performances. Further work is needed to
+  understand which types of models well in these scenarios where the number of
+  cases requires good sample efficiency.
 \end{chapterabstract}
 
 
@@ -2488,18 +2507,11 @@ would provide a complete view of patient care.
 %But why such interest in predictive pipelines for healthcare ? How these tasks
 %relate to th}%
 % \label{subsec:predictive_models:importance}%
-\gv{I wonder if this is the right way to angle our paper. It seems to me beside
-  the points that we are trying to make (but maybe I've just missing the
-  angle)}\md{The shift towards less relevant tasks is outside the scope indeed.
-  I focused rather on a range of tasks covering a more or less precise clinical
-  population. Our point is to benchmark the different models on these different
-  type of tasks.}
-
 % promises
 The increasing availability of routine care data and advances in machine
-learning are raising hope for predictive modeling in healthcare. The richness of
-the data in EHRs and their integration in routine care make them a promising
-application area \citep{raghupathi2014big}.
+learning are raising hope for predictive modeling in healthcare. EHRs are
+promising because of the richness of their data and their integration in routine
+care. \citep{raghupathi2014big}.
 
 % However, there is a shift from clinically meaningful objectives towards abstract
 % outcomes in EHR predictive modeling literature.
