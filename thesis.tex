@@ -483,7 +483,7 @@
   Sciences et technologies de l'information et de la communication (STIC)\\
   \small Spécialité de doctorat: Informatique mathématique\\
   \footnotesize Unité de recherche: Inria, Social Data\\
-  \footnotesize Référent: : voir annexe
+  %\footnotesize Référent: : voir annexe
   \vspace{15mm}
 
   \textbf{Thèse présentée et soutenue à Saclay,\\ le 20 novembre 2023, par}\\
@@ -611,22 +611,22 @@
   entre ces nouvelles sources de données, l'apprentissage automatique et des
   problématiques modernes de santé publique. Ces exemples motivent notre principale question
   de recherche : Comment des modèles flexibles peuvent-ils aider à
-  fournir un traitement approprié à chaque patient afin d'améliorer sa santé ?%
+  fournir un traitement approprié à chaque patient afin d'améliorer sa santé ? %
   Afin de mieux comprendre les infrastructures modernes de collecte
   et d'analyse des dossiers patients informatisés (DPI), nous faisons la
   synthèse d'entretiens semi-structurés menés dans le cadre d'une étude de cas
   nationale portant sur les entrepôts de données cliniques des 32 hôpitaux
-  régionaux et universitaires français.%
+  régionaux et universitaires français. %
   Reconnaissant la difficulté d'accéder à des échantillons de grande taille et à
   la puissance de calcul pour développer des modèles prédictifs généralisables,
   nous étudions un gradient de complexité dans les représentations et les
-  algorithmes prédictifs sur DPI.%
+  algorithmes prédictifs sur DPI. %
   En se tournant vers le cadre causal, nous détaillons ensuite les éléments clés
   nécessaires pour estimer de manière robuste l'effet du traitement à partir de
   données de DPI variant dans le temps. Nous documentons l'impact de différents
   choix méthodologiques pour l'étude de l'effet de
   l'albumine sur la mortalité dans des cas de septicémie avec la base de données
-  MIMIC-IV (Medical Information Mart for Intensive Care).%
+  MIMIC-IV (Medical Information Mart for Intensive Care). %
   Dans des problèmes à grande dimension, la sélection d'hyperparamètres pour les
   modèles causaux est cruciale pour éviter le sous-apprentissage ou le
   sur-apprentissage. Pour une simulation et trois ensembles de données
@@ -5438,19 +5438,20 @@ infrastructures: the Clinical Data Warehouses (CDWs). Navigating this mass of
 data is simplified, mainly by centralizing fragmented data from poorly
 interoperable softwares and the use of NLP techniques. The main aim of these
 CDWs is to improve clinical research. However, deriving new evidences from EHRs
-is currently hampered  by a poorly standardized data access processes,
+is currently hindered by a poorly standardized data access processes,
 heterogeneous local care practices, and the non-exhaustive collection of
 critical elements of care trajectories, even during hospital care.
 %
 \paragraph{These data repositories are not big enough for large neural network
   trained on structured data} Even the regional scale data center of the AP-HP
-has only a few thousands of cases for common pathologies such as
-cardiovascular adverse events. On these medium sized datasets, flexible models
-on top of simple data representations --such as random forest with event
-counts-- are performing better than transformer-based models while being
-simpler to deploy and more compute efficient. These results echo the recent
-benchmark from \cite{grinsztajn2022tree} showing the superiority of tree-based
-methods over deep learning on tabular data.
+with data on 10 millions individuals has only a few thousands of cases for
+common pathologies such as cardiovascular adverse events. On these medium
+sized datasets, flexible models on top of simple data representations --such
+as random forest with event counts-- are performing better than
+transformer-based models while being simpler to deploy and more compute
+efficient. These results echo the recent benchmark from
+\cite{grinsztajn2022tree} showing the superiority of tree-based methods over
+deep learning on tabular data.
 %
 \paragraph{Big data is no oracle, we need causal thinking} Even with sufficient
 data, the observational nature of EHRs requires clear and robust workflows
@@ -5469,15 +5470,15 @@ models is the most performant approach. In practice, a simple procedure where
 nuisances are estimated with the same train set as the candidate models
 introduces negligible bias.
 
-\section{Personal convictions for perspectives}
+\section{Personal thoughts on perspectives}
 
 % Data does not flow, thus we should focus on small models or make use of
 % pretrained models from other domain
-\paragraph{The unreasonable effectiveness of healthcare data is yet out of
+\paragraph{The unreasonable effectiveness of healthcare data is still out of
   reach} Due to the impossibility to transfer models, administrative barriers to
 access data (linked with the multiplicity of the involved actors), and the
-difficulty to normalize healthcare data, predictive models deployment is still
-rare \citep{kelly2019key}. This encourages us to rely on sample efficient
+difficulty to normalize healthcare data, predictive models are very seldom
+deployed \citep{kelly2019key}. This encourages us to rely on sample efficient
 techniques that make the best of medium-sized data or rely on sharable sources
 of knowledge. This calls for more work adopting research network methodologies
 \citep{hripcsak2015observational} and model sharing strategies such as
@@ -5507,15 +5508,16 @@ presented in chapter \ref{chapter:causal_tuto}.
   effectiveness and public health policy} Some difficulty to define precise
 populations make claims inappropriate for precise clinical questions, but they
 are a good source for many public health and medico-economic questions. They
-are well normalized, well documented, lack few critical PICO elements
-\citep{caruana2023administrative}. Estimations methods borrowed to
-econometrics such as difference-in-difference \citep{athey2006identification},
-regression discontinuity design \citep{bor2014regression} and instrumental
-variables \citep{greenland2000introduction} might be also considered when
-appropriate for the question of interest.
+are well standardized, well documented, and contain most of the PICO elements
+needed to study chronic conditions \citep{caruana2023administrative}.
+Estimations methods borrowed to econometrics such as difference-in-difference
+\citep{athey2006identification}, regression discontinuity design
+\citep{bor2014regression} and instrumental variables
+\citep{greenland2000introduction} might be also considered when appropriate
+for the question of interest.
 
 %
-\paragraph{Modern public health problems should take into account the fragmented
+\paragraph{Modern public health problems should account for the fragmented
   nature of healthcare} Healthcare burdens and costs are driven by chronic
 diseases where death or rehospitalization are not the only outcomes of
 interest. Most of care is provided outside of the hospital
@@ -5525,14 +5527,18 @@ critical outcomes, for which experiments are easier to conduct and where error
 is more acceptable. Adopting methods from policy learning
 \citep{athey2021policy} would allow better evaluation and continuous
 improvement for interventions, opening the door to potentially big prevention
-benefits.
+benefits. Such public health interventions should be conducted within clear
+ethical frameworks. They could draw inspiration from existing experimental
+processes such as the French Article 51 or the United States center for
+medicare and medicaid innovation, both focused on organisational innovations
+\citep{lenormand2021what}.
 %
 Ultimately, I am convinced that the resource constraints faced by modern
 healthcare systems link the issue care effectiveness to that of equity. Some
-patients will be treated less well than others. Public health seeks to minimize
-these mistreated patients, hopefully without discrimination. More observational
-studies could help identify which subpopulations benefit the most from effective
-interventions.
+patients will benefit more from a given intervention than others. Public health
+seeks to minimize these mistreated patients, hopefully without discrimination.
+More observational studies could help identify which subpopulations benefit the
+most from effective interventions.
 
 % Modern collection of data in healthcare makes it a domain closer to social
 % sciences than usually considered. It involves institutions and individuals with
@@ -8968,11 +8974,53 @@ interventions.
 
   \vspace{-.5cm}
   \begin{multicols}{2}
-    \noindent \textbf{Résumé:}
+    \noindent \textbf{Résumé:} Les bases de données de vie réelle sont de plus
+    en plus accessibles, exhaustives, avec des détails temporels précis.
+    Contrairement aux données utilisées dans la recherche clinique
+    traditionnelle, elles capturent l'organisation routinière des soins. Ces
+    données de soins quotidiens ouvrent la porte à de nouvelles questions de
+    recherche, notamment en ce qui concerne la qualité des soins, l'efficacité
+    des interventions après leur mise sur le marché, l'hétérogénéité de leurs
+    bénéfices dans les populations mal desservies ou le développement de
+    traitements personnalisés. D'un autre côté, la complexité et la nature à
+    grande échelle de ces bases de données posent un certain nombre de défis
+    pour leur utilisation efficace. Pour remédier à ces problèmes, les
+    économètres et les épidémiologistes ont récemment proposé l'utilisation de
+    modèles flexibles combinant l'inférence causale et l'apprentissage
+    automatique en grande dimension.
+
+    Dans un premier temps, nous illustrons par trois exemples la tension
+    actuelle entre ces nouvelles sources de données, l'apprentissage automatique
+    et des problématiques modernes de santé publique. Ces exemples motivent
+    notre principale question de recherche : Comment des modèles flexibles
+    peuvent-ils aider à fournir un traitement approprié à chaque patient afin
+    d'améliorer sa santé ?
+    Afin de mieux comprendre les infrastructures modernes de collecte
+    et d'analyse des dossiers patients informatisés (DPI), nous faisons la
+    synthèse d'entretiens semi-structurés menés dans le cadre d'une étude de cas
+    nationale portant sur les entrepôts de données cliniques des 32 hôpitaux
+    régionaux et universitaires français.
+    Reconnaissant la difficulté d'accéder à des échantillons de grande taille et à
+    la puissance de calcul pour développer des modèles prédictifs généralisables,
+    nous étudions un gradient de complexité dans les représentations et les
+    algorithmes prédictifs sur DPI.
+    En se tournant vers le cadre causal, nous détaillons ensuite les éléments clés
+    nécessaires pour estimer de manière robuste l'effet du traitement à partir de
+    données de DPI variant dans le temps. Nous documentons l'impact de différents
+    choix méthodologiques pour l'étude de l'effet de
+    l'albumine sur la mortalité dans des cas de septicémie avec la base de données
+    MIMIC-IV (Medical Information Mart for Intensive Care).
+    Dans des problèmes à grande dimension, la sélection d'hyperparamètres pour
+    les modèles causaux est cruciale pour éviter le sous-apprentissage ou le
+    sur-apprentissage. Pour une simulation et trois ensembles de données
+    semi-simulées, nous montrons que le risque usuel en apprentissage
+    statistique n'est pas adapté au cadre causal et que le risque R doublement
+    robuste surpasse d'autres risques causaux existants.
   \end{multicols}
 
 \end{mdframed}
 
+\clearpage
 \begin{mdframed}[linecolor=Prune,linewidth=1]
 
   \textbf{Title:} Representations and inference from time-varying routine care data
@@ -8980,9 +9028,43 @@ interventions.
   \noindent \textbf{Keywords:} Machine learning, Electronic Health Records, Causality
 
   \begin{multicols}{2}
-    \noindent \textbf{Abstract:}
+    \noindent \textbf{Abstract:} Real World Databases are increasingly
+    accessible, exhaustive and with fine temporal details. Unlike traditional
+    data used in clinical research, they capture the routine organization of
+    care. These day-to-day records of patients care open the door to new
+    research questions, notably concerning the efficiency of interventions after
+    market access, the heterogeneity of their benefits in under-served
+    populations or the development of personalized medicine. On the other hand,
+    the complexity and large-scale nature of these databases pose a number of
+    challenges for effectively answering these questions. To remedy these
+    problems, econometricians and epidemiologists have recently proposed the use
+    of flexible models combining causal inference with high-dimensional machine
+    learning.
+
+    We first illustrate with three examples the current tension between these
+    new sources of data, machine learning and modern public health issues. These
+    examples motivate the main research question of this work: How flexible
+    models can help delivering appropriate treatment to each and every patient
+    to improve her health? In order to gain a better understanding of the
+    modern infrastructures for collecting and analyzing Electronic Health
+    Records (EHRs), we summarize semi-structured interviews conducted as part of
+    a national case study of the clinical data warehouses (CDWs) of the 32
+    French regional and university hospitals. Acknowledging the difficulty to
+    access large sample sizes and computational power to develop generalizable
+    predictive models, we explore a complexity gradient in representation and
+    predictive algorithms for EHRs. We then turn to causal thinking, detailing
+    key elements necessary to robustly estimate treatment effect from
+    time-varying EHR data. We illustrate the impact of methodological choices in
+    studying the effect of albumin on sepsis mortality in the Medical
+    Information Mart for Intensive Care database (MIMIC-IV). In high-dimensional
+    settings, the selection of hyper-parameters for the causal model is crucial
+    to avoid under- or over-learning. In a simulation and three semi-simulated
+    datasets, we shows that the usual machine learning risk are not adapted to
+    the causal setting and that the doubly robust R-risk outperforms other
+    existing causal risks.
   \end{multicols}
 \end{mdframed}
+
 
 %************************************
 \vspace{\fill} % ALIGNER EN BAS DE PAGE
