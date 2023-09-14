@@ -8,3 +8,6 @@ cp-thesis:
 zip-thesis:
 	zip -r thesis_zipped img/ references.bib thesis.tex
 
+?PHONY: extract-french
+extract-french:
+	 pdftk thesis.pdf cat 26-29 output materials/resume_francais.pdf
