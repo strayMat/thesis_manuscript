@@ -731,8 +731,8 @@ toujours là pour une séance à Bleau. Merci à tous ceux de la grimpe, les
 semaines en falaises sont inoubliables grâce à vous: Lorraine, Théo, Albane,
 Théo$^2$, Lucas, Alice, Louis (promis après ce manuscrit je fais du typst), et
 Noémie. Merci Orel pour ces soirées de grimpe à Pantin. Merci Philou d'être cet
-ami attentif. Merci aux autres que je vois de loin en loin: Féf, Anthoine,
-Paul, Sylvain, Hippolyte, Gustave.\\
+ami attentif. Merci à ceux que je vois de loin en loin: Féf, Anthoine, FH,
+Paul, Sylvain, Hippolyte, Manu, Gustave.\\
 
 Papa, Maman, Cécile, vous m'avez accompagné depuis la première rentrée des
 classes jusqu'à l'école d'ingénieur et la thèse. Je sais ce que je vous dois et
@@ -1380,7 +1380,7 @@ databases \citep{beaulieu2021machine} outperform rule-based clinical scores in
 predicting patient's readmission, in-hospital mortality or future comorbidities
 \citep{li2020behrt}. Recently, large language models (LLMs) leveraged clinical
 notes from several hospitals for length of stay prediction
-\citep{jiang2023health}. Hope is high that LLMs models will soon be able to help
+\citep{jiang2023health}. Hope is high that LLM models will soon be able to help
 practitioners during consultation \citep{lee2023benefits}. The trend towards
 personalized medicine is gradually moving away from the automation of
 well-understood but tedious tasks to tailored individual care, where mechanisms
@@ -1408,7 +1408,7 @@ by the European Medicines Agency and the \emph{Real World Evidence Program} by t
 and Drug Administration \citep{fda_real_2018}. However, recent surges in data
 collection also encouraged deviation from the standard interventional design by
 relaxing some of the methodological constraint of RCTs. HTA agencies witnessed a
-deterioration of evidences for new drugs and strongly advocate against
+deterioration of evidence for new drugs and strongly advocate against
 observational studies for replacing new drugs evaluation
 \citep{wieseler2023replacing,vanier2023rapid}. This debate crystallizes tensions
 between the pharmaceutical industry and regulators since drug prices are
@@ -1835,7 +1835,7 @@ Cependant, la description des séquences de soins est restée complexe en raison
 du grand nombre d'événements médicaux différents utilisés dans ces données. Ce
 problème, connu sous le nom de \emph{malédication de la grande dimension} a été
 introduit dans la recherche opérationnelle \citep{bellman1957dynamic} et est
-bien connu en statistique \citep{breiman2001statistique} : Le nombre
+bien connu en statistique \citep{breiman2001statistical} : Le nombre
 d'échantillons requis pour développer des algorithmes prédictifs croît
 généralement de manière exponentielle avec le nombre de dimensions. Les
 séquences d'événements de facturation peuvent être considérées comme une
@@ -1952,33 +1952,33 @@ le code et les données sont disponibles publiquement.
 
 \paragraph{Chapitre \ref{chapter:causal_model_selection} : Comment sélectionner
   des modèles prédictifs pour l'inférence causale ?} Ce chapitre s'intéresse à
-  la variabilité des résultats constatée dans le chapitre
-  \ref{chapter:causal_tuto} pour différents choix d'estimateurs. Pouvons-nous
-  expliquer pourquoi certains modèles permettent de mieux estimer l'effet du
-  traitement que d'autres ? La théorie de l'apprentissage statistique établit
-  comment sélectionner les modèles pour la prédiction. Ce chapitre montre que
-  les méthodes de sélection utilisées en apprentissage automatique ne permettent
-  pas de choisir les meilleurs modèles pour l'inférence causale. Nous passons en
-  revue des risques plus élaborés présents dans la littérature d'inférence
-  causale. Ces risques reposent sur l'estimation de nuisances qui permettent
-  l'identification de l'effet causal. Cependant, ces risques causaux n'ont pas
-  été évalués empiriquement pour une grande variété de contextes en échantillons
-  finis. Ce chapitre étudie grâce à une étude empirique approfondie les
-  performances de cinq risques causaux pour sélectionner un modèle d'estimation
-  de l'effet de traitement.
+la variabilité des résultats constatée dans le chapitre
+\ref{chapter:causal_tuto} pour différents choix d'estimateurs. Pouvons-nous
+expliquer pourquoi certains modèles permettent de mieux estimer l'effet du
+traitement que d'autres ? La théorie de l'apprentissage statistique établit
+comment sélectionner les modèles pour la prédiction. Ce chapitre montre que
+les méthodes de sélection utilisées en apprentissage automatique ne permettent
+pas de choisir les meilleurs modèles pour l'inférence causale. Nous passons en
+revue des risques plus élaborés présents dans la littérature d'inférence
+causale. Ces risques reposent sur l'estimation de nuisances qui permettent
+l'identification de l'effet causal. Cependant, ces risques causaux n'ont pas
+été évalués empiriquement pour une grande variété de contextes en échantillons
+finis. Ce chapitre étudie grâce à une étude empirique approfondie les
+performances de cinq risques causaux pour sélectionner un modèle d'estimation
+de l'effet de traitement.
 
-  Nos résultats montrent que les estimateurs pour l'inférence causale doivent
-  être sélectionnés, validés et ajustés à l'aide de procédures et de mesures
-  d'erreur différentes de celles utilisées classiquement en apprentissage
-  statistique. La sélection du meilleur modèle à l'aide du risque R conduit à de
-  meilleures estimations causales. Malgré le fait qu'il repose sur l'estimation
-  de deux nuisances, ce risque est plus performant que les autres. Nous montrons
-  également de manière théorique que le risque R est une version repondérée du
-  risque non observé oracle entre les deux modèles d'outcomes potentiels. Cette
-  propriété permet une estimation précise de l'hétérogénéité du traitement
-  lorsque la population traitée et la population non traitée diffèrent peu,
-  comme dans les essais randomisés. Pour faciliter la sélection des modèles,
-  nous fournissons un code python mettant en oeuvre notre procédure.
+Nos résultats montrent que les estimateurs pour l'inférence causale doivent
+être sélectionnés, validés et ajustés à l'aide de procédures et de mesures
+d'erreur différentes de celles utilisées classiquement en apprentissage
+statistique. La sélection du meilleur modèle à l'aide du risque R conduit à de
+meilleures estimations causales. Malgré le fait qu'il repose sur l'estimation
+de deux nuisances, ce risque est plus performant que les autres. Nous montrons
+également de manière théorique que le risque R est une version repondérée du
+risque non observé oracle entre les deux modèles d'outcomes potentiels. Cette
+propriété permet une estimation précise de l'hétérogénéité du traitement
+lorsque la population traitée et la population non traitée diffèrent peu,
+comme dans les essais randomisés. Pour faciliter la sélection des modèles,
+nous fournissons un code python mettant en oeuvre notre procédure.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -9196,7 +9196,7 @@ most from effective interventions.
 
 
   \noindent \textbf{Mots clés:} Apprentissage automatique, Dossiers de santé
-  électroniques, Causalité
+  électroniques, Causalité, Epidémiologie, Santé publique
 
   \vspace{-.5cm}
   \begin{multicols}{2}
@@ -9249,7 +9249,7 @@ most from effective interventions.
 
   \textbf{Title:} Representations and inference from time-varying routine care data
 
-  \noindent \textbf{Keywords:} Machine learning, Electronic Health Records, Causality
+  \noindent \textbf{Keywords:} Machine learning, Electronic Health Records, Causality, Epidemiology, Public health
 
   \begin{multicols}{2}
     \noindent \textbf{Abstract:} Real World Databases are increasingly
@@ -9269,23 +9269,23 @@ most from effective interventions.
     new sources of data, machine learning and modern public health issues. These
     examples motivate the main research question of this work: How flexible
     models can help delivering appropriate treatment to each and every patient
-    to improve her health? In order to gain a better understanding of the
-    modern infrastructures for collecting and analyzing Electronic Health
-    Records (EHRs), we summarize semi-structured interviews conducted as part of
-    a national case study of the clinical data warehouses (CDWs) of the 32
-    French regional and university hospitals. Acknowledging the difficulty to
-    access large sample sizes and computational power to develop generalizable
+    to improve her health? In order to gain a better understanding of the modern
+    infrastructures for collecting and analyzing Electronic Health Records
+    (EHRs), we summarize semi-structured interviews conducted as part of a
+    national case study of the clinical data warehouses (CDWs) of the 32 French
+    regional and university hospitals. Acknowledging the difficulty to access
+    large sample sizes and computational power to develop generalizable
     predictive models, we explore a complexity gradient in representation and
     predictive algorithms for EHRs. We then turn to causal thinking, detailing
     key elements necessary to robustly estimate treatment effect from
     time-varying EHR data. We illustrate the impact of methodological choices in
     studying the effect of albumin on sepsis mortality in the Medical
-    Information Mart for Intensive Care database (MIMIC-IV). In high-dimensional
-    settings, the selection of hyper-parameters for the causal model is crucial
-    to avoid under- or over-learning. In a simulation and three semi-simulated
-    datasets, we show that the usual machine learning risk are not adapted to
-    the causal setting and that the doubly robust R-risk outperforms other
-    existing causal risks.
+    Information Mart for Intensive Care database (MIMIC-IV). EHRs are
+    high-dimensional databases. For such settings, the selection of
+    hyper-parameters for the causal model is crucial to avoid under- or
+    over-learning. In a simulation and three semi-simulated datasets, we show
+    that the usual machine learning risk are not adapted to the causal setting
+    and that the doubly robust R-risk outperforms other existing causal risks.
   \end{multicols}
 \end{mdframed}
 
