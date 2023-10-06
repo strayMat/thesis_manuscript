@@ -2099,7 +2099,7 @@ nous fournissons un code python mettant en oeuvre notre procédure.
 
 \paragraph{Clinical Data Warehouse (CDW)}\label{def:cdw}
 Dedicated infrastructures are
-needed to pool data data from one or more medical information systems --whatever
+needed to pool data from one or more medical information systems --whatever
 the organizational framework-- to homogeneous formats, for management, research
 or care reuses \citep{chute_enterprise_2010,pavlenko_implementation_2020}. Fig
 \ref{background:CDW:fig:ehr_flow} illustrates for a CDW, the four phases of data
@@ -2341,7 +2341,7 @@ data categories integrated in French CDWs. Structured biology and texts are
 almost always integrated (20/21 and 20/21). The texts contain a large amount of
 information. They constitute unstructured data and are therefore more difficult
 to use than structured tables. Other integrated sources are the hospital drug
-circuit (prescriptions and administration, 16/21), Intense Care Unit (ICU, 2/21)
+circuit (prescriptions and administration, 16/21), Intensive Care Unit (ICU, 2/21)
 or nurse forms (4/21). Imaging is rarely integrated (4/21), notably for reasons
 of volume. Genomic data are well identified, but never integrated, even though
 they are sometimes considered important and included in the CDW work program.
@@ -2518,7 +2518,7 @@ valuable to all healthcare system implementing CDWs on a national scale.
 \subsection{Governance: CDWs are infrastructures}%
 \label{subsec:cdw:recommendations:governance}%
 
-\paragraph{Multidisciplinar teams} As the CDW becomes an essential component of data management in the hospital,
+\paragraph{Multidisciplinary teams} As the CDW becomes an essential component of data management in the hospital,
 the creation of an autonomous internal team dedicated to data architecture,
 process automation and data documentation should be encouraged
 \citep{goldacre_better_2022}. This multidisciplinary team should develop an
@@ -2528,7 +2528,7 @@ towards a homogenous schema and harmonize the semantics. It should have a sound
 knowledge of public health, as well as the technical and statistical skills to
 develop high-quality software that facilitates data reuse.
 
-\paragraph{Lack of sustainable fundings} The resources specific to the warehouse are rare and often taken from other
+\paragraph{Lack of sustainable funding} The resources specific to the warehouse are rare and often taken from other
 budgets, or from project-based credits. While this is natural for an initial
 prototyping phase, it does not seem adapted to the perennial and transversal
 nature of the tool. As a research infrastructure of growing importance, it must
@@ -2577,8 +2577,7 @@ science skills to change the focus from the implementation of the statistical
 design to the data engineering process. Data reuse requires more effort to
 prepare the data and document the transformations performed.
 
-\paragraph{Poor adoption of common standards} The more heterogeneous a HIS system is, the less qualitative would be the CDW
-built on top of it. There is a need for increasing interoperability, to help EHR
+\paragraph{Poor adoption of common standards} The more heterogeneous a HIS system is, the less qualitative the CDW built above it will be. There is a need for increasing interoperability, to help EHR
 vendors interfacing the different hospital softwares, thus facilitating CDW
 development. One step in this direction would be the open source publication of
 HIR data schema and vocabularies. At the analysis level, international recommendations insist
@@ -2616,7 +2615,7 @@ the hospitals.
 % Case for open source: transparency, less technological lock-in, mutualization,
 % favor modularity, help build consensus Opportunity for open source solutions
 
-\subsection{Data quality an documentation: more incentives needed}%
+\subsection{Data quality and documentation: more incentives needed}%
 \label{subsec:cdw:recommendations:quality}%
 
 \paragraph{Focus on data quality} Quality is not sufficiently considered as a relevant scientific topic itself.
@@ -2749,7 +2748,7 @@ promising because of the richness of their data and their integration in routine
 care \citep{raghupathi2014big}. However, predictive algorithms trying to model
 this ever richer data sources gain in complexity. There is currently a lack of
 of guidance on the performance-complexity tradeoff in predictive models
-\citep{de2022guidelines}. We explores a complexity gradient of predictive
+\citep{de2022guidelines}. We explore a complexity gradient of predictive
 pipelines on three tasks ranging from general populations of patients to more
 specific clinical cases.
 
@@ -2786,10 +2785,10 @@ EHRs contain time varying variables with a high cardinality. Time-consuming work
 from medical and computer experts is required to clean and transform these
 sources into data tables suited for statistical analysis
 \citep{bacry2020scalpel3,hripcsak2015observational}. More specifically, data
-preprocessing usually requires to map non standard terminologies, create derived
+preprocessing usually require to map non standard terminologies, create derived
 variables by aggregating measures over specific time periods. The choices of
 baseline covariates should be driven by medical experts which are often not
-familiar the complexity of the full EHR data processing pipeline. We propose to
+familiar with the complexity of the full EHR data processing pipeline. We propose to
 leverage models that take raw structured data as input to avoid as much as possible these
 preprocessing steps.
 
@@ -2862,9 +2861,9 @@ organizations \citep{agniel2018biases}.
 learning models in healthcare: Different population, information systems and
 healthcare practices may require tailored tools \citep{rose2018}. As an example
 of failed generalization, \cite{wong2021external} externally evaluated a sepsis
-prediction model deplyed in hundered of US caresites. The model transfer
+prediction model deployed in hundered of US caresites. The model transfer
 performance dropped from 0.76 to 0.83 area under the receiver operating curve
-(ROC AUC) declared by the manufacturer to to 0.63.
+(ROC AUC) declared by the manufacturer to 0.63.
 
 \subsection{Current barriers to predictive models usefulness}%
 \label{subsec:predictive_models:useful}%
@@ -2878,8 +2877,7 @@ expertise rather than machine learning. But only a small part of the published
 models are successfully deployed into clinical practice
 \citep{wyatt1995commentary, kelly2019key}. Poor adoptions are due to lack of
 evidence for clinical credibility, accuracy, generality or clinical
-effectiveness. Improving the strength of this evidence requires to repeatedly
-test these systems on different prospective populations with intuitive metrics
+effectiveness. To improve the robustness of these proofs, we need to test these systems on different prospective populations with intuitive metrics
 for physicians \citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
 Hence deployment simplicity is a key factor for model adoption.
 
@@ -2913,7 +2911,7 @@ There is a need to balance good predictive performances with model frugality.
 We study the performances of increasingly complex models on three operational
 and clinical tasks. We explore the performance trade-offs between small models
 that can be run on few samples and large models requiring more samples to become
-efficient. We propose a new model based on the transfer of static medical
+performant. We propose a new model based on the transfer of static medical
 embeddings trained from large claims databases. In the technically and legally
 constrained environment of healthcare data, what predictive pipelines are the
 most efficient to yield good practical utility?
@@ -2931,7 +2929,7 @@ implications.
 \paragraph{Main findings}
 
 With small to moderate sample sizes -up to 20,000 patients-, simple models have
-better performances than transformer-based models on general tasks such as
+better performance than transformer-based models on general tasks such as
 length of stay interpolation or prognosis. Among the simpler model based on row counts or
 static embeddings, no featurization choice largely outperforms others in any
 single task but random forest estimators are always more performant than linear
@@ -3094,7 +3092,7 @@ define each predictive task, taking inspiration from
 \cite{ohdsi2019book,tomavsev2021use}. First, we define a \emph{study period}
 during which data acquisition was sufficiently stable. Then, we define and
 select the \emph{cohort} detailed for each task. Inclusion criteria are detailed
-in the flowcharts of Figure \ref{apd:fig:flowcharts}. We define the task outcome
+in the flowcharts of Figure \ref{apd:fig:flowcharts}. We define the task
 with: an \emph{index visit}, an \emph{observation period} during which events
 are fed to the predictive model, an \emph{horizon} after the end of the
 observation period defining the followup, and a target event potentially
@@ -4211,8 +4209,8 @@ clinical use \citep{richens2020improving}, and more fair
 \citep{plecko2022causal}.
 %
 Capturing individualized effects via machine-learning models does require
-to probe many diverse individuals. EHRs and claims data are well suited
-for these models, as they easily cover much more individuals
+many diverse individuals. EHRs and claims data are well suited
+for these models, as they easily cover more individuals
 than a typical clinical study.
 
 % Loop to limitations by saying that learning on EHR cannot inform on
@@ -4223,7 +4221,7 @@ data. No matter how sophisticated, causal inference cannot conclude if
 there is no data to support an apple-to-apple comparison between treated
 and non-treated individuals. For example, treatment allocation is known
 to be influenced by race- and gender-concordance between the patient and the
-care provider. Yet, if the EHR data does no contain this information, it
+care provider. Yet, if the EHR data does not contain this information, it
 cannot nourish evidence-based decisions on such matter.
 %
 EHRs and RCTs complement each other:
@@ -4231,7 +4229,7 @@ a dedicated study, with a randomized intervention, as an RCT, can be
 crafted to answer a given question on a given population. But RCTs cannot
 address all the subpopulations, local practices, healthcare systems
 \citep{rothwell2006factors,travers2007external,kennedy2015literature}.
-Our framework suggest to integrate the evidence from RCTs designed with
+Our framework suggest integrating the evidence from RCTs designed with
 matching PICO formulation to ensure the validity of the analysis and to
 use the EHR to explore heterogeneity.
 
@@ -4620,7 +4618,7 @@ models to estimate.
 
 Several theoretical works have proposed causal model selection procedures
 that are \emph{consistent}: select the best model in a family given
-asymptotically large data. These work rely on introducing a
+asymptotically large data. These works rely on introducing a
 CATE estimator in the testing procedure: matching
 \citep{rolling_model_2014}, an IPW estimate
 \citep{gutierrez_causal_2016}, a doubly robust estimator
@@ -4703,7 +4701,7 @@ counterfactual nearest neighbors, which has been shown ineffective
   \end{eqnarray}
   This equation builds on two quantities: the conditional expectancy
   of the outcome given the covariates and either
-  treatment or no no treatment, called \emph{response function}:
+  treatment or no treatment, called \emph{response function}:
   \begin{flalign*}
     \text{Response function}
      &  &
@@ -4712,7 +4710,7 @@ counterfactual nearest neighbors, which has been shown ineffective
   \end{flalign*}
 
   Given a sample of data and the oracle response functions $\mu_0, \mu_1$, the
-  finite sum version of \autoref{eq:tau_population} leads to an
+  finite sum version of equation \ref{eq:tau_population} leads to an
   estimator of the ATE written:
   \begin{equation}
     \hat \tau = \frac{1}{n} \biggl(\sum_{i=1}^n \mu_{1}(x_i) - \mu_{0}(x_i) \biggr)
@@ -5332,7 +5330,7 @@ machine learning methods \citep{schuler2017targeted}, we use as models
 for the nuisances $\check e$ (respectively $\check m$) a form of meta-learner: a
 stacked estimator of ridge and boosting classifiers (respectively
 regressions). We select hyper-parameters with randomized search on a validation set
-$\mathcal{V}$ and keep them fix for model selection
+$\mathcal{V}$ and keep them fixed for model selection
 (\ref{apd:experiments:nuisances_hp} lists hyperparameters). As extreme inverse
 propensity weights induce high variance, we use clipping
 \citep{swaminathan_counterfactual_2015, ionides_truncated_2008} to bound
@@ -5455,7 +5453,7 @@ both Caussim and ACIC 2018
 \paragraph{Nuisances can be estimated on the same data as outcome models}
 
 Using the train set $\mathcal{T}$ both to fit the candidate estimator and the
-nuisance estimates is a form of double dipping which can lead errors in
+nuisance estimates is a form of double dipping which can lead to errors in
 nuisances correlated to that of outcome models
 \citep{nie_quasioracle_2017}. In theory, these correlations can bias model
 selection and, strictly speaking, push
@@ -5662,14 +5660,14 @@ models.
 \paragraph{Considerable efforts are being made to prepare routine care data for reuse}
 A vast amount of new data is being collected in healthcare, at the cost of new
 infrastructures: the Clinical Data Warehouses (CDWs). Navigating this mass of
-data is simplified, mainly by centralizing fragmented data from poorly
-interoperable softwares and the use of NLP techniques. The main aim of these
-CDWs is to improve clinical research. However, deriving new evidences from EHRs
+data is simplified, mainly by centralizing fragmented data from poor
+interoperability and the use of NLP techniques. The main aim of these
+CDWs is to improve clinical research. However, deriving new evidence from EHRs
 is currently hindered by a poorly standardized data access processes,
 heterogeneous local care practices, and the non-exhaustive collection of
 critical elements of care trajectories, even during hospital care.
 %
-\paragraph{These data repositories are not big enough for large neural network
+\paragraph{These data repositories are not big enough for large neural networks
   trained on structured data} Even the regional scale data center of the AP-HP
 with data on 10 millions individuals has only a few thousands of cases for
 common pathologies such as cardiovascular adverse events. On these medium
