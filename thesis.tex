@@ -128,6 +128,8 @@
 \def\bsf#1{{\sffamily\sbc\fontsize{14}{11}\selectfont #1}}
 \newcommand{\important}[1]{\textcolor{h_color}{\bsf{#1}}}
 
+\newcommand{\eg}{e.g., }
+
 % background colors
 \colorlet{bayes_error}{purple}
 \colorlet{approximation_error}{Orchid}
@@ -814,7 +816,7 @@ repository of clinical notes for research.
 % apport
 Yet, routine care data is not a familiar material for medical research. For
 engineers and NLP researchers, this routine care data are different from
-traditional research data collection because it requires new tools --eg. from
+traditional research data collection because it requires new tools --\eg from
 NLP-- to deal with the novel complexity and scale of the data collection
 process. For epidemiologists and physicians, the major difference lies in the
 opposition between experimental and observational data (presented in Subsection
@@ -1104,7 +1106,8 @@ benefit from innovative methods.
   decision making processes with a large action-state space, rather than a
   one-off treatment as in this thesis. To robustly estimate the probabilities
   involved in large dimensional state-action spaces, these works often require a
-  simulated environment \citep{bennett2013artificial}. Simulations allow to
+  simulated environment \citep{bennett2013artificial}. Simulations are
+  convenient to
   collect large samples of trajectory implementing the policy to be evaluated
   but are hard to build for complicated problems such as patient trajectories.
   Bridges with healthcare and personalized medicine include application in
@@ -1192,7 +1195,7 @@ models and interpreting their inner part as causal.
   \paragraph{Model selection -- How to choose between multiple promising models}
 
   Choosing the best model among a family of potential estimators is done by
-  comparing their performances on an unseen test dataset. If we were to evaluate
+  comparing their performance on an unseen test dataset. If we were to evaluate
   a model on the same data that it has been trained on, we would systematically
   favor flexible models that adapt better to the sampled training data. To avoid
   this process called \emph{overfitting}, the analyst should separate the data
@@ -1202,7 +1205,7 @@ models and interpreting their inner part as causal.
   the same data as illustrated in Figure \ref{fig:intro:cross_validation}. The
   data is divided in K folds --typically 5 to 10--. Then, each fold is part of
   the training set K-1 time and is used once as test set. Algorithms are then
-  selected on the average performances over the K test sets.
+  selected on the average performance over the K test sets.
 
   Note, that despite being valid for model selection --i.e. choosing the best model,
   cross-validation yields biased estimates to evaluate a given model
@@ -1235,7 +1238,7 @@ models and interpreting their inner part as causal.
   \cite{achille2018emergence} for a detailed formalization. This definition of
   usefulness highlights the importance of finding pretext tasks to supervise the learning
   of representations. For example, in computer vision, the pretext task is to
-  label coarse classes of images (eg. dog, cat, container, ...). In NLP, the
+  label coarse classes of images (\eg dog, cat, container, ...). In NLP, the
   pretext task is to predict randomly masked world in a text. These tasks should
   be weakly-supervised in the sense that they do not require human annotations.
   The learned representations are then used as input to a supervised task, which
@@ -1246,9 +1249,9 @@ models and interpreting their inner part as causal.
   This thesis was originally motivated by studying deep representations for
   patient trajectories and their ability to transfer between healthcare
   databases. However, the choice of a representation loops back to the choice of
-  a model, and hence to the measure of performances for relevant downstream
+  a model, and hence to the measure of performance for relevant downstream
   tasks. For other domains such as NLP, consensual downstream tasks such as text
-  classification have been established to evaluate the performances of
+  classification have been established to evaluate the performance of
   representations. Aggregated in benchmarks such as GLUE \citep{wang2018glue},
   these tasks fueled model developments for years. Recently, \cite{raji2021ai}
   pointed out the risk of misalignment between machine learning benchmarks and
@@ -1563,7 +1566,7 @@ guide this link between patient characteristics and intervention.
     drown). Under all three scenarios, we can observe exactly the same data, but
     the implications for an ice cream ban are very different. Hence, answering
     questions about what will happen under an intervention requires us to
-    incorporate some causal knowledge of the world — e.g., which of these scenarios
+    incorporate some causal knowledge of the world — \eg which of these scenarios
     is plausible?}
 
   % Connexion with important questions in healthcare: 
@@ -1580,8 +1583,8 @@ guide this link between patient characteristics and intervention.
   progressively introduce supplementary concepts as needed in Chapters
   \ref{chapter:causal_tuto} and \ref{chapter:causal_model_selection}.
 
-  Given an outcome $Y \in \mathbb R$ (eg. mortality risk or hospitalization
-  length), function of a binary treatment $A \in \mathcal{A} = \{0, 1\}$ (eg.~a
+  Given an outcome $Y \in \mathbb R$ (\eg mortality risk or hospitalization
+  length), function of a binary treatment $A \in \mathcal{A} = \{0, 1\}$ (\eg~a
   medical procedure, a drug administration), and baseline covariates $X \in
     \mathcal{X} \subset \mathbb{R}^d$, we observe the factual distribution, $O =
     (Y(A), X, A) \sim \mathcal D = \mathbb P(y, x, a)$. However, we want to model
@@ -1719,7 +1722,7 @@ healthcare for every patient. Anchored in causal thinking, it details key
 elements necessary to robustly estimate treatment effect from time-varying EHR
 data. We present a step-by-step framework to help build valid decision making
 from real-life patient records by emulating a randomized trial before
-individualizing decisions, e.g. with machine learning. We illustrate the various
+individualizing decisions, \eg with machine learning. We illustrate the various
 choices in studying the effect of albumin on sepsis mortality in the Medical
 Information Mart for Intensive Care database (MIMIC-IV). We study the impact
 of various choices at every step, from feature extraction to causal-estimator
@@ -1743,7 +1746,7 @@ the causal inference literature. These risks rely on the estimation of
 nuisances that allow for the identification of the causal effect. However,
 these causal risk have not been empirically evaluated in a wide variety of
 finite sample settings. Drawing from an extensive empirical study, this
-chapter study the performances of five causal risk to select an outcome model
+chapter study the performance of five causal risk to select an outcome model
 for treatment effect estimation.
 
 Our results highlight that estimators for causal inference should be selected,
@@ -2417,7 +2420,7 @@ institution. Finally, closer to the clinic, some actors state that the CDW could
 also be used to provide regular and appropriate feedback to healthcare
 professionals on their practices. This feedback would help to increase the
 involvement and interest of healthcare professionals in CDW projects. The CDW is
-sometimes of interest for health monitoring (eg. during Covid-19) or
+sometimes of interest for health monitoring (\eg during Covid-19) or
 pharmacovigilance (13/21).
 
 
@@ -2577,7 +2580,9 @@ science skills to change the focus from the implementation of the statistical
 design to the data engineering process. Data reuse requires more effort to
 prepare the data and document the transformations performed.
 
-\paragraph{Poor adoption of common standards} The more heterogeneous a HIS system is, the less qualitative the CDW built above it will be. There is a need for increasing interoperability, to help EHR
+\paragraph{Poor adoption of common standards} The more heterogeneous a HIS
+system is, the poorest quality will have a CDW built above it. There is a need
+for increasing interoperability, to help EHR
 vendors interfacing the different hospital softwares, thus facilitating CDW
 development. One step in this direction would be the open source publication of
 HIR data schema and vocabularies. At the analysis level, international recommendations insist
@@ -2785,7 +2790,7 @@ EHRs contain time varying variables with a high cardinality. Time-consuming work
 from medical and computer experts is required to clean and transform these
 sources into data tables suited for statistical analysis
 \citep{bacry2020scalpel3,hripcsak2015observational}. More specifically, data
-preprocessing usually require to map non standard terminologies, create derived
+preprocessing usually requires mapping non standard terminologies, create derived
 variables by aggregating measures over specific time periods. The choices of
 baseline covariates should be driven by medical experts which are often not
 familiar with the complexity of the full EHR data processing pipeline. We propose to
@@ -2877,7 +2882,8 @@ expertise rather than machine learning. But only a small part of the published
 models are successfully deployed into clinical practice
 \citep{wyatt1995commentary, kelly2019key}. Poor adoptions are due to lack of
 evidence for clinical credibility, accuracy, generality or clinical
-effectiveness. To improve the robustness of these proofs, we need to test these systems on different prospective populations with intuitive metrics
+effectiveness. Improving the strength of this evidence requires
+repeatedly testing these systems on different prospective populations with intuitive metrics
 for physicians \citep{kelly2019key, varoquaux2022evaluating, wornow2023shaky}.
 Hence deployment simplicity is a key factor for model adoption.
 
@@ -2888,7 +2894,7 @@ predictive models that can run on pre-existing hardware such as the successful
 QRISK for cardiovascular risk prediction \citep{hippisley2017development}.
 Relying on such commodity hardware facilitates model training, calibration and
 deployment, eventually leading to better clinical adoption and integration into
-healthcare processes. To benefit to the largest number of patients accross the
+healthcare processes. To benefit the largest number of patients accross the
 world, predictive models should be an appropriate technology: it should be
 \emph{easily and economically utilized from readily available resources by local
   communities to meet their needs} \citep{pearce2012case}. However, recent
@@ -2902,16 +2908,16 @@ resources --as detailed in Appendix \ref{apd:computing_resources_review}.
 % evaluated on a small fraction of existing healthcare datasets, endangering
 % external validity, integration into EHR and ultimately usefulness
 % \citep{sharma2021,wornow2023shaky}.
-There is a need to balance good predictive performances with model frugality.
+There is a need to balance good predictive performance with model frugality.
 
 \subsection{Objective and outline of the paper}%
 \label{subsec:predictive_models:contribution}%
 
 \paragraph{Contributions}
-We study the performances of increasingly complex models on three operational
+We study the performance of increasingly complex models on three operational
 and clinical tasks. We explore the performance trade-offs between small models
 that can be run on few samples and large models requiring more samples to become
-performant. We propose a new model based on the transfer of static medical
+effective. We propose a new model based on the transfer of static medical
 embeddings trained from large claims databases. In the technically and legally
 constrained environment of healthcare data, what predictive pipelines are the
 most efficient to yield good practical utility?
@@ -2919,7 +2925,7 @@ most efficient to yield good practical utility?
 \paragraph{Outline}
 Section \ref{sec:predictive_models:pipelines} details four predictive pipelines
 of increasing complexity. Subsection
-\ref{subsec:predictive_models:expe_definitions} define three clinical tasks
+\ref{subsec:predictive_models:expe_definitions} defines three clinical tasks
 covering different benchmarking and clinical usefulness. Subsection
 \ref{par:predictive_models:evaluation_pipeline} details our evaluation
 pipeline. Finally subsection \ref{subsec:predictive_models:results} presents our
@@ -2934,7 +2940,7 @@ length of stay interpolation or prognosis. Among the simpler model based on row 
 static embeddings, no featurization choice largely outperforms others in any
 single task but random forest estimators are always more performant than linear
 estimators. Static embeddings models are the most compute and memory efficient
-solution. We quantify the detrimental effects on prognosis performances of
+solution. We quantify the detrimental effects on prognosis performance of
 low target prevalences --linked to the number of cases.
 
 %Benchmark tasks are simpler to instantiate but are hard to include into a
@@ -3008,18 +3014,18 @@ $$\Delta t = |t-T_0|$$
 Then, we decay the count matrix with an exponential of half life $\delta$.
 $$C_{\delta}[i, c] += e^{-\frac{\Delta t}{\delta}}$$% 
 Finally, we obtain the patient features by concatenating each
-delayed count matrix; eg. with decay 0 and decay $\delta$.
+delayed count matrix; \eg with decay 0 and decay $\delta$.
 $$g_{count}(S, (0, \delta))= [C_{0}, C_{\delta}]$$% 
 Several decays can be selected and concatenated together. The decays are
 considered hyperparameters which are selected by cross-validation.
 
 
-\subsection{Static embeddings of event features: $g_{emb-local}$ or $g_{emb-SNDS}$}
+\subsection{Static embeddings of event features: $g_{emb-local}$ or $g_{\mathrm{emb-SNDS}}$}
 
 The SVD-PPMI algorithm (introduced by \cite{beam2018big}, detailed in Appendix
 \ref{apd:pipelines:static_embeddings}) performs a dimension reduction on the
-cooccurrence matrix between each medical concepts. It creates neighboring vector
-representations for codes that coocurre frequently together and thus induces
+cooccurrence matrix between medical concepts. It creates neighboring vector
+representations for codes that coocur frequently together and thus induces
 some sense of clinical relation. Building upon this algorithm, we consider two
 sequence representation techniques. These embeddings are static by opposition to
 transformer-based embeddings that adapts to the context.
@@ -3034,7 +3040,7 @@ with decayed counts: $g_{emb-local}(S, (0, \delta))=[C_{0} \cdot \Phi_{local}, C
 embeddings on the train cohort, we rely on static embeddings $\Phi_{SNDS}$
 pre-computed on French national claims data from 3,112,565 patients
 \citep{doutrelignerepresentations}. The aggregation is performed similarly as
-for decayed counting and local embeddings: $g_{emb-SNDS}((S, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
+for decayed counting and local embeddings: $g_{\mathrm{emb-SNDS}}((S, (0, \delta))) = [C_{0} \cdot \Phi_{SNDS}, C_{\delta} \cdot
   \Phi_{SNDS}]$.
 
 \subsection{Transformer based: $g_{cbert}$}%
@@ -3162,10 +3168,10 @@ results when testing the models on patient from other hospitals.
   \centering
   \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_weighted.pdf}
   \caption{Prognosis AUPRC, weighted by prevalences over 21
-    ICD10 chapters with more than 1\% prevalence. The performances are averaged
+    ICD10 chapters with more than 1\% prevalence. The performance is averaged
     over 5 folds. The shaded area represents the standard deviation. The
     horizontal black line displays the naive baseline that predicts the previous
-    stay codes for the target stay. Random forest have better performances.
+    stay codes for the target stay. Random forest have better performance.
     Count encoder outperforms other featurizers, suggesting the importance of
     low count events that are smoothed out in embedding methods. We report
     AUPRC rather than ROC AUC, since it takes better into account
@@ -3190,7 +3196,7 @@ is far from the best performance, certainly because of too small samples.
 % linear combination of icd10 chapter is a strong baseline
 For the prognosis task, we added to all featurizers the previous index stay
 ICD10 chapters as supplementary features. This intuitive baseline is reported as
-the horizontal black line. The good performances of the logistic regression with
+the horizontal black line. The good performance of the logistic regression with
 demographic features only indicates that a simple linear combination of the
 index stay chapters is a strong baseline.
 
@@ -3198,7 +3204,7 @@ index stay chapters is a strong baseline.
   \centering
   \includegraphics[width=0.9\linewidth]{img/chapter_3/los/roc_auc_score_performances.pdf}
   \caption{Length of stay ROC AUC for different featurizers and estimators. The
-    performances are averaged over 5 folds. The shaded area represents the
+    performance is averaged over 5 folds. The shaded area represents the
     standard deviation. The task performance seems to saturate at 95\% ROC AUC
     for random forest and all featurizers but the demographics and CEHR-BERT,
     suggesting that the Bayes error rate is reached. However, for lower sample
@@ -3224,7 +3230,7 @@ index stay chapters is a strong baseline.
 Figure \ref{fig:prognosis_prevalences_auprc} shows the AUPRC
 performances on the prognosis task plotted against the prevalence for a random
 forest estimator. Low prevalences translate into small number of cases, which
-decreases overall performances and increase variances among chapters with less
+decreases overall performance and increase variances among chapters with less
 than 5\% prevalences. Appendix \ref{apd:prognosis_prevalences} shows similar
 results for ROC AUC and linear estimators.
 
@@ -3267,7 +3273,7 @@ algorithms, from simple baseline to large transformer-based pipelines.
 \paragraph{Tree-based models outperform other pipelines}
 For simple predictive tasks such as LOS interpolation or prognosis at the ICD10 level and
 small sample sizes, simple pipelines based either on decayed countings or static
-embeddings followed by random forest are sufficient to reach good performances.
+embeddings followed by random forest are sufficient to reach good performance.
 Transformer-based models struggle with these low-sample regimes. In low
 computing resources environments, static embedding pipelines are twice as fast
 as decayed counting and more than five times faster than transformers.
@@ -3285,9 +3291,9 @@ as decayed counting and more than five times faster than transformers.
 MACE is more complicated to evaluate because of the low prevalence of the
 outcome. This forced us to use a larger cohort to collect enough cases. Both
 simple and complex models require larger computing resources than those we can
-access. However, the type of theses resources are different. Static embeddings
-can reach satisfying performances on big samples with large memory consumption
-(eg. 100GB of RAM). Transformer architectures require large GPUs to be trained
+access. However, the type of these resources are different. Static embeddings
+can reach satisfying performance on big samples with large memory consumption
+(\eg 100GB of RAM). Transformer architectures require large GPUs to be trained
 even for small sample sizes. Because of constraints for these two types of
 resources on the AP-HP computing cluster, we are currently struggling to
 evaluate the MACE task on the full cohort.
@@ -3295,7 +3301,7 @@ evaluate the MACE task on the full cohort.
 % limit
 \paragraph{Comparing to bigger or pretrained models}
 The high number of laboratory measurements --only available for inpatients--
-could improve the performances for all tasks. However, the addition of these
+could improve the performance for all tasks. However, the addition of these
 high-frequency features exceeds the computing resources currently at our
 disposal. Our benchmark also lacks a pre-trained model on large structured data
 and the interesting avenue of repurposing large language model for predictive
@@ -3468,8 +3474,8 @@ Time-varying features of EHR data, however, raise particular challenges that cal
 for an adapted framework.
 %
 We focus on single interventions: only one prescription during the study period,
-e.g., a patient either receives mechanical ventilation or not during admission to an
-intensive care unit compared to, e.g. blood transfusion which may be given repeatedly.
+\eg a patient either receives mechanical ventilation or not during admission to an
+intensive care unit compared to, \eg blood transfusion which may be given repeatedly.
 %
 Section \ref{sec:causal_tuto:framework} details our proposed step-by-step
 analytic framework on EHR data. Section \ref{sec:causal_tuto:application}
@@ -3612,7 +3618,7 @@ improper alignment of the inclusion defining event and the intervention time
 \ref{fig:immortal_time_bias} illustrates this
 Immortal time bias --related to survivor bias \citep{lee2020immortaltimebias}.
 It occurs when the follow-up period, i.e. cohort entry, starts before the
-intervention, e.g. prescription for a
+intervention, \eg prescription for a
 second-line treatment. In this case, the treated group will be
 biased towards patients still alive at the time of assignment and thus
 overestimating the effect size. Other common temporal biases are lead time bias
@@ -3624,7 +3630,7 @@ overestimating the effect size. Other common temporal biases are lead time bias
 Good practices include explicitly stating the cohort inclusion event
 \citep[Chapter~10:Defining Cohorts]{ohdsi2019book} and defining an appropriate
 grace period between starting time and the intervention assignment
-\citep{hernan2016specifying}. At this step, a population timeline can help (eg.
+\citep{hernan2016specifying}. At this step, a population timeline can help (\eg
 Figure \ref{fig:cohort_timeline_albumin}).
 
 \begin{figure}[!h]
@@ -3787,9 +3793,9 @@ non-treated that are not due to the intervention
   Depending on the question, different estimands are better suited to contrast the
   two potential outcomes E[Y(1)] and E[Y(0)] \citep{imbens_nonparametric_2004,
     colnet2023risk}. For continuous outcomes, risk difference is a natural estimand,
-  while for binary outcomes (e.g. events)  the choice of estimand depends on the
+  while for binary outcomes (\eg events)  the choice of estimand depends on the
   scale of the study. Whereas the risk difference is very informative at the
-  population level, e.g. for medico-economic decision making, the risk ratio and
+  population level, \eg for medico-economic decision making, the risk ratio and
   the hazard ratio are more informative to reason on sub-populations such as
   individuals or sub-groups \citep{colnet2023risk}.
 
@@ -3977,7 +3983,7 @@ with expert knowledge, creating the causal DAG shown in Figure
 \ref{fig:causal_diagram_albumin}. Gray confounders are not controlled for, since
 they are not available in the data. However, resulting confounding biases are
 captured by proxies such as comorbidity scores (SOFA or SAPS II) or other
-variables (eg. race, gender, age, weight).
+variables (\eg race, gender, age, weight).
 %
 Appendix \ref{apd:albumin_for_sepsis:table1_complete} details confounders
 summary statistics for treated and controls.
@@ -4154,7 +4160,7 @@ instance, to build a predictive system on post-treatment data, rendering
 it unreliable for decision making.
 %
 EHR data come with particular challenges: information may be available
-indirectly, \emph{e.g.} via billing codes, the time-wise dimension requires
+indirectly, \emph{\eg} via billing codes, the time-wise dimension requires
 aggregations (Sub-section \ref{subsec:causal_tuto:estimation}). These challenges can create
 subtle causal biases (Subsection \ref{subsec:causal_tuto:framing}).
 %
@@ -4306,7 +4312,7 @@ specific individuals, such as patients undergoing sceptic shock.
   Theoretically, simple risks used in machine learning do not control causal
   effects when treated and non-treated population differ too much. More elaborate
   risks use ``nuisances'' re-weighting to approximate the causal error on the
-  observed data. But does estimating these nuisances adds noise to model selection?
+  observed data. But does estimating these nuisances add noise to model selection?
   % Contributions
   Drawing from an extensive empirical study, we outline an efficient causal
   model-selection procedure. To select the best predictive model to guide
@@ -4550,7 +4556,7 @@ causal effects of an intervention, as we illustrate below.
 Figure \ref{fig:toy_example} gives a toy example: the probability $Y$ of
 an undesirable
 outcome (\emph{eg} death), a binary treatment $A \in \{0, 1\}$, and a covariate
-$X \in \mathbb R$ summarizing the patient health status (eg. the
+$X \in \mathbb R$ summarizing the patient health status (\eg the
 Charlson index \citep{charlson_new_1987}). We simulate a
 treatment beneficial (decreases $Y$) for patients with high Charlson scores (bad health
 status) but with little effect for patients in good
@@ -4752,6 +4758,7 @@ counterfactual nearest neighbors, which has been shown ineffective
   \end{flalign}
   $m$ and $e$ are often called
   \emph{nuisances} \citep{chernozhukov_double_2018}; they are unknown.
+  $\varepsilon$ is residual noise of mean zero.
 
 \end{background_box_left}
 
@@ -4812,7 +4819,7 @@ counterfactual nearest neighbors, which has been shown ineffective
 \paragraph{Causal model selection}
 
 We formalize model selection for causal estimation. Thanks to the g-formula
-identification (\autoref{eq:mu_identification}), a given outcome model $f: \mathcal X
+identification (equation \ref{eq:mu_identification}), a given outcome model $f: \mathcal X
   \times \mathcal A \rightarrow \mathcal{Y}$ --learned from data or built from
 domain knowledge-- induces feasible estimates of the ATE and CATE (eqs
 \ref{eq:ate_estimate} and \ref{eq:cate_estimate}), $\hat \tau_{f}$ and $\hat \tau_{f}(x)$.
@@ -4937,7 +4944,7 @@ These risks are summarized in Table \ref{tab:evaluation_metrics}.
 \subsection{Estimation and model selection procedure}\label{problem:estimation_procedure}
 
 Causal model selection (as in
-\autoref{eq:causal_model_selection}) may involve estimating various quantities
+equation \ref{eq:causal_model_selection}) may involve estimating various quantities
 from the observed data: the outcome model $f$, its induced risk as
 introduce in the previous section, and possibly nuisances required by the
 risk.
@@ -4992,7 +4999,7 @@ useful for numerical stability
 
 We now relate two feasible risks, $\mu \text{-risk}_{IPW}$ and the
 $R\text{-risk}$ to the oracle $\tau\text{-risk}$. Both results make
-explicit the role of overlap for the performances of causal risks.
+explicit the role of overlap for the performance of causal risks.
 
 These bounds depend on a specific form of residual that we now define: for each potential outcome, $a \in  \{0; 1\}$, the variance conditionally on $x$
 is \citep{shalit_estimating_2017}:
@@ -5048,7 +5055,7 @@ bounded away from 0 and 1 by $\eta$, \ref{background:causal_assumptions}), the
 above bound simplifies into a looser one involving the usual mean squared error:
 $\tau\text{-risk}(f)\leq \frac{2}{\eta}\, \mu\text{-risk}(f) -  2 \, \big(\sigma^2_{B}(1) +  \sigma^2_{B}(0)\big)$. For weak overlap (propensity scores not bounded far from 0
 or 1), this bound is very loose (as shown in Figure \ref{fig:toy_example})
-and is not appropriate to discriminate between models with close performances.
+and is not appropriate to discriminate between models with close performance.
 
 
 \subsection{Reformulation of the $R\text{-risk}$ as reweighted $\tau\text{-risk}$}%
@@ -5110,7 +5117,7 @@ $\tau\text{-risk}$ up to multiplicative and additive constants:
 \end{equation*}
 Thus, selecting estimators with $R\text{-risk}^*$ in
 randomized setting controls the $\tau\text{-risk}$. This explains
-the strong performances of $R\text{-risk}$ in randomized setups
+the strong performance of $R\text{-risk}$ in randomized setups
 \citep{schuler_comparison_2018} and is a strong argument to use it
 to estimate heterogeneity in RCTs.
 
@@ -5314,8 +5321,7 @@ literature, semi-simulated data adding a known synthetic causal effect to real -
 \paragraph{Family of candidate estimators}
 
 For these three datasets, the family of candidate estimators are gradient
-boosting trees for both the response surfaces and the treatment
-\footnote{Scikit-learn regressor,
+boosting trees for both the response surfaces and the treatment\footnote{Scikit-learn regressor,
   \href{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html}{HistGradientBoostingRegressor},
   and classifier,
   \href{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html}{HistGradientBoostingClassifier}.}
@@ -5400,9 +5406,9 @@ strong and weak overlap.
 
 Among all metrics, the classical mean squared error (ie. factual
 $\mu\text{-risk}$) is worse and reweighting it with propensity score
-($\mu\text{-risk}_{IPW}$) does not bring much improvements. The
+($\mu\text{-risk}_{IPW}$) does not bring much improvement. The
 $R\text{-risk}$, which includes a model of mean outcome and propensity
-scores, leads to the best performances. Interestingly, the
+scores, leads to the best performance. Interestingly, the
 $U\text{-risk}$, which uses the same nuisances, deteriorates in weak overlap, probably due to variance
 inflation when dividing by extreme propensity scores.
 
@@ -5480,7 +5486,7 @@ nuisance set and the simpler shared nuisance-candidate set procedure.
 For every risk, the oracle version recovers better the best estimator.
 However,
 stacked nuisances estimators (boosting and linear) lead to feasible
-metrics with close performances to the oracles ones: the
+metrics with close performance to the oracles ones: the
 corresponding estimators recover well-enough the true nuisances.
 One may wonder if simpler models for the nuisance could be useful,
 in particular in data-poor settings or when the true models are linear.
@@ -5573,7 +5579,7 @@ Rather, selecting the best outcome model according to the $R\text{-risk}$
 \paragraph{Nuisance models -- More gain than pain}
 %
 Estimating the $R\text{-risk}$ requires a more complex procedure than
-standard cross-validation used \emph{e.g.}~in machine learning: it involves
+standard cross-validation used \emph{\eg}~in machine learning: it involves
 fitting nuisance models necessary for model evaluation, though our
 results show that these can be learned on the same set of data
 as the outcome model evaluated.
@@ -6249,7 +6255,7 @@ most from effective interventions.
                                                                                  &
           \begin{tabular}[c]{@{}l@{}}Machine learning: If machine learning systems
             are used
-            (e.g.
+            (\eg
             for
             extracting
             and
@@ -6263,7 +6269,7 @@ most from effective interventions.
             \\ For
             manual
             coding
-            (e.g.
+            (\eg
             labelling),
             is there
             a coding
@@ -6399,7 +6405,7 @@ most from effective interventions.
           \begin{tabular}[c]{@{}l@{}}Health Technology Assessment Department:
             hospital biology activity (description), adverse events associated with
             procedures, post-registration studies \\(procedures, early access
-            oncology). Evaluation of procedures: e.g. biological and imaging
+            oncology). Evaluation of procedures: \eg biological and imaging
             procedures performed in hospitals, genetic tests in oncology and rare
             diseases.\end{tabular}
           \\ \hline
@@ -6455,7 +6461,7 @@ most from effective interventions.
   term interventions in the clinic, these models seek to increase short or long
   terms outcomes of the patients thanks to early intervention before deterioration
   \citep{tang2007global, rothman2013development, wong2021external}. Those so-called alert systems
-  \citep{yu2018artificial} map complex inputs --eg. a combination of nursing
+  \citep{yu2018artificial} map complex inputs --\eg a combination of nursing
   assessments, vital signs, laboratory results and cardiac rhythms-- to simpler
   risk scores, allowing clinicians to rapidly judge the evolution of the patient.
   % Long term prevention
@@ -6522,7 +6528,7 @@ most from effective interventions.
   \cite{goldstein2017opportunities} identified key characteristics of 107 studies
   on predictive models on EHRs: a very large study size (median=26,100), few
   predictors are included (median = 27 variables), few longitudinal data (37
-  studies), half multi-center studies. The tasks and performances were
+  studies), half multi-center studies. The tasks and performance were
   \textcolor{O}{mortality} with \textcolor{S}{0.84 AUC}, \textcolor{O}{clinical
     prediction (various clinical endpoints)} with \textcolor{S}{0.83 AUC},
   \textcolor{O}{hospitalization} with \textcolor{S}{0.71 AUC},
@@ -6611,8 +6617,8 @@ most from effective interventions.
   \cite{wornow2023shaky} review other published FMs for EHRs highlighting the
   small scale of patients used for pretraining, and the lack of model weights
   accessibility. To improve upon the existing they advise: 1) for better
-  predictive performances (measured both on AUOC, AUPRC and ranking metrics) as
-  well as calibration performances; 2) to detail the performances with the number
+  predictive performance (measured both on AUOC, AUPRC and ranking metrics) as
+  well as calibration performance; 2) to detail the performance with the number
   of labelled cases; 3) simplified model deployment; 4) Emergent clinical
   applications; 5) Multimodality.
 
@@ -6693,7 +6699,7 @@ most from effective interventions.
     \begin{center}
       \includegraphics[width=0.9\linewidth]{img/chapter_3/behrt-performances.pdf}
     \end{center}
-    \caption{BEHRT \citep{li2020behrt} performances for every diagnosis target.
+    \caption{BEHRT \citep{li2020behrt} performance for every diagnosis target.
       Number of positive cases is above 5000 for almost every disease.}
     \label{apd:fig:behrt_performances}
   \end{figure}
@@ -6706,8 +6712,8 @@ most from effective interventions.
   \ref{apd:table:foundation_model_nb_cases} shows the number of cases for
   downstream tasks of Med-BERT and CEHR-BERT. All tasks exceed 10,000 cases, a
   number of cases out of reach for the vast majority of healthcare centers. Figure
-  \ref{apd:fig:behrt_performances} outlines the performances of BEHRT on every
-  diagnosis. There is no clear trend that outlines better performances for higher
+  \ref{apd:fig:behrt_performances} outlines the performance of BEHRT on every
+  diagnosis. There is no clear trend that outlines better performance for higher
   number of cases. However, the number of cases is still greater than 5000 for
   almost all targeted diseases.
 
@@ -7056,7 +7062,7 @@ most from effective interventions.
     \centering
     \includegraphics[width=\linewidth]{img/chapter_3/los/average_precision_score_performances.pdf}
     \caption{LOS AUPRC for different featurizers and estimators.
-      The performances are averaged over 5 folds. The shaded area represents the
+      The performance is averaged over 5 folds. The shaded area represents the
       standard deviation. The task performance seems to saturate at 98\% average
       precision for random forest and all featurizers but the demographics,
       suggesting that the Bayes error rate is reached. However, for lower sample
@@ -7069,7 +7075,7 @@ most from effective interventions.
 
   \subsection{Prognosis}\label{apd:temporal_split:prognosis}
 
-  Performances are reported with Area Under the Receiver Operating
+  Performance is reported with Area Under the Receiver Operating
   Characteristic Curve (ROC AUC) and Area Under the Precision Recall Curve
   (AUPRC) using
   \url{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html}
@@ -7095,12 +7101,12 @@ most from effective interventions.
       \includegraphics[width=\linewidth]{img/chapter_3/prognosis/roc_auc_score__c_weighted.pdf}
     \end{subfigure}
     \caption{Prognosis ROC AUC averaged over chapters for different featurizers and
-      estimators. The performances are averaged over 5 folds. The shaded area
+      estimators. The performance is averaged over 5 folds. The shaded area
       represents the standard deviation. The horizontal black lines display the
       naive baseline that predicts the previous stay codes for the target stay.
       Figure \ref{fig:prognosis_rocauc_macro} average all chapter with equal weight
       whereas \ref{fig:prognosis_rocauc_weighted} averages chapters by prevalences.
-      Random forest have better performances. Count encoder outperform other
+      Random forest have better performance. Count encoder outperform other
       featurizers, suggesting the importance of low count events that are smoothed
       out in embedding methods.}%
     \label{fig:prognosis_rocauc}
@@ -7115,7 +7121,7 @@ most from effective interventions.
     \includegraphics[width=\linewidth]{img/chapter_3/prognosis/average_precision_score__c_macro.pdf}
 
     \caption{Prognosis AUPRC averaged by prevalence over chapters
-      for different featurizers and estimators. The performances are averaged
+      for different featurizers and estimators. The performance is averaged
       over 5 folds. The shaded area represents the standard deviation. The
       horizontal black line displays the naive baseline that predicts the
       previous stay codes for the target stay.}%
@@ -7240,7 +7246,7 @@ most from effective interventions.
       equivalent. For logistic regression, the local embeddings remain the best
       performing method. We also compare the effect of reducing the dimension by applying a
       Singular Value Decomposition with 30 components kept. This increases a
-      little bit the performance for logistic regression but decreases the performances of the
+      little bit the performance for logistic regression but decreases the performance of the
       other estimators.}\label{apd:fig:hospital_split_los_decay7_roc_auc}
   \end{figure}
 
@@ -7284,7 +7290,7 @@ most from effective interventions.
   \label{apd:vibration_study_decay}
 
   Using the LOS task, we investigated if the decay hyperparameter played an
-  important role in the performances of the different pipelines. We evaluated this
+  important role in the performance of the different pipelines. We evaluated this
   vibration analysis on a randomly chose train set (no temporal or hospital data
   shift). Figure \ref{apd:fig:vibration_decay} shows the big impact of different
   decay hyperparameters on ROC AUC. This led us to cross-validate the decays in
@@ -7456,7 +7462,7 @@ most from effective interventions.
   \ref{apd:fig:motivating_example_roc_auc} when measuring performance with Area
   Under the Curve of the Receiving Operator Characteristic (ROC AUC). In the
   contrary, a model trained on pre-treatment features yield competitive
-  performances. This failure illustrates well the shortcuts on which predictive
+  performance. This failure illustrates well the shortcuts on which predictive
   models could rely to make predictions. A clinically useful predictive model
   should support decision making --in this case, addition of albumin to
   crystalloids-- rather than maximizing predictive performance. In this example,
@@ -7766,7 +7772,7 @@ most from effective interventions.
     =\mathbb{E}\left(Y \mid A=a, \mathbf{X}=x\right)$
 
   Using an outcome estimator to learn a model for the response surface $\hat
-    \mu$ (eg. a linear model), the ATE estimator is an average over the n samples:
+    \mu$ (\eg a linear model), the ATE estimator is an average over the n samples:
   \begin{equation}
     \hat{\tau}_G(\hat \mu) = \frac{1}{n} \sum_{i=1}^n \hat \mu(x_i, 1) - \hat \mu(x_i, 0) = \frac{1}{n} \sum_{i=1}^n \hat \mu_{(1)}(x_i) - \hat \mu_{(0)}(x_i)
   \end{equation}
@@ -7927,7 +7933,7 @@ most from effective interventions.
   \cite{foster2019orthogonal} suggested to regress the Individual Treatment
   Effect estimates from AIPW on potential sources of heterogeneity $X^{cate}$:
   $\hat \tau = \argmin_{\tau \in \Theta} (\hat \tau_{AIPW}(X) - \tau(X^{cate}))$
-  for $\Theta$ some class of model (eg. linear model).
+  for $\Theta$ some class of model (\eg linear model).
 
   \paragraph{Double Machine Learning} \citep{chernozhukov2018double} It is also known
   as the R-learner \citep{nie2021quasi}. It is based on the R-decomposition,
@@ -7973,7 +7979,7 @@ most from effective interventions.
   forests are used, a fairer comparison between single and double robust methods
   should use cross-fitting for both. This lack in the scikit-learn API reflects
   different needs between purely predictive machine learning focused on
-  generalization performances and counterfactual prediction aiming at unbiased
+  generalization performance and counterfactual prediction aiming at unbiased
   inference on the input data.
 
   \paragraph{Good practices for imputation not implemented in EconML}
@@ -8113,8 +8119,8 @@ most from effective interventions.
   \end{figure}
 
 
-  We followed a two-step procedure to train the nuisance models (eg. ($\hat e,
-    \hat \mu$) for the AIPW causal estimator), taking inspiration from the
+  We followed a two-step procedure to train the nuisance models (\eg ($\hat e,
+  \hat \mu$) for the AIPW causal estimator), taking inspiration from the
   computationally cheap procedure from
   \cite[section~3.3]{bouthillier2021accounting}. First, for each nuisance
   model, we fit a random parameter search with 5-fold cross validation and 10
@@ -8834,7 +8840,7 @@ most from effective interventions.
     Results measured in relative Kendall's for feasible and semi-oracle risks}
 
   Because of extreme propensity scores in the denominator and bayes error residuals in the numerator, the semi-oracle
-  $U$-risk has poor performances at bad overlap. Estimating these propensity scores in the is feasible $U$-risk reduces
+  $U$-risk has poor performance at bad overlap. Estimating these propensity scores in the is feasible $U$-risk reduces
   the variance since clipping is performed.
 
   \begin{figure}[!b]
@@ -8948,7 +8954,7 @@ most from effective interventions.
     \begin{subfigure}[b]{0.10\textwidth}
       ~
     \end{subfigure}
-    \caption{Metric performances by normalized tau-risk distance to the best
+    \caption{Metric performance by normalized tau-risk distance to the best
       method selected with $\tau\text{-risk}$. All nuisances are learned with the
       same estimator stacking gradient boosting and ridge regression. Doted and
       plain lines corresponds to 60\% lowess quantile estimates. This choice of
