@@ -135,7 +135,7 @@
 \colorlet{approximation_error}{Orchid}
 \colorlet{estimation_error}{SeaGreen}
 
-\definecolor{Prune}{RGB}{151, 104, 209}
+\definecolor{Prune}{RGB}{99,0,60}
 \definecolor{light_grey}{rgb}{0.3,.3,.3}
 \definecolor{deep_blue}{rgb}{0,.2,.5}
 \definecolor{dark_blue}{rgb}{0,.15,.5}
@@ -463,87 +463,66 @@
   \vspace{25mm} % à régler éventuellement, avec le bandeau logo2, c'était 10mm
   \color{Prune}
   \fontfamily{cmss}\fontseries{m}\fontsize{22}{26}\selectfont
-  Representations and inference from time-varying routine care data
+  \Huge Representations and inference from time-varying routine care data \\
 
   \normalsize
   \color{black}
   \Large{\textit{Représentations et inférence à partir de données de santé temporelles collectées en routine}}
   %*****************************************************
 
+
   %\fontfamily{fvs}\fontseries{m}\fontsize{8}{12}\selectfont
-
   \vspace{1.5cm}
-  \normalsize
 
+  \normalsize
   \textbf{Thèse de doctorat de l'université Paris-Saclay}
 
+  \vspace{6mm}
 
-  \vspace{15mm}
+  \small École doctorale n$^{\circ}$  580, Sciences et technologies de l'information et de la communication (STIC)\\
+  \small Spécialité de doctorat : Informatique mathématique\\
+  \small Graduate School: Informatique et sciences du numérique, \\
+  Référent : Faculté des sciences d'Orsay\\
+  \vspace{6mm}
 
-  École doctorale n$^{\circ}$  580,
-  Sciences et technologies de l'information et de la communication (STIC)\\
-  \small Spécialité de doctorat Informatique mathématique\\
-  Graduate School: , Référent : Faculté des sciences d'Orsay\\
-
-  \vspace{15mm}
-  Thèse préparée dans l'unité de recherche Inria Saclay-Île-de-France
+  \footnotesize Thèse préparée dans l'unité de recherche Inria Saclay-Île-de-France
   (Université Paris-Saclay, Inria), sous la direction de \textbf{Gaël
-  Varoquaux}, directeur de recherches à l'Inria, le co-encadrement de
+    Varoquaux}, directeur de recherches à l'Inria, le co-encadrement de
   \textbf{Claire Morgand}, Dr à l'Agence Régionale de Santé Ile-de-France, et la
-  co-supervision de \textbf{Pierre-Alain Jachiet}, Dr. à la Haute Autorité de
-  Santé
-
-  %\footnotesize Unité de recherche: Inria, Social Data\\
-  %\footnotesize Référent: : voir annexe
+  co-supervision de \textbf{Pierre-Alain Jachiet}, Dr. à la Haute Autorité de Santé
   \vspace{15mm}
 
-  \textbf{Thèse soutenue à Saclay, le 20 novembre 2023, par}\\
+  \textbf{Thèse soutenue à Paris-Saclay, le 20 novembre 2023, par}\\
   \bigskip
-  \Large {\color{Prune} \textbf{Matthieu DOUTRELIGNE}}
+  \Large {\color{Prune}{\textbf{Matthieu DOUTRELIGNE}}}
 
 
   %************************************
   \vspace{\fill} % ALIGNER LE TABLEAU EN BAS DE PAGE
   %************************************
 
-  %\flushleft \small \textbf{Composition du jury:}
   \bigskip
 
   \flushleft
-
-  \scriptsize
+  \small {\color{Prune}{\textbf{Composition du jury}}}\\
+  {\color{Prune}{\scriptsize{Membres du jury avec voix délibérative}}} \\
+  \vspace{2mm}
+  \footnotesize
   \begin{tabular}{|p{9cm}l}
     \arrayrulecolor{Prune}
-    {\footnotesize \textbf{Composition du jury}}                                                                    \\
-                                                                                                     &              \\
-    \textbf{Florence Tubach}                                                                         & Rapportrice  \\
-    Professeur des Universités - Praticien Hospitalier, Sorbonne Université                          &              \\
-    \textbf{Peter Szolovits}                                                                         & Rapporteur   \\
-    Professor, Massachusetts Institute of Technology                                                 &              \\
-    \textbf{Pierre Zweigenbaum}                                                                      & Examinateur  \\
-    Directeur de Recherche, Laboratoire Interdisciplinaire des sciences du numérique de Paris Saclay &              \\
-    \textbf{Emmanuel Chazard}                                                                        & Examinateur  \\
-    Professeur des Universités - Praticien Hospitalier, Université de Lille                          &              \\
-    \textbf{Marzyeh Ghasseimi}                                                                       & Examinatrice \\
-    Assistant Professor, Massachusetts Institute of Technology                                       &              \\
-    \textbf{Etienne Audureau}                                                                        & Examinateur  \\
-    Professeur, Paris Est Créteil                                                                    &              \\
+    \textbf{Florence Tubach}                                                                         & Rapporteur \& Examinatrice \\
+    Professeur des Universités - Praticien Hospitalier, Sorbonne Université                          &                            \\
+    \textbf{Peter Szolovits}                                                                         & Rapporteur  \& Examinateur \\
+    Professor, Massachusetts Institute of Technology                                                 &                            \\
+    \textbf{Pierre Zweigenbaum}                                                                      & Examinateur                \\
+    Directeur de Recherche, Laboratoire Interdisciplinaire des sciences du numérique de Paris Saclay &                            \\
+    \textbf{Emmanuel Chazard}                                                                        & Examinateur                \\
+    Professeur des Universités - Praticien Hospitalier, Université de Lille                          &                            \\
+    \textbf{Marzyeh Ghasseimi}                                                                       & Examinatrice               \\
+    Assistant Professor, Massachusetts Institute of Technology                                       &                            \\
+    \textbf{Etienne Audureau}                                                                        & Examinateur                \\
+    Professeur, Paris Est Créteil                                                                    &                            \\
   \end{tabular}
-
-  % \medskip
-  % \begin{tabular}{|p{9cm}l}
-  %   \arrayrulecolor{Prune}
-  %   {\footnotesize \textbf{Direction de la thèse}}                          \\
-  %                                                &                          \\
-  %   \textbf{Gaël Varoquaux}                      & Directeur de thèse       \\
-  %   Directeur de recherches, Institut National de Recherche en Informatique et
-  %   en Automatique                               &                          \\
-  %   \textbf{Claire Morgand}                      & Co-encadrante            \\
-  %   Dr., Agence Régionale de Santé Ile-de-France &                          \\
-  %   \textbf{Pierre-Alain Jachiet}                & Tuteur en administration \\
-  %   Dr., Haute Autorité de Santé
-  % \end{tabular}
-
 
 \end{titlepage}
 
