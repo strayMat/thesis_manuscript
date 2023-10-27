@@ -888,7 +888,7 @@ benefit from innovative methods.
 
   \paragraph{Traditional research data collections}
   % Evidence based medicine and RCTs
-  The gold standard for generating new evidence in healthcare are Random Control
+  The gold standard for generating new evidence in healthcare are Randomized Controlled
   Trials (RCTs). Based on the randomization of patients to a treatment or a
   control group, the data collection is designed for one experiment, addressing
   one precise research question. RCTs are at the heart of \emph{evidence-based
@@ -2164,7 +2164,7 @@ and university hospitals, both with existing and prospective CDWs.
 We conducted semi-structured interviews on the following themes: the initiation
 and construction of the CDWs; the current status of the project and the studies
 carried out; opportunities and obstacles; quality criteria for observational
-research. S1 Table list all interviewed people with their team title.
+research. Appendix \ref{apd:cdw:table:expert_teams} lists all interviewed people with their team title.
 
 We designed an interview form, sent to participants in advance. We used it as a
 support to conduct 90 minutes interviews recorded for reference (the complete
@@ -2300,7 +2300,8 @@ in production. Uses other than ongoing scientific studies are very rarely
 documented. The publication of the list of ongoing studies is very heterogeneous
 and fragmented between several sources: \url{clinicaltrials.gov}, the mandatory
 project portal of the Health Data Hub \citep{health_data_hub_portal_2023} or the
-website of the hospital data warehouse.
+website of the hospital data warehouse.  \footnote{The full collection of ongoing study is available on this url:
+  \url{https://gitlab.has-sante.fr/has-sante/public/rapport_edsh/-/blob/master/data/cycle_eds/cycle_eds_etudes.csv?ref_type=heads}}
 
 \subsection{Triple usage of data: Research, management, clinic}%
 \label{subsec:cdw:results:data}%
@@ -2381,8 +2382,8 @@ The studies are mainly observational (non-interventional). Fig
 \ref{results:usage:image:study_objective} presents the distribution of the six
 categories defined in \ref{subsec:cdw:classification} for 231 studies collected
 on the study portals of nine hospitals. The studies focus first on population
-characterization (25 \%), followed by the development of decision support
-processes (24 \%), the study of risk factors (19 \%) and the treatment effect
+characterization (25 \%), followed by the development of diagnostic and prognostic
+algorithms (24 \%), the study of risk factors (19 \%) and the treatment effect
 evaluations (15 \%).
 
 
@@ -2586,7 +2587,8 @@ is hard to obtain without international data sharing collaborations. Thus, more
 incitation is needed to maintain and update the terminology mappings between
 local nomenclatures and international standards.
 
-\paragraph{Lack of translational researches} Many ongoing studies concern the development of decision support processes whose
+\paragraph{Lack of translational researches} Many ongoing studies concern the
+development of diagnostic and prognostic algorithms whose
 goal is to save time for healthcare professionals. These are often research
 projects, not yet integrated into routine care. The analysis of study portals
 and the interviews revealed that data reuse oriented towards primary care is
@@ -3415,7 +3417,7 @@ intervention, the difference between these being the causal effect.
 % TODO: reintroduce counterfactual predictions? Not sure, given that it
 % does not fit well with the rest of our manuscript
 In medicine, causal effects
-are typically measured by Randomized Control Trials
+are typically measured by Randomized Controlled Trials
 (RCTs).
 Yet, RCTs may not suffice for individualized decision making: They
 may suffer from selection biases \citep{travers2007external,
@@ -4378,7 +4380,7 @@ also known as G-computation, G-formula \citep{robins_role_1986}, Q-model
 treatment effects is that of confounding: spurious associations between
 treatment allocation and baseline health, \emph{eg} only prescribing a drug
 to mild cases \citep{hernan_causal_2020,vanderweele2019principles}.
-Controlled allocation of treatment, as in randomized controlled trials
+Controlled allocation of treatment, as in Randomized Controlled Trials
 (RCTs), alleviate this concern. Yet most machine-learning models are trained
 on \emph{observational} data, close to real-word practice
 \citep{black1996we,hernan_methods_2021} but challenging for causal
