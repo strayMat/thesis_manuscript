@@ -1827,20 +1827,20 @@ parallèle et sur de la documentation collaborative \citep{documentation_snds}.
 Cependant, la description des séquences de soins est restée complexe en raison
 du grand nombre d'événements médicaux différents utilisés dans ces données. Ce
 problème, connu sous le nom de \emph{malédiction de la grande dimension} a été
-introduit dans la recherche opérationnelle \citep{bellman1957dynamic} et est
+introduit en recherche opérationnelle \citep{bellman1957dynamic} et est
 bien connu en statistique \citep{breiman2001statistical} : Le nombre
 d'échantillons requis pour développer des algorithmes prédictifs croît
 généralement de manière exponentielle avec le nombre de dimensions. Les
-séquences d'événements de facturation peuvent être considérées comme une
+séquences d'événements de facturation peuvent être considérées comme des
 séquences de signes, tout comme le texte. Ainsi, des travaux en informatique
 médicale, s'inspirant des techniques de TAL, consiste à créer des
 représentations de faible dimension --embeddings-- de concepts médicaux
-\citep{beam2019clinical}. Les relations entre les événements capturés par ces
+\citep{beam2019clinical}. Les relations entre les événements capturées par ces représentations
 sont étonnamment proches des associations connues, comme le montre la figure
 \ref{intro:tsne_plots}. Cependant, l'utilité avale de ces représentations
 reste incertaine. La santé publique est peu intéressée par les domaines de
 représentation de l'information ou même par des tâches de prédictions. Les
-services publics cherchent à comprendre l'hétérogénéités des consommations de
+services publics cherchent à comprendre l'hétérogénéité des consommations de
 soins : qu'est-ce qu'un soin approprié et comment le repérer à partir des
 données ? \citep{cma_policy_appropriateness_2015} ? Cette question est motivée
 par la nécessité croissante d'adapter le financement des soins à un système aux
