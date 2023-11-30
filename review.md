@@ -9,7 +9,7 @@
 ## Florence
 
 - chap 2: "étude en cours" 
-- chap3: A noter qu’il est dit qu’en santé, les évènements sont rares (et donc que les modèles parcimonieux sont plus adaptés), ce qui n’est pas toujours le ca
+- chap3: A noter qu’il est dit qu’en santé, les évènements sont rares (et donc que les modèles parcimonieux sont plus adaptés), ce qui n’est pas toujours le cas
 
 - Contraste causal, et donc la question des censures informatives ? 
 
